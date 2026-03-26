@@ -1,9 +1,15 @@
+day001
+TODO1:  GITHUB
+TODO2:  JAVA SETTING
+
+
+--- 
 ## Part001 
 - TODO1:  GITHUB
 
 ■1. git, github
 - git : 내컴퓨터에서 파일의 변화를 기록
-- github : 협업시 저장공간 (원격)
+- github : 협업시 저장공간
 
 ■2. 실습
 1. Git 설치
@@ -60,11 +66,34 @@
 
 --- 
 ## Part002 
-- TODO2: 마크다운 문법
+- TODO2:  JAVA SETTING
+■1. JAVA
+1. java.sun.com 
+2. 다운로드 (11,17,21)
+3. 설치
+4. path등록 - C:\Program Files\Java
+   JAVA_HOME   :   C:\Program Files\Java\jdk-11.0.30
+                  C:\Program Files\Java\jdk-17.0.18
+                  C:\Program Files\Java\jdk-21.0.10
 
-# 제목 ( 제일 큰 제목 )
-## 중간제목
-### 작은제목
-#### step4
-##### step4
-###### step4
+   path        :   %JAVA_HOME%\bin                
+
+5. java 확인
+   CMD
+   java -version
+
+
+■2. eclipse
+
+
+
+--- 
+## Part003 
+- 숙제 안내 (개별카톡 보내주세요~!)
+1. 집에서 github 연동 - git clone                 ※ 스크린샷 제출
+2. 집 내 컴퓨터에 java/ eclipse 설치 (11, 17, 21 ) ※ 스크린샷 제출
+3. 복습문제 - 노트 준비
+
+※ 카톡은 무조건 보내기~!
+1. 설치가 잘안되셨다면~ 언제까지~ 도전! 
+2. 숙제완료!
