@@ -83,8 +83,10 @@ TODO2:  JAVA SETTING
    java -version
 
 ■2. eclipse
-1. 
-
+1. eclipse.org
+2. 다운로드
+3. 워크스페이스 - [깃허브저장소] - track003_java
+4. .gitignore 확인
 
 --- 
 ## Part003 
