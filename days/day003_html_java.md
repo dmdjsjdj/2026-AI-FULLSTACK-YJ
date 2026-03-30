@@ -93,4 +93,11 @@ System.out.printf( "%d+%d=%d" ,  a , b , a+b);
  - inm    : 이미지, src="경로" , alt="설명"
  - a      : 링크, href="경로" , title="설명"
 
+- 3. java
+  1. 자바의 자료형 분류 (기본형/참조형)
+  2. 기본형  : 값
+  2-1 논리형 : boolean - true/false
+  2-2 정수형 : (byte-short-int★-long(L) / 1,2,3 / 1-2-4-8)
+	2-3 실수형 : (float(f)-double★ /3.14 / 4-8)   %.2f
+
 ---
