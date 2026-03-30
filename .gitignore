@@ -16,5 +16,3 @@ portfolio/
 # OS별 임시파일
 *.DS_Store
 Thumbs.db
-
-/.metadata/
