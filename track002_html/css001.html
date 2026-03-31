@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS</title>
+</head>
+<body>
+    <!-- 1. 여백 -->
+    <!-- Q1. 1. 여백그룹에 배경색상-검정, 글자색은 하얀색  /  안쪽여백 50px / 바깥쪽여백-완쪽: 50px -->
+    <!-- Q2. h3 좋아하는 색상 / 바깥쪽 아래 여백 10px -->
+    <!-- Q3. p margin 맨끝(오른쪽)에 하나만 이미지 25 25 넣기 -->
+    <!-- Q4. p padding 반복해서 이미지 25 25 넣기 -->
+    <div style="background-color: black; color: aliceblue; padding: 50px; margin-left: 50px;" >
+        <h3 style="background-color: blue; margin-bottom: 10px;" >1. 여백 - margin/padding </h3>
+        <p style="background: cornflowerblue url(./img/cat.png) no-repeat right / 30px 30px;" >margin  : 바깥쪽 여백</p>
+        <p style="background: url(./img/cat.png) repeat right / 30px 30px;" >padding : 안쪽 여백</p>
+    </div>
+
+    <!-- 2. 배경 -->
+    <div style="background-color: cornflowerblue; color:rgb(11, 4, 112); padding: 50px; margin: 50px;">
+        <h3>2. 배경</h3>
+        <p style="background-color: blueviolet; color:aliceblue; padding: 10px;">
+            background-color:gold
+        </p>
+        <p style="padding-top: 10px; background-image: linear-gradient(45deg , aliceblue, blue); color: blueviolet; " >
+            background-image: linear-gradient(45deg , aliceblue, blue)
+        </p>
+        <p style="margin-top: 30px; background: pink url(./img/four.png) no-repeat right / 150px 140px  ; padding: 10px;" >
+            background: 
+        </p>
+    </div>
+
+</body>
+</html>
