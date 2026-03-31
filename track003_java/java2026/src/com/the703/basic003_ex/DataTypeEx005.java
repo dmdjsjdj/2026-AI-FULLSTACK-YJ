@@ -24,8 +24,8 @@ public class DataTypeEx005 {
 		System.out.println("수학점수를 입력하시오. ");
 		math = sc.nextInt();
 		
-		//처리
-		tot = kor + eng + math;
+		//처리 A=B
+		tot = kor + eng + math; // 정수/실수  10/3
 		awa = tot/3.0; // /3.0도 가능
 		
 		//출력

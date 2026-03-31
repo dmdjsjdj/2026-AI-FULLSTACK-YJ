@@ -7,14 +7,14 @@
 </head>
 <body>
     <!-- 1. 여백 -->
-    <!-- Q1. 1. 여백그룹에 배경색상-검정, 글자색은 하얀색  /  안쪽여백 50px / 바깥쪽여백-완쪽: 50px -->
-    <!-- Q2. h3 좋아하는 색상 / 바깥쪽 아래 여백 10px -->
-    <!-- Q3. p margin 맨끝(오른쪽)에 하나만 이미지 25 25 넣기 -->
-    <!-- Q4. p padding 반복해서 이미지 25 25 넣기 -->
+    <!-- Q1. 1. 여백그룹    배경색상-검정, 글자색은 하얀색  /  안쪽여백 50px / 바깥쪽여백-완쪽: 50px -->
+    <!-- Q2. h3            좋아하는 색상 / 바깥쪽 아래 여백 10px -->
+    <!-- Q3. p margin      맨끝(오른쪽)에 하나만 이미지 25 25 넣기 -->
+    <!-- Q4. p padding     반복해서 이미지 25 25 넣기 -->
     <div style="background-color: black; color: aliceblue; padding: 50px; margin-left: 50px;" >
-        <h3 style="background-color: blue; margin-bottom: 10px;" >1. 여백 - margin/padding </h3>
-        <p style="background: cornflowerblue url(./img/cat.png) no-repeat right / 30px 30px;" >margin  : 바깥쪽 여백</p>
-        <p style="background: url(./img/cat.png) repeat right / 30px 30px;" >padding : 안쪽 여백</p>
+        <h3 style="color: blue; margin-bottom: 10px;" >1. 여백 - margin/padding </h3>
+        <p style="background: url(./img/cat.png) no-repeat right / 30px 30px;" >margin  : 바깥쪽 여백</p>
+        <p style="background: url(./img/cat.png) repeat center / 30px 30px;" >padding : 안쪽 여백</p>
     </div>
 
     <!-- 2. 배경 -->
@@ -29,6 +29,43 @@
         <p style="margin-top: 30px; background: pink url(./img/four.png) no-repeat right / 150px 140px  ; padding: 10px;" >
             background: 
         </p>
+    </div>
+
+    <!-- 3. 글자스타일 -->
+    <div>
+        <h3>3. 글자스타일</h3>
+        <dl>
+            <dt>1. 글자색상</dt>
+            <dd style="color: rgb(17, 216, 216);" >color:red</dd>
+
+            <dt>2. 글자크기</dt>
+            <dd style="font-size: 30px;" >font-size:25px</dd>
+
+            <dt>3. 정렬</dt>
+            <dd style="text-align: center;" >text-align:center</dd>
+
+            <dt>4. 밑줄</dt>
+            <dd style="text-decoration:line-through;" >text-decoration:none;</dd>
+            <dd>
+                <a href="#" style="text-decoration: none;">네이버</a>
+            </dd>
+
+            <dt>5. 글꼴</dt>
+            <dd style="font-family: 'Times New Roman', Times, serif;" >font-family:sans-serif</dd>
+
+            <dt><h4 style="font-weight: normal;" >6. 굵게</h4></dt>
+            <dd style="font-weight: bold;" >font-weight:bold</dd>
+        </dl>
+    </div>
+
+    <!-- 4. 박스디자인 -->
+    <div style="width: 300px; border: 5px solid cornflowerblue; margin:auto;
+               border-radius: 30px; padding: 10px; text-align: center; box-shadow: 0 0 20px rgba(16, 180, 180, 0.5);" >
+        <h3> 박스디자인 </h3>
+        <P> 가로 : width</P>
+        <p> 선   : border: 3px solid red </p>
+        <p> 둥근모서리 : border-radius </p>
+        <p> 그림자효과 : box-shadow </p>
     </div>
 
 </body>
