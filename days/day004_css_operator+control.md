@@ -91,3 +91,5 @@
       int num1, num2;
       double result;
       Scanner scanner = new Scanner(System.in);
+
+      System.out.println("숫자입력1> );
