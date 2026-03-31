@@ -90,7 +90,7 @@ System.out.printf( "%d+%d=%d" ,  a , b , a+b);
  - h      : 제목, 1~6
  - p      : 문단
  - pre    : 문단 - 줄바꿈 인식
- - inm    : 이미지, src="경로" , alt="설명"
+ - img    : 이미지, src="경로" , alt="설명"
  - a      : 링크, href="경로" , title="설명"
 
 - 3. java

@@ -19,3 +19,5 @@ java.io.FileNotFoundException: D:\sonyj\2026-AI-FULLSTACK-YJ\track003_java\.meta
 	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2549)
 	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:558)
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:123)
+2026-03-30 14:31:10,776 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is not available. Remote download required.
+2026-03-31 09:05:30,568 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
