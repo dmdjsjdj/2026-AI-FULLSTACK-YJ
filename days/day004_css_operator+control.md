@@ -51,28 +51,30 @@
 ### ■4. 복습문제
 
 - 1. css(1)
-1. 배경 :  
-2. 글자 :  
-3. 글자크기 :  
-4. 정렬 :  
-5. 밑줄 :  
-6. 글꼴 :  
-7. 굵게 :  
-8. 가로 :  
-9. 바깥쪽여백:  
-10. 안쪽여백:  
-11. 선 : 
-12. 둥근모서리 :  
-13. 그림자효과 :  
+1. 배경 :  background-color
+2. 글자 :  color
+3. 글자크기 :  font-size
+4. 정렬 :  text-align
+5. 밑줄 :  text-decoration
+6. 글꼴 :  font-family
+7. 굵게 :  font-weight
+8. 가로 :  width
+9. 바깥쪽여백:  margin
+10. 안쪽여백:  padding
+11. 선 : border
+12. 둥근모서리 : border-radius
+13. 그림자효과 :  box-shadow
 
 - 2. java
-  1. 자바의 자료형 분류(   /   )
+  1. 자바의 자료형 분류(  기본형 / 참조형  )
   2. 기본형 : 값
     2-1 논리형 : 예) boolean  - true/false (1byte)   
-    2-2 정수형 :  
-    2-3 실수형 :  
-    2-4 문자형 :
-  3. 자동형변환은 (    )  빼고  (    ) 기본형
+    2-2 정수형 :  byte - short - int - long (1-2-4-8L)
+    2-3 실수형 :  float - double (4f-8)
+    2-4 문자형 :  char
+  3. 자동형변환은 (  boolean  )  빼고  (  
+     byte < short / char < int < iong < float < double
+    ) 기본형
 
 
 - 3. java [실습]
