@@ -37,8 +37,10 @@ public class BankMini {
 			ml = sc.nextInt();
 		} 
 		
-		if (num==2) {
-			System.out.println("bye");
+		else if (num==2) {
+			System.out.println("아이디: ");
+			id = sc.next().charAt(0);
+			
 		}
 
 	}

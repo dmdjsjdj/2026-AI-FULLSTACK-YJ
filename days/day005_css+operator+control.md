@@ -95,8 +95,8 @@ css 적용방법
 2. 글자색상을 빨간색으로 지정하는 속성은?         color:red
 3. 글자 크기를 20px로 지정하는 속성은?          font-size:20px
 4. 글자를 가운데 정렬하는 속성은?               font-align: center
-5. 글자에 밑줄을 추가하는 속성은?               text-decoration
-6. 글꼴을 Arial로 지정하는 속성은?              font-family:"Arial"
+5. 글자에 밑줄을 추가하는 속성은?               text-decoration: underline
+6. 글꼴을 Arial로 지정하는 속성은?              font-family:'Arial'
 7. 글자를 굵게 표시하는 속성은?                 text-weight 
 8. 요소의 가로 길이를 300px로 지정하는 속성은?   width:300px
 9. 요소의 바깥쪽 여백을 10px로 지정하는 속성은?  margin:10px
