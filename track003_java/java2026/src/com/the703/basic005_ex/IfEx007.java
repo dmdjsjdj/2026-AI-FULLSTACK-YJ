@@ -34,13 +34,24 @@ public class IfEx007 {
 			System.out.printf("%d / %d = %.2f\n", num1, num2, result );
 		}
 		//줄이기
-		if(ch != '/') {
-			result = num1 + (char)ch +num2;
-			System.out.println(num1 +" "+ ch +" "+ num2 + "=" + (num1+ch+num2));
+		if (ch == '+') { 
+			result = num1 + num2;
+		}
+		else if (ch == '-') { 
+			result = num1 - num2;
+		}
+		else if (ch == '*') { 
+			result = num1 * num2;
+		}
+		else { 
+			result = (double)num1 / num2;
+		}
+		
+		if (ch == '/') {
+			System.out.printf("%d / %d = %.2f", num1, num2, result );
 		}
 		else {
-			result = (double)num1/num2;
-			System.out.printf("%d / %d = %.2f", num1, num2, result );
+			System.out.printf("%d %c %d = %d", num1, ch, num2, (int)result);
 		}
 
 	}
