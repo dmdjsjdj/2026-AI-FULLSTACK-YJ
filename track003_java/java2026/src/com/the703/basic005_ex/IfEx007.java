@@ -33,6 +33,7 @@ public class IfEx007 {
 			result = (double)num1/num2;
 			System.out.printf("%d / %d = %.2f\n", num1, num2, result );
 		}
+		
 		//줄이기
 		if (ch == '+') { 
 			result = num1 + num2;

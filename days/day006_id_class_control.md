@@ -138,9 +138,24 @@ css 적용방법
 14. 버튼에 마우스를 올렸을 때 부드럽게 색이 바뀌도록 하려면?  .button:hover{transition:all 2s;}
 
 > 정리문제 (2)
-1. css 선택자 유일한 값 ?
-2. css 선택자 여러개 선택시? 
+1. css 선택자 유일한 값 ? id
+2. css 선택자 여러개 선택시?  class
  
 > 정리문제 (3)
 1. 숫자를 한개입력받아
 2. 1이면 1이다, 2이면 2이다, 3이면 3이다  if로 작성 
+int num=0;
+Scanner scanner = new Scanner(System.in);
+
+System.out.println("숫자 한개 입력");
+num = scanner.nextInt();
+
+if(num == 1){
+    System.out.println("1이다.");
+}
+else if(num == 2){
+    System.out.println("2이다.");
+}
+else if(num == 3){
+    System.out.println("3이다.");
+}
