@@ -23,7 +23,11 @@ public class BankProjectV1 {
 			menu = sc.nextInt();
 			//처리
 			//출력
-			if (menu==1) {
+			if (menu == 9) {
+				System.out.println("종료합니다.");
+				break;
+			}
+			else if (menu==1) {
 				System.out.print("아이디: ");
 				id=sc.nextInt();
 				System.out.print("비밀번호: ");
@@ -50,9 +54,6 @@ public class BankProjectV1 {
 				System.out.println("출금기능입니다.\n");
 			} else if (menu == 5) {
 				System.out.println("삭제기능입니다.\n");
-			} else if (menu == 9) {
-				System.out.println("종료합니다.");
-				break;
 			}
 		}
 		
