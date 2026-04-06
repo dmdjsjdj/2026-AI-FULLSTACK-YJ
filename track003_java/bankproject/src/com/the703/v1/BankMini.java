@@ -108,7 +108,10 @@ public class BankMini {
 				
 				if( id == id2 && pw == pw2 ) {
 					if(deletid == 'y') {
-						// 내용 비우는방법 아직 모름
+						id = 0;
+						pw = 0;
+					}else if(deletid == 'n') {
+						System.out.println("계좌 삭제를 취소하셨습니다.");
 					}
 				} else {
 					System.out.println("다시 확인해보세요");
