@@ -35,17 +35,17 @@ public class ForIn001_2 {
 		
 		for(;;) {
 			
-			if( kor<0 && kor>100 ) {
+			if( kor<0 || kor>100 ) {
 				System.out.print("국어점수 입력 > ");
 				kor = scanner.nextInt(); 
 				continue;
 			}
-			if(mat>=0 && mat<=100) {
+			if(mat<0 || mat>100) {
 				System.out.print("수학점수 입력 > ");
 				mat = scanner.nextInt();
 				continue;
 			}
-			if(eng>=0 && eng<=100) {
+			if(eng<0 || eng>100) {
 				System.out.print("영어점수 입력 > ");
 				eng = scanner.nextInt();
 				continue;
