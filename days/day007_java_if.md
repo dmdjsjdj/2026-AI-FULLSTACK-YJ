@@ -121,9 +121,7 @@ css 적용방법
 
 1. 마크업
 1-1.  이미지태그를 이용해서 001.png 파일을 마크업하시오.
-<img src="./img/001.png" ait="이미지"/>
 1-2.  naver로 링크하는 a태그를 적으시오.
-<a href="https://www.naver.com/" target="_blank" ait="네이버링크">네이버</a>
 
 2. css
 1. 배경을 노란색으로 설정하는 속성은?      

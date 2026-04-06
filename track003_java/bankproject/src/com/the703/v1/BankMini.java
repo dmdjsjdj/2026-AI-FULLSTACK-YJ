@@ -22,8 +22,10 @@ public class BankMini {
 		int id=-1,pw=-1,id2=-1,pw2=-1;
 		Scanner sc = new Scanner(System.in);
 		
+		System.out.print("\n 🌟💰 welcome to bank 💰🌟\r\n");
+		
 		for( ; menu < 9;) {
-			System.out.print("\n 🌟💰 welcome to bank 💰🌟\r\n"
+			System.out.print("\n -- bank menu --\r\n"
 					 + "\r\n"
 					 + "1.➕계좌 추가\r\n" 
 					 + "2.🔍계좌 조회\r\n" 
@@ -108,6 +110,7 @@ public class BankMini {
 				
 				if( id == id2 && pw == pw2 ) {
 					if(deletid == 'y') {
+						System.out.println("계좍가 삭제되었습니다.");
 						id = 0;
 						pw = 0;
 					}else if(deletid == 'n') {
