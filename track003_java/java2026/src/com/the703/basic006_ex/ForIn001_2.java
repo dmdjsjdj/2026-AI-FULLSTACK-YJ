@@ -57,7 +57,7 @@ public class ForIn001_2 {
 		avg = (double)total/3;
 		
 		hap = (avg<60 ? "불합격" : kor>=40 && mat>=40 && eng>=40 ? "합격" : "불합격");
-		jang = (avg>=90 ? "장학생" : "해당없음");
+		jang = (avg>=95 ? "장학생" : "해당없음");
 		lev = (avg>=90 ? "수" : avg>=80 ? "우" :avg>=70 ? "미" :avg>=60 ? "양" : "가");
 	
 		//출력
