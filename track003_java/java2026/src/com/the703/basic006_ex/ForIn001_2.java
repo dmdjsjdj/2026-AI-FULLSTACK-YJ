@@ -6,63 +6,50 @@ public class ForIn001_2 {
 	
 	public static void main(String[] args) {
 		//변수
-		//자료형 : 기본형/참조형 (String)
-		//기본형 - 정수:byte-shirt/char-int-long (1-2-4-8L)  / 실수:float-double (4f-8) / boolean 빼고 타입형변환 가능
-		String std="", hap="불합격", lev="가", jang="";
-		int kor=-1, eng=-1, mat=-1, total=-1;  /* ■1) 0~100사이가 아닌 값*/
+		int kor=-1, eng=-1, mat=-1, total=-1;
 		double avg=-1;
+		String std=" ", hap=" ", lev=" ", jang=" ";
 		
 		Scanner scanner = new Scanner(System.in);
-
-		//입력
+		
+		//입력  0. 국어, 영어,수학(0~100만 입력받기) 무한반복
+		//     문자열: next() / 정수형: nextInt() / 실수형: nextDouble() / 문자: next().charAt(0)
 		System.out.print("\n학번 입력 > ");
-		std = scanner.next();
-		
-		for(;;) {
-			
-			if( kor<0 || kor>100 ) {   // ■2) kor = -1
-				System.out.print("국어점수 입력 > "); 
-				kor = scanner.nextInt();  //3)
-				continue;
-			}
-			if(mat<0 || mat>100) {
-				System.out.print("수학점수 입력 > ");
-				mat = scanner.nextInt();
-				continue;
-			}
-			if(eng<0 || eng>100) {
-				System.out.print("영어점수 입력 > ");
-				eng = scanner.nextInt();
-				continue;
-			} break;   // kor eng mat 입력을 잘한경우
+				std = scanner.next();
+				
+		for( ;  ; ) {
+				System.out.print("국어점수 입력 > ");
+				kor = scanner.nextInt();
+				if(kor>=0 && kor<100) {break;}
 		}
+		for( ;  ; ) {
+			System.out.print("수학점수 입력 > ");
+			mat = scanner.nextInt();
+			if(mat>=0 && mat<100) {break;}
+		}
+		for( ;  ; ) {
+			System.out.print("영어점수 입력 > ");
+			eng = scanner.nextInt();
+			if(eng>=0 && eng<100) {break;}
+		}	
 		
-		/*   변수 int a 초기값에 -1과 0의 차이
-		 * for(;;){
-		 * 		if(국어점수 범위가 아니라면){  //-1  (0~100 사이가 아니므로 처리가능)
-		 * 			1.	국어점수입력 > (0~100만 입력받기)
-		 * 			2.  건너뛰기  continue;
-		 * 		if(영어점수 범위가 아니라면){
-		 * 			1.	영어점수입력 > 
-		 * 			2.  건너뛰기
-		 * 		}
-		 * 		if(수학점수 범위가 아니라면){
-		 * 			1.	수학점수입력 > 
-		 * 			2.  건너뛰기
-		 * 		}
-		 *      //break; 나오기
-		 * }
-		 * */
-						
-			//처리
-			total = kor + mat + eng;
-			avg = (double)total/3;
-			
-			hap = (avg<60 ? "불합격" : kor>=40 && mat>=40 && eng>=40 ? "합격" : "불합격");
-			jang = (avg>=95 ? "장학생" : "해당없음");
-			lev = (avg>=90 ? "수" : avg>=80 ? "우" :avg>=70 ? "미" :avg>=60 ? "양" : "가");
+//		for( ; !(kor>=0 && kor<100) ; ) {
+		//     -> kor<0 && kor>100
+//			System.out.print("국어점수 입력 > ");   kor = scanner.nextInt();
+//		}
+//		for( ; !(mat>=0 && mat<100) ; ) {
+		//     -> mat<0 && mat>100
+//			System.out.print("수학점수 입력 > ");   mat = scanner.nextInt();
+//		}
+//		for( ; !(eng>=0 && eng<100) ; ) {
+		//     -> eng<0 && eng>100
+//			System.out.print("영어점수 입력 > ");	 eng = scanner.nextInt();
+//		}
 		
-
+		//처리
+		total = kor+mat+eng;
+		avg = (double)total/3;
+		
 		hap = (avg<60 ? "불합격" : kor>=40 && mat>=40 && eng>=40 ? "합격" : "불합격");
 		jang = (avg>=95 ? "장학생" : "해당없음");
 		lev = (avg>=90 ? "수" : avg>=80 ? "우" :avg>=70 ? "미" :avg>=60 ? "양" : "가");
@@ -74,6 +61,6 @@ public class ForIn001_2 {
 		System.out.printf("%s\t%d\t%d\t%d\t%d\t%.2f\t%s\t%s\t%s\n", std, kor, eng, mat, total, avg, hap, lev, jang);
 
 		
-	 }
+	}
 
 }
