@@ -2,7 +2,7 @@ package com.the703.basic006_ex;
 
 import java.util.Scanner;
 
-public class ForIn001_2 {
+public class ForIn001_4 {
 	
 	public static void main(String[] args) {
 		//변수
@@ -20,21 +20,18 @@ public class ForIn001_2 {
 		
 		for(;;) {
 			
-			if( kor<0 || kor>100 ) {   // ■2) kor = -1
-				System.out.print("국어점수 입력 > "); 
-				kor = scanner.nextInt();  //3)
-				continue;
+			if( kor<0 || kor>100 ) {   // ■2) kor = -1  //해당범위x면 
+				System.out.print("국어점수 입력 > ");      //입력받음
+				kor = scanner.nextInt(); 
 			}
-			if(mat<0 || mat>100) {
-				System.out.print("수학점수 입력 > ");
+			else if(mat<0 || mat>100) {					//해당범위x면 
+				System.out.print("수학점수 입력 > ");		//입력받음
 				mat = scanner.nextInt();
-				continue;
 			}
-			if(eng<0 || eng>100) {
-				System.out.print("영어점수 입력 > ");
+			else if(eng<0 || eng>100) { 				//해당범위x면 
+				System.out.print("영어점수 입력 > ");      //입력받음
 				eng = scanner.nextInt();
-				continue;
-			} break;   // kor eng mat 입력을 잘한경우
+			} else { break; }   // kor eng mat 입력을 잘한경우
 		}
 		
 		/*   변수 int a 초기값에 -1과 0의 차이
