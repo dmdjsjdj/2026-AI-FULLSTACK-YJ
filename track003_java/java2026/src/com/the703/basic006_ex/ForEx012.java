@@ -35,8 +35,10 @@ public class ForEx012 {
 //		}
 		
 		c = a<b ? 1:-1;	
+		//a-2, b-5  3-5x1  6-5x1=1->종료
+		//a-5, b-2   1-2x-1=1->종료
 						//2,5
-		for(; ;) {      //5-5 * 1  
+		for(; ;) {      //5-5 * 1        i=i+c(1,-1)
 			for(int i = a; (i-b)*c <= 0 ; i+=c) {
 				num = num+i;
 				System.out.print((i==a?"":"+")+i);

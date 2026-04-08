@@ -44,6 +44,15 @@
         .f3 {
             clear: both;
         }
+
+
+        .p {
+            position: relative;
+        }
+        .me {
+            position: absolute; bottom: 0;  right: 0;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -66,12 +75,25 @@
         </ul>
     </div>
 
-    <div class="container">
+    <div class="container f">
         <h3>3. 배치(1) - float</h3>
         <p class="item f1">LEFT<span>(왼쪽)</span></p>
         <p class="item f2">RIGHT<span>(오른쪽)</span></p>
         <p class="item f3">float속성끊기 - clear:both / overflow:hidden </p>
     </div>
+
+
+    <div class="container p">
+        <h3>4. 배치(2) - position - relative(누구안에) + absolute(어디) 좌표</h3>
+        <p class="item me">WHERE I AM</p>
+        <p>종류 : static(기본값), relative(박스 위치), 
+                  absolute(박스 위치x), fixed(브라우저 고정), 
+                  sticy(스크롤할때 특점지정에 붙기) 
+        </p>
+        <p>부모 : relative(공간확보) / 자식 : (원하는 위치 배치) - 좌표 </p>
+    </div>
+
+
 
 </body>
 </html>
