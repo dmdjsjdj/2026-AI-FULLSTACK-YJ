@@ -10,7 +10,6 @@ public class ForEx012 {
 		
 		int a=-1,b=-1, num=0;
 		int c=-1;
-		String d = "";
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.print("첫번째 숫자 입력 : ");
@@ -18,32 +17,31 @@ public class ForEx012 {
 		System.out.print("두번째 숫자 입력 : ");
 		b=scanner.nextInt();
 
-		
 //		for(; ;) {
-//			if(a<b) {
-//				for(int i= a; i<=b; i++) {
-//					num = num+i;
-//					System.out.print((i==a?"":"+")+i);
-//				} break;
-//			}
-//			else if(a>b) {
-//				for(int i1= a; i1>=b; i1--) {
-//					num = num+i1;
-//					System.out.print((i1==a?"":"+")+i1);
-//				} break;
-//			}
+//		if(a<b) {
+//			for(int i= a; i<=b; i++) {
+//				num = num+i;
+//				System.out.print((i==a?"":"+")+i);
+//			} break;
 //		}
-		
+//		else if(a>b) {
+//			for(int i1= a; i1>=b; i1--) {
+//				num = num+i1;
+//				System.out.print((i1==a?"":"+")+i1);
+//			} break;
+//		}
+//	}
 		c = a<b ? 1:-1;	
-		//a-2, b-5  3-5x1  6-5x1=1->종료
-		//a-5, b-2   1-2x-1=1->종료
-						//2,5
-		for(; ;) {      //5-5 * 1        i=i+c(1,-1)
-			for(int i = a; (i-b)*c <= 0 ; i+=c) {
-				num = num+i;
-				System.out.print((i==a?"":"+")+i);
-			} break;
-		}
+		//i<=b   i-b<=0  2-5=-3(성립x)
+		//a-2, b-5  3-5x1=-2 / 4-5x1=-1 / 6-5x1=1->종료
+		//a-5, b-2  4-2x-1=2 / 3-2x-1=-1 / 1-2x-1=1->종료
+						
+                //   i=i+c(1,-1)
+		for(int i = a; (i-b)*c <= 0 ; i+=c) {
+			num = num+i;
+			System.out.print((i==a?"":"+")+i);
+		} 
+		
 		
 		System.out.println("="+num);
 	}

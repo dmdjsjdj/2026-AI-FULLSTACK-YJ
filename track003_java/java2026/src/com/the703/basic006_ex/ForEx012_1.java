@@ -1,0 +1,42 @@
+package com.the703.basic006_ex;
+
+import java.util.Scanner;
+
+public class ForEx012_1 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		//변수
+		int num1 = -1, num2 = -1, sum = 0;
+		//입력
+		System.out.print("숫자 1 입력 : ");
+		num1 = sc.nextInt();
+		System.out.print("숫자 2 입력 : ");
+		num2 = sc.nextInt();
+		//처리
+		
+		//version-1-출력
+//		for(int i = num1; i <= num2; i++) {
+//			System.out.printf(i!=num2?"%d+":"%d="+"%d\n", i, sum+=i);
+//		}
+//		for(int i = num1; i >= num2; i--) {
+//			System.out.printf(i!=num2?"%d+":"%d="+"%d\n", i, sum+=i);
+//		}
+		
+		// version-2-출력
+		String result = "";
+		for(int i = num1;;) {
+			result += String.format("%d+", i);
+			System.out.println("1-"+i);
+			sum += num1 > num2? i-- : i++;
+			
+			if(i == num2) {
+				result += String.format("%d=%d\n", i, sum += i);
+				System.out.println("2-"+i);
+				break;
+			}
+		}
+		System.out.println(result);
+		
+	}
+}
+// 두수 사이의 합

@@ -10,6 +10,7 @@ public class ForEx003 {
 		//2) num = 1 + 2
 		//3) num = 3 + 3
 		//...
+		//+ 1+2+...+10=55 출력
 		int num = 0;
 		for(int i=1;i<=10;i++) {
 			
