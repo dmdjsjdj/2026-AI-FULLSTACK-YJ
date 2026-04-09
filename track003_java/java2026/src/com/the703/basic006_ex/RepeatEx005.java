@@ -19,8 +19,6 @@ public class RepeatEx005 {
 		int count = sum.length();
 		
 		for(int i=0; i < count/2;i++) {
-			System.out.println(sum.charAt(i));
-			System.out.println(sum.charAt(count-i-1));
 			if(sum.charAt(i) != sum.charAt(count-i-1)) {
 				non = false;
 			} 

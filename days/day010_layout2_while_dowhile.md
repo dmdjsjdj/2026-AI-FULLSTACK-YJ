@@ -65,7 +65,7 @@
      - 자식콘텐츠로  ( position: absolute; )를 사용해 배치한다.
 
     6.  스크롤할 때 상단에 계속 붙어 있도록 만드는 방법은?  
-    position: sticky;
+    position: sticky; top:0;
 ```    
 
 ■ 2. java
