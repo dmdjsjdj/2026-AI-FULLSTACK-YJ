@@ -9,14 +9,11 @@ public class ForEtc007_1 {
 		//  8단  9단
 		
 		for(int j=2;j<=9;j+=3) {    //단 숫자 증가
-			for(int i=1;i<=3;i++) { //곱하는 숫자
-				for(int z=0;z<3;z++) {  // 2->3->4 증가
-					int t = j+z;
-					if(t<=9) {
-						System.out.print(t+"x"+i+"="+ (i*t)+(i*t>=10?" ":"  "));
-					}
+				for(int z=1;z<9;z++) {  // 2->3->4 증가
+					
+					System.out.printf("%d x %d = %d  %d x %d = %d  %d x %d = %d", j,z,j*z, j+1,z,(j+1)*z, j+2<=9?j+2:null,j+2<=9?z:null,j+2<=9?(j+2)*z:null);
+					System.out.println();
 				}System.out.println();
-			}System.out.println();
 		}
 //							(j+z)	 (i)	  (i*(j+z))
 //		System.out.println(j+z+"x"+1+"="+ (1*j)+"  ");
@@ -26,6 +23,8 @@ public class ForEtc007_1 {
 //		System.out.println(j+z+"x"+1+"="+ (1*(j+3))+"  ");
 //		System.out.println(j+z+"x"+2+"="+ (2*(j+3))+"  ");
 //		System.out.println(j+z+"x"+3+"="+ (3*(j+3))+"  ");
+//		(j+z)	 (i)	  (i*(j+z)) 		(j+z+1)	 (i)	  (i*(j+z))		(j+z+2)	 (i)	  (i*(j+z))
+//		(j+z+3)	 (i)	  (i*(j+z))
 	}
 
 }
