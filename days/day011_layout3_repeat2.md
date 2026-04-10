@@ -94,9 +94,9 @@
    6.  a태그의 링크를 확대하려고 한다. 사용해야하는 방법은?
    a { display: block; }
    7.  li태그들을 가로방향으로 배치하려고 한다.  width를 줘야하는데 사용해야하는 방법은?
-   justify-content: center;
+    display: inline-block;
    8.  header 안에서 로고와 내비게이션을 양쪽 끝에 배치하고, 콘텐츠 간 간격을 일정하게 유지하려면 어떤 레이아웃 방식을 사용해야 하는가?
-   justify-content: space-between;
+      display: flex;   justify-content: space-between;
 
 ```    
 
@@ -125,14 +125,29 @@
     Scanner scanner = new Scanner(System.in);
     System.out.print("평균입력 > ");  avg = scanner.nextInt();
     
+    switch(avg/10){
+      case 9 : syso "A 학점"; break;
+      case 8 : syso "B 학점"; break;
+      case 7 : syso "C 학점"; break;
+      default : syso "F 학점" break;
+    }
+    
 3. for, while, do while 버젼으로  문제를 풀으시오!  
     1 2 3
+
+    for(int i=1;)
 
 4. 이중 for를 이용해서 다음문제를 풀으시오.
   ★★★★
   ★★★★
   ★★★★
   ★★★★
+
+  for(int i = 1; i<=4;i++) {
+    for(int j=1;j<=4;j++){
+      System.out.print("★");
+    }System.out.println();
+  }
     
   
 ```
