@@ -111,6 +111,13 @@
     70점 이상 → "C 학점"
     그 외 → "F 학점"
 
+    int a=0;
+
+    if (a>=90){ syso "A 학점" }
+    else if (a>=80) { syso "B 학점" }
+    else if (a>=70) { syso "C 학점"}
+    else { syso "F 학점" }
+
 2. switch버젼에 해당하는 다음에 연결해서 문제를 작성하시오.
    위의 문제를 switch 로
   
