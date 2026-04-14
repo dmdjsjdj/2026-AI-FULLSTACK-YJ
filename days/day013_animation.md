@@ -1,10 +1,11 @@
-■ 1. html + css  
+### ■ 1. html + css  
 html + css 익히느라 수고하셨습니다~!
 내일은 바로 부트스트랩 진행할께요~~! 
 
 
+---
 
-■ 2. java  [25분 안 쪽으로 끝나게 도전이요~!]
+### ■ 2. java  [25분 안 쪽으로 끝나게 도전이요~!]
 ```
 Scanner scanner = new Scanner(System.in);
 System.out.print("숫자 입력(1,2,3) > ");
