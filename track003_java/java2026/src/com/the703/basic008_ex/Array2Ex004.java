@@ -28,6 +28,9 @@ public class Array2Ex004 {
 				for(int k=0;k<datas.length;k++) {
 						height=height+datas[k][j];
 					}result[datas.length][j]=height;
+					
+		//   result[i][datas[0].length]+=result[i][j];  가로 누적
+		//   result[datas.length][j]+=result[i][j];  세로 누적
 				
 			}
 			result[i][datas[0].length]=width;

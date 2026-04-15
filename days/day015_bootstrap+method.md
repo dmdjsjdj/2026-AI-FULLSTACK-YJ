@@ -63,3 +63,12 @@
 3. for + length 이용해서 출력 
    101   102   103
    104   105   106  
+   int [] arr = new int[];
+   int a=101;
+
+   for(int i=0;i<arr.length;i++){
+      for(int j=0;j<arr[i].length;j++){
+         arr[i][j]=a;
+         a++;
+      }syso;
+   }
