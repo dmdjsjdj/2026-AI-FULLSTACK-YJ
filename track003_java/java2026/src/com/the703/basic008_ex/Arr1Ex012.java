@@ -9,7 +9,7 @@ public class Arr1Ex012 {
 		
 		int[] mon = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		String[] yoil = {"일", "월", "화", "수", "목", "금", "토"};
-		int days = 1;
+		int days = 0;
 		int yun = 0;
 		
 		//1. 서기 1년 1월 1일부터 2020년 10월 13일 까지의 총 일수 구하기
@@ -21,6 +21,9 @@ public class Arr1Ex012 {
 						days=days+1;
 					}break;
 				}
+				else if(j==2&&((i%4==0 && i%100!=0)||i%400==0)) {
+						days=days+29;
+				}
 				else {
 					for(int k=1;k<=mon[j];k++) {  //일 계산
 						days=days+1;
@@ -29,15 +32,29 @@ public class Arr1Ex012 {
 				
 			}
 			
-			
-			if(i!=0&&i%4==0) {
-				yun++;
-			}
 		} System.out.println(days); System.out.println(yun); 
 		days = days + yun;
 		System.out.println("* 서기1년 ~ 2020년 10월 13일까지의 총 일수: "+days+"일");
 		
+		System.out.println("* 2020년 10월 13일 "+yoil[days%7]+"요일");
 		
+		System.out.println("========= 10월 ==========");
+		for(int i=0;i<yoil.length;i++) {
+			System.out.print(yoil[i]+"\t");
+		}
+		System.out.println();
+		
+		int startday = (days-12)%7;
+		
+		for(int r=0;r<startday;r++) {
+			System.out.print( "*\t" );
+		}
+		for(int i = 1;i<mon[10];i++) {
+			System.out.print(i+"\t");
+			if((startday+i)%7==0) {
+				System.out.println();
+			}
+		}
 	}
 
 }
