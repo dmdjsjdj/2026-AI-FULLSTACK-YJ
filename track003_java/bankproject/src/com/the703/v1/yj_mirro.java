@@ -16,8 +16,10 @@ public class yj_mirro {
 		System.out.print("\n  미로찾기 \r\n");
 		
 		for( ; step<=9 ;) {
-			System.out.print("길 선택\n"+
-								"왼쪽:a , 오른쪽:d , 위:w , 아래:s");
+			System.out.println("남은 길: "+ (mir.length-step));
+			System.out.print("길 선택 "+
+								"(왼쪽:a , 오른쪽:d , 위:w , 아래:s) : ");
+			
 			mirro = sc.next().charAt(0);
 			
 			
