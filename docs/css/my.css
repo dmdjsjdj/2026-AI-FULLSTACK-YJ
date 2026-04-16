@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.myhidden {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    white-space: nowrap;
+    clip:rect(0,0,0,0); /*요소를 잘라서 시각적으로 완전히 숨김 - 구형 브라우저 호환*/
+}
+
+#demo {
+    height: 400px;
+    overflow: hidden;
+    margin-bottom: 5%;
+}
+#demo img {
+    object-fit: cover;
+}
+h3 {
+    font-weight: bold;
+    font-size: 35px;
+    text-decoration-line: underline;
+    transition: all 2.8s; 
+    
+}
+
+/* 배경 body에 fixed하고 원하는 배경부분만 투명하게*/
+.mybg {
+    background-color: transparent;
+}
+body {
+    background-image: url(../img/ocean.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    background-attachment: fixed;
+}
+
+/* transform + transition*/
+@keyframes shakeAnimation {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+      20%, 40%, 60%, 80% { transform: translateX(3px); }
+      0% {
+         transform: rotate(0deg)
+      }
+      25% {
+         transform: rotate(-15deg);
+      }
+      50% {
+            transform: rotate(15deg);
+         }
+      75% {
+         transform: rotate(-15deg);
+      }
+      100% {
+         transform: rotate(0deg);
+      }
+   }
+h3:hover {
+    /* transform: translateY(5px); */
+
+    animation-name: shakeAnimation;
+      animation-duration: 0.8s;
+      animation-timing-function: ease;
+      animation-timing-function: linear;
+      animation-iteration-count: 2;
+      animation-direction: normal;
+      animation-fill-mode: both;
+}
