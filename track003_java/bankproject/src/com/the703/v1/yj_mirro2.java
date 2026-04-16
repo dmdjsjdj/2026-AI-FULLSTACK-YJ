@@ -1,15 +1,30 @@
 package com.the703.v1;
 
+import java.util.Random;
 import java.util.Scanner;
 
-public class yj_mirro {
+public class yj_mirro2 {
 
 	public static void main(String[] args) {
 		//미로탈출
 		
 		char mirro ='\u0000';
-		char[] mir= {'a','d','d','s','d','w','w','a','s','s','a'};
+		char[] mir= new char[11];
+		char[] load = {'a','d','s','w'};
+		double random=Math.random();
 		int step=0;
+		
+//		for(int i=0;i<6;i++) {
+//			
+//			int lo = (int)Math.round(random * (load.length-1));
+//			
+//			if(i>0 && load[i-1]==lotto[i]) {
+//				i--;
+//			}
+//			else {
+//				lotto[i]=a;
+//			}
+//		} 
 		
 		Scanner sc = new Scanner(System.in);
 		
