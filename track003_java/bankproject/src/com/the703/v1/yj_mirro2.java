@@ -11,26 +11,21 @@ public class yj_mirro2 {
 		char mirro ='\u0000';
 		char[] mir= new char[11];
 		char[] load = {'a','d','s','w'};
-		double random=Math.random();
+		Random random = new Random();
 		int step=0;
+		int a=0;
 		
-//		for(int i=0;i<6;i++) {
-//			
-//			int lo = (int)Math.round(random * (load.length-1));
-//			
-//			if(i>0 && load[i-1]==lotto[i]) {
-//				i--;
-//			}
-//			else {
-//				lotto[i]=a;
-//			}
-//		} 
-		
+		for(int i=0;i<mir.length;i++) {
+			a=0;
+			a = random.nextInt(load.length);
+			mir[i] = load[a];
+		} 
+		System.out.println(mir);
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("\n  미로찾기 \r\n");
 		
-		for( ; step<=10 ;) {
+		for( ; step<mir.length ;) {
 			System.out.println("남은 길: "+ (mir.length-step));
 			System.out.println(step);
 			System.out.print("길 선택 "+

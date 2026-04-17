@@ -7,7 +7,7 @@ public class MethodEx003 {
 	}
 	//2
 	public static float return_float() {
-		
+//			  	 double -> return 3.3333
 		float a=10/3.0f;
 		return a ;
 	}
@@ -41,14 +41,15 @@ public class MethodEx003 {
 	
 	//6 
 	public static String myban(char a) {
-		String b="";
-		if(a=='A') {
-			b="노랑조";
-		}
-		else if(a=='B') {
-			b="주황조";
-		}
-		return b;
+//		if(a=='A') {
+//			return "노랑조";
+//		}
+//		else if(a=='B') {
+//			return "주황조";
+//		}
+//		else {return "";}
+		
+		return a=='A'?"노랑조":a=='B'?"주황조":" ";
 	}
 	//7
 	public static String stdId(int a) {
@@ -56,21 +57,23 @@ public class MethodEx003 {
 	}
 	//8
 	public static char stdAvg(int a) {
-		char b=0;
-		if(a>=90) {
-			b='A';
-		}
-		else if(a>=80) {
-			b='B';
-		}
-		else if(a>=70) {
-			b='C';
-		}
-		else {
-			b='D';
-		}
-		return b;
+//		char b=0;
+//		if(a>=90) {
+//			b='A'; //바로 return 'A'도 가능
+//		}
+//		else if(a>=80) {
+//			b='B';
+//		}
+//		else if(a>=70) {
+//			b='C';
+//		}
+//		else {
+//			b='D';
+//		}
+//		return b;
+		return a<70? 'D': a<80? 'C': a<90? 'B': a<=100?'A': ' ';
 	}
+	
 
 }
 

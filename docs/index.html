@@ -11,10 +11,10 @@
 <body>
     <!-- HEADER -->
     <!-- Q1. h1 내용 바꾸고 / a태그에 들어가있는 Logo이름변경 / nav 좋아하는 색상으로 바꾸기 -->
-    <header>
+    <header id="head">
         <h1 class="myhidden">yejin's Portfolio</h1>
 
-        <nav class="navbar navbar-expand-sm navbar-dark bg-info" 
+        <nav class="navbar navbar-expand-sm navbar-dark bg-info p-3" 
              style="background-image: linear-gradient(140deg,rgb(146, 223, 248),rgb(229, 183, 255));">
             <h2 class="myhidden">주메뉴</h2>
 
@@ -30,13 +30,13 @@
                                             target="_blank" title="깃허브로 이동">포트폴리오</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">About Me</a>
+                        <a class="nav-link" href="#about">About Me</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Gallery</a>
+                        <a class="nav-link" href="#portfo">Gallery</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Contact</a>
+                        <a class="nav-link" href="#contact">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -85,68 +85,89 @@
 
     <!-- INFO -->
     <section class="bg lg">
-        <div class="container me rounded p-5">
-            <h3 class="p-5 text-center text-white">About Me</h3>
+        <div class="container me rounded p-5 aboutbg text-white">
+            <h3 class="p-5 text-center text-white" id="about">About Me</h3>
 
-            <div class="row bg-white p-3 rounded">
-                <div class="col-sm-4">
-                    <p><img src="./img/one.png" alt="프로필사진" class="w-50"></p>
-                    <h4>son yejin</h4>
-                    <ul>
-                        <li>jenia03s@gmail.com</li>
-                        <li>
-                            <a href="https://github.com/dmdjsjdj/2026-AI-FULLSTACK-YJ" 
-                               target="_blank" title="깃허브로 이동">깃허브 포폴
-                            </a> 
-                        </li>
-                    </ul>
+            <div id="abme" class="carousel slide" data-bs-ride="carousel">
+
+                <!-- Indicators/dots -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#abme" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#abme" data-bs-slide-to="1"></button>
                 </div>
 
-                <div class="col-sm-4">
-                    <h4>Education</h4>
-                    <ul>
-                        <li>AI활용 풀스택(프론트엔드,백엔드)부트캠프(자바,파이썬,플러터)  (26.3.26 ~ 26.10.8)</li>
-                    </ul>
+                <div class=" p-3 rounded aboutbg carousel-inner">
+                    <div class="carousel-item active p-5 ">
+                        <div class="col-sm-6">
+                            <p><img src="./img/one.png" alt="프로필사진" class="w-50"></p>
+                            <h4>son yejin</h4>
+                            <ul>
+                                <li>jenia03s@gmail.com</li>
+                                <li>
+                                    <a href="https://github.com/dmdjsjdj/2026-AI-FULLSTACK-YJ" target="_blank"
+                                    title="깃허브로 이동" style="text-decoration: none; color: rgb(33, 37, 255);">
+                                        깃허브 포트폴리오
+                                    </a> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-                    <h4>KeyWord</h4>
-                    <ul>
-                        <li class="btn btn-danger mx-2">열정</li>
-                        <li class="btn btn-warning mx-2">성실</li>
-                        <li class="btn btn-info mx-2">끈기</li>
-                    </ul>
+                    <div class="carousel-item p-5 pg2">
+                        <div >
+                            <h4>Education</h4>
+                            <ul>
+                                <li>AI활용 풀스택(프론트엔드,백엔드)부트캠프(자바,파이썬,플러터)  (26.3.26 ~ 26.10.8)</li>
+                            </ul>
+
+                            <h4>KeyWord</h4>
+                            <ul>
+                                <li class="btn btn-danger mx-2">열정</li>
+                                <li class="btn btn-warning mx-2">성실</li>
+                                <li class="btn btn-info mx-2">끈기</li>
+                            </ul>
+                        </div>
+
+                        <div >
+                            <h4>SKILLS</h4>
+
+                            <div class="progress my-3">
+                                <div class="progress-bar bg-info progress-bar-striped" 
+                                    style="width:80%">JAVA 80%</div>
+                            </div>
+                            <div class="progress my-3">
+                                <div class="progress-bar bg-warning progress-bar-striped" 
+                                    style="width:90%">ORACLE 90%</div>
+                            </div>
+                            <div class="progress my-3">
+                                <div class="progress-bar bg-danger progress-bar-striped" 
+                                    style="width:85%">SPRING 85%</div>
+                            </div>
+                            <div class="progress my-3">
+                                <div class="progress-bar bg-primary progress-bar-striped" 
+                                    style="width:90%">REACT 90%</div>
+                            </div>
+                            <div class="progress my-3">
+                                <div class="progress-bar bg-success progress-bar-striped" 
+                                    style="width:80%">FLUTTER 80%</div>
+                            </div>
+                        </div>
+                    </div>   
                 </div>
-
-                <div class="col-sm-4">
-                    <h4>SKILLS</h4>
-
-                    <div class="progress my-3">
-                        <div class="progress-bar bg-info progress-bar-striped" 
-                             style="width:80%">JAVA 80%</div>
-                    </div>
-                    <div class="progress my-3">
-                        <div class="progress-bar bg-warning progress-bar-striped" 
-                             style="width:90%">ORACLE 90%</div>
-                    </div>
-                    <div class="progress my-3">
-                        <div class="progress-bar bg-danger progress-bar-striped" 
-                             style="width:85%">SPRING 85%</div>
-                    </div>
-                    <div class="progress my-3">
-                        <div class="progress-bar bg-primary progress-bar-striped" 
-                             style="width:90%">REACT 90%</div>
-                    </div>
-                    <div class="progress my-3">
-                        <div class="progress-bar bg-success progress-bar-striped" 
-                             style="width:80%">FLUTTER 80%</div>
-                    </div>
-                </div>
+                <!-- Left and right controls/icons -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#abme" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#abme" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
             </div>
         </div>
     </section>
 
     <!-- PORTFOLIO -->
-    <section class="bg-info p-5">
-        <h3 class="p-5 text-center text-white">Portfolio</h3>
+    <section class=" p-5">
+        <h3 class="p-5 text-center text-white" id="portfo">Portfolio</h3>
 
         <div class="container my-3 bg-white rounded shadow">
 
@@ -195,7 +216,7 @@
 
     <!-- CONTACT -->
     <section class="p-5 mybg">
-        <h3 class=" text-center p-3 text-white">Contact Me</h3>
+        <h3 class=" text-center p-3 text-white" id="contact">Contact Me</h3>
         <div class="container shadow p-5">
             <form action="/action_page.php">
                 <div class="mb-3 mt-3">
@@ -211,6 +232,11 @@
         </div>
 
     </section>
+
+    <div class="top">
+        <a class=" btn btn-primary" href="#head"
+            style="position: fixed; bottom: 20px; right: 20px;">top↑</a>
+    </div>
 
     <!-- FOOTER -->
     <footer class="text-center p-5 bg-secondary text-white">
