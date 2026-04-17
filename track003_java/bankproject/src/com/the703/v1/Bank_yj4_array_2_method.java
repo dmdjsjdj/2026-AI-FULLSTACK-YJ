@@ -91,7 +91,7 @@ public class Bank_yj4_array_2_method {
                + "4.💸 출금\r\n" + "5.🗑️삭제\r\n" + "6.🔧비번 수정\r\n" + "9.종료\r\n" + "\r\n" + "👉 번호를 선택하세요: ");
 
          menu();
-         //      public static 번호 menu(){} 
+         //   public static 번호 menu(){} 
 
          if (menu == 9) { // 9.종료 >> 종료합니다.
             System.out.println("종료합니다.");
