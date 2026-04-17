@@ -39,6 +39,25 @@ public class Bank_yj4_array_2_method {
             
 		}
 	    //4. 계좌추가기능
+		public static String id(int f) {
+			System.out.print("아이디: ");
+            id[f] = sc.next();
+            return id[f];
+		}
+		public static String pw(int f) {
+			System.out.print("비밀번호: ");
+	        pw[f] = sc.next();
+            return pw[f];
+		}
+		public static double bal(int f) {
+			do {
+	            System.out.print("잔액: ");
+	            balance[f] = sc.nextInt();
+	         } while (balance[f] < 0);
+            return balance[f];
+		}
+			
+		
 		
 	    //5. 조회기능
 		public static void balance(int f) {
@@ -102,14 +121,9 @@ public class Bank_yj4_array_2_method {
             if(find==-1) {System.out.println("가입불가");}
             
             //기능2 - 빈칸이 있다면 입력받기
-            System.out.print("아이디: ");
-            id[find] = sc.next();
-            System.out.print("비밀번호: ");
-            pw[find] = sc.next();
-            do {
-               System.out.print("잔액: ");
-               balance[find] = sc.nextInt();
-            } while (balance[find] < 0);
+            id(find);
+            pw(find);
+            bal(find);
          } 
          else if (menu >= 2 && menu <= 6) {
             System.out.print("아이디: ");
@@ -122,7 +136,7 @@ public class Bank_yj4_array_2_method {
             
 	          switch (menu) {
 	          case 2:
-	             balance(find);
+	             bal(find);
 	             break;
 	
 	          case 3:
