@@ -33,7 +33,7 @@ public class Arr1Ex012_1 {
 			}
 			
 			
-			if(i!=0&&i%4==0) {
+			if((i%4==0 && i%100!=0)||i%400==0) {
 				yun++;
 			}
 		} System.out.println(days); System.out.println(yun); 
