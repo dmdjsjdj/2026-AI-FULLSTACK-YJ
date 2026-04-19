@@ -21,13 +21,13 @@ public class Arr1Ex012 {
 						days=days+1;
 					}break;
 				}
-<<<<<<< HEAD
+
 				else if(j == 2 && ((i%4==0 && i%100!=0)||i%400==0)) {  //일 계산
 					days += 29;
-=======
+				}
+
 				else if(j==2&&((i%4==0 && i%100!=0)||i%400==0)) {
 						days=days+29;
->>>>>>> 5787e668d91aef39c269b6379e8beb65b9b264dc
 				}
 				else {
 					for(int k=1;k<=mon[j];k++) {  //일 계산
@@ -35,47 +35,39 @@ public class Arr1Ex012 {
 					}
 				}
 				
+				
 			}
 			
-<<<<<<< HEAD
 		}
-=======
-		} System.out.println(days); System.out.println(yun); 
+		 System.out.println(days); System.out.println(yun); 
 		days = days + yun;
->>>>>>> 5787e668d91aef39c269b6379e8beb65b9b264dc
 		System.out.println("* 서기1년 ~ 2020년 10월 13일까지의 총 일수: "+days+"일");
 		
 		System.out.println("* 2020년 10월 13일 "+yoil[days%7]+"요일");
 		
-<<<<<<< HEAD
 		System.out.println("* 2020년 10월 13일 "+yoil[days%7]+"요일");
 		
-=======
->>>>>>> 5787e668d91aef39c269b6379e8beb65b9b264dc
 		System.out.println("========= 10월 ==========");
 		for(int i=0;i<yoil.length;i++) {
 			System.out.print(yoil[i]+"\t");
 		}
 		System.out.println();
 		
-<<<<<<< HEAD
-		//시작요일 공백
-		int startDay = (days - 12) % 7;
+//		//시작요일 공백
+//		int startDay = (days - 12) % 7;
+//		
+//		for(int i=0; i<startDay;i++) {
+//			System.out.print("*\t");
+//		}
+//		
+//		for(int i=1;i<=31;i++) {
+//			System.out.print(i+"\t");
+//			
+//			if((startDay+i)%7==0) {
+//				System.out.println();
+//			}
+//		}
 		
-		for(int i=0; i<startDay;i++) {
-			System.out.print("*\t");
-		}
-		
-		for(int i=1;i<=31;i++) {
-			System.out.print(i+"\t");
-			
-			if((startDay+i)%7==0) {
-				System.out.println();
-			}
-		}
-		
-		
-=======
 		int startday = (days-12)%7;
 		
 		for(int r=0;r<startday;r++) {
@@ -87,7 +79,6 @@ public class Arr1Ex012 {
 				System.out.println();
 			}
 		}
->>>>>>> 5787e668d91aef39c269b6379e8beb65b9b264dc
 	}
 
 }
