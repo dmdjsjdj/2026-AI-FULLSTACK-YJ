@@ -6,189 +6,101 @@ import java.util.Scanner;
 public class Bank_yj4_array_2_method {
 		// 변수 0 1 2
 		static String[] id = new String[3]; // one two three
-		static String[] pw = new String[3]; // 1111 2222 3333
+		static String[] pass = new String[3]; // 1111 2222 3333
 		static double[] balance = new double[3];// 1100 2200 3300
+		
 		static int menu = -1;
 		static Scanner sc = new Scanner(System.in);
-		static int inputm = -1, outputm = -1;
+		static int find = -1;
 		static char deletid = '\u0000';
 		static String id2 = " ";
 		static String pw2 = " ";
+		static int tempbalance = -1;
 		
-		//1. 메뉴판을 기능
-		public static int menu() {
-			menu = sc.nextInt();
-			return menu;
-		}
-		
-	    //2. 유저 빈칸찾기 기능, 3. 사용자인증기능 (아이디와 비밀번호가 같은지 찾기)
+		//		   2. 기능 
+		// 유저 빈칸찾기 기능, 3. 사용자인증기능 (아이디와 비밀번호가 같은지 찾기)
 		public static int fd() {
 			int find=-1;
             for (int i = 0; i < id.length; i++) {
             	if(menu==1) {
-            		if (id[i] == null) { find = i; break; }
-            		else { find=-1; break;}
+            		if (id[i] == null) { return find = i;  }
             	}
             	else if(menu >= 2 && menu <= 6) {
-            		if (id[i].equals(id2) && pw[i].equals(pw2)) { find = i; break; }
-            		else { find=-1; break;}
+            		if (id[i].equals(id2) && pass[i].equals(pw2)) { return find = i; }
             	}
                
             }
-            return find;
-            
+            return find=-1;
 		}
-	    //4. 계좌추가기능
-		public static String id(int f) {
-			System.out.print("아이디: ");
-            id[f] = sc.next();
-            return id[f];
-		}
-		public static String pw(int f) {
-			System.out.print("비밀번호: ");
-	        pw[f] = sc.next();
-            return pw[f];
-		}
-		public static double bal(int f) {
-			do {
-	            System.out.print("잔액: ");
-	            balance[f] = sc.nextInt();
-	         } while (balance[f] < 0);
-            return balance[f];
-		}
-			
-		
-		
-	    //5. 조회기능
-		public static void balance(int f) {
-			System.out.println("잔액: "+balance[f]+"원");
-		}
-		
-	    //6. 입금기능, 7. 출금기능
-		public static void money(int a, String b,int f) {
-			if( "in".equals(b)) {
-				if (inputm >= 0) {
-		            balance[f] = balance[f] + (double) inputm;
-		            System.out.println( "잔액: " + balance[f] + "원");
-		         } else {
-		        	 System.out.println( "음수는 입력할 수 없습니다");
+		//
+		//		   → idx != -1이면 기능 실행
+		//		      - 조회
+		//		      - 입금
+		//		      - 출금
+		//		      - 삭제
+		//		      - 비번변경
+	   public static void main(String[] args) {
+		   
+//		   1. 메뉴 선택
+
+		   
+		   //for(   ;menu!=9;   ) {
+		      while(menu!=9) {
+//		            System.out.println( id + "\t" + pass + "\t" + balance);  // 계좌의 1명분  확인용
+		         System.out.print("\n\n🌟💰 WELCOME TO BANK SYSTEM 💰🌟\r\n"
+		               + "[1] ➕ 계좌 추가 [2] 🔍 계좌 조회 [3] 💵 입금하기 [4] 💸 출금하기 [5] 🗑️ 계좌 삭제  [9]종료\r\n"
+		               + "👉 번호를 선택하세요:");
+		         menu = sc.nextInt();
+		         if (menu == 9) {
+		            System.out.println("프로그램을 종료합니다.");
+		         } else if (menu == 1) {
+		            find = -1;
+
+		            find = fd();
+		            // 꽉찼을경우 
+		            if(find == -1) { System.out.println("가입불가!"); continue;  } 
+
+		            System.out.print("ID 입력: ");
+		            id[find] = sc.next();
+		            System.out.print("PASS 입력: ");
+		            pass[find] = sc.next();
+		            System.out.print("금액 입력: ");
+		            balance[find] = sc.nextInt();
+		            
+		         }else if (menu >= 2 && menu <= 5) { 
+		            //   2-1. 사용자가 맞는지 여부
+		            String tempid="-1", temppass="-1"; 
+		            System.out.print("아이디  입력 > ");   tempid = sc.next();
+		            System.out.print("비밀번호 입력 > ");   temppass = sc.next(); 
+		            
+		            for(int i=0;i<balance.length;i++) {
+		               if(tempid.equals(id[i]) && temppass.equals(pass[i])){
+		            	   find=i;   
+		                  break;            
+		               }
+		            }
+		   
+		            if(  !(tempid.equals(id[find])  ||  temppass.equals(pass[find]) )) { 
+		               System.out.println("정보확인해주세요.");  continue; 
+		            }
+
+		            //2-2. 조회면 조회기능, 입력이면 사용자에게 입력받아서 입금, 출금이면 출금금액받아서 출금 , 계좌삭제라면 y,n입력받아서 계좌삭제
+		            switch( menu ){
+		               case 2 : System.out.printf("ID : %s\nPASS: %s\nBALANCE: %.2f\n" ,id[find] ,pass[find] , balance[find]);     break;
+		               case 3 : System.out.print("입금할 금액 > ");  tempbalance = sc.nextInt();       
+		                        System.out.println("입금완료! 현재잔액 : " + (balance[find] += tempbalance));
+		               
+		               break;
+		               case 4 :  
+		                  System.out.print("출금할 금액 > ");   tempbalance = sc.nextInt();  
+		                  System.out.println( tempbalance > balance[find] ?"잔액부족! 출금불가" : "출금완료! 현재잔액 : " + (balance[find] -= tempbalance));
+		               break;
+		               case 5 : System.out.print("계좌삭제 (Y/N) > "); char again = sc.next().charAt(0);
+		                  if(again == 'Y' || again == 'y') { id[find] = "-1"; pass[find] = "-1";; balance[find] = -1;  }
+		               break;
+		            }
 		         }
-			}
-			else if("out".equals(b)) {
-				if (outputm >= 0 && balance[f] - (double) outputm >= 0) {
-		            balance[f] = balance[f] - (double) outputm;
-		            System.out.println("잔액: " + balance[f] + "원");
-		         } else {
-		            System.out.println("잔액이 부족합니다.\n  현재 잔액" + balance[f]+"원");
-		         }
-			}
-			return;
-		}
-	    //8. 삭제기능
-		public static String del(char ch,int f) {
-			String a=" ";
-			if (deletid == 'y' || deletid == 'Y') {
-				a= "null";
-	         } else if (deletid == 'n' || deletid == 'N') {
-	            a="삭제 취소";
-	         }
-			return a;
-		}
-		
-		
-		
-   public static void main(String[] args) {
-      //  public static 리턴값 메서드명(재료) 
-
-      System.out.print("\n 🌟💰 welcome to bank 💰🌟\r\n");
-
-      while (menu != 9) {
-    	 // 
-         System.out.println(Arrays.toString(id));
-         System.out.println(Arrays.toString(pw));
-         System.out.print("\n -- bank menu --\r\n" + "\r\n" + "1.➕계좌 추가\r\n" + "2.🔍계좌 조회\r\n" + "3.💵입금\r\n"
-               + "4.💸 출금\r\n" + "5.🗑️삭제\r\n" + "6.🔧비번 수정\r\n" + "9.종료\r\n" + "\r\n" + "👉 번호를 선택하세요: ");
-
-         menu();
-         //   public static 번호 menu(){} 
-
-         if (menu == 9) { // 9.종료 >> 종료합니다.
-            System.out.println("종료합니다.");
-         } else if (menu == 1) { // 1.추가 - 아이디 id, 비번 pw, 잔액 balance
-            
-            //기능1 - 빈칸찾기
-            int find = fd();
-            if(find==-1) {System.out.println("가입불가");}
-            
-            //기능2 - 빈칸이 있다면 입력받기
-            id(find);
-            pw(find);
-            bal(find);
-         } 
-         else if (menu >= 2 && menu <= 6) {
-            System.out.print("아이디: ");
-            id2 = sc.next();
-            System.out.print("비밀번호: ");
-            pw2 = sc.next();
-
-            int find = fd();
-            if(find==-1) {System.out.println("정보확인해주세요.");}
-            
-	          switch (menu) {
-	          case 2:
-	             bal(find);
-	             break;
-	
-	          case 3:
-	             System.out.print("입금금액: ");
-	             inputm = sc.nextInt();
-	
-	             String in = "in";
-				money(inputm,in,find);
-	             break;
-	
-	          case 4:
-	             System.out.print("출금금액: ");
-	             outputm = sc.nextInt();
-	
-	             String out = "out";
-				money(outputm,out,find);
-	             break;
-	
-	          case 5:
-	             System.out.print("계좌를 삭제하시겠습니까?( y / n ): ");
-	             deletid = sc.next().charAt(0);
-	
-	             if(del(deletid,find).equals(null)) {
-	            	 id[find]=null;
-		             pw[find]=null;
-		             balance[find]=-1;
-		             break;
-	             }
-	             else {
-	            	 System.out.println(del(deletid,find));
-	             }
-	             break;
-	
-	          case 6:
-	             System.out.print("변경할 비밀번호: ");
-	             pw2 = sc.next();
-	
-	             pw[find] = pw2;
-	
-	             break;
-	
-	          default:
-	             System.out.println("잘못된 숫자입력입니다.");
-	             break;
-	          };
-            
-
-         } else {
-            System.out.println("\n 잘못된 입력입니다.");
-         }
-      }
-
-   }
+		      }// end while       
+	   }
 
 }
