@@ -1,6 +1,5 @@
 package com.the703.v1;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Bank_yj4_array_2_method {
@@ -20,7 +19,7 @@ public class Bank_yj4_array_2_method {
 		//		   2. 기능 
 		// 유저 빈칸찾기 기능, 3. 사용자인증기능 (아이디와 비밀번호가 같은지 찾기)
 		public static int fd() {
-			int find=-1;
+			find=-1;
             for (int i = 0; i < id.length; i++) {
             	if(menu==1) {
             		if (id[i] == null) { return find = i;  }

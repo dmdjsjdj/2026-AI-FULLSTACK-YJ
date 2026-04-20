@@ -1,6 +1,5 @@
 package com.the703.v1;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Bank_yj4_array_2_method2 {
