@@ -14,29 +14,23 @@ public class Bank_yj4_array_2_method {
 		static char deletid = '\u0000';
 		static String id2 = " ";
 		static String pw2 = " ";
-		
-		//1. 메뉴판을 기능
-		public static int menu() {
-			menu = sc.nextInt();
-			return menu;
-		}
+		static int find=-1;
 		
 	    //2. 유저 빈칸찾기 기능, 3. 사용자인증기능 (아이디와 비밀번호가 같은지 찾기)
 		public static int fd() {
-			int find=-1;
             for (int i = 0; i < id.length; i++) {
+            	find=-1;
             	if(menu==1) {
-            		if (id[i] == null) { find = i; break; }
-            		else { find=-1; break;}
+            		if (balance[i] == 0) { find = i; break;}
+            		else { find=-1;  break;}
             	}
             	else if(menu >= 2 && menu <= 6) {
-            		if (id[i].equals(id2) && pw[i].equals(pw2)) { find = i; break; }
+            		if (id[i].equals(id2) && pw[i].equals(pw2)) { find = i;  break;}
             		else { find=-1; break;}
             	}
-               
-            }
+            	
+            }System.out.println(find);
             return find;
-            
 		}
 	    //4. 계좌추가기능
 		public static String id(int f) {
@@ -109,7 +103,7 @@ public class Bank_yj4_array_2_method {
          System.out.print("\n -- bank menu --\r\n" + "\r\n" + "1.➕계좌 추가\r\n" + "2.🔍계좌 조회\r\n" + "3.💵입금\r\n"
                + "4.💸 출금\r\n" + "5.🗑️삭제\r\n" + "6.🔧비번 수정\r\n" + "9.종료\r\n" + "\r\n" + "👉 번호를 선택하세요: ");
 
-         menu();
+         menu = sc.nextInt();
          //   public static 번호 menu(){} 
 
          if (menu == 9) { // 9.종료 >> 종료합니다.
@@ -118,7 +112,7 @@ public class Bank_yj4_array_2_method {
             
             //기능1 - 빈칸찾기
             int find = fd();
-            if(find==-1) {System.out.println("가입불가");}
+            if(find==-1) {System.out.println("가입불가"); continue;}
             
             //기능2 - 빈칸이 있다면 입력받기
             id(find);
