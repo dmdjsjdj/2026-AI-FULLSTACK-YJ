@@ -105,16 +105,18 @@ public class Bank_yj4_array_2_method_1 {
     	 // 
          System.out.println(Arrays.toString(id));
          System.out.println(Arrays.toString(pw));
+         System.out.println(Arrays.toString(balance));
+
          System.out.print("\n -- bank menu --\r\n" + "\r\n" + "1.➕계좌 추가\r\n" + "2.🔍계좌 조회\r\n" + "3.💵입금\r\n"
                + "4.💸 출금\r\n" + "5.🗑️삭제\r\n" + "6.🔧비번 수정\r\n" + "9.종료\r\n" + "\r\n" + "👉 번호를 선택하세요: ");
-
+         
          menu();
          //   public static 번호 menu(){} 
 
          if (menu == 9) { // 9.종료 >> 종료합니다.
             System.out.println("종료합니다.");
          } else if (menu == 1) { // 1.추가 - 아이디 id, 비번 pw, 잔액 balance
-            
+           
             //기능1 - 빈칸찾기
             int find = fd();
             if(find==-1) {System.out.println("가입불가");}
@@ -162,6 +164,7 @@ public class Bank_yj4_array_2_method_1 {
 	            	 id[find]=null;
 		             pw[find]=null;
 		             balance[find]=-1;
+		             System.out.println("계좌가 삭제되었습니다.");
 		             break;
 	             }
 	             else {
