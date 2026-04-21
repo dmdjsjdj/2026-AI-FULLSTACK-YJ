@@ -50,15 +50,15 @@
 
 ■ Javascript
 1. js 선택자 
-1-1. id 선택자 사용시   document.getElementById
-1-2. 태그 선택자 사용시  document.getElementsByTagName
-1-3. css 표현 선택자 사용시 document.querySelector/+All
+1-1. id 선택자 사용시       document.getElementById
+1-2. 태그 선택자 사용시      document.getElementsByTagName
+1-3. css 표현 선택자 사용시  document.querySelector(+All)
 
 2. 다음에 해당하는 코드를 한줄한줄  적으시오.
 2-1. 스크립트가 document어느위치에서든지 동작가능하게     
-window.addEventListener("load",function(){});
+    window.addEventListener("load",function(){});
 2-2. 아이디가 test인것을  querySelector 이용해 선택   
-let test = document.querySelector("#test");
+    let test = document.querySelector("#test");
 2-3. 클릭시 prompt이용해서 당신의 이름묻기
 document.getElementById("test").onclick=function(){
    let name =  prompt("당신의 이름은?");
@@ -71,7 +71,7 @@ document.getElementById("test").onclick=function(){
 window.addEventListener("load",function(){
     let test = document.querySelector("#test");
     test.onclick=function(){
-        let name =  prompt("당신의 이름은?");
+        let name =  prompt("이름을 입력하시오");
         alter ("당신의 이름은"+name);
     }
 });
@@ -80,12 +80,12 @@ window.addEventListener("load",function(){
 
 
 ■ OOP
-1.  생성자   - new 연산자에 의해 호출 [초기화] 담당
+1.  생성자   - new 연산자에 의해 호출 ■[초기화] 담당
 
 2. 기본생성자( 디폴트생성자 )
 - 모든클래스에 생성자가 반드시 존재
 - 생성자선언을 생략시 컴파일러가 자동으로 기본생성자를 추가
-- 개발자가 선언시 컴파일러가 자동생성  (취소)
+- 개발자가 선언시 컴파일러가 자동생성  ■(취소)
 
 3. 생성자형식
 class A{
