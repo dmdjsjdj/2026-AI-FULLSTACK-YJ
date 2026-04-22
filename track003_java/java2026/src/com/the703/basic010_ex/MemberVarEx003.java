@@ -6,29 +6,30 @@ package com.the703.basic010_ex;
 //- 문제 4. runtime data area 위치영역 그림그리기
 //- 문제 5. 다음과 같이 출력되도록 코드를 작성하시오.
 class LunchTray {
-    String owner;        
-    int rice = 90;               
-    int soup = 85;               
+    String owner;        // 인스턴스 변수  new  heap area 생성자 관련  this
+    int rice = 90;       // 인스턴스 변수  new  heap area 생성자 관련  this
+    int soup = 85;       // 인스턴스 변수  new  heap area 생성자 관련  this        
 
-    static int trayCount = 0;      
+    static int trayCount = 0;      //클래스변수 static method area 공용 클래스명.변수
 
-    static int totalFood = rice + soup;
+//    static int totalFood = rice + soup;  //클래스변수 인스턴스변수 (static은 인스턴스 사용불가 - 오류남
 
-    static int maxRice = 100;       
+    static int maxRice = 100;       //클래스변수 static method area 공용 클래스명.변수
 
-    public int getFoodAmount() {
+    public int getFoodAmount() {  //인스턴스메서드  (static X)
         return rice + soup;         
     }
 
-    public static void showTrayCount() {
+    public static void showTrayCount() {  //클래스메서드 (static O)
         System.out.println("전체 급식판 수: " + trayCount);   
     }
 
-    public static void showOwner() { 
+    public  void showOwner() { //인스턴스메서드  (static X)-static써서 오류남(수정
        System.out.println(owner);
     }
 
-    public void showTray() {
+    public void showTray() {  //인스턴스메서드  (static X)
+    	owner = "std-"+(++trayCount);
         System.out.println("\n\n:: 주인 이름: " + owner);                
         System.out.println("총 음식량: " + getFoodAmount());     
     }
@@ -46,6 +47,19 @@ public class MemberVarEx003 {
         LunchTray.showTrayCount();         
    }
 } 
+//////////////////////////////////////////////////////
+/* [RUNTIME DATA AREA]
+------------------------------------------------------------
+[METHOD:정보]	LunchTray.class(설계도) , 		MemberVarEx003.class#1
+LunchTray.trayCount = 0;  LunchTray.maxRice = 100;  LunchTray.showTrayCount()
+------------------------------------------------------------
+[HEAP:동적]           						      |  [STACK:지역]
+1번지 {owner = null,rice = 90,soup = 85, 
+	  getFoodAmount(),showOwner(),showTray()}	  ←  s1[1번지]
+					 								 main#2
+------------------------------------------------------------
+*/
+//////////////////////////////////////////////////////
 /*
 연습문제3)  멤버변수
 패키지명 : com.company.java010_ex

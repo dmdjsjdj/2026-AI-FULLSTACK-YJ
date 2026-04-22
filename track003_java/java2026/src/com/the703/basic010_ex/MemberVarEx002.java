@@ -6,32 +6,32 @@ package com.the703.basic010_ex;
 //- 문제 4. runtime data area 위치영역 그림그리기
 
 class Student {
-    String name = "홍길동";        
-    int kor = 90;                  
-    int eng = 85;                 
-    static int studentCount = 0;    
+    String name = "홍길동";       // 인스턴스 변수  new  heap area 생성자 관련  this
+     int kor = 90;              // 인스턴스 변수  new  heap area 생성자 관련  this
+     int eng = 85;              // 인스턴스 변수  new  heap area 생성자 관련  this
+    static int studentCount = 0;    //클래스변수 static method area 공용 클래스명.변수
 
-    static int total = kor + eng;   
+//    static int total = kor + eng;   //클래스변수 인스턴스변수 (static은 인스턴스 사용불가 - 오류남
 
-    static int maxScore = 100;     
+    static int maxScore = 100;     //클래스변수  static method area 공용 클래스명.변수
 
-    public Student() {
+    public Student() {  //인스턴스메서드  (static X)
         studentCount++;             
     }
 
-    public int getTotalScore() {
+    public int getTotalScore() {  //인스턴스메서드  (static X)
         return kor + eng;        
     }
 
-    public static void showStudentCount() {
+    public static void showStudentCount() {  //클래스메서드 (static O)
         System.out.println("전체 학생 수: " + studentCount);  
     }
 
-   public static void showName() {
+   public  void showName() {  //인스턴스메서드  (static X)
          System.out.println(name);  
    }
 
-    public void showInfo() {
+    public void showInfo() {  //인스턴스메서드  (static X)
         System.out.println("이름: " + name);            
         System.out.println("총점: " + getTotalScore());    
     }
@@ -46,6 +46,18 @@ public class MemberVarEx002 {
         Student.showStudentCount();    
     }
 }
+//////////////////////////////////////////////////////
+/* [RUNTIME DATA AREA]
+------------------------------------------------------------
+[METHOD:정보]	Student.class(설계도) , 		MemberVarEx002.class#1
+	Student.studentCount = 0;  Student.maxScore = 100;  Student.showStudentCount()
+------------------------------------------------------------
+[HEAP:동적]           											  		  |  [STACK:지역]
+1번지 {name = "홍길동",kor = 90, eng = 85, Student(),showName(),showInfo()}	  ←  s1[1번지]
+												 					 		 main#2
+------------------------------------------------------------
+*/
+//////////////////////////////////////////////////////
 /*
 패키지명 : com.company.java010_ex
 클래스명 : MemberVarEx002
