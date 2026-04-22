@@ -153,35 +153,35 @@
     </ul>
     <script>
       window.addEventListener("load", function(){
-      //////////////////////////////
-      //1. step1 #animal 선택하기  (document.getElementById)
-      let animal = document.getElementById("animal");
-      console.log(animal);
-      //2. 그 안에 동물들(li) 찾기  (document.getElementsByTagName)
-      let anis = animal.getElementsByTagName("li");
-      console.log(anis , typeof(anis));
-      //3. 꾸미기 
-      anis[0].style.color="blue";
-      anis[1].style.color="#FBF302";
-    });
+        //////////////////////////////
+        //1. step1 #animal 선택하기  (document.getElementById)
+        let animal = document.getElementById("animal");
+        console.log(animal);
+        //2. 그 안에 동물들(li) 찾기  (document.getElementsByTagName)
+        let anis = animal.getElementsByTagName("li");
+        console.log(anis , typeof(anis));
+        //3. 꾸미기 
+        anis[0].style.color="blue";
+        anis[1].style.color="#FBF302";
+      });
     </script>
     <script>
       window.addEventListener("load", function(){
-      //////////////////////////////
-      //4. 만능 querySelector (css id=)
-      let animal = document.querySelector("#animal")
-      console.log(animal);
-      animal.style.border="5px detted crimson";
-      animal.style.padding="20px";
-      animal.style.borderRadius="20px";
-      //5. 만능 모든요소가져오기 querySelectorAll
-      let alis = document.querySelectorAll("#animal li");
-      console.log(alis)
-      for(let i=0; i<alis.length; i++){
-        alis[i].style.backgroundColor="blue";
-        alis[i].style.color="white";
-      }
-
+        //////////////////////////////
+        //4. 만능 querySelector (css id=)
+        let animal = document.querySelector("#animal")
+        console.log(animal);
+        animal.style.border="5px detted crimson";
+        animal.style.padding="20px 50px";
+        animal.style.borderRadius="20px";
+        animal.style.backgroundColor="blue";
+        //5. 만능 모든요소가져오기 querySelectorAll
+        let alis = document.querySelectorAll("#animal li");
+        console.log(alis)
+        for(let i=0; i<alis.length; i++){
+          alis[i].style.backgroundColor="blue";
+          alis[i].style.color="white";
+        }
       });
     </script>
 
@@ -192,15 +192,41 @@
       <li id="gold">GOLD</li>
     </ul>
     <script>
+      window.addEventListener("load",function(){
+        //ver-1
+        // let color = document.getElementById("color");
+        // let lis = color.getElementsByTagName("li");
+        // lis[0].style.fontWeight="bold";
+        //ver-2
+          let color = document.querySelector("#color");
+          let clis  = color.querySelectorAll("li");
+          clis[0].style.fontWeight="bold";
+      });
+      //Q1. #color 선택하기  color라는 변수에 담기
+      //Q2. 안에 있는 li태그들 선택
+      //Q3. 첫번째 RED의 굵게   font-weight="bold"
         //////////////////////////////
-      // 6. querySelector
- 
-      //7. parentElement
- 
-      //8. 제일가까운 상위부모 
+      window.addEventListener("load",function(){
+        // 6. querySelector
+        let color = document.querySelector("#color");
+        color.style.backgroundColor="aqua"
 
-      //9. 형제요소 
-      
+        //7. parentElement
+        let orange = document.querySelector("#orange");
+        orange.parentElement.style.border="8px dashed blue";
+        orange.parentElement.style.padding="20px 50px";
+        orange.parentElement.style.borderRadius="20px";
+
+        //8. 제일가까운 상위부모 (담은 선택자를 감싸고있어야함(li-orange를 감싼 태그만 적용가능))
+        orange.closest("div").style.backgroundColor="skyblue";
+        orange.closest("div").style.color="white";
+
+
+        //9. 형제요소 
+        orange.previousElementSibling.style.textAlign="center";
+        orange.nextElementSibling.style.textAlign="right";
+
+      });
     </script>
   </div>
   <!--     -->
@@ -252,18 +278,40 @@
     <h4>STEP4. value, innerHTML </h4>
     <div class="row">
       <div class="col"><input type="text"    id="value_target"  class="form-control"
-                         placeholder="input에서는 value"  readonly/></div>
-      <div class="col"><input type="button"  value="value"  title="value_target"  id="value"  class="btn btn-outline-primary" /></div>
+                         placeholder="input에서는 value"  value="일반텍스트입력"/></div>
+      <div class="col"><input type="button"  value="value"  title="value_target"  id="value"  
+                              class="btn btn-outline-primary" />
+      </div>
     </div>
     <hr/>
     <div class="row">
       <div class="col"> <div class="inner_target  alert alert-success"></div>  </div>
-      <div class="col"><input type="button"  value="value"  title="value_target"  id="inner"   class="btn btn-outline-primary" /></div>
+      <div class="col"><input type="button"  value="value"  title="value_target"  id="inner"   
+                              class="btn btn-outline-primary" />
+      </div>
     </div>
 
     <script>
+      window.addEventListener("load",function(){
         //////////////////////////////
- 
+        //#1. value_target(사용자에게 입력받는 값)
+        let value = document.querySelector("#value");
+        value.addEventListener("click", function(){
+          let value_target = document.querySelector("#value_target");  //대상(input)
+          alert(value_target.value);  // input 태그에서 대상을 찾을때  vlaue : 찾기
+          value_target.value = "abc"; // value : 세팅
+        });
+
+        //#2. innerHtml - 대상
+        // inner 버튼 클릭시  div(입력받는용도가 아닌 태그).inner_target 태그 안에 값
+        let inner = document.querySelector("#inner");
+        inner.addEventListener("click", function(){
+            let inner_target = document.querySelector(".inner_target");
+            inner_target.innerHTML = "HELLO";  // 해당태그에 동적으로 값 넣기  A=B  B값이 A로
+            alert( inner_target.innerHTML );   // alert로 해당 값 출력
+        });
+
+      });
     </script>
   </div>
   <!--     -->
@@ -290,8 +338,42 @@
      https://www.w3schools.com/js/js_events.asp
     </pre>
     <script>
-    
+      window.addEventListener("load",function(){
         //////////////////////////////
+        //Q1) #test1를 클릭하면 본인이름 입력받고 입력받은 값 알림창 띄우기
+        let one = document.getElementById("test1");
+        one.onclick=function(){
+          let name = prompt("이름 입력");
+          console.log(name);
+          alert("당신의 이름은 "+ name);
+        }
+        //Q2) #test2를 클릭하면 #test2의 value값을 INPUT으로 수정
+        let two = document.getElementById("test2");
+        two.onclick=function(){
+          two.value = "input";
+        }
+        // Q3) #test3를 클릭하면
+        // 1.  .result_target영역안의 문자열을 알림창으로 띄우고
+        // 2.  .result_target영역안을 본인이름으로 수정
+        let three = document.querySelector("#test3");
+        three.addEventListener("click", function(){
+            let result_target = document.querySelector(".result_target");
+            alert( result_target.innerHTML );   
+            result_target.innerHTML = "YEJIN";  
+        });
+        // Q4) #test4를 마우스를 올리면(mouseover) .result_target의 배경색을 crimson으로
+        //             마우스를 떼면(mouseout) .result_target의 배경색을 black으로
+        let four = document.querySelector("#test4");
+        four.onmouseover=function(){
+          document.querySelector(".result_target").style.backgroundColor="crimson";
+          document.querySelector(".result_target").style.color="lightblue";
+        }
+        document.getElementById("test4").onmouseout=function(){
+          let target = document.querySelector(".result_target");
+          target.style.backgroundColor="blue";
+          target.style.color="white";
+        }
+      });
     </script>
   </div>
 </div>
