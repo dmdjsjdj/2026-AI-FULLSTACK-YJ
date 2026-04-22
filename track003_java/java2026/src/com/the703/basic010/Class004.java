@@ -1,11 +1,47 @@
 package com.the703.basic010;
 
+//1. 클래스는 부품객체
+//2. 클래스 상태(멤버변수)와 행위(멤버함수)
+/*	 
+ 	 Object					2) Object() {									} 3)
+ 	   ↑
+	 Product{name, price}	1) Product(){	super();	name=null, price=0	} 4)
+ */
+class Product extends Object {  // 상속을 받을게, object(클래스의 기본틀) , object 생략가능
+	// 인스턴스 변수
+	String name;
+	int	   price;
+	//alt + shift + s
+	public Product() { super(); }  // super (부모)- Object()	   - ctrl + alt + j  한줄		
+	public Product(String name, int price) { super(); this.name = name; this.price = price; } //this(각각의 내꺼)
+	@Override public String toString() { return "Product [name=" + name + ", price=" + price + "]"; }
+
+}
+
+
 public class Class004 {
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Product p1 = new Product();  //1) new 객체 생성  2) 생성자-초기화 3) p1 주소찾기	(1번지)
+		System.out.println(p1);  //p1(1번지)	 →  1번지: Product [name=null, price=0]
+		
+		Product p2 = new Product("아이폰17", 100);  //1) new 객체 생성  2) 생성자-초기화 3) p1 주소찾기	(2번지)
+		System.out.println(p2);  //p2(2번지)	 →  2번지: Product [name=null, price=0]
 
 	}
 }
+//////////////////////////////////////////////////////
+/* [RUNTIME DATA AREA]
+----------------------------------------------------------
+[METHOD:정보]	 Product.class(설계도)	,	Class004.class#1)
+----------------------------------------------------------
+[HEAP:동적]            					|  [STACK:지역]
+
+1번지: Product {name=null, price=0}		←  p1(1번지)
+						 	    			main#2)
+----------------------------------------------------------
+(인스턴스)
+*/
+//////////////////////////////////////////////////////
 
 /*************
 ■ OOP
