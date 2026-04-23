@@ -22,15 +22,22 @@ public class Score{    // com.the703.basic010 패키지에 설정해주세요
 	   public int getEng() { return eng; } public void setEng(int eng) { this.eng = eng; } 
 	   public int getMath() { return math; } public void setMath(int math) { this.math = math; }
 	   public static void info() {
-		   System.out.println();
-	   }
-	   public String hap() {
-		   return p= total<60?"불합격":total>=60?"합격":" ";
-		   
+		   System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\r\n"
+					+ "이름\t국어\t영어\t수학\t총점\t평균\t합격여부\t장학생\t랭킹\r\n"
+					+ ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\\r\\n");
 	   }
 	   public void show() {
-		   
 		   total = kor+eng+math;
-		   aver  = total/3f;
+		   aver  = total/3.0;
+		   
+		   p= total<60?"불합격":total>=60?"합격":" ";
+		   s = (aver >= 95) ? "장학생" : " ";
+		   
+		   rank = "";
+		    for(int i = 0; i < (int)(aver / 10); i++) {
+		        rank += "*";
+		    }
+		    System.out.printf("%s\t%d\t%d\t%d\t%d\t%.2f\t%s\t%s\t%s\n",
+		            name, kor, eng, math, total, aver, p, s, rank);
 	   } 
 	}

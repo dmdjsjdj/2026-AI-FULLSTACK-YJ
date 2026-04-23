@@ -12,7 +12,7 @@ public class ModifierEx2{    // com.the703.basic010_ex   패키지에 설정해�
 	      // Score.info()위에 메서드작성해주세요!  ##
 	      // setter를 이용해주세요!
 	      iron.setName("iron"); iron.setKor(100); iron.setEng(100); iron.setMath(100);
-	      hulk.setName("hulk"); hulk.setKor(100); hulk.setEng(100); hulk.setMath(100);
+	      hulk.setName("hulk"); hulk.setKor(20); hulk.setEng(50); hulk.setMath(30);
 	      
 	      Score.info();     // 클래스메서드
 	      iron.show();          
