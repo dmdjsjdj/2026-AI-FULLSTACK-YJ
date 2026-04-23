@@ -29,7 +29,7 @@ class LunchTray {
     }
 
     public void showTray() {  //인스턴스메서드  (static X)
-    	owner = "std-"+(++trayCount);
+    	owner = "std-"+(++trayCount);  //owner 추가
         System.out.println("\n\n:: 주인 이름: " + owner);                
         System.out.println("총 음식량: " + getFoodAmount());     
     }

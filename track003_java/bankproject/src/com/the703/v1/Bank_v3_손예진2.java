@@ -73,7 +73,7 @@ public class Bank_v3_손예진2 {
 	   public static void main(String[] args) {
 		   	int menu = -1;
 			int find = -1;
-			Steel s = new Steel();
+			Steel s = new Steel();  // static을 빼고 받아와서 사용
 			
 			
 		   
