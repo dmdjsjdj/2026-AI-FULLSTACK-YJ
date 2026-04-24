@@ -41,13 +41,13 @@ class A{
 
 ---
 
-### ■2.  Todo1: 
+### ■2.  Todo1: js
 
 
 
 ---
 
-### ■3.  Todo2: 
+### ■3.  Todo2: java  method
 
 
 ---
