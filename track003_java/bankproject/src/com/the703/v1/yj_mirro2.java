@@ -33,45 +33,46 @@ public class yj_mirro2 {
 			
 			mirro = sc.next().charAt(0);
 			
-			
-			if (mirro=='a') { //1.왼쪽길 선택
-				if(mir[step]=='a') {
-					step+=1;
-					
-				}else {
-					System.out.println("\n 잘못된 길입니다.");
-					step = step;
-				}continue;
-			} 
-			
-			else if (mirro=='d') {  //2.오른쪽길 선택
-				if(mir[step]=='d') {
-					step+=1;
-					
-				}else {
-					System.out.println("\n 잘못된 길입니다.");
-					step = step;
-				}continue;
+			if(mir[step]==mirro) {
+				step+=1;
+				
+			}else {
+				System.out.println("\n 잘못된 길입니다.");
 			}
-			
-			else if (mirro=='w') {  //3.윗길 선택
-				if(mir[step]=='w') {
-					step+=1;
-					
-				}else {
-					System.out.println("\n 잘못된 길입니다.");
-					step = step;
-				}continue;
-			}
-			else if (mirro=='s') {  //4.아랫길 선택
-				if(mir[step]=='s') {
-					step+=1;
-					
-				}else {
-					System.out.println("\n 잘못된 길입니다.");
-					step = step;
-				}continue;
-			}
+//			if (mirro=='a') { //1.왼쪽길 선택
+//				if(mir[step]=='a') {
+//					step+=1;
+//					
+//				}else {
+//					System.out.println("\n 잘못된 길입니다.");
+//				}continue;
+//			} 
+//			
+//			else if (mirro=='d') {  //2.오른쪽길 선택
+//				if(mir[step]=='d') {
+//					step+=1;
+//					
+//				}else {
+//					System.out.println("\n 잘못된 길입니다.");
+//				}continue;
+//			}
+//			
+//			else if (mirro=='w') {  //3.윗길 선택
+//				if(mir[step]=='w') {
+//					step+=1;
+//					
+//				}else {
+//					System.out.println("\n 잘못된 길입니다.");
+//				}continue;
+//			}
+//			else if (mirro=='s') {  //4.아랫길 선택
+//				if(mir[step]=='s') {
+//					step+=1;
+//					
+//				}else {
+//					System.out.println("\n 잘못된 길입니다.");
+//				}continue;
+//			}
 		}System.out.println("도착!");
 
 	}

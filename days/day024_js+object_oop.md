@@ -187,15 +187,15 @@ class Child7 extends Parent7 {
 public class PolyEx002 {
    public static void main(String[] args) {
          Parent7 p = new Child7();     //부모  = 자식 (업캐스팅)
-         // 7-3.    Parent7 p   보장하는 범위  
+         // 7-3.    Parent7 p   보장하는 범위  { x = 100 / method(){Parent Method} }
          // 7-4.    인스턴스화 했을때 사용가능한 범위 : new Child7()   
          Child7 c = new Child7();  
 
-         System.out.println("p.x = " + p.x);  // 7-5 출력되는 내용  
-         p.method();  //7-6 출력되는 내용    
+         System.out.println("p.x = " + p.x);  // 7-5 출력되는 내용   p.x = 100 
+         p.method();  //7-6 출력되는 내용     Child Method 
          
-         System.out.println("c.x = " + c.x);   // 7-7  출력되는 내용 
-         c.method();   //7-8. 출력되는 내용     
+         System.out.println("c.x = " + c.x);   // 7-7  출력되는 내용 c.x = 200
+         c.method();   //7-8. 출력되는 내용     Child Method
    }
 }
 
