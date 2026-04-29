@@ -9,10 +9,13 @@ public class ListEx001 {
 		colors.add("red");
 		colors.add("green");
 		colors.add("blue");
+		colors.add("blue"); //중복가능
 		
 		for(int i=0;i<colors.size();i++) {
 			System.out.println(colors.get(i));		
 		}
+		
+		for( String c : colors) { System.out.println(c); }
 	}
 }
 /*
