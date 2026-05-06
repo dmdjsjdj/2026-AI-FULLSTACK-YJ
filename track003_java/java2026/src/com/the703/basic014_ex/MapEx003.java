@@ -1,7 +1,7 @@
 package com.the703.basic014_ex;
 
-import java.sql.Array;
-import java.util.Arrays;
+//import java.sql.Array;
+//import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,14 +28,26 @@ public class MapEx003 {
 		        {"부산점", "978-33333", "자료구조와 알고리즘", "이순신"},
 		        {"부산점", "978-44444", "파이썬 심화", "홍길동"}
 		};
-		System.out.println(data.length);
-		System.out.println("=== 도서관 전체 목록 ===");
 		for(int i=0;i<data.length;i++) {
-					// data[0][0] data[0][1] data[0][2] data[0][3]
-//			Map<String,BookDTO> lib = new HashMap<>();
-//			lib.put(data[i][i+1], new BookDTO(data[i][i+2], data[i][i+3]));
-//			System.out.println(lib);
-//			library.put(data[i][i], new BookDTO(lib));
+			String branch = data[i][0]; 
+			if(!library.containsKey(branch)) {
+			    library.put(branch, new HashMap<>());
+			}
+			Map<String, BookDTO> in = library.get(branch);
+			String isbn = data[i][1];
+			String title = data[i][2];
+			String author = data[i][3];
+			in.put(isbn, new BookDTO(title, author));
+		}
+		System.out.println("=== 도서관 전체 목록 ===");
+		for(String branch : library.keySet()) {
+			System.out.println(branch);
+			Map<String, BookDTO> in = library.get(branch);
+			for(String isbn : in.keySet()) {
+			    BookDTO book = in.get(isbn);
+			    System.out.print(isbn + " | ");
+			    System.out.println(book);
+			}System.out.println("------------------------");
 		}
 	}
 }
