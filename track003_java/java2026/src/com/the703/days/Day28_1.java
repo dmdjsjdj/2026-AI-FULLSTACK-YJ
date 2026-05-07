@@ -1,6 +1,7 @@
 package com.the703.days;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -50,16 +51,28 @@ public class Day28_1 {
 		for(int i=0;i<milk.size();i++) {
 			System.out.println(i+1 +"  "+ milk.get(i).getMname()+"   "+milk.get(i).getMprice());
 		}
-		System.out.println();
-		
-		int i=0;
-		for(Milk m:milk) { System.out.printf("%d  %s  %d\n",++i,m.getMname(),m.getMprice()); }
 		
 		//오름차순
 		System.out.println("\n\n가격순으로 오름차순");
-		milk.sort( (m1,m2) -> Integer.compare(m1.getMprice(), m2.getMprice()) );
-		i=0;
+		
+		//1. 익명적객체
+//		milk.sort(new Comparator<Milk>() {
+//			@Override public int compare(Milk o1, Milk o2) { 
+//				return Integer.compare(o1.getMprice(), o2.getMprice()); 
+//			}
+//		});
+		//2. 람다식		
+//		milk.sort( (o1, o2) -> Integer.compare(o1.getMprice(), o2.getMprice()) );
+		// @FunctionalInterface  public interface Comparator<T> { int compare(T o1, T o2); }
+		
+		//3. 참조형   Integer 부품객체에 compare라는 기능박스
+//		error:  milk.sort( Integer::compare );  Milk 객체에서 가격 꺼내야함
+		milk.sort(Comparator.comparingInt(Milk::getMprice));
+		
+		int i=0;
 		for(Milk m:milk) { System.out.printf("%d  %s  %d\n",++i,m.getMname(),m.getMprice()); }
+	
+		
 		System.out.println("\n가격순으로 내림차순");
 		milk.sort( (m1,m2) -> Integer.compare(m2.getMprice(), m1.getMprice()) );
 		i=0;
@@ -68,9 +81,7 @@ public class Day28_1 {
 		//  리턴값 void (안에서 알아서 처리)
 		//  Comparator<? super Milk> c  -  Comparator 비교 부품객체  <? super Milk> Milk 포함한 부모객체
 		
-		
-		
-		System.out.println();
+System.out.println("----------");
 		//Set( 주머니 ) 순서X, 중복X, add, 향상된 for/iterator, size, remove, contains
 		//sets 이름으로 HashSet 만들기  / Iterator 이용해서 데이터 출력   
 		Set<Milk> sets = new HashSet<>();
