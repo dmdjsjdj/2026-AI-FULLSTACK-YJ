@@ -4,6 +4,8 @@ package com.the703.basic014_ex;
 //import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
 
 class BookDTO {
     private String title;
@@ -21,6 +23,7 @@ class BookDTO {
 
 public class MapEx003 {
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 		Map<String, Map<String, BookDTO>> library = new HashMap<>();
 		String[][] data = {
 		        {"서울점", "978-11111", "자바의 정석", "남궁성"},
@@ -49,6 +52,29 @@ public class MapEx003 {
 			    System.out.println(book);
 			}System.out.println("------------------------");
 		}
+		System.out.print("지점 이름 입력> ");
+		String br = sc.next();
+		System.out.print("ISBN 입력> ");
+		String is = sc.next();
+		
+		if(library.containsKey(br)) {
+			Map<String, BookDTO> in = library.get(br);
+			BookDTO b = in.get(is);
+			System.out.println("📖 선택한 도서 정보: "+ b.getTitle() 
+							+" / 저자: "+ b.getAuthor());
+		}
+		
+//		Set<String> branch = library.keySet();
+////		br=branch(m).equals(br)?branch:" ";
+//		Map<String, BookDTO> in = library.get(branch);
+//		System.out.println("📖 선택한 도서 정보: "+ in.get(branch).getTitle() 
+//							+" / 저자: "+ in.get(branch).getAuthor());
+//		
+//		for(String k: library.keySet() ) {
+//			Map<String, BookDTO> m = library.get(k);
+//			
+////			System.out.println(k +"  "+ m.getMname()+"   "+m.getMprice());
+//		}
 	}
 }
 /*

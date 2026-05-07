@@ -41,7 +41,8 @@ public class Day028 {
 		milks.add(new MilkDto("커피우유", 1500)); 
 		
 		for(int i=0;i<milks.size();i++) {
-			System.out.println(i+1 +"  "+ milks.get(i).getMname()+"   "+milks.get(i).getMprice());
+			System.out.println(i+1 +"  "+ milks.get(i).getMname()
+								   +"   "+milks.get(i).getMprice());
 		}
 		System.out.println();
 		//sets 이름으로 HashSet 만들기  / Iterator 이용해서 데이터 출력   
