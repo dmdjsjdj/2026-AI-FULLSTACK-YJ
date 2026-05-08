@@ -47,12 +47,10 @@ public class Day029 {
 			System.out.println(i+1 +" "+ players.get(i).getName()+"  "+players.get(i).getScore());
 		}
 		
+		System.out.println();
 //		Q6. 정렬 문제
 //		6-1. List코드에서 익명 클래스로 점수 오름차순 정렬
-//		6-2. 람다식으로 점수 내림차순 정렬
-//		6-3. 메서드 참조로 점수 오름차순 정렬
-System.out.println();
-		System.out.println("오름차순 정렬");
+		System.out.println("익명클래스 오름차순 정렬");
 		players.sort(new Comparator<Player>() {
 			@Override public int compare(Player o1, Player o2) { 
 				return Integer.compare(o1.getScore(), o2.getScore()); 
@@ -60,6 +58,22 @@ System.out.println();
 		});
 		
 		int i=0;
+		for(Player p: players) {
+			System.out.println(++i +" "+ p.getName()+"  "+p.getScore());
+		}
+//		6-2. 람다식으로 점수 내림차순 정렬
+		System.out.println("람다식 내림차순 정렬");
+		players.sort((Player o1, Player o2)->Integer.compare(o2.getScore(), o1.getScore()));
+		
+		i=0;
+		for(Player p: players) {
+			System.out.println(++i +" "+ p.getName()+"  "+p.getScore());
+		}
+//		6-3. 메서드 참조로 점수 오름차순 정렬
+		System.out.println("메서드 오름차순 정렬");
+		players.sort(Comparator.comparingInt(Player::getScore));
+		
+		i=0;
 		for(Player p: players) {
 			System.out.println(++i +" "+ p.getName()+"  "+p.getScore());
 		}
