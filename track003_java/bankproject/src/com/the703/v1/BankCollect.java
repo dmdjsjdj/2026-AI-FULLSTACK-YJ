@@ -2,6 +2,7 @@ package com.the703.v1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 //1. Dto 데이터전송목적
 class BankDto{
@@ -9,13 +10,33 @@ class BankDto{
 	private String pass;
 	private double balance;
 	
+	public BankDto() { super(); }
 	public BankDto(String id, String pass, double balance) {
 		super();
 		this.id = id;
 		this.pass = pass;
 		this.balance = balance;
-	} 
-	
+	}
+	@Override public String toString() { return "BankDto [id=" + id + ", pass=" + pass + ", balance=" + balance + "]"; }
+	public String getId() { return id; } 
+	public void setId(String id) { this.id = id; }
+	public String getPass() { return pass; } 
+	public void setPass(String pass) { this.pass = pass; }
+	public double getBalance() { return balance; } 
+	public void setBalance(double balance) { this.balance = balance; }
+	@Override public int hashCode() { return Objects.hash(balance, id, pass); }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BankDto other = (BankDto) obj;
+		return Double.doubleToLongBits(balance) == Double.doubleToLongBits(other.balance)
+				&& Objects.equals(id, other.id) && Objects.equals(pass, other.pass);
+	}
 }
 
 class Bank1{
