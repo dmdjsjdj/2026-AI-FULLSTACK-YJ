@@ -18,7 +18,7 @@ class BankDto{
 		this.pass = pass;
 		this.balance = balance;
 	}
-	@Override public String toString() { return "BankDto [id=" + id + ", pass=" + pass + ", balance=" + balance + "]"; }
+	@Override public String toString() { return "id=" + id + ", pass=" + pass + ", balance=" + balance; }
 	public String getId() { return id; } 
 	public void setId(String id) { this.id = id; }
 	public String getPass() { return pass; } 
@@ -48,6 +48,7 @@ class Bank{
 	
 	Scanner sc = new Scanner(System.in);
 	BankDto login = null;
+	double putm = -1;	double bal = -1;	char deletid ='\u0000';
 	
 	// 메뉴 - 안에 내용작성
 	public void menu() {
@@ -58,7 +59,6 @@ class Bank{
 				 + "3.💵입금\r\n" 
 				 + "4.💸 출금\r\n" 
 				 + "5.🗑️삭제\r\n" 
-				 + "6.🔧비번 수정\r\n" 
 				 + "9.종료\r\n"
 				 + "\r\n"+"👉 번호를 선택하세요: ");
 	}   
@@ -77,6 +77,7 @@ class Bank{
 		}while(balance<0);
 		//처리 
 		users.add( new BankDto(id , pass , balance ) );
+		System.out.println("사용자 추가 완료");
 		//출력
 		System.out.println(users);
 	}
@@ -96,7 +97,7 @@ class Bank{
 			}
 			//  if( id.equals(id2) || pw.equals(pw2)) { continue; }
 			else if( !users.get(i).getId().equals(id2) && !users.get(i).getPass().equals(pw2)) {
-				
+				login = null;
 			}
 		}
 	}
@@ -106,15 +107,42 @@ class Bank{
 	}                                                                                                                                              
 	// 입금   (get)
 	public void deposit() {
+		System.out.print("입금금액: "); 
+		putm = sc.nextInt();
+		bal = login.getBalance();
 		
+		if(putm>=0) {
+			bal = bal + (double)putm;
+			System.out.println("잔액: "+ bal + "원");
+		}
+		else { 
+				System.out.println("음수는 입력할 수 없습니다"); 
+		}
 	}
 	// 출금   (get)
 	public void withdraw() {
+		System.out.print("출금금액: "); 
+		putm = sc.nextInt();
 		
+		if(putm>=0 && bal-(double)putm>=0) {
+			bal = bal - (double)putm;
+			System.out.println("잔액: "+ bal + "원");
+		}
+		else { 
+				System.out.println("잔액이 부족합니다.  현재 잔액: "+bal); 
+		}
 	}
 	// 유저삭제(remove)
 	public void delete() {
+		System.out.print("계좌를 삭제하시겠습니까?: ( y / n ) "); 
+		deletid = sc.next().charAt(0);
 		
+		if(deletid == 'y') {
+			System.out.println("계좌가 삭제되었습니다.");
+			users.remove(login);
+		} else if(deletid == 'n') {
+			System.out.println("계좌 삭제를 취소하셨습니다.");
+		   }
 	}
 	// 종료   
 }
@@ -138,66 +166,28 @@ public class BankCollect {
 			else if (menu>=2 && menu<=6) {  
 					controller.usercheck();
 					if( controller.login == null ) {
-						
+						continue;
 					}
 					else {			
 						switch(menu) {
 						case 2: controller.jan(); break;
 							    
 						
-						case 3: System.out.print("입금금액: "); 
-								inputm = sc.nextInt();
+						case 3: controller.deposit(); break;
 								
-								if(inputm>=0) {
-									balance[i] = balance[i] + (double)inputm;
-									System.out.println("잔액: "+ balance[i] + "원");
-								}
-								else { 
-										System.out.println("음수는 입력할 수 없습니다"); 
-								} break;
+						case 4: controller.withdraw(); break;
 								
-						case 4: System.out.print("출금금액: "); 
-								outputm = sc.nextInt();
-								
-								if(outputm>=0 && balance[i]-(double)outputm>=0) {
-									balance[i] = balance[i] - (double)outputm;
-									System.out.println("잔액: "+ balance[i] + "원");
-								}
-								else { 
-										System.out.println("잔액이 부족합니다.  현재 잔액"+balance[i]); 
-								} break;
-								
-						case 5: System.out.print("계좌를 삭제하시겠습니까?: ( y / n ) "); 
-								deletid = sc.next().charAt(0);
-								
-								if(deletid == 'y') {
-									System.out.println("계좌가 삭제되었습니다.");
-									id[i] = null;
-									pw[i] = null;
-								} else if(deletid == 'n') {
-									System.out.println("계좌 삭제를 취소하셨습니다.");
-								   } break;
-						
-						case 6: System.out.print("변경할 비밀번호: ");
-								pw2 = sc.next();
-								
-								pw[i] = pw2;
-								
-								break;
-								
-						
+						case 5: controller.delete(); break;
 						
 						default: System.out.println("잘못된 숫자입력입니다."); break;
 						};	 
-					}break;
+					}
 					
 				}
 				
-				
-			}
 			else {
-					System.out.println("\n 잘못된 입력입니다.");
-				}
+				System.out.println("\n 잘못된 입력입니다.");
+			}
 		}
 	}
 }
