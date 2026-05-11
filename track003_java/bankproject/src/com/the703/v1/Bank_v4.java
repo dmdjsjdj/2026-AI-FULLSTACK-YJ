@@ -37,7 +37,7 @@ class Bank{
 	List<BankDto>  users;   // 객체를 생성하는게 아니라 정보만 받을 목적
 	
 	public Bank() { super(); }
-	public Bank(List<BankDto> users) { super(); this.users = users; }
+	public Bank(List<User> users) { super(); this.users = users; }
 	
 	// 메뉴 - 안에 내용작성
 	public void menu() {}   
@@ -46,7 +46,7 @@ class Bank{
 		//변수
 		//입력 - 사용자에게 정보입력받기
 		//처리 
-		users.add( new BankDto("aaa" , "pass" , 1 ) );
+		users.add( new User("aaa" , "pass" , 1 ) );
 		//출력
 	}
 	// 입금   (get)
