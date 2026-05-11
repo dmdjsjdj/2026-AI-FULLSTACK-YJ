@@ -54,3 +54,24 @@ public class JavaIO003_char {
 		}
 	}
 }
+/*
+1. Java I/O
+- 입력(input)과 출력(output)
+- 두 대상간의 데이터를 주고 받는것
+- 스트림이란? 사용 연결통로
+
+	입력 스트림	→	[프로그램]	  →	  출력 스트림
+	   InputStream		    OutputStream
+	   Reader				Writer
+	
+2. Java I/O 분류
+- byte(모든종류-그림, 멀티미디어, 문자)    / char(문자)
+- byte (InputStream/OutputStream) / char (Reader/Writer)
+
+3. 보조스트림
+
+
+*/
+
+
+

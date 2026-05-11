@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 
-public class JavaIO004 {
+public class JavaIO004_img {
 	public static void main(String[] args) throws IOException {
 		//#1. 경로
 		String origin  = "src/com/the703/basic016/cat.png";
