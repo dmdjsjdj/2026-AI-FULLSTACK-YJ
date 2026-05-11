@@ -74,40 +74,60 @@
 </div>    
 
 <!-- STEP3 XML -->
-  <div class="container my-5  card-body">
-    <h4>Q1. Ajax-xml (fetch)</h4>
-    <pre>
-      1. fetch()로 로컬 XML 파일 가져오기
-         경로: ./data/xml2.xml
-         예시 내용:
-         <items>
-           <item><name>사과</name><price>1000</price></item> 
-         </items>
-      2. 응답을 .text()로 받아서 DOMParser로 XML 파싱
-      3. item 태그를 순회하며 name, price 출력하기
-    </pre>
-    <p><input type="button" id="btnXml" value="fetch-xml" class="btn btn-outline-primary" onclick="showXml2()"/></p>
-    <div class="alert alert-primary result xml2" id="xml2"></div>
+<div class="container my-5  card-body">
+  <h4>Q1. Ajax-xml (fetch)</h4>
+  <pre>
+    1. fetch()로 로컬 XML 파일 가져오기
+        경로: ./data/xml2.xml
+        예시 내용:
+        <items>
+          <item><name>사과</name><price>1000</price></item> 
+        </items>
+    2. 응답을 .text()로 받아서 DOMParser로 XML 파싱
+    3. item 태그를 순회하며 name, price 출력하기
+  </pre>
+  <p><input type="button" id="btnXml" value="fetch-xml" class="btn btn-outline-primary" onclick="showXml2()"/></p>
+  <div class="alert alert-primary result xml2" id="xml2"></div>
     <script>
       function showXml2() {
-        fetch("./data/xml2.xml")
-            .then(res => res.text())
-            .then(xml=> {
-              console.log(xml);
-              let parser = new DOMParser();
-              let Doc = parser.parseFromString(xml,"application/xml")
+        // fetch("./data/xml2.xml")
+        //     .then(res => res.text())
+        //     .then(xml=> {
+        //       console.log(xml);
+        //       let parser = new DOMParser();
+        //       let Doc = parser.parseFromString(xml,"application/xml")
 
-              let item = Doc.getElementsByTagName("items");
-              let name = item[0].getElementsByTagName("name")[0].textContent;
-              let price = item[0].getElementsByTagName("price")[0].textContent;
-              document.getElementById("xml2").innerHTML=
-                    `<div class="alert alert-info"><strong>${name}</strong> <span>${price}</span></div>`;
-            })
-            .catch(err => {
-              document.getElementById("xml2").innerHTML= err.message;
-            });
+        //       let item = Doc.getElementsByTagName("items");
+        //       let name = item[0].getElementsByTagName("name")[0].textContent;
+        //       let price = item[0].getElementsByTagName("price")[0].textContent;
+        //       document.getElementById("xml2").innerHTML=
+        //             `<div class="alert alert-info"><strong>${name}</strong> <span>${price}</span></div>`;
+        //     })
+        //     .catch(err => {
+        //       document.getElementById("xml2").innerHTML= err.message;
+        //     });
+
+          fetch("./data/xml2.xml")
+              .then(res => res.text())
+              .then(xml=> {
+                let parser = new DOMParser();
+                let Doc = parser.parseFromString(xml,"application/xml")
+
+                let items = Doc.getElementsByTagName("item");
+                let result="";
+                for(let i=0; i<items.length; i++) {
+                  let name = items[i].getElementsByTagName("name")[0].textContent;
+                  let price = items[i].getElementsByTagName("price")[0].textContent;
+
+                  result += `<div class="alert alert-info"><strong>${name}</strong> <span>${price}</span></div>`;
+                }
+                document.getElementById("xml2").innerHTML = result
+              })
+              .catch(err => {
+                document.getElementById("xml2").innerHTML= err.message;
+              });
       }
-    </script>
+    </script> 
   </div>
 </div>
 
