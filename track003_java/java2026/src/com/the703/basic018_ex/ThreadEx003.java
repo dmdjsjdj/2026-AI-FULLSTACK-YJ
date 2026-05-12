@@ -3,7 +3,6 @@ package com.the703.basic018_ex;
 import javax.swing.JOptionPane;
 
 class Count extends Thread {
-	
 	@Override  public void run() {
 //   #####1. ... 10~1까지 카운트
 //   #####2. 오류시 break
@@ -14,6 +13,15 @@ class Count extends Thread {
     		System.out.println(i); 
 	    	try { Thread.sleep(1000); } 
 	    	catch (InterruptedException e) { break; }
+	    	
+//	    	System.out.println("..."+Thread.currentThread().isInterrupted());
+//	    	if(Thread.currentThread().isInterrupted()) { break; }
+//	    	System.out.println(i); 
+//	    	try { Thread.sleep(1000); } 
+//	    	catch (InterruptedException e) { 
+//	    		System.out.println("...>>"+Thread.currentThread().isInterrupted());
+//	    		Thread.currentThread().interrupt();//수동변경
+//	    		break; }
     	} 
     }
 }
