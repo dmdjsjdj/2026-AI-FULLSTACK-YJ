@@ -6,13 +6,13 @@
 
 ---
 
-### ■2.  Todo1: java  method
+### ■2.  Todo1: java  ajax
 
 
 
 ---
 
-### ■3.  Todo2: java  method
+### ■3.  Todo2: java  thread
 
 
 ---
