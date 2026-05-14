@@ -86,3 +86,98 @@ show databases;
 
 drop database db703;
 ```
+
+### 3. 테이블
+
+1. RDBMS (Relational DataBase Management System)
+- 관계형 데이터베이스 
+- 테이블의 관계
+- 속성(필드) 연결
+
+2. 테이블 만들기 (집안의 방, 가방 안의 분류표)
+DDL (정의: create, alter, drop), DML (조작: insert, select, update, delete), DCL (제어: grant, revoke)
+-------------------------------------------------------
+CREATE TABLE table명 (
+    필드1 자료형 옵션,
+    필드2 자료형 옵션
+);
+-------------------------------------------------------
+자료형 :
+    1. 숫자 : int(정수, 1,2,3), double(실수, 1.23)
+    2. 문자 : char(고정, 남/여), varchar(가변, abc, abcd, abcde)
+    3. 날짜 : date, datetime
+옵션 :
+    필수입력 - not null
+    숫자자동증가 - auto_increment
+    기본키 - primary key
+
+[실습1]
+create table t1(  
+    name varchar(100) not null,
+    age  int
+);
+
+show tables;    -- 테이블목록확인
+desc t1;        -- 구조확인
+
+create table t11(
+    no   int         not null,
+    name varchar(30) not null
+);
+create table t12(
+    bookid int          not null,   -- not null (빈입력 안됨)
+    title  varchar(100) not null
+);
+
+show tables;    -- 테이블목록확인
+desc t12;       -- 구조확인
+
+※ ERROR 1046 (3D000): No database selected
+use db명
+
+mysql> show databases;
+mysql> use mbasic
+mysql> status          -- 상태확인
+
+※ 참고사항) not null 필수입력
+mysql> insert into t1 (age) values (1);
+ERROR 1364 (HY000): Field 'name' doesn't have a default value (값넣어!)
+
+mysql> insert into t1 (name, age) values ('aaa', 1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into t1 (name) values ('bbb');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from t1;
++------+------+
+| name | age  |
++------+------+
+| aaa  |    1 |
+| bbb  | NULL |
++------+------+
+2 rows in set (0.00 sec)
+
+
+[실습2] auto_increment (숫자 자동증가), primary key (기본키)
+create table t2(
+    jumin int          not null  auto_increment  primary key,
+    name  varchar(100) not null,
+    age   int 
+);
+
+※ 참고사항)
+insert into  t2 (name, age)  values ('aaa' , 1);   -- 숫자자동증가
+insert into  t2 (name)  values ('bbb');            -- 숫자자동증가
+insert into  t2 (jumin, name, age)  values (1 , 'ccc' , 1);  -- error 기본키
+insert into  t2 (jumin, name, age)  values (3 , 'ccc' , 1);  
+
+mysql> select * from t2;
++-------+------+------+
+| jumin | name | age  |
++-------+------+------+
+|     1 | aaa  |    1 |
+|     2 | bbb  | NULL |
+|     3 | aaa  |    1 |  <-- aaa, 1 / aaa,1 구분을 해줄수 있는 필드는  jumin  1,3  
++-------+------+------+
+2 rows in set (0.00 sec)
