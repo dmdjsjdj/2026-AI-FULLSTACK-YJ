@@ -35,7 +35,7 @@
 2.  (#1 데이터 )는 수집된 사실이나 값을 의미하고 (#2 정보 )는 의미를 제공하는 데이터를 의미한다.
 3. 대표적인 데이터베이스 종류에는 Oracle, Mysql, MSSql 등이 있다.
 4.  RDBMS는 Relational Database Management System의 약자이다.
-5. RDBMS의 구성요소는   DDL, DML, DCL
+5. RDBMS의 구성요소는  (개체(entity, table), 관계(relationship) , 속성(attribute: 필드) )
 6. 데이터베이스 언어
 DDL(  정의어   )    CREATE, ALTER, DROP 
 DML(  조작어   )    INSERT, SELECT, UPDATE , DELETE 
