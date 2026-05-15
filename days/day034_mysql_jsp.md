@@ -28,16 +28,23 @@
 -- 3. 이메일 필드 수정(modify)   email을 email2로  자료형은 varchar(50) 으로 
 -- 4. 이메일 필드 삭제(drop)   
 
----
-
-### ■2. Todo1: 
-
-
-
+>> track004_1_mysql > basic004_repeat.sql
 
 ---
 
-### ■3. Todo2: 
+### ■2. Todo1: MYSQL
+
+
+#### INSERT
+#### UPDATE
+#### DELETE
+
+
+---
+
+### ■3. Todo2: JSP
+
+- REQUEST-요청
 
 
 ---

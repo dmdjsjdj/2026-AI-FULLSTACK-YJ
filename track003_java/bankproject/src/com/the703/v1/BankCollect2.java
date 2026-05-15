@@ -25,7 +25,7 @@ class BankDto{
 	public void setPass(String pass) { this.pass = pass; }
 	public double getBalance() { return balance; } 
 	public void setBalance(double balance) { this.balance = balance; }
-	@Override public int hashCode() { return Objects.hash(balance, id, pass); }
+	@Override public int hashCode() { return Objects.hash(id); }
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -35,8 +35,7 @@ class BankDto{
 		if (getClass() != obj.getClass())
 			return false;
 		BankDto other = (BankDto) obj;
-		return Double.doubleToLongBits(balance) == Double.doubleToLongBits(other.balance)
-				&& Objects.equals(id, other.id) && Objects.equals(pass, other.pass);
+		return Objects.equals(id, other.id);
 	}
 }
 
@@ -64,19 +63,30 @@ class Bank{
 	// 유저추가  (add)
 	public void add() {
 		//변수
-		String id; String pass; double balance;
+		String id; String pass; double balance; int jung=-1;
 		//입력 - 사용자에게 정보입력받기
 		System.out.print("아이디: ");
 		id = sc.next();
-		System.out.print("비밀번호: ");
-		pass = sc.next();
-		do {
-			System.out.print("잔액: ");
-			balance = sc.nextInt();
-		}while(balance<0);
-		//처리 
-		users.add( new BankDto(id , pass , balance ) );
-		System.out.println("사용자 추가 완료");
+		
+		for(int i=0;i<users.size();i++) {
+			if(id.equals(users.get(i).getId())) {
+				jung=1;
+				break;
+			}
+		}
+		
+		if(jung==-1){
+				System.out.print("비밀번호: ");
+				pass = sc.next();
+				do {
+					System.out.print("잔액: ");
+					balance = sc.nextDouble();
+				}while(balance<0);
+				//처리 
+				users.add( new BankDto(id , pass , balance ) );
+				System.out.println("사용자 추가 완료");
+			}
+		else { System.out.println("존재하는 아이디입니다."); }
 		//출력
 		
 	}
@@ -104,7 +114,7 @@ class Bank{
 	// 입금   (get)
 	public void deposit(BankDto find) {
 		System.out.print("입금금액: "); 
-		double putm = sc.nextInt();
+		double putm = sc.nextDouble();
 		double bal = find.getBalance();
 		
 		if(putm>=0) {
@@ -118,7 +128,7 @@ class Bank{
 	// 출금   (get)
 	public void withdraw(BankDto find) {
 		System.out.print("출금금액: "); 
-		double putm = sc.nextInt();
+		double putm = sc.nextDouble();
 		double bal=find.getBalance();
 		
 		if(putm>=0 && bal-(double)putm>=0) {
