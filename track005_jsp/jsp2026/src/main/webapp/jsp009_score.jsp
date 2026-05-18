@@ -48,21 +48,21 @@
 		</form>
 		<script>
 			function checkScore(){
-	      		let ko = document.getElementById("ko");
-	      		let en = document.getElementById("en");
-	      		let ma = document.getElementById("ma");
+	      		let ko = document.getElementById("kor");
+	      		let en = document.getElementById("eng");
+	      		let ma = document.getElementById("math");
 	      		if(ko.value.trim() == ""){
-	      			alert("이메일을 입력해주세요");
+	      			alert("KOR를 입력해주세요");
 	      			ko.focus();
 	      			return false;
 	      		} 
 	      		if(en.value.trim() == ""){
-	      			alert("비밀번호를 입력해주세요");
+	      			alert("ENG를 입력해주세요");
 	      			en.focus();
 	      			return false;
 	      		}
 	      		if(ma.value.trim() == ""){
-	      			alert("비밀번호를 입력해주세요");
+	      			alert("MATH를 입력해주세요");
 	      			ma.focus();
 	      			return false;
 	      		}
