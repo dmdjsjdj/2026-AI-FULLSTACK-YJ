@@ -1,4 +1,3 @@
-<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  <!-- 자바 -->   <!-- 주석 ctrl + shift + / -->
 <!DOCTYPE html>
@@ -16,7 +15,7 @@
 	<div class="container card my-5 bg-primary text-white">
 	   	<h3 class="card-header"> WAS : 동적페이지</h3>
 	   	<p> 
-	   	<%-- <%@page import="java.util.Calendar"%> --%>
+	   	<%@page import="java.util.Calendar"%>
 		<%
 		// ctrl + space
 		Calendar today = Calendar.getInstance();
