@@ -43,3 +43,15 @@ alter table userinfo change email email2 varchar(50);
 alter table userinfo modify email2 varchar(100);
 -- -- 4. 이메일 필드 삭제(drop)   
 alter table userinfo drop email2;
+
+
+
+SET SQL_SAFE_UPDATES = 0;
+use mbasic;
+create table userinfo_ex select*from userinfo;
+select * from userinfo_ex;
+delete from userinfo_ex where age=55;
+delete from userinfo_ex where age=60;
+insert into userinfo_ex values (5, 'fifth', 50);
+insert into userinfo_ex values (6, 'six', 66);
+update userinfo_ex set age=55 where name='fifth';

@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+.myhidden {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    white-space: nowrap;
+    clip:rect(0,0,0,0); /*요소를 잘라서 시각적으로 완전히 숨김 - 구형 브라우저 호환*/
+}
+
+#demo {
+    height: 400px;
+    overflow: hidden;
+    margin-bottom: 5%;
+}
+#demo img {
+    object-fit: cover;
+}
+h3 {
+    font-weight: bold;
+    font-size: 35px;
+    text-decoration-line: underline;
+    transition: all 2.8s; 
+    
+}
+.aboutbg {
+    background-color: rgba(126, 197, 255, 0.521);
+}
+
+body {
+    background-image: url(../img/ocean.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    background-attachment: fixed;
+}
+
+.mybg {
+    background-color: rgba(229, 243, 255, 0.219);
+}
+
+.pg1 {
+    padding-left: 20px;
+}
+
+iframe {
+  width: 120%;    /* 부모 col 너비에 맞춤 */
+    /* 비율 유지 */
+  max-width: 100%;          /* 영역 밖으로 나가는 것 방지 */
+}
+.line {
+    padding: 15% 6% 10% 6%;
+}
+#adbg {
+    background-color: rgba(229, 243, 255, 0.219);
+}
+#adbg .adts {
+    font-size: 16px;
+}

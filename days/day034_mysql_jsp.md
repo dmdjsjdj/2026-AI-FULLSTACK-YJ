@@ -53,9 +53,9 @@
 
 -- STEP1) 
 -- 1.  데이터베이스 언어 - 다음과 같은형식으로 빈칸 채우기
--- DDL(   )   
--- DML(             )   
--- DCL(  제어어   )  GRANT , REVOKE
+-- DDL(  정의어   )   CREATE, ADD, DROP
+-- DML(  조작어   )   INSERT, SELECT, UPDATE, DELETE
+-- DCL(  제어어   )   GRANT , REVOKE
 
 
 -- STEP2) 
@@ -70,6 +70,8 @@
 -- | age   | int          | NO   |     | NULL    |                |
 -- +-------+--------------+------+-----+---------+----------------+
 -- 3 rows in set (0.00 sec)
+
+create table userinfo_ex select*from userinfo
 
 -- mysql> select * from userinfo_ex;
 -- +----+--------+-----+
@@ -95,7 +97,8 @@
 -- |  5 | fifth    |  50 |
 -- |  6 | six   |  66 |
 -- +----+--------+-----+
-
+insert into userinfo_ex values (5, 'fifth', 50);
+insert into userinfo_ex values (6, 'six', 66);
 
 -- Q3. userinfo_re1 에 데이터 수정
 -- mysql> select * from userinfo_re1;
@@ -110,6 +113,8 @@
 -- |  6 | six   |  66 |       ← name sixth로 수정
 -- +----+--------+-----+
 
+update userinfo_ex set age=55 where name='fifth';
+update userinfo_ex set name='sixth' where age=66;
 
 
 -- Q4. userinfo_re1 에 데이터 삭제
@@ -122,3 +127,5 @@
 -- |  3 | third  |  33 |
 -- |  4 | fourth |  44 | 
 -- +----+--------+-----+
+delete from userinfo_ex where age=55;
+delete from userinfo_ex where age=66;

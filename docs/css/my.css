@@ -1,62 +1,666 @@
 @charset "UTF-8";
 
-.myhidden {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    border: 0;
-    white-space: nowrap;
-    clip:rect(0,0,0,0); /*요소를 잘라서 시각적으로 완전히 숨김 - 구형 브라우저 호환*/
+/* =========================
+   RESET & COMMON
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-#demo {
-    height: 400px;
-    overflow: hidden;
-    margin-bottom: 5%;
-}
-#demo img {
-    object-fit: cover;
-}
-h3 {
-    font-weight: bold;
-    font-size: 35px;
-    text-decoration-line: underline;
-    transition: all 2.8s; 
-    
-}
-.aboutbg {
-    background-color: rgba(126, 197, 255, 0.521);
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    background-image: url(../img/ocean.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom;
-    background-attachment: fixed;
+body{
+    position: relative;
+    font-family:'Pretendard', sans-serif;
+    overflow-x:hidden;
+
+    background:none;
 }
 
-.mybg {
-    background-color: rgba(229, 243, 255, 0.219);
+/* 배경 이미지만 */
+body::before{
+    content:'';
+
+    position:fixed;
+    inset:0;
+
+    background-image:url(../img/ocean.png);
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    z-index:-2;
+
+    filter:
+    blur(7px)
+    brightness(0.9)
+    saturate(1.6)
+    contrast(1.05)
+    hue-rotate(15deg);
+
+    transform:scale(1.08);
 }
 
-.pg1 {
-    padding-left: 20px;
+/* 어두운 오버레이 */
+body::after{
+    content:'';
+
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(
+        rgba(78, 131, 238, 0.418),
+        rgba(100, 171, 238, 0.425)
+    );
+
+    z-index:-1;
 }
 
-iframe {
-  width: 120%;    /* 부모 col 너비에 맞춤 */
-    /* 비율 유지 */
-  max-width: 100%;          /* 영역 밖으로 나가는 것 방지 */
+/* 접근성 */
+.myhidden{
+    position:absolute;
+    left:-9999px;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    border:0;
+    white-space:nowrap;
+    clip:rect(0,0,0,0);
 }
-.line {
-    padding: 15% 6% 10% 6%;
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar{
+    backdrop-filter:blur(18px);
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(140,190,255,0.35),
+        rgba(210,170,255,0.35)
+    ) !important;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.12);
 }
-#adbg {
-    background-color: rgba(229, 243, 255, 0.219);
+
+.navbar-brand{
+    font-size:1.6rem;
+    font-weight:800;
+    letter-spacing:2px;
+    color:white !important;
 }
-#adbg .adts {
-    font-size: 16px;
+
+.nav-link{
+    color:white !important;
+    font-weight:600;
+    margin-left:15px;
+    transition:0.3s;
+    position:relative;
+}
+
+.nav-link:hover{
+    color:#ffe082 !important;
+    transform:translateY(-2px);
+}
+
+.nav-link::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-5px;
+
+    width:0%;
+    height:2px;
+
+    background:white;
+    transition:0.3s;
+}
+
+.nav-link:hover::after{
+    width:100%;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+h3{
+    font-weight:800;
+    font-size:2.6rem;
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+    position:relative;
+
+    text-decoration:none;
+
+    animation:fadeUp 1s ease;
+}
+
+h3::after{
+    content:'';
+
+    width:90px;
+    height:4px;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+        to right,
+        #8ec5fc,
+        #e0c3fc
+    );
+
+    position:absolute;
+
+    left:50%;
+    bottom:-15px;
+
+    transform:translateX(-50%);
+}
+
+/* =========================
+   MAIN VISUAL
+========================= */
+#demo{
+    height:550px;
+    overflow:hidden;
+
+    margin-bottom:8%;
+}
+
+#demo .carousel-inner{
+    height:100%;
+}
+
+#demo .carousel-item{
+    height:100%;
+}
+
+#demo img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:0 0 30px 30px;
+
+    filter:brightness(0.9);
+}
+
+/* =========================
+   ABOUT SECTION
+========================= */
+.aboutbg{
+    background:
+    rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(18px);
+
+    border:
+    1px solid rgba(255,255,255,0.2);
+
+    border-radius:30px;
+
+    box-shadow:
+    0 8px 32px rgba(0,0,0,0.2);
+}
+
+#abme{
+    padding:20px;
+}
+#abme .carousel-item{
+    min-height:550px;
+}
+
+.pg1{
+    padding-left:20px;
+}
+
+.pg1 img{
+    width:220px !important;
+    height:220px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:5px solid rgba(255,255,255,0.7);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
+
+    transition:0.4s;
+}
+
+.pg1 img:hover{
+    transform:scale(1.05);
+}
+
+.pg1 h4{
+    margin-top:20px;
+    font-weight:700;
+}
+
+.pg1 ul{
+    list-style:none;
+    padding-left:0;
+    line-height:2;
+}
+
+.pg1 a{
+    color:#ffe082 !important;
+    font-weight:bold;
+}
+
+#adbg{
+    background:
+    rgba(255,255,255,0.12);
+
+    border-radius:20px !important;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+    inset 0 0 10px rgba(255,255,255,0.08);
+}
+
+#adbg h4{
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+#adbg .adts{
+    font-size:17px;
+    margin-bottom:15px;
+    line-height:1.8;
+}
+
+/* =========================
+   KEYWORD BUTTONS
+========================= */
+/* =========================
+   KEYWORD
+========================= */
+
+.keyword-btn{
+    display:inline-block;
+
+    padding:10px 22px;
+
+    margin:10px 8px 0 0;
+
+    border-radius:30px;
+
+    font-weight:700;
+
+    color:white;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.12);
+
+    transition:0.3s;
+}
+
+.keyword-btn:hover{
+    transform:
+    translateY(-4px)
+    scale(1.03);
+
+    box-shadow:
+    0 10px 20px rgba(0,0,0,0.18);
+}
+
+/* 컬러 */
+.passion{
+    background:
+    linear-gradient(
+        135deg,
+        #ffb5d8,
+        #ff8fab
+    );
+}
+
+.sincere{
+    background:
+    linear-gradient(
+        135deg,
+        #a0c4ff,
+        #8ec5fc
+    );
+}
+
+.patience{
+    background:
+    linear-gradient(
+        135deg,
+        #cdb4ff,
+        #b8c0ff
+    );
+}
+
+
+/* =========================
+   SKILL BAR COLOR
+========================= */
+
+.progress{
+    background:
+    rgba(255,255,255,0.12);
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    height:30px;
+}
+
+.progress-bar{
+    font-weight:700;
+
+    border-radius:50px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    letter-spacing:1px;
+}
+
+/* pastel gradient */
+.skill-java{
+    background:
+    linear-gradient(
+        135deg,
+        #8ec5fc,
+        #b8c0ff
+    );
+}
+
+.skill-oracle{
+    background:
+    linear-gradient(
+        135deg,
+        #cdb4ff,
+        #bde0fe
+    );
+}
+
+.skill-spring{
+    background:
+    linear-gradient(
+        135deg,
+        #ffafcc,
+        #ffc8dd
+    );
+}
+
+.skill-react{
+    background:
+    linear-gradient(
+        135deg,
+        #90dbf4,
+        #98f5e1
+    );
+}
+
+.skill-flutter{
+    background:
+    linear-gradient(
+        135deg,
+        #b8c0ff,
+        #cdb4ff
+    );
+}
+
+/* =========================
+   PORTFOLIO
+========================= */
+#portfo{
+    margin-top:30px;
+}
+
+.portfolio-box{
+    background:
+    rgba(255,255,255,0.12) !important;
+
+    backdrop-filter:blur(18px);
+
+    border-radius:30px !important;
+
+    padding:30px;
+
+    box-shadow:
+    0 8px 30px rgba(0,0,0,0.2);
+}
+
+.portfolio-box .col-sm-4{
+    background:
+    rgba(255,255,255,0.08);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    transition:0.4s;
+
+    margin-bottom:20px;
+}
+
+.portfolio-box .col-sm-4:hover{
+    transform:translateY(-10px);
+
+    box-shadow:
+    0 15px 25px rgba(0,0,0,0.2);
+}
+
+.line{
+    padding:5% 0;
+
+    font-weight:700;
+
+    position:relative;
+
+    margin-bottom:20px;
+}
+
+.line::after{
+    content:'';
+
+    width:60px;
+    height:3px;
+
+    background:#8ec5fc;
+
+    position:absolute;
+
+    left:0;
+    bottom:10px;
+}
+
+/* 영상 */
+iframe{
+    width:100%;
+    height:250px;
+
+    border:none;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* =========================
+   CONTACT
+========================= */
+.mybg{
+    background:
+    rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:30px;
+
+    padding:40px;
+
+    box-shadow:
+    0 8px 32px rgba(0,0,0,0.2);
+}
+
+form input,
+form textarea{
+    background:
+    rgba(255,255,255,0.2) !important;
+
+    border:none !important;
+
+    color:white !important;
+
+    border-radius:15px !important;
+
+    padding:14px !important;
+}
+
+form input::placeholder,
+form textarea::placeholder{
+    color:rgba(255,255,255,0.7);
+}
+
+form input:focus,
+form textarea:focus{
+    box-shadow:
+    0 0 0 3px rgba(142,197,252,0.4) !important;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.btn{
+    border-radius:30px;
+    font-weight:700;
+    padding:10px 22px;
+
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+/* =========================
+   TOP BUTTON
+========================= */
+.top a{
+    border:none !important;
+
+    border-radius:50px !important;
+
+    padding:12px 18px !important;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.25);
+
+    z-index:999;
+}
+
+footer{
+    position:relative;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(150, 190, 255, 0.88),
+        rgba(200, 180, 255, 0.88)
+    ) !important;
+
+    font-size:14px;
+
+    letter-spacing:1px;
+
+    color:#dbeafe;
+
+    overflow:hidden;
+}
+
+/* 위쪽 glass 효과 */
+footer::before{
+    content:'';
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:18px;
+
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.18),
+        rgba(255,255,255,0)
+    );
+
+    backdrop-filter:blur(10px);
+}
+
+/* =========================
+   ANIMATION
+========================= */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width:768px){
+
+    h3{
+        font-size:2rem;
+    }
+
+    #demo{
+        height:300px;
+    }
+
+    .pg1{
+        text-align:center;
+    }
+
+    .pg1 img{
+        width:170px !important;
+        height:170px;
+    }
+
+    iframe{
+        height:200px;
+    }
+
+    .line{
+        padding-top:10%;
+    }
 }

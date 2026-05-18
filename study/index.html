@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bootcamp Study Note</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:Arial, sans-serif;
+      background:#eef5ff;
+      color:#334155;
+      line-height:1.6;
+    }
+
+    header{
+      background:linear-gradient(135deg,#93c5fd,#bfdbfe);
+      padding:50px 20px;
+      text-align:center;
+      color:#1e3a8a;
+      box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    header h1{
+      font-size:42px;
+      margin-bottom:10px;
+    }
+
+    header p{
+      font-size:18px;
+    }
+
+    .container{
+      width:90%;
+      max-width:1200px;
+      margin:50px auto;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .card{
+      background:white;
+      border-radius:25px;
+      padding:30px;
+      box-shadow:0 10px 25px rgba(59,130,246,0.12);
+      transition:0.3s;
+      border:2px solid #dbeafe;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+    }
+
+    .card h2{
+      margin-bottom:20px;
+      color:#2563eb;
+      font-size:28px;
+    }
+
+    .card ul{
+      list-style:none;
+    }
+
+    .card li{
+      margin-bottom:14px;
+    }
+
+    .card a{
+      text-decoration:none;
+      color:#475569;
+      font-size:17px;
+      transition:0.2s;
+    }
+
+    .card a:hover{
+      color:#2563eb;
+      padding-left:5px;
+    }
+
+    footer{
+      text-align:center;
+      padding:40px;
+      color:#64748b;
+      font-size:14px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <h1>📘 Bootcamp Study Note</h1>
+    <p>HTML · CSS · Java · JavaScript · DB</p>
+  </header>
+
+  <div class="container">
+
+    <div class="grid">
+
+      <div class="card">
+        <h2>📂 HTML</h2>
+
+        <ul>
+          <li><a href="#">HTML 기본 태그</a></li>
+          <li><a href="#">form 태그</a></li>
+          <li><a href="#">table 태그</a></li>
+          <li><a href="#">semantic 태그</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🎨 CSS</h2>
+
+        <ul>
+          <li><a href="#">CSS 기본</a></li>
+          <li><a href="#">display</a></li>
+          <li><a href="#">position</a></li>
+          <li><a href="#">flex</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>☕ Java</h2>
+
+        <ul>
+          <li><a href="#">자료형</a></li>
+          <li><a href="#">연산자</a></li>
+          <li><a href="#">조건문</a></li>
+          <li><a href="#">반복문</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🟨 JavaScript</h2>
+
+        <ul>
+          <li><a href="#">기본문법</a></li>
+          <li><a href="#">DOM</a></li>
+          <li><a href="#">이벤트</a></li>
+          <li><a href="#">fetch / ajax</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🗄 MySQL</h2>
+
+        <ul>
+          <li><a href="#">SELECT</a></li>
+          <li><a href="#">JOIN</a></li>
+          <li><a href="#">GROUP BY</a></li>
+          <li><a href="#">정규화</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>🚀 Project</h2>
+
+        <ul>
+          <li><a href="#">카페 키오스크</a></li>
+          <li><a href="#">게시판</a></li>
+          <li><a href="#">포트폴리오</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© Bootcamp Study Archive</p>
+  </footer>
+
+</body>
+</html>
