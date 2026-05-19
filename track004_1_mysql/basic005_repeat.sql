@@ -4,7 +4,6 @@
 -- DML(  조작어   )   INSERT, SELECT, UPDATE, DELETE  → CRUD
 -- DCL(  제어어   )   GRANT , REVOKE
 
-
 -- STEP2) 
 -- Q1. userinfo 테이블을 복사해서 userinfo_ex 테이블을 만드시오.
 use mbasic;   -- database 선택

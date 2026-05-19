@@ -596,6 +596,14 @@ section {
 
     box-shadow: 0 0 0 0.2rem rgba(100,170,240,0.2);
 }
+/* top_btn */
+.top_btn:hover{
+    background-color: #8bbff7;
+}
+
+.top_btn {
+    background-color: #6aa0f1;
+}
 
 /* footer */
 

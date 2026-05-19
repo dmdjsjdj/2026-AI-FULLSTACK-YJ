@@ -1,0 +1,434 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,sans-serif;
+
+  background:
+  linear-gradient(
+    135deg,
+    #dff4ff 0%,
+    #cbe9ff 50%,
+    #b9ddff 100%
+  );
+
+  color:#334155;
+
+  line-height:1.6;
+
+  min-height:100vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.main-header{
+  background:
+  linear-gradient(
+    135deg,
+    #8ec5ff,
+    #b7deff
+  );
+
+  padding:60px 20px;
+
+  text-align:center;
+
+  color:#1e3a8a;
+
+  box-shadow:
+  0 8px 25px rgba(59,130,246,0.15);
+}
+
+.main-header h1{
+  font-size:42px;
+  margin-bottom:10px;
+  font-weight:700;
+}
+
+.main-header p{
+  font-size:18px;
+  opacity:0.9;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.container{
+  width:90%;
+  max-width:1200px;
+  margin:60px auto;
+}
+
+.layout{
+  display:flex;
+  gap:40px;
+
+  width:90%;
+  max-width:1200px;
+
+  margin:60px auto;
+}
+
+.col{
+  flex:1;
+
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.row-item{
+  padding:22px 26px;
+
+  border-radius:18px;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(255,255,255,0.6),
+    rgba(220,240,255,0.85)
+  );
+
+  border:1px solid rgba(255,255,255,0.5);
+
+  box-shadow:0 8px 20px rgba(80,130,200,0.10);
+
+  text-decoration:none;
+
+  color:#2563eb;
+
+  font-weight:600;
+
+  transition:0.25s;
+}
+
+.row-item:hover{
+  transform:translateX(6px);
+}
+
+/* .descs .row-item{
+  color:#64748b;
+
+  font-weight:500;
+} */
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(260px,1fr));
+
+  gap:28px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+  background:
+  linear-gradient(
+    135deg,
+    rgba(255,255,255,0.55),
+    rgba(220,240,255,0.85)
+  );
+
+  backdrop-filter:blur(12px);
+
+  border-radius:28px;
+
+  padding:32px;
+
+  border:
+  1px solid rgba(255,255,255,0.5);
+
+  box-shadow:
+  0 10px 30px rgba(80,130,200,0.12);
+
+  transition:0.35s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+
+  box-shadow:
+  0 18px 40px rgba(80,130,200,0.18);
+}
+
+.card h2{
+  margin-bottom:20px;
+
+  color:#2563eb;
+
+  font-size:28px;
+
+  font-weight:700;
+}
+
+/* 카드 링크 */
+.card-link{
+  text-decoration:none;
+
+  color:inherit;
+
+  display:block;
+}
+
+/* 카드 높이 */
+.card{
+  min-height:260px;
+}
+
+/* =========================
+   LIST
+========================= */
+
+.card ul{
+  list-style:none;
+}
+
+.card li{
+  margin-bottom:14px;
+}
+
+/* =========================
+   LINK
+========================= */
+
+.card a{
+  text-decoration:none;
+
+  color:#475569;
+
+  font-size:17px;
+
+  transition:0.25s;
+
+  display:inline-block;
+}
+
+.card a:hover{
+  color:#2563eb;
+
+  transform:translateX(6px);
+}
+
+/* =========================
+   NOTE PAGE
+========================= */
+
+.note-layout{
+  display:grid;
+
+  grid-template-columns:
+  260px 1fr;
+
+  gap:30px;
+}
+
+/* 사이드 */
+
+.sidebar{
+  position:sticky;
+
+  top:30px;
+
+  height:fit-content;
+}
+
+/* 본문 */
+
+.content{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+/* 코드 */
+
+pre{
+  background:#eff6ff;
+
+  padding:20px;
+
+  border-radius:16px;
+
+  overflow-x:auto;
+
+  margin-top:15px;
+
+  border:1px solid #bfdbfe;
+}
+
+/* 테이블 */
+
+table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  margin-top:20px;
+}
+
+table th,
+table td{
+  border:1px solid #cbd5e1;
+
+  padding:14px;
+
+  text-align:left;
+}
+
+table th{
+  background:#dbeafe;
+
+  color:#1e40af;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+
+  padding:45px;
+
+  color:#5f7d96;
+
+  font-size:14px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+  .note-layout{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    position:relative;
+    top:0;
+  }
+}
+
+@media(max-width:768px){
+
+  .main-header h1{
+    font-size:32px;
+  }
+
+  .card{
+    padding:26px;
+  }
+}
+
+/* 과목 목차 페이지 */
+
+.study-list{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.study-item{
+  text-decoration:none;
+
+  background:rgba(255,255,255,0.6);
+
+  padding:22px 26px;
+
+  border-radius:20px;
+
+  color:#2563eb;
+
+  font-size:20px;
+
+  font-weight:600;
+
+  transition:0.25s;
+
+  border:1px solid rgba(255,255,255,0.5);
+
+  box-shadow:
+  0 8px 20px rgba(80,130,200,0.08);
+}
+
+.study-item:hover{
+  transform:translateX(8px);
+
+  background:
+  linear-gradient(
+    135deg,
+    #dbeeff,
+    #c6e3ff
+  );
+}
+
+/* 상단 홈 버튼 */
+
+.top-home{
+  width:90%;
+  max-width:1200px;
+
+  margin:30px auto 0;
+}
+
+.home-btn{
+  display:inline-block;
+
+  text-decoration:none;
+
+  padding:12px 24px;
+
+  border-radius:14px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #93c5fd,
+    #bfdbfe
+  );
+
+  color:#1e3a8a;
+
+  font-weight:700;
+
+  box-shadow:
+  0 6px 18px rgba(59,130,246,0.12);
+
+  transition:0.25s;
+}
+
+.home-btn:hover{
+  transform:translateY(-3px);
+
+  background:
+  linear-gradient(
+    135deg,
+    #7db7ff,
+    #abd5ff
+  );
+}
