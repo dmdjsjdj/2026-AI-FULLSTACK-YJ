@@ -2,6 +2,11 @@
 
 ######  복습문제 확인 및 깃허브
 
+>> 노트에서
+DDL (정의) CREATE, ALTER, DROP
+DML (조작) INSERT, SELECT, UPDATE, DELETE
+DCL (제어) GRANT, REVOKE
+
 복습문제1) 
 1. 다음과 같이 테이블을 작성하는 코드를 적으시오.
 -- mysql> desc userinfo;
@@ -14,8 +19,8 @@
 -- +-------+--------------+------+-----+---------+----------------+
 -- 3 rows in set (0.00 sec)
 
-2. 마지막에 5, five, 50을  insert하는 코드를 작성하시오.
-3. no가 5인 데이터의 5, five, 55로  수정하는 코드를 작성하시오.   
+2. 마지막에 5, fifth, 50을  insert하는 코드를 작성하시오.
+3. no가 5인 데이터의 5, fifth, 55로  수정하는 코드를 작성하시오.   
 4. no가 5인 데이터를 삭제하는 코드를 작성하시오. 
 5. 다음과 같이 나이를 오름차순으로 정렬하는 코드를 작성하시오.
 -- mysql> select * from userinfo_re1;
