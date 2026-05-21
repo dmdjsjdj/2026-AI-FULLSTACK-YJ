@@ -1,4 +1,4 @@
-use mbasic;   
+
 -- = MODEL
 -- ★ 다음과 같이 테이블을 준비해주세요!
 -- mysql> desc milk_order;
@@ -30,6 +30,7 @@ update milk_order set oname='banana' where ono=3;
 -- Q5.  milk_order 해당번호의 데이터 삭제
 delete from milk_order where ono=1;
 
+use mbasic;   
 
 delete from milk where mno=1;
 select * from milk; 
