@@ -12,6 +12,52 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<!-- 		메뉴판테이블			 -->
+<!-- https://www.w3schools.com/bootstrap5/bootstrap_tables.php -->
+   	<div class="container card my-5 text-white bg-primary">
+    	<h2 class="card-header"> Milks Menu </h2>
+       	<p> </p>
+       	
+       	<table class="table table-bordered table-striped table-hover">
+       		<caption class="caption-top text-white">우유메뉴</caption>
+	        <thead >
+	            <tr>
+	                <th scope="col">NO</th>
+	                <th scope="col">NAME</th>
+	                <th scope="col">PRICE</th>
+	            </tr>
+	        </thead>
+	
+	        <tbody>
+	        
+	        <%
+		      try{
+			      //1. 드라이버로딩 필요한 코드? Class.forName()
+		    	  Class.forName("com.mysql.cj.jdbc.Driver");
+		    	  PreparedStatement pstmt =null;	ResultSet rset = null; Connection conn = null;
+			      //2. JDBC 연동 필요한 코드? DriverManager.getConnection()
+		    	  conn = DriverManager.getConnection( "jdbc:mysql://localhost:3306/mbasic", "root", "1234");
+			      ///////////////////////////////////////////////
+			      
+			      pstmt = conn.prepareStatement("select * from milk");
+				  rset = pstmt.executeQuery();
+			      
+				  while( rset.next() ){
+						out.println("<tr><td>" + rset.getInt("mno") + "</td><td>" 
+							+ rset.getString("mname")  + "</td><td>" 
+							+ rset.getInt("mprice") + "</td></tr>"   );  // 칸 rset.getInt("필드명")
+					}
+			      ///////////////////////////////////////////////
+			      //3. JDBC 끊기 필요한 코드? conn.close()
+			       if(rset   != null) { rset.close();   }
+     			   if(pstmt  != null) { pstmt.close();  }
+				   if(conn  != null) { conn.close();  }
+		      } catch(Exception e) {  e.printStackTrace(); }
+		      %>
+	        </tbody>
+	    </table>
+   	</div>
+<!-- 		메뉴판테이블			 -->
     <div class="container card my-5  bg-warning  text-white ">
       <h2 class="card-header">Milk 주문현황표</h2>  
       <table  class="table table-striped table-bordered table-hover">
@@ -176,6 +222,38 @@
 				    if(no2.value.trim() == ""){
 				        alert("주문번호 입력");
 				        no2.focus();
+				        return false;
+				    }
+				
+				    return true;
+				}
+				</script>
+            </div>
+         </div>
+         
+         <div class="card">
+            <div class="card-header text-white bg-success">
+               <a class="collapsed btn" data-bs-toggle="collapse"
+                  href="#collapseFour"> 메뉴 검색 </a>
+            </div>
+            <div id="collapseFour" class="collapse" data-bs-parent="#accordion">
+               <form  action="jsp012_search.jsp"  method="get"  onsubmit="return order3()">
+					<div class="my-3">
+						<label for="ono3"   class="form-label">찾는 메뉴번호 : </label>
+						<input type="number"  class="form-control"  id="ono3"  name="ono3"/>      
+					</div>
+					<div class="my-3"  style="text-align:right" > 
+						<button type="submit"    class="btn btn-primary" 
+							  title="검색하기">검색하기</button>
+					</div>
+				</form>
+				<script>
+				function order3(){
+				    let no3 = document.getElementById("ono3");
+				
+				    if(no3.value.trim() == ""){
+				        alert("번호 입력");
+				        no3.focus();
 				        return false;
 				    }
 				

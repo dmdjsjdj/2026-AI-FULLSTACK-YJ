@@ -84,12 +84,14 @@ limit 2;
 --     이름의 두번째 글자가 e가아닌 데이터를 조회하시오
 select *
 from userinfo_select
-where age is not null and (no =2 or no=3) and name not like '_e%';
+where age is not null
+and no in (2, 3) 
+and name not like '_e%';
 
 -- Q8.  emp 테이블에서 GROUP BY절만  사용하여
 -- -- 각부서의 직책별 사원수, 가장높은 급여, 급여합, 평균급여를  다음과 같이  사원데이터를  조회하시오.
 desc emp;
-select deptno, job, count(*) `사원수`, max(sal), sum(sal), avg(sal)
+select deptno, job, count(*) `사원수`, max(sal) `최고급여`, sum(sal) `급여합`, avg(sal) `평균급여`
 from emp
 group by  deptno, job
 order by  deptno, job asc;
@@ -144,6 +146,12 @@ order by  deptno, job asc;
 -- 4.   mod(숫자 , 나눌 수)   나머지 연산자
 
 -- = BASIC 
+select ceil(1.1)  `올림 2`, floor(1.9)  `내림 1`, round(1.5)  `반올림 2`, mod(10,3)  `나머지 1` from dual;
+
+select 	12.2345
+		, round(12.2545,1)  -- 소수점 1번째 자리까지 반올림  12.3
+        , round(15.2345,-1) -- 정수 	1번째 자리까지 반올림  20
+from	dual;
 -- +-----------+------------+------------+-----------+
 -- | ceil(1.1) | floor(1.9) | round(1.5) | mod(10,3) |
 -- +-----------+------------+------------+-----------+
@@ -158,6 +166,8 @@ order by  deptno, job asc;
 
 -- ■ 진행3. CRUD (SELECT Function-Number 연습문제)
 
+-- ceil(올림), floor(내림), round(반올림), mod(나머지)
+
 -- EX1    123.4578을 ROUND를 이용하여 다음과 같이 출력하시오.
 -- +----------+--------+--------+--------+--------+
 -- | 123.4578 | ROUND1 | ROUND2 | ROUND3 | ROUND4 |
@@ -165,7 +175,9 @@ order by  deptno, job asc;
 -- | 123.4578 |    123 |    120 |  123.5 | 123.46 |
 -- +----------+--------+--------+--------+--------+
 -- 1 row in set (0.00 sec)
-
+select 	123.4578, round(123.4578,0) `ROUND1`, round(123.4578,-1) `ROUND2`
+				, round(123.4578,1) `ROUND3`, round(123.4578, 2) `ROUND4`
+from	dual;
 
 -- EX2  다음과 같이 출력하시오.
 -- +----------+------+-------+
@@ -174,13 +186,14 @@ order by  deptno, job asc;
 -- | 123.4578 |  124 |   123 |
 -- +----------+------+-------+
 -- 1 row in set (0.00 sec)
-
+select 	123.4578, ceil(123.4578) `CEIL`, floor(123.4578) `FLOOR`
+from	dual;
 
 
 -- ■ 진행4. CRUD (SELECT Function-String)
 -- #2. String
 -- length
--- upper / lower
+-- upper 대문자 / lower 소문자
 
 -- instr( 문자열, 찾을 문자열 ) - 위치
 -- substr( 문자열, 시작, 갯수 )  - 문자열일부분 추출
@@ -205,6 +218,7 @@ order by  deptno, job asc;
 -- |             3 |
 -- +---------------+
 -- 1 row in set (0.00 sec)
+select 	length('abc') from	dual;
 
 -- mysql>
 -- mysql> -- 2. upper/lower 
@@ -214,9 +228,9 @@ order by  deptno, job asc;
 -- | ABC     | ABC  | abc  |
 -- +---------+------+------+
 -- 1 row in set (0.01 sec)
+select 	'ABC' `DEFAULT`, upper('Abc') `s1-upper`, lower('AbC') `s2-lower`
+from	dual;
 
--- mysql>
--- mysql>
 -- mysql> -- 3. 찾기1 - 위치  instr  
 -- +----------+-----------+-----------+
 -- | b의 위치 | ab의 위치 | ac의 위치 |
@@ -224,7 +238,8 @@ order by  deptno, job asc;
 -- |        2 |         1 |         0 |
 -- +----------+-----------+-----------+
 -- 1 row in set (0.00 sec)
-
+select  instr('abcdef','a(1)b(2)c에서 b') `b의 위치`, instr('abcdef','abc에서 ab') `ab의 위치`, instr('abcdef','abc에서 ac없으면 0') `ac의 위치`
+from dual;
 
 -- mysql> -- 4.   찾기 2 - 문자열 left, right, substr 
 -- +------+------+------+------+
@@ -233,8 +248,9 @@ order by  deptno, job asc;
 -- | a    | ab   | c    | bc   |
 -- +------+------+------+------+
 -- 1 row in set (0.00 sec)
+select 	left('abc',1) `l1`, left('abc',2) `l2`, right('abc',1) `r1`, right('abc',2) `r2`
+from 	dual;
 
--- mysql>
 -- mysql> -- 5. 찾기 3  - substr 
 -- +------+------+------+
 -- | s1   | s2   | s3   |
@@ -242,9 +258,11 @@ order by  deptno, job asc;
 -- | bc   | bcd  | abc  |
 -- +------+------+------+
 -- 1 row in set (0.00 sec)
+select	  substr('abcde',2,2) `두번째부터 2개출력`
+		, substr('abcde',2,3) `두번째부터 3개출력`
+        , substr('abcde',1,3) `첫번째부터 3개출력`
+from 	dual;
 
--- mysql>
--- mysql>
 -- mysql> -- 6. 문자열 연결   - concat 
 -- +--------------------------+
 -- | concat('choco' , 'milk') |
@@ -252,8 +270,9 @@ order by  deptno, job asc;
 -- | chocomilk                |
 -- +--------------------------+
 -- 1 row in set (0.00 sec)
+select	concat('choco ' , 'milk')
+from 	dual;
 
--- mysql>
 -- mysql> -- 7. 공백빼기 - trim 
 -- +-----------------+
 -- | trim(' a b c ') |
@@ -261,32 +280,39 @@ order by  deptno, job asc;
 -- | a b c           |
 -- +-----------------+
 -- 1 row in set (0.00 sec)
+select	trim(' a b c ')
+from 	dual;
 
--- mysql> 
 -- +---------+----------+----------+
 -- | t1      | t2       | t3       |
 -- +---------+----------+----------+
 -- | #a b c# | #a b c # | # a b c# |
 -- +---------+----------+----------+
 -- 1 row in set (0.00 sec)
+select	concat('#',trim(' a b c ') ,'#')   -- 양쪽공백뺴기
+		,concat('#',ltrim(' a b c ') ,'#') -- 왼공백빼기
+        ,concat('#',rtrim(' a b c ') ,'#') -- 오공백빼기
+from 	dual;
 
--- mysql>
--- mysql> -- 8. 찾아서 바꾸기 - replace 
+-- mysql> -- 8. 찾아서 바꾸기 - replace (문자열, 찾아서, 바꾸기)
 -- +--------------------------------------+
 -- | replace('hello sally' , 'sally','a') |
 -- +--------------------------------------+
 -- | hello a                              |
 -- +--------------------------------------+
 -- 1 row in set (0.00 sec)
+select	replace('hello sally' , 'sally','a')
+from 	dual;
 
--- mysql>
--- mysql> -- 9. 반복 repeat 
+-- mysql> -- 9. 반복 repeat (문자열,갯수)
 -- +---------------+
 -- | repeat('*',5) |
 -- +---------------+
 -- | *****         |
 -- +---------------+
 -- 1 row in set (0.00 sec)
+select	repeat('*',5)
+from 	dual;
 
 -- mysql> -- 10. 빈칸채우기 
 -- +----------------------+----------------------+
@@ -295,12 +321,8 @@ order by  deptno, job asc;
 -- | ##ABC                | ABC##                |
 -- +----------------------+----------------------+
 -- 1 row in set (0.00 sec)
-
--- mysql>
-
-
-
-
+select lpad('ABC' , 5, '#'), rpad('ABC' , 5, '#')
+from dual;
 
 -- ■ 진행5. CRUD (SELECT Function-Number 연습문제)
 
@@ -314,7 +336,12 @@ order by  deptno, job asc;
 -- | email | varchar(20) | NO   |     | NULL    |       |
 -- +-------+-------------+------+-----+---------+-------+
 -- 4 rows in set (0.01 sec)
-
+select*from userinfo;
+create table fn_select_userinfo2 select*from userinfo where 1=2;
+desc fn_select_userinfo2;
+alter table fn_select_userinfo2 add email varchar(20) not null;
+alter table fn_select_userinfo2 modify age int not null;
+select*from fn_select_userinfo2;
 -- mysql> select * from fn_select_userinfo2;
 -- +----+------+-----+---------------+
 -- | no | name | age | email         |
@@ -326,9 +353,15 @@ order by  deptno, job asc;
 -- |  5 | abc  |  55 | abc@gmail.com |
 -- |  6 | bca  |  66 | bca@gmail.com |
 -- +----+------+-----+---------------+
+delete from fn_select_userinfo2 where no>=1;
 -- 6 rows in set (0.00 sec)
-
--- mysql>
+insert into fn_select_userinfo2 values (1, 'aaa', 11, 'aaa@gmail.com');
+insert into fn_select_userinfo2 values (2, 'bbb', 22, 'bbb@gmail.com');
+insert into fn_select_userinfo2 values (3, 'ccc', 33, 'ccc@gmail.com');
+insert into fn_select_userinfo2 values (4, 'ddd', 44, 'ddd@gmail.com');
+insert into fn_select_userinfo2 values (5, 'abc', 55, 'abc@gmail.com');
+insert into fn_select_userinfo2 values (6, 'bca', 66, 'bca@gmail.com');
+select*from fn_select_userinfo2;
 
 
 -- 1. 유저의 이름의 글자수를 조회하시오.
@@ -343,6 +376,8 @@ order by  deptno, job asc;
 -- | bca  |    3 |
 -- +------+------+
 -- 6 rows in set (0.00 sec)
+select name `이름`, length(name) `갯수`
+from fn_select_userinfo2;
 
 -- 2. 유저의 이름과 이름의  첫번째 글자 , 마지막글자 를 조회하시오. (left, right)
 -- +------+-------------+------------+
@@ -356,7 +391,8 @@ order by  deptno, job asc;
 -- | bca  | b           | a          |
 -- +------+-------------+------------+
 -- 6 rows in set (0.00 sec)
-
+select name, left(name,1) `첫번째 글자`, right(name,1) `마지막글자`
+from fn_select_userinfo2;
 
 -- 3. 유저이름의 aaa인 유저를 찾아서 'aaa 1등'으로 변경하시오.
 -- +------+-----------------------------------+
@@ -370,10 +406,11 @@ order by  deptno, job asc;
 -- | bca  | bca                               |
 -- +------+-----------------------------------+
 -- 6 rows in set, 1 warning (0.00 sec)
+select name, replace( name, 'aaa' , 'aaa 1등')
+from fn_select_userinfo2;
 
--- mysql>
--- mysql>
-
+-- length(갯수), left/right(문자열,몇개), replace(문자열,찾아서,바꾸기), concat(문자열,문자열,문자열)
+-- upper(대문자)/lower(소문자)
 -- 4. 다음과 같이 직업을 출력하시오.   (concat)
 -- +---------------------+
 -- | 직업                |
@@ -386,7 +423,8 @@ order by  deptno, job asc;
 -- | bca는 개발자입니다. |
 -- +---------------------+
 -- 6 rows in set, 1 warning (0.00 sec)
-
+select concat(name,'는 개발자입니다.') `직업`
+from fn_select_userinfo2;
 
 -- 5. 이름을 대문자로 조회하시오.
 -- +-------------+
@@ -400,6 +438,8 @@ order by  deptno, job asc;
 -- | BCA         |
 -- +-------------+
 -- 6 rows in set (0.00 sec)
+select upper(name)
+from fn_select_userinfo2;
 
 --  6. 이름을 소문자로 조회하시오.
 -- +-------------+
@@ -413,6 +453,8 @@ order by  deptno, job asc;
 -- | bca         |
 -- +-------------+
 -- 6 rows in set (0.00 sec)
+select lower(name)
+from fn_select_userinfo2;
 
 -- 7. 나이가 40대이상의 유저의 이름과 b의 위치를  조회하시오. (instr)
 -- +------+-----------------+
@@ -423,6 +465,9 @@ order by  deptno, job asc;
 -- | bca  |               1 |
 -- +------+-----------------+
 -- 3 rows in set (0.03 sec)
+select name, instr(name,'b')
+from fn_select_userinfo2
+where age>=40;
 
 -- 8. [upgrade] 나이가 40대이상의 유저의 이름과 b의 위치를  조회시 나이 많은 순으로 2분을 조회하시오(instr)
 -- +------+-----------------+
@@ -432,7 +477,10 @@ order by  deptno, job asc;
 -- | abc  |               2 |
 -- +------+-----------------+
 -- 2 rows in set (0.02 sec)
-
+select name, instr(name,'b')
+from fn_select_userinfo2
+where age>=40
+order by age desc  limit 2;
 
 
 -- 9. [upgrade] 유저의 이름과 이름의  첫번째 글자 , 마지막글자 를 조회하시오.
@@ -447,11 +495,13 @@ order by  deptno, job asc;
 -- | bca  | b*a  |
 -- +------+------+
 -- 6 rows in set (0.00 sec)
-
--- mysql>
+select name, concat(left(name,1),'*',right(name,1))
+from fn_select_userinfo2;
 
 -- 10. 테이블 select_userinfo복사해서 한개더 만들기
 -- mysql> select * from select_userinfo2;
+create table select_userinfo2 select * from fn_select_userinfo2;
+select * from select_userinfo2;
 -- +----+-------+-----+---------------+
 -- | no | name  | age | email         |
 -- +----+-------+-----+---------------+
@@ -463,8 +513,13 @@ order by  deptno, job asc;
 -- |  6 | baaca |  66 | bca@gmail.com |
 -- +----+-------+-----+---------------+
 -- 6 rows in set (0.00 sec)
+update select_userinfo2 set name='aaaa' where no=1;
+update select_userinfo2 set name='bbaab' where no=2;
+update select_userinfo2 set name='ccaac' where no=3;
+update select_userinfo2 set name='daadd' where no=4;
+update select_userinfo2 set name='baaca' where no=6;
 
-
+select * from select_userinfo2;
 -- +-------+-------+
 -- | name  | test  |
 -- +-------+-------+
@@ -475,10 +530,197 @@ order by  deptno, job asc;
 -- | abc   | a*c   |
 -- | baaca | b***a |
 -- +-------+-------+
+-- 					첫번째1						 전체문자열-2			마지막1
+select name, concat(left(name,1),  repeat('*',length(name)-2),  right(name,1)) `test`
+from select_userinfo2;
+
+-- 11. 모든 유저의 평균 나이를 구하시오.   
+-- +-----------+
+-- | 평균나이  |
+-- +-----------+
+-- |   38.5    |
+-- +-----------+
+select 	round(avg(age),1) `평균나이`
+from	select_userinfo2;
+
+-- 12. 나이가 40대 이상인 유저의 수를 구하시오.   
+-- +--------+
+-- | 인원수 |
+-- +--------+
+-- |   3    |
+-- +--------+
+select count(*) `인원수`
+from select_userinfo2
+where age>=40;
+
+-- 13. 이메일이 `gmail.com`인 유저의 최대 나이를 구하시오.   
+-- +-----------+
+-- | 최대나이  |
+-- +-----------+
+-- |    66     |
+-- +-----------+
+select *
+from select_userinfo2;
+select max(age) `최대나이`
+from select_userinfo2
+where email like '%gmail.com';
+
+-- 14. 이름 길이가 3글자인 유저들의 최소 나이를 구하시오.   
+-- +-----------+
+-- | 최소나이  |
+-- +-----------+
+-- |    11     |
+-- +-----------+
+select min(age)
+from select_userinfo2
+where length(name)=3;
+
+-- 15. 나이가 30대 이상인 유저들의 평균 나이를 소수점 1자리까지 반올림하여 구하시오.  
+-- +-----------+
+-- | 평균나이  |
+-- +-----------+
+-- |   49.0    |
+-- +-----------+
+select round(avg(age),1)
+from select_userinfo2
+where age>=30;
+
+-- 16. 이름에 'b'가 포함된 유저들의 수를 구하시오.  
+-- +-----------+
+-- | b포함인원 |
+-- +-----------+
+-- |     3     |
+-- +-----------+
+select count(*) `b포함인원`
+from select_userinfo2
+where name like '%b%';
+
+-- 17. 나이가 가장 많은 유저의 이름과 나이를 조회하시오.  
+-- +------+-----+
+-- | name | age |
+-- +------+-----+
+-- | bca  |  66 |
+-- +------+-----+
+select name, age
+from select_userinfo2
+order by age desc limit 1;
+
+-- 18. 유저 이름의 글자 수 평균을 구하고, 소수점 1자리까지 반올림하시오.  
+-- +-------------+
+-- | 평균글자수  |
+-- +-------------+
+-- |     3.0     |
+-- +-------------+
+select round(avg(length(name)),1) `평균글자수`
+from select_userinfo2;
+-- 
+
+-- 19. 나이가 40대 이상인 유저들의 이름을 대문자로 변환하여 조회하시오.  
+-- +-------------+
+-- | 대문자이름  |
+-- +-------------+
+
+-- | DDD         |
+-- | ABC         |
+-- | BCA         |
+-- +-------------+
+select upper(name) `대문자이름`
+from select_userinfo2
+where age>=40;
+
+-- 20. 유저 이름의 첫 글자와 마지막 글자를 합쳐서 출력하고, 그 중 글자 수가 3 이상인 유저만 조회하시오.  
+-- +------+------+
+-- | name | test |
+-- +------+------+
+-- | aaa  | a-a  |
+-- | bbb  | b-b  |
+-- | ccc  | c-c  |
+-- | ddd  | d-d  |
+-- | abc  | a-c  |
+-- | bca  | b-a  |
+-- +------+------+
+select name, concat(left(name,1), '-' , right(name,1)) `test`
+from select_userinfo2
+where length(name) >= 3;
 
 
+ 
+ 
+-- 21. [subquery] 가장 나이가 많은 유저의 이름을 조회하시오.  
+
+SELECT name
+FROM fn_select_userinfo2
+WHERE age = (SELECT MAX(age) FROM fn_select_userinfo2);
+
+-- +------+
+-- | name |
+-- +------+
+-- | bca  |
+-- +------+
 
 
+-- 22. [subquery] 평균 나이보다 많은 유저들의 이름과 나이를 조회하시오.  
 
+-- +------+-----+
+-- | name | age |
+-- +------+-----+
+-- | ddd  |  44 |
+-- | abc  |  55 |
+-- | bca  |  66 |
+-- +------+-----+
+select name, age
+from fn_select_userinfo2
+where  age>= (select avg(age) from fn_select_userinfo2);
 
+--  
+-- 23. [subquery] 가장 짧은 이름을 가진 유저의 이름과 나이를 조회하시오.   
+-- +------+-----+
+-- | name | age |
+-- +------+-----+
+-- | aaa  |  11 |
+-- | bbb  |  22 |
+-- | ccc  |  33 |
+-- | ddd  |  44 |
+-- | abc  |  55 |
+-- | bca  |  66 |
+-- +------+-----+
+select name, age
+from fn_select_userinfo2
+where length(name)=(select min(length(name)) from fn_select_userinfo2);
 
+--  
+-- 24. [subquery] 가장 긴 이름을 가진 유저의 이름과 이메일을 조회하시오.  
+-- +-------+---------------+
+-- | name  | email         |
+-- +-------+---------------+
+-- | aaaaa | aaa@gmail.com |
+-- | bbaab | bbb@gmail.com |
+-- | ccaac | ccc@gmail.com |
+-- | ddddd | ddd@gmail.com |
+-- | baaca | bca@gmail.com |
+-- +-------+---------------+
+select name, email
+from select_userinfo2
+where length(name)=( select max(length(name))  from select_userinfo2);
+
+--  
+-- 25. [subquery] 가장 나이가 적은 유저의 이름과 나이를 조회하시오.   
+-- +------+-----+
+-- | name | age |
+-- +------+-----+
+-- | aaa  |  11 |
+-- +------+-----+
+select name, age
+from  fn_select_userinfo2
+where age = ( select min(age) from fn_select_userinfo2 );
+
+--  
+-- 26. [subquery] 이름에 'a'가 포함된 유저들의 평균 나이를 구하시오.  
+-- +-----------+
+-- | 평균나이  |
+-- +-----------+
+-- |   44.0    |
+-- +-----------+
+select round(avg(age),1) `평균나이`
+from  fn_select_userinfo2
+where name in ( select name from fn_select_userinfo2 where name like '%a%');

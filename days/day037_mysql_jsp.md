@@ -43,14 +43,14 @@ DCL (제어) GRANT, REVOKE
 
 ---
 
-### ■2. Todo1: 
+### ■2. Todo1: MYSQL
 
 
 
 
 ---
 
-### ■3. Todo2: 
+### ■3. Todo2: JSP
 
 
 ---
