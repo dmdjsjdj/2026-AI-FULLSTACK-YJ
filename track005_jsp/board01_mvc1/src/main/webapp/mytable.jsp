@@ -7,13 +7,13 @@
     <!-- content -->
     <form class="d-flex justify-content-end gap-2 my-2">
         <input class="form-control" type="text" id="sercht"
-        	   placeholder="Search" style="width: 250px;"  onkeyup="filtert()">
+        	   placeholder="Search" style="width: 250px;"  onkeyup="myfiltert()">
         <button class="btn btn-primary" type="button">Search</button>
     </form>
     <section class="container my-5">
-        <h3> 글 목록 </h3>
+        <h3> 내가 쓴 글 목록 </h3>
         <table 
-            class="table table-striped table-bordered table-hover " id="usertable" >
+            class="table table-striped table-bordered table-hover " id="mytable" >
             <caption> 글 목록 </caption>
             <thead>
             <tr>
@@ -26,41 +26,24 @@
             </thead>
             <tbody>
             <%
+            
+            String nickname = (String)session.getAttribute("nickname");
+            
+	        if(nickname == null){
+	            out.println("<script> alert('로그인이 필요합니다'); location.href='login.jsp'; </script>");
+	        }
+            
 		      try{
 		    	  Class.forName("com.mysql.cj.jdbc.Driver");
 		    	  PreparedStatement pstmt =null;	ResultSet rset = null; Connection conn = null;
 		    	  conn = DriverManager.getConnection( "jdbc:mysql://localhost:3306/mbasic", "root", "1234");
-		    	  pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1) `cnt` FROM mvcboard1 b ORDER BY bno DESC" , 
-	                       ResultSet.TYPE_SCROLL_INSENSITIVE, 
-	                       ResultSet.CONCUR_READ_ONLY);
-		    	 /*  PreparedStatement cntStmt = conn.prepareStatement( "select count(*) cnt from mvcboard1" );
-				  ResultSet cntrs = cntStmt.executeQuery();
-	    		  int num = 0;
-	
-	    		  if(cntrs.next()){ num = cntrs.getInt("cnt"); }
-	    		  if(cntrs   != null) { cntrs.close();   }
-	    		  if(cntStmt   != null) { cntStmt.close();   }
+		    	  pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1) cnt FROM mvcboard1 b where bname=? ORDER BY bno DESC" 
+		    			  , ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		    	  
-			      pstmt = conn.prepareStatement("select * from mvcboard1 order by bno desc");
-			      //select- executeQuery/ insert, update, delete- executeUpdate
-				  rset = pstmt.executeQuery(); */
-				  
-				  pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1) `cnt` FROM mvcboard1 b ORDER BY bno DESC");
-			      //select- executeQuery/ insert, update, delete- executeUpdate
+		    	  pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1) `cnt` FROM mvcboard1 b where bname=? ORDER BY bno DESC");
+			      pstmt.setString(1, nickname);
+				  //select- executeQuery/ insert, update, delete- executeUpdate
 				  rset = pstmt.executeQuery(); //표
-				  int num = 0;
-					
-	    		  if(rset.next()){ 
-	    			  num = rset.getInt("cnt"); 
-					  do {
-							out.println("<tr><td>" 
-					  					+ (num--) + "</td><td>" 
-					  					+ "<a href='detail.jsp?bno=" + rset.getInt("bno") + "' style='text-decoration:none; color:inherit;'>" + rset.getString("btitle") + "</a></td><td>" 
-										+ rset.getString("bname")  + "</td><td>" 
-										+ rset.getString("bdate")  + "</td><td>" 
-										+ rset.getInt("bhit")      + "</td></tr>"   ); 
-						}while( rset.next() );
-	    		  }
 	    		  
 	    		  int cnt = -1;
 					
@@ -72,7 +55,7 @@
 						out.println("<tr><td>" 
 				  					+ (cnt--) + "</td><td>" 
 				  					+ "<a href='detail.jsp?bno=" + rset.getInt("bno") + "' style='text-decoration:none; color:inherit;'>" + rset.getString("btitle") + "</a></td><td>" 
-									+ rset.getString("bname")  + "</td><td>" 
+									+ nickname  + "</td><td>" 
 									+ rset.getString("bdate")  + "</td><td>" 
 									+ rset.getInt("bhit")      + "</td></tr>"   ); 
 					}
@@ -90,9 +73,9 @@
     </section>
     <script>
  // 검색 필터 
-    function filtert(){
+    function myfiltert(){
       let keyword = document.getElementById("sercht").value.toLowerCase();
-      document.querySelectorAll("#usertable tbody tr").forEach(tr=>{
+      document.querySelectorAll("#mytable tbody tr").forEach(tr=>{
         tr.style.display = tr.innerText.toLowerCase().includes(keyword) ? "" : "none";
       });
     }

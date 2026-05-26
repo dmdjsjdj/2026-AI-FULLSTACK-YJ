@@ -77,7 +77,7 @@
       <pre class="alert alert-info">
       1. http요청에 대한 응답저장하는 객체
       2. jsp에서 다른페이지로 이동
-      		(1) sendRedirect 		- 브라우저 url을 변경o, request/response객체가 유지안됨
+     		(1) sendRedirect 		- 브라우저 url을 변경o, request/response객체가 유지안됨
       		(2) RequestDispatcher 	- 위임(요청전달)
       								  브라우저 url을 변경x, request/response객체가 유지 됨
       </pre>
@@ -97,11 +97,11 @@
       <pre class="alert alert-info">
       jsp013_implicit.jsp (1) 
       : 나이입력받는폼
-      						→  jsp013_4.jsp  처리 (2)
-                       
-		                       19세 미만이라면 -   jsp013_child.jsp
-		                       19세 이상이라면 -  보여주는 주소표시창줄은   jsp013_4.jsp  
-		                             보이는화면은   jsp013_adult.jsp
+		→  jsp013_4.jsp  처리 (2)
+             
+               19세 미만이라면 -   jsp013_child.jsp
+               19세 이상이라면 -  보여주는 주소표시창줄은   jsp013_4.jsp  
+                     보이는화면은   jsp013_adult.jsp
       </pre>
       <form action="jsp013_4.jsp" method="get" onsubmit="return agecheck()">
 		  <div class="my-2">
@@ -115,14 +115,48 @@
       <hr/>
       <h4>004. scope</h4>
       <pre class="alert alert-info">
-      
+      1. application (웹애플리케이션이 실행되고 있는동안, 서버가 꺼질때까지 유지)  
+      		>  session (특정 브라우저와 연결된 세션, 브라우저 종료시 소멸)
+      			> request (요청: form, a 요청)  
+      				>  page (해당 jsp 페이지에서만)
+      2. 객체.setAttribute("속성", "값")   / 객체.getAttribute("속성")
       </pre>
+      <%
+       application.setAttribute("name", "D.application-웹어플리케이션 실행");
+      	   session.setAttribute("name", "C.	   session-브라우저 종료/ 로그인 후 아이디 유지");
+      	   request.setAttribute("name", "B.	   request-a.jsp  ->  b.jsp  요청할때");
+       pageContext.setAttribute("name", "A.	   현재페이지에서만 유지");
+      %>
       
+      <table class="table table-striped">
+		<caption>SCOPE- 내장객체 유효범위</caption>
+		<tbody>
+		   <tr><th scope="row">page</th>       <td><%=pageContext.getAttribute("name")%></td></tr>
+		   <tr><th scope="row">request</th>    <td><%=request.getAttribute("name")%></td></tr>
+		   <tr><th scope="row">session</th>     <td><%=session.getAttribute("name")%></td></tr>
+		   <tr><th scope="row">application</th> <td><%=application.getAttribute("name")%></td></tr>         
+		</tbody>
+	  </table>
+	  <p><a href="jsp013_5.jsp" class="btn btn-danger">SCOPE2</a></p>
+	  
       <hr/>
       <h4>005. error</h4>
-       <pre class="alert alert-info">
-      
+      <pre class="alert alert-info">
+       error
+       1. 4xx: 클라이언트 오류
+       		404 (페이지 없음) / 400 (bad quest)
+       2. 5xx: 서버오류
+       		500 (내부서버오류) / 502 (서버과부화)
+       		
+       * 해결방안
+       1. error페이지 만들기
+       2. [src] - [main] - [webapp] - [WEB_INF] - web.xml 에러처리 설정
       </pre>
+      <h4 class="card-haeder">1. ERROR 404 </h4>
+      <p><a href="no.jsp" class="btn btn-danger">NO PAGE</a></p>
+      
+      <h4 class="card-haeder">2. ERROR 500 </h4>
+       <%-- <%   int i=40/0;  %>   --%>
    </div>
 </body>
 </html>

@@ -20,16 +20,10 @@
 	    if(result>0){ 
 			out.println("<script> alert('글삭제 성공'); location.href='list.jsp'; </script>"); 
 		} else{ 
-			out.println("<script> alert('비밀번호가 다릅니다'); location.href='list.jsp'; </script>"); 
+			out.println("<script> alert('비밀번호가 다릅니다'); history.go(-1); </script>"); 
 		}
 		
-		if(pstmt != null){ pstmt.close();}
-		Statement stmt = conn.createStatement();
-	    stmt.execute("SET @COUNT = 0");
-	    stmt.execute( "update mvcboard1 set bno = @count:=@count+1" );
-	    // AUTO_INCREMENT 재설정
-	    stmt.execute( "alert table mvcboard1 auto_increment = 1" );
-	    stmt.close();
+	    if(pstmt != null){ pstmt.close();}
 		if(conn != null){ conn.close();}
 	}catch(Exception e){e.printStackTrace();}
 

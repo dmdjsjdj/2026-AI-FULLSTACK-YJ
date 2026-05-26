@@ -1,3 +1,4 @@
+<%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
 <%@include file="inc/header.jsp" %>
@@ -5,15 +6,58 @@
     <!--  jasp014_header.jsp -->
     <div class="container my-5">
         <h3 >글 등록 </h3>
+        <%
+        String email = (String)session.getAttribute("email");
+
+        if(email == null){
+            response.sendRedirect("login.jsp");
+            out.println("로그인이 필요합니다.");
+        }
         
+        
+        String bno = request.getParameter("bno"); 
+	    
+	    // HTML에 출력할 변수 초기화
+	    String bname = "";
+	    String bpass = "";
+	
+	    // 2. DB 연동하여 데이터 가져오기
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        String url = "jdbc:mysql://localhost:3306/mbasic";
+	        conn = DriverManager.getConnection(url, "root", "1234"); // 본인 비밀번호 입력
+	
+	        String sql = "select * from users where email = ?"; 
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, email);
+	        rs = pstmt.executeQuery(); //표
+	
+	        if (rs.next()) { //줄
+	            bname = rs.getString("nickname");
+	            bpass = rs.getString("bpass");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if(rs != null) rs.close();
+	        if(pstmt != null) pstmt.close();
+	        if(conn != null) conn.close();
+	    }
+        %>
         <form  action ="write_action.jsp"  method="post"   onsubmit="return checkForm()">
 	         <div  class="my-3">
 	            <label for="bname"   class="form-label">이름</label>
-	            <input type="text"   class="form-control"    id="bname"  name="bname"  />
+	            <input type="text"   class="form-control"    
+	            		id="bname"  name="bname" value="<%=bname %>" readonly/>
 	         </div> 
 	         <div  class="my-3">
 	            <label for="bpass"   class="form-label">비밀번호</label>
-	            <input type="password"   class="form-control"    id="bpass"  name="bpass"  />
+	            <input type="password"   class="form-control"    
+	            		id="bpass"  name="bpass" value="<%=bpass %>" readonly/>
 	         </div>
 	         <div  class="my-3">
 	            <label for="btitle"  class="form-label">제목</label>

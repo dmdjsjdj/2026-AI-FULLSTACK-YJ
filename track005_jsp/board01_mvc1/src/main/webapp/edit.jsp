@@ -7,7 +7,15 @@
     <div class="container my-5">
         <h3 >글 수정 </h3>
         <%
+	        String nickname = (String)session.getAttribute("nickname");
+			
+	        if(nickname == null){
+	            out.println("<script> alert('로그인이 필요합니다'); location.href='login.jsp'; </script>");
+	        }
 		    String bno = request.getParameter("bno"); 
+		    if(!nickname.equals(bno)){
+		    	out.println("<script> alert('다른사용자의 글은 수정할수없습니다'); location.href='list.jsp'; </script>");
+		    }
 		    
 		    // HTML에 출력할 변수 초기화
 		    String bname = "";
@@ -23,14 +31,14 @@
 		    try {
 		        Class.forName("com.mysql.cj.jdbc.Driver");
 		        String url = "jdbc:mysql://localhost:3306/mbasic";
-		        conn = DriverManager.getConnection(url, "root", "1234"); // 본인 비밀번호 입력
+		        conn = DriverManager.getConnection(url, "root", "1234"); 
 		
 		        String sql = "select * from mvcboard1 where bno = ?"; 
 		        pstmt = conn.prepareStatement(sql);
 		        pstmt.setString(1, bno);
-		        rs = pstmt.executeQuery();
+		        rs = pstmt.executeQuery(); //표
 		
-		        if (rs.next()) {
+		        if (rs.next()) { //줄
 		            bname = rs.getString("bname");
 		            bpass = rs.getString("bpass");
 		            btitle = rs.getString("btitle");
