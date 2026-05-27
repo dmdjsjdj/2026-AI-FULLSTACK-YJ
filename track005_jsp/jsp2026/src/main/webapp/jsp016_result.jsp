@@ -32,9 +32,5 @@
 		if(conn != null){ conn.close();}
 		
 	}catch(Exception e){e.printStackTrace();}
-	
-	session.setMaxInactiveInterval(10*60);     // seconds  10분동안 세션 유지
-	
-	response.sendRedirect("jsp016_login.jsp");
 
 %>
