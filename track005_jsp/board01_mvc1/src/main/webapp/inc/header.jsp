@@ -28,15 +28,26 @@
                 </button>
                 <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                    <a class="nav-link" href="login.jsp">login</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="join.jsp">join</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="mypage.jsp">mypage</a>
-                    </li>
+                <%
+                String nickname = (String)session.getAttribute("nickname");
+        		
+                if(nickname == null){
+                	out.println(	
+                    "<li class='nav-item'>"+
+                    "<a class='nav-link' href='login.jsp'>login</a>"+
+                    "</li>"+
+                    "<li class='nav-item'>"+
+                    "<a class='nav-link' href='join.jsp'>join</a>"+
+                    "</li>");
+                }
+                
+                if(nickname != null){
+                	out.println(	
+                    "<li class='nav-item'>"+
+                    "<a class='nav-link' href='mypage.jsp'>mypage</a>"+
+                    "</li>");
+                }
+                  %>
                 </ul> 
                 </div>
             </div>

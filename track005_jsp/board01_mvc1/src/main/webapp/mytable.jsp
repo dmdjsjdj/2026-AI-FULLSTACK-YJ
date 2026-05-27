@@ -27,11 +27,11 @@
             <tbody>
             <%
             
-            String nickname = (String)session.getAttribute("nickname");
-            
-	        if(nickname == null){
-	            out.println("<script> alert('로그인이 필요합니다'); location.href='login.jsp'; </script>");
-	        }
+	            nickname = (String)session.getAttribute("nickname");
+	            
+		        if(nickname == null){
+		            out.println("<script> alert('로그인이 필요합니다'); location.href='login.jsp'; </script>");
+		        }
             
 		      try{
 		    	  Class.forName("com.mysql.cj.jdbc.Driver");

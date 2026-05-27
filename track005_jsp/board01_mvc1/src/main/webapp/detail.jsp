@@ -71,8 +71,13 @@
 	            		   name="bcontent" readonly ><%=bcontent %></textarea>
 	         </div>
 	         <div  class="my-3  text-end"> 
-	            <a href="edit.jsp?bno=<%=bno %>"  class="btn btn-outline-success"  title="글수정">수정</a>
-	            <a href="delete.jsp?bno=<%=bno %>" class="btn btn-outline-primary"  title="글삭제">삭제</a>
+	         <%
+	         nickname = (String)session.getAttribute("nickname");
+                if(nickname.equals(bname)){
+	            out.println("<a href='edit.jsp?bno=" + bno + "'  class='btn btn-outline-success'  title='글수정'>수정</a>"+
+	            "<a href='delete.jsp?bno=" + bno + "' class='btn btn-outline-primary'  title='글삭제'>삭제</a>");
+	            }
+	           %>
 	            <a href='list.jsp'     class="btn btn-primary"  title="목록보러가기">목록</a>
 	         </div>
 	      </form> 

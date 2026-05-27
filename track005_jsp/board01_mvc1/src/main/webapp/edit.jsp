@@ -7,15 +7,15 @@
     <div class="container my-5">
         <h3 >글 수정 </h3>
         <%
-	        String nickname = (String)session.getAttribute("nickname");
+	         nickname = (String)session.getAttribute("nickname");
 			
 	        if(nickname == null){
 	            out.println("<script> alert('로그인이 필요합니다'); location.href='login.jsp'; </script>");
 	        }
 		    String bno = request.getParameter("bno"); 
-		    if(!nickname.equals(bno)){
+		    /* if(!nickname.equals(bno)){
 		    	out.println("<script> alert('다른사용자의 글은 수정할수없습니다'); location.href='list.jsp'; </script>");
-		    }
+		    } */
 		    
 		    // HTML에 출력할 변수 초기화
 		    String bname = "";

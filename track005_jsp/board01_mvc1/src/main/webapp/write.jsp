@@ -7,7 +7,7 @@
     <div class="container my-5">
         <h3 >글 등록 </h3>
         <%
-        String nickname = (String)session.getAttribute("nickname");
+         nickname = (String)session.getAttribute("nickname");
 
         if(nickname == null){
             response.sendRedirect("login.jsp");

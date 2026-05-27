@@ -15,6 +15,7 @@
 -- DML : insert, select #, update, delete
 -- DCL  : grant, revoke
 
+--  basic010_join.sql
 
 
 -- ■진행1. CRUD (SELECT JOIN)
@@ -27,14 +28,9 @@
 --    - inner join : 양쪽테이블 모두 일치하는 데이터
 --    - outer join : 특정테이블을 기준으로 데이터를 검색
 
-set SQL_SAFE_UPDATES = 0;
+
 -- STEP0) 준비테이블
 -- mysql> desc join_userinfo;
-use mbasic;
-create table join_userinfo select * from userinfo;
-desc join_userinfo;
-delete from join_userinfo where no>4;
-alter table join_userinfo modify age int not null;
 -- +-------+--------------+------+-----+---------+-------+
 -- | Field | Type         | Null | Key | Default | Extra |
 -- +-------+--------------+------+-----+---------+-------+
@@ -47,7 +43,6 @@ alter table join_userinfo modify age int not null;
 -- mysql>
 
 -- mysql> select * from join_userinfo;
-select * from join_userinfo;
 -- +----+------+-----+
 -- | no | name | age |
 -- +----+------+-----+
@@ -61,12 +56,6 @@ select * from join_userinfo;
 
 -- ---------------------------------
 -- mysql> desc join_userban;
-show tables;
-create table join_userban
-SELECT no, name, ban
-FROM group_userinfo;
-alter table join_userban modify no int not null primary key auto_increment;
-desc join_userban;
 -- +-------+-------------+------+-----+---------+----------------+
 -- | Field | Type        | Null | Key | Default | Extra          |
 -- +-------+-------------+------+-----+---------+----------------+
@@ -76,7 +65,6 @@ desc join_userban;
 -- +-------+-------------+------+-----+---------+----------------+
 
 -- mysql> select * from join_userban;
-select * from join_userban;
 -- +----+--------+------+
 -- | no | name   | ban  |
 -- +----+--------+------+
@@ -88,6 +76,34 @@ select * from join_userban;
 -- |  6 | sixth  | C    |
 -- +----+--------+------+
 
+use mbasic;
+CREATE TABLE join_userinfo
+( no  int not null  auto_increment primary key ,
+  name varchar(20)  not null ,
+  age  int not null
+ ) default charset utf8;
+insert into  join_userinfo (name, age)  values  ('first'  , 11 );
+insert into  join_userinfo (name, age)  values  ('second' , 22 );
+insert into  join_userinfo (name, age)  values  ('third'  , 33 );
+insert into  join_userinfo (name, age)  values  ('fourth' , 44);
+
+
+CREATE TABLE join_userban
+( no  int not null  auto_increment primary key ,
+  name varchar(20)  not null ,
+  ban  char(2)
+) default charset utf8;
+
+insert into  join_userban  (name,  ban)  values  ('first'     ,  'A');
+insert into  join_userban  (name,  ban)  values  ('second' ,   'B');
+insert into  join_userban  (name,  ban)  values  ('third'    ,  'A');
+insert into  join_userban  (name,  ban)  values  ('fourth'  ,   'C');
+insert into  join_userban  (name,  ban)  values  ('fifth'     ,  'B');
+insert into  join_userban  (name,  ban)  values  ('sixth'    ,  'C');
+
+select * from join_userinfo;
+select * from join_userban;
+ 
 
 -- question1) join을 이용하여 join_userinfo
 --   학생의 번호, 이름, 나이, 반을 출력하시오.
@@ -99,29 +115,31 @@ select * from join_userban;
 -- |  3 | third  |  33 | A    |
 -- |  4 | fourth |  44 | C    |
 -- +----+--------+-----+------+
+
 -- >>> (1) = join
--- select  no , name  , age , ban 
--- from    join_userinfo a, join_userban b
+-- select  no , name  ,age , ban 
+-- from    join_userinfo ,   join_userban 
 -- where   join_userinfo.no=join_userban.no;
--- Error Code: 1052. Column 'no' in field list is ambiguous	0.000 sec
+-- Error Code: 1052. Column 'no' in field list is ambiguous   0.000 sec
 
 select  a.no , a.name  , a.age , b.ban 
-from    join_userinfo a, join_userban b
+from    join_userinfo  a,   join_userban  b
 where   a.no=b.no;
 
 -- >>> (2) join  on
 select  a.no , a.name  , a.age , b.ban 
-from    join_userinfo a  join join_userban b
-on   a.no=b.no;
+from    join_userinfo  a  join   join_userban  b
+on      a.no=b.no;
 
 -- >>> (3) join  using
 select  a.no , a.name  , a.age , b.ban 
-from    join_userinfo a  join join_userban b
+from    join_userinfo  a  join   join_userban  b
 using(no);
 
 -- >>> (4) natural join
 select no, name, age, ban
-from  join_userinfo  natural join join_userban;
+from   join_userinfo  natural join  join_userban;
+
 
 -- question2)  inner join을 이용하여 join_userinfo
 --   테이블의 20세이상 40세 이하 학생의 번호, 이름, 나이, 반을 출력하시오.   번호.이름
@@ -133,26 +151,27 @@ from  join_userinfo  natural join join_userban;
 -- |  3 | third  |  33 | A    |
 -- +----+--------+-----+------+
 -- >>> (1) = join
-select a.no, a.name, a.age, b.ban
-from   join_userinfo a, join_userban b 
-where  a.no=b.no and age>=20 and age<=40;
+select     a.no ,  a.name , a.age , b.ban
+from       join_userinfo  a,     join_userban  b
+where      a.no = b.no  and  a.age >= 20  and  a.age <=40;   
 
 -- >>> (2) join  on
-select a.no, a.name, age, ban -- 곂치지 않는 조건은 소속안밝혀도됨
-from   join_userinfo a join join_userban b 
-on  a.no=b.no 
-where age>=20 and age<=40;
+select     a.no ,  a.name , a.age , b.ban
+from       join_userinfo  a   join    join_userban  b
+on          a.no = b.no  
+where  a.age >= 20  and  a.age <=40;   
 
 -- >>> (3) join  using
-select a.no, a.name, a.age, b.ban
-from   join_userinfo a join join_userban b 
+select     a.no ,  a.name , a.age , b.ban
+from       join_userinfo  a   join    join_userban  b
 using(no)
-where age>=20 and age<=40;
+where  a.age >= 20  and  a.age <=40;   
 
--- >>> (4) natural join
-select no, name, age, ban
-from   join_userinfo natural join join_userban
-where age>=20 and age<=40;
+select     no ,name ,age ,ban
+from       join_userinfo     natural  join    join_userban    
+where      age >= 20  and   age <=40;   
+
+
 
 -- question3)  outer join
 -- +------+--------+------+------+
@@ -166,13 +185,17 @@ where age>=20 and age<=40;
 -- | NULL | NULL   | C    | NULL |
 -- +------+--------+------+------+
 -- 6 rows in set (0.00 sec)
-select a.no, a.name, b.ban, a.age
-from join_userinfo a right join join_userban b
-on a.no=b.no;
 
-select a.no, a.name, b.ban, a.age
-from join_userban b left join join_userinfo a 
-on a.no=b.no;
+select  a.no   , a.name   , b.ban  , a.age 
+from    join_userinfo a  right join    join_userban  b
+on      a.no = b.no;
+
+select  a.no   , a.name   , b.ban  , a.age 
+from    join_userban  b left join  join_userinfo a 
+on      a.no = b.no;
+
+
+
 
 -- question4)  left, right join 이용
 -- +----+--------+------+------+
@@ -186,25 +209,25 @@ on a.no=b.no;
 -- |  6 | sixth  | C    | NULL |
 -- +----+--------+------+------+
 -- 6 rows in set (0.00 sec)
-select b.no, b.name, b.ban, a.age
-from join_userinfo a right outer join join_userban b
-on a.no=b.no;
+select    b.no , b.name   , b.ban , a.age
+from      join_userinfo  a  right join  join_userban b
+on        a.no = b.no;
 
-select b.no, b.name, b.ban, a.age
-from join_userban b left join join_userinfo a 
-on a.no=b.no;
+select    b.no , b.name   , b.ban , a.age
+from      join_userban b   left join   join_userinfo  a  
+on        a.no = b.no;
+
 
 -- ■진행2. CRUD (SELECT JOIN 연습문제)   >>연습문제 1~20번
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- -- 실습 1
 -- -- emp ,DEPT 테이블을 이용하여 다음과 같이  사원데이터를  조회하시오.
--- SELECT * FROM EMP, DEPT ORDER BY EMPNO;
-SELECT * FROM EMP, DEPT ORDER BY EMPNO;
--- -- 이코드가 의미하는바는? 
--- 조인조건 없으면 두테이블 모두 조회 
--- emp 14줄, dept 4줄 카다시안곱 - 모든조합
--- --
+SELECT * FROM EMP, DEPT ORDER BY EMPNO;   
+--  >> 조인조건이 없으면 두테이블 모두 조회 
+--  >> emp 14줄, dept 4줄  카다시안곱 - 모든조합
+
+-- -- 이코드가 의미하는바는?
 -- mysql> SELECT * FROM EMP, DEPT ORDER BY EMPNO;
 -- +-------+--------+-----------+------+------------+------+------+--------+--------+------------+----------+
 -- | empno | ename  | job       | mgr  | hiredate   | sal  | comm | deptno | deptno | dname      | loc      |
@@ -278,6 +301,20 @@ SELECT * FROM EMP, DEPT ORDER BY EMPNO;
 -- -- 실습 2
 -- -- emp ,DEPT 테이블에서
 -- -- EMP테이블의 DEPTNO 와 DEPT테이블의 DEPTNO가 같은 사원의 데이터를  조회하시오.
+select  *
+from    emp , dept 
+where   emp.deptno = dept.deptno
+order   by empno;
+
+select  empno , ename , job , mgr , hiredate, sal, comm, emp.deptno, dept.deptno, dname, loc
+from    emp , dept 
+where   emp.deptno = dept.deptno
+order   by empno;
+-- 겹치는 필드 소속채우기 Column 'deptno' in field list is ambiguous   0.000 sec 
+
+desc emp;    -- empno , ename , job , mgr , hiredate, sal, comm, deptno, deptno 
+desc dept;   -- deptno, dname, loc
+
 -- +-------+--------+-----------+------+------------+------+------+--------+--------+------------+----------+
 -- | empno | ename  | job       | mgr  | hiredate   | sal  | comm | deptno | deptno | dname      | loc      |
 -- +-------+--------+-----------+------+------------+------+------+--------+--------+------------+----------+
@@ -297,9 +334,7 @@ SELECT * FROM EMP, DEPT ORDER BY EMPNO;
 -- |  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |     10 | ACCOUNTING | NEW YORK |
 -- +-------+--------+-----------+------+------------+------+------+--------+--------+------------+----------+
 -- 14 rows in set (0.00 sec)
-select *
-from emp , DEPT 
-where emp.deptno=DEPT.deptno;
+
 -- >>>>>
 
 
@@ -308,6 +343,16 @@ where emp.deptno=DEPT.deptno;
 -- -- 3
 -- -- emp 테이블의 별칭을 E로 ,DEPT  테이블의 별칭을 D로 하여
 -- -- 별칭을 이용하여 EMP테이블의 DEPTNO 와 DEPT테이블의 DEPTNO가 같은 사원의 데이터를  조회하시오.
+select  *
+from    emp e, dept d
+where   e.deptno = d.deptno
+order   by  empno;
+
+select  empno ,ename , job   , mgr  , hiredate , sal, comm, e.deptno, d.deptno,dname    , loc  
+from    emp e, dept d
+where   e.deptno = d.deptno
+order   by  empno;
+
 -- +-------+--------+-----------+------+------------+------+------+--------+--------+------------+----------+
 -- | empno | ename  | job       | mgr  | hiredate   | sal  | comm | deptno | deptno | dname      | loc      |
 -- +-------+--------+-----------+------+------------+------+------+--------+--------+------------+----------+
@@ -327,20 +372,21 @@ where emp.deptno=DEPT.deptno;
 -- |  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |     10 | ACCOUNTING | NEW YORK |
 -- +-------+--------+-----------+------+------------+------+------+--------+--------+------------+----------+
 -- 14 rows in set (0.00 sec)
-select *
-from emp e join DEPT d 
-on e.deptno=d.deptno;
+
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- -- 4
 -- -- EMP, DEPT테이블에서 다음과 같이 조회해보고 어떤오류가 나는지 적으시오.
+--   Error Code: 1052. Column 'DEPTNO' in field list is ambiguous   0.000 sec
+--   depno 필드가 emp, dept 둘다 있어서,,,,, 겹치는 필드 소속채우기
 
--- SELECT EMPNO, ENAME, DEPTNO, DNAME, LOC
--- FROM EMP E, DEPT D
--- WHERE E.DEPTNO = D.DEPTNO;
+SELECT EMPNO, ENAME, DEPTNO, DNAME, LOC
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO;
 
--- Error Code: 1052. Column 'DEPTNO' in field list is ambiguous	0.000 sec
+
+
 
 
 -- --------------------------------------------------------
@@ -348,6 +394,10 @@ on e.deptno=d.deptno;
 -- -- 실습 5
 -- -- 위의 코드를  오류안나게 수정해
 -- -- 다음과 같은 결과가 나오게 만드시오.
+SELECT EMPNO, ENAME, e.DEPTNO, DNAME, LOC
+FROM   EMP E, DEPT D
+WHERE  E.DEPTNO = D.DEPTNO;
+
 -- +-------+--------+--------+------------+----------+
 -- | EMPNO | ENAME  | DEPTNO | DNAME      | LOC      |
 -- +-------+--------+--------+------------+----------+
@@ -367,9 +417,7 @@ on e.deptno=d.deptno;
 -- |  7934 | MILLER |     10 | ACCOUNTING | NEW YORK |
 -- +-------+--------+--------+------------+----------+
 -- 14 rows in set (0.00 sec)
-SELECT e.EMPNO, e.ENAME, d.DEPTNO, d.DNAME, d.LOC
-FROM EMP E, DEPT D
-WHERE E.DEPTNO = D.DEPTNO;
+
 -- mysql>
 
 
@@ -388,18 +436,29 @@ WHERE E.DEPTNO = D.DEPTNO;
 -- |  7902 | FORD  | 3000 |     20 | RESEARCH   | DALLAS   |
 -- +-------+-------+------+--------+------------+----------+
 -- 3 rows in set (0.00 sec)
-SELECT e.EMPNO, e.ENAME, e.sal, d.DEPTNO, d.DNAME, d.LOC
-FROM EMP E join DEPT D
-on E.DEPTNO = D.DEPTNO
-where sal>=3000;
+
+select    EMPNO , ENAME , sal  , e.DEPTNO ,DNAME   , LOC  
+from      emp e , dept d
+where     e.deptno = d.deptno  and  sal >= 3000;
+
 
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- -- 실습 7
--- -- emp 테이블의 별칭을 E로 ,SALAGRADE  테이블의 별칭을 S로 하여
+-- -- emp 테이블의 별칭을 E로 ,SALGRADE  테이블의 별칭을 S로 하여
 -- -- 별칭을 이용하여  EMP테이블의 사원의 급여가  SALGRADE의 최소급여와 최대급여사이이 있는
 -- -- 사원을 데이터를 다음과 같이 조회하시오.
+desc emp;         --  empno | ename  | job       | mgr  | hiredate   | sal  | comm | deptno 
+desc salgrade;    --  grade | losal | hisal 
+select * from salgrade;
+
+select     *
+from       emp e , SALGRADE  s
+where      sal between   s.losal   and  s.hisal
+order      by  grade asc  , sal asc  ;
+
+
 -- +-------+--------+-----------+------+------------+------+------+--------+-------+-------+-------+
 -- | empno | ename  | job       | mgr  | hiredate   | sal  | comm | deptno | grade | losal | hisal |
 -- +-------+--------+-----------+------+------------+------+------+--------+-------+-------+-------+
@@ -419,11 +478,7 @@ where sal>=3000;
 -- |  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |     5 |  3001 |  9999 |
 -- +-------+--------+-----------+------+------------+------+------+--------+-------+-------+-------+
 -- 14 rows in set (0.00 sec)
-select * from SALAGRADE;
-select *
-from emp e join SALAGRADE s 
-on e.sal>=s.losal and e.sal<=s.hisal;
--- 	Error Code: 1111. Invalid use of group function	0.000 sec
+
 
 -- >>>>>
 
@@ -433,6 +488,18 @@ on e.sal>=s.losal and e.sal<=s.hisal;
 -- -- emp 테이블을 두번 이용하여
 -- -- 별칭을 이용하여  EMP테이블의 사원의 급여가  SALGRADE의 최소급여와 최대급여사이이 있는
 -- -- 사원의 직속상관(MGR)의 정보를 다음과 같이 조회하시오.
+select  empno, ename, mgr `직속상관`  from emp;
+
+-- select    사원.empno , 사원.ename , 사원.mgr  , 직속상관.empno `MGR_EMPNO`  , 직속상관.ename `MGR_ENAME`
+-- from      emp sawon  , emp mgr , salgrade s
+-- where     사원.mgr  = 직속상관.empno(연결조건)  and    사원.sal   between  SALGRADE의 최소급여   and  최대급여사이이 있는  
+-- order by  직속상관의 번호를 오름차순으로
+
+select    sawon.empno , sawon.ename , sawon.mgr  , mgr.empno `MGR_EMPNO`  , mgr.ename `MGR_ENAME`
+from      emp sawon  , emp mgr , salgrade s
+where     sawon.mgr  = mgr.empno   and    sawon.sal   between s.losal  and  s.hisal
+order by  mgr.empno  asc;
+
 -- +-------+--------+------+-----------+-----------+
 -- | empno | ename  | mgr  | MGR_EMPNO | MGR_ENAME |
 -- +-------+--------+------+-----------+-----------+
@@ -452,10 +519,7 @@ on e.sal>=s.losal and e.sal<=s.hisal;
 -- +-------+--------+------+-----------+-----------+
 -- 13 rows in set (0.00 sec)
 
-SELECT  e.empno, e.ename, e.mgr, m.empno `MGR_EMPNO`, m.ename `MGR_ENAME`
-FROM emp e , emp m, salagrade s
-where e.mgr = m.empno and e.sal BETWEEN s.losal AND s.hisal
-order by m.empno asc;
+
 
 
 
@@ -500,6 +564,12 @@ order by m.empno asc;
 -- -- 앞의 예제와 비교 (앞의 예제는 13줄) -->> KING은 최고직급인 PRESIDENT이므로
 -- -- 직속상관이 존재하지않으므로 NULL이나와 데이터에서 빠짐.
 -- -- 데이터가 NULL이더라도 데이터가 나오게 처리하시오.
+select   sawon.EMPNO , sawon.ENAME  , sawon.MGR , mgr.empno  `MGR_EMPNO`  , mgr.ename  `MGR_ENAME` 
+from     emp  sawon  left join  emp  mgr
+on       sawon.mgr = mgr.empno 
+order   by   sawon.empno  asc;  
+
+
 --  +-------+--------+------+-----------+-----------+
 -- | EMPNO | ENAME  | MGR  | MGR_EMPNO | MGR_ENAME |
 -- +-------+--------+------+-----------+-----------+
@@ -519,10 +589,7 @@ order by m.empno asc;
 -- |  7934 | MILLER | 7782 |      7782 | CLARK     |
 -- +-------+--------+------+-----------+-----------+
 -- 14 rows in set (0.00 sec)
-SELECT  e.empno, e.ename, e.mgr, m.empno `MGR_EMPNO`, m.ename `MGR_ENAME`
-FROM emp e LEFT JOIN emp m
-ON e.mgr = m.empno
-ORDER BY e.empno asc;
+
 -- mysql>
 
 
@@ -533,6 +600,10 @@ ORDER BY e.empno asc;
 -- --------------------------------------------------------
 -- -- 실습 10
 -- -- 다음과 같이 코드를 작성해보고  오른쪽 외부조인이 의미하는 바를 적으시오.
+select   sawon.EMPNO , sawon.ENAME  , sawon.MGR , mgr.empno  `MGR_EMPNO`  , mgr.ename  `MGR_ENAME` 
+from     emp  sawon  right join  emp  mgr
+on       sawon.mgr = mgr.empno 
+order   by  sawon.MGR;  
 
 -- +-------+--------+------+-----------+-----------+
 -- | EMPNO | ENAME  | MGR  | MGR_EMPNO | MGR_ENAME |
@@ -560,11 +631,9 @@ ORDER BY e.empno asc;
 -- |  7934 | MILLER | 7782 |      7782 | CLARK     |
 -- +-------+--------+------+-----------+-----------+
 -- 21 rows in set (0.00 sec)
-SELECT  e.empno, e.ename, e.mgr, m.empno `MGR_EMPNO`, m.ename `MGR_ENAME`
-FROM emp e right JOIN emp m
-ON e.mgr = m.empno
-order by e.empno asc;
--- 
+
+
+
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
@@ -577,6 +646,14 @@ order by e.empno asc;
 -- -- 반드시 두 테이블 간의 같은 이름, 타입을 가진 컬럼이 필요하다.
 -- -- 조인에 이용되는 컬럼은 명시하지 않아도 자동으로 조인에 사용된다.
 -- -- 동일한 이름을 갖는 컬럼이 있지만 데이터 타입이 다르면 에러가 발생한다.
+select  *  
+from    emp e natural join  dept d
+order by deptno, empno;    -- deptno 필드 겹침 부분이 1번만나옴   (중간테스트)
+
+select  EMPNO , ENAME  , JOB    , MGR  , HIREDATE   , SAL  , COMM , DEPTNO , DNAME     , LOC   
+from    emp e natural join  dept d
+order by deptno, empno;   
+
 
 -- +-------+--------+-----------+------+------------+------+------+--------+------------+----------+
 -- | EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | DNAME      | LOC      |
@@ -597,12 +674,7 @@ order by e.empno asc;
 -- |  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 | SALES      | CHICAGO  |
 -- +-------+--------+-----------+------+------------+------+------+--------+------------+----------+
 -- 14 rows in set (0.00 sec)
-select *
-from emp e natural join dept d;
 
-select empno, ENAME , JOB ,MGR, HIREDATE , SAL, COMM ,DEPTNO ,DNAME  , LOC
-from emp e natural join dept d
-order by deptno, empno asc;
 -- mysql>
 
 
@@ -621,39 +693,51 @@ order by deptno, empno asc;
 -- |  7902 | FORD  | ANALYST   | 7566 | 1981-12-03 | 3000 | NULL |     20 | RESEARCH   | DALLAS   |
 -- +-------+-------+-----------+------+------------+------+------+--------+------------+----------+
 -- 3 rows in set (0.00 sec)
-select empno, ENAME , JOB ,MGR, HIREDATE , SAL, COMM ,d.DEPTNO ,DNAME  , LOC
-from emp e join dept d
-using(DEPTNO)
-where sal>=3000
-order by deptno asc;
+select    EMPNO , ENAME , JOB , MGR , HIREDATE , SAL , COMM , d.DEPTNO , DNAME  , LOC   
+from      emp e  join dept d   using(deptno)
+where     sal  >= 3000
+order     by  deptno;
 
-select empno, ENAME , JOB ,MGR, HIREDATE , SAL, COMM ,d.DEPTNO ,DNAME  , LOC
-from emp e join dept d
-on  e.deptno=d.deptno
-where sal>=3000
-order by deptno asc;
+select    EMPNO , ENAME , JOB , MGR , HIREDATE , SAL , COMM , d.DEPTNO , DNAME  , LOC   
+from      emp e  join dept d   on  e.deptno = d.deptno
+where     sal  >= 3000
+order     by  deptno;
 
-select empno, ENAME , JOB ,MGR, HIREDATE , SAL, COMM ,d.DEPTNO ,DNAME  , LOC
-from emp e , dept d
-where  e.deptno=d.deptno
-and sal>=3000
-order by deptno asc;
+select    EMPNO , ENAME , JOB , MGR , HIREDATE , SAL , COMM , d.DEPTNO , DNAME  , LOC   
+from      emp e  , dept d     
+where     e.deptno = d.deptno  and sal  >= 3000
+order     by  deptno;
 
-select empno, ENAME , JOB ,MGR, HIREDATE , SAL, COMM , DEPTNO ,DNAME  , LOC
-from emp e natural join dept d
-where sal>=3000
-order by deptno asc;
+select    EMPNO , ENAME , JOB , MGR , HIREDATE , SAL , COMM , DEPTNO , DNAME  , LOC   
+from      emp e  natural join dept d     
+where     sal  >= 3000
+order     by  deptno;
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- -- 실습 13
 -- -- emp,dept 테이블을 JOIN + ON을 이용하여
 -- -- 급여가 3000이하인 직원의 데이터를 다음과 같이 작성하시오.
-select e.empno, e.ENAME , e.JOB ,e.MGR, e.HIREDATE , e.SAL, e.COMM ,d.DEPTNO ,d.DNAME  , d.LOC
-from emp e join dept d
-on e.deptno=d.deptno
-where sal<=3000
+select   EMPNO , ENAME , JOB , MGR , HIREDATE , SAL , COMM , d.DEPTNO , DNAME  , LOC   
+from     emp e  join   dept d    on  e.deptno  = d.deptno
+where    sal < 3000
 order by deptno asc;
+
+select   EMPNO , ENAME , JOB , MGR , HIREDATE , SAL , COMM , d.DEPTNO , DNAME  , LOC   
+from     emp e  join   dept d     using( deptno)
+where    sal < 3000
+order by deptno asc;
+
+select   EMPNO , ENAME , JOB , MGR , HIREDATE , SAL , COMM , d.DEPTNO , DNAME  , LOC   
+from     emp e  ,   dept d     
+where     e.deptno  = d.deptno  and  sal < 3000
+order by deptno asc;
+
+select   EMPNO , ENAME , JOB , MGR , HIREDATE , SAL , COMM ,  DEPTNO , DNAME  , LOC   
+from     emp e  natural join  dept d     
+where    sal < 3000
+order by deptno asc;
+
 -- +-------+--------+----------+------+------------+------+------+--------+------------+----------+
 -- | EMPNO | ENAME  | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | DNAME      | LOC      |
 -- +-------+--------+----------+------+------------+------+------+--------+------------+----------+
@@ -682,6 +766,23 @@ order by deptno asc;
 -- -- 실습 14
 -- -- emp ,DEPT 테이블에서  급여가 2000  초과인 사원들의 부서 정보, 사원정보를 다음과 같이   조회하시오.
 -- -- 등가조인 =  을 이용하시오.
+select  d.DEPTNO , DNAME  , EMPNO, ENAME, SAL
+from    emp e, dept d
+where   d.deptno = e.deptno   and  sal > 2000;
+
+select  d.DEPTNO , DNAME  , EMPNO, ENAME, SAL
+from    emp e  join  dept d  on d.deptno = e.deptno   
+where   sal > 2000;
+
+select  d.DEPTNO , DNAME  , EMPNO, ENAME, SAL
+from    emp e  join  dept d   using(deptno)   
+where   sal > 2000;
+
+select  DEPTNO , DNAME  , EMPNO, ENAME, SAL
+from    emp e  natural join  dept d  
+where   sal > 2000;
+
+
 -- +--------+------------+-------+-------+------+
 -- | DEPTNO | DNAME      | EMPNO | ENAME | SAL  |
 -- +--------+------------+-------+-------+------+
@@ -693,16 +794,16 @@ order by deptno asc;
 -- |     20 | RESEARCH   |  7902 | FORD  | 3000 |
 -- +--------+------------+-------+-------+------+
 -- 6 rows in set (0.00 sec)
-select d.DEPTNO, d.DNAME, e.empno , e.ENAME , e.sal
-from emp e , dept d
-where e.deptno=d.deptno and sal>2000
-order by empno asc;
+
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- -- 실습 15
 -- -- emp ,DEPT 테이블에서  급여가 2000  초과인 사원들의 부서 정보, 사원정보를 다음과 같이   조회하시오.
--- -- NATURAL JOIN을 이용하시오.
+-- -- NATURAL JOIN을 이용하시오. 
+select  DEPTNO , DNAME  , EMPNO, ENAME, SAL
+from    emp e  natural join  dept d  
+where   sal > 2000; 
 -- +--------+------------+-------+-------+------+
 -- | DEPTNO | DNAME      | EMPNO | ENAME | SAL  |
 -- +--------+------------+-------+-------+------+
@@ -714,10 +815,10 @@ order by empno asc;
 -- |     20 | RESEARCH   |  7902 | FORD  | 3000 |
 -- +--------+------------+-------+-------+------+
 -- 6 rows in set (0.00 sec)
-select DEPTNO, DNAME, empno , ENAME , sal
-from emp e natural join dept d
-where sal>2000
-order by empno asc;
+
+
+
+
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
@@ -732,23 +833,35 @@ order by empno asc;
 -- |     30 | SALES      | 1566.6667 |    2850 |     950 |   6 |
 -- +--------+------------+-----------+---------+---------+-----+
 -- 3 rows in set (0.00 sec)
-select  d.DEPTNO , d.DNAME , AVG(e.sal) `AVG_SAL`, MAX(e.sal) `MAX_SAL`, MIN(e.sal) `MIN_SAL`, count(e.deptno) `CNT`
-from emp e, dept d
-where e.deptno=d.deptno
-group by d.deptno
-order by d.deptno asc;
--- 	Error Code: 1052. Column 'DEPTNO' in field list is ambiguous	0.000 sec
+select    d.DEPTNO , DNAME   , avg(sal) `AVG_SAL`, max(sal) `MAX_SAL` , min(sal) `MIN_SAL` , count(*) `CNT`
+from      emp  e , DEPT  d
+where     e.deptno = d.deptno
+group by  d.DEPTNO , DNAME
+order by  d.deptno asc;
+ 
+select    d.DEPTNO , DNAME   , avg(sal) `AVG_SAL`, max(sal) `MAX_SAL` , min(sal) `MIN_SAL` , count(*) `CNT`
+from      emp  e join DEPT  d   on  e.deptno = d.deptno
+group by  d.DEPTNO , DNAME
+order by  d.deptno asc;
+ 
+select    d.DEPTNO , DNAME   , avg(sal) `AVG_SAL`, max(sal) `MAX_SAL` , min(sal) `MIN_SAL` , count(*) `CNT`
+from      emp  e join DEPT  d   using(deptno)
+group by  d.DEPTNO , DNAME
+order by  d.deptno asc; 
+
+select    DEPTNO , DNAME   , avg(sal) `AVG_SAL`, max(sal) `MAX_SAL` , min(sal) `MIN_SAL` , count(*) `CNT`
+from      emp  e  natural join DEPT  d  
+group by  DEPTNO , DNAME
+order by  deptno asc; 
+
+
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- -- 실습 17
 -- -- emp ,DEPT 테이블에서  각 부서별 평균급여, 최대급여, 최소급여, 사원수를  다음과 같이   조회하시오.
 -- -- JOIN + USING을 이용하시오.
-select  d.DEPTNO , d.DNAME , AVG(e.sal) , MAX(e.sal) , MIN(e.sal) , count(e.deptno)
-from emp e join dept d
-using(deptno)
-group by d.deptno
-order by deptno asc;
+
 -- +--------+------------+-----------+---------+---------+-----+
 -- | DEPTNO | DNAME      | AVG_SAL   | MAX_SAL | MIN_SAL | CNT |
 -- +--------+------------+-----------+---------+---------+-----+
@@ -758,12 +871,25 @@ order by deptno asc;
 -- +--------+------------+-----------+---------+---------+-----+
 -- 3 rows in set (0.00 sec)
 
+select    d.DEPTNO , DNAME   , avg(sal) `AVG_SAL`, max(sal) `MAX_SAL` , min(sal) `MIN_SAL` , count(*) `CNT`
+from      emp  e join DEPT  d   using(deptno)
+group by  d.DEPTNO , DNAME
+order by  d.deptno asc; 
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- -- 실습 18
 -- -- emp ,DEPT 테이블에서 모든부서정보와 사원정보를 다음과 같이 부서번호, 사원이름 순으로    조회하시오.
 -- -- left join을 이용하시오.
+select    d.DEPTNO , DNAME    , EMPNO , ENAME ,JOB  , SAL  
+from      dept d  left join emp  e    on   d.deptno = e.deptno
+order  by  d.deptno, ename;
+
+select    d.DEPTNO , DNAME    , EMPNO , ENAME ,JOB  , SAL  
+from      emp  e     right join  dept d    on   d.deptno = e.deptno
+order  by  d.deptno, ename;
+
+
 -- +--------+------------+-------+--------+-----------+------+
 -- | DEPTNO | DNAME      | EMPNO | ENAME  | JOB       | SAL  |
 -- +--------+------------+-------+--------+-----------+------+
@@ -784,15 +910,8 @@ order by deptno asc;
 -- |     40 | OPERATIONS |  NULL | NULL   | NULL      | NULL |
 -- +--------+------------+-------+--------+-----------+------+
 -- 15 rows in set (0.00 sec)
-select  d.DEPTNO, d.DNAME , e.EMPNO , e.ENAME , e.JOB , e.SAL
-from dept d left join emp e
-on e.deptno=d.deptno
-order by deptno,ename asc;
 
-select  d.DEPTNO, d.DNAME , e.EMPNO , e.ENAME , e.JOB , e.SAL
-from  emp e right join dept d 
-on e.deptno=d.deptno
-order by deptno,ename asc;
+
 
 
 -- --------------------------------------------------------
@@ -820,16 +939,49 @@ order by deptno,ename asc;
 -- |     40 | OPERATIONS |  NULL | NULL   | NULL      | NULL |
 -- +--------+------------+-------+--------+-----------+------+
 -- 15 rows in set (0.00 sec)
-select  d.DEPTNO, d.DNAME , e.EMPNO , e.ENAME , e.JOB , e.SAL
-from emp e right join dept d
-on e.deptno=d.deptno
-order by deptno,ename asc;
+
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- -- 실습 20
 -- -- emp ,DEPT 테이블에서 모든부서정보와 사원정보, 급여등급정보, 각사원의 직속상관의 정보를
 -- -- 다음과 같이 부서번호, 사원이름 순으로  정렬하여  조회하시오.
+select    d.DEPTNO , d.DNAME  , e.EMPNO , e.ENAME, e.MGR  , e.SAL ,e.DEPTNO, 
+          s.LOSAL , s.HISAL ,s.GRADE ,
+          mgr.empno `MGR_EMPNO` , mgr.ename `MGR_ENAME` 
+from      emp e   right join  DEPT d      on (e.deptno = d.deptno)  
+                  left  join  salgrade s  on (e.sal  between  s.losal  and  s.hisal)
+                  left  join  emp mgr     on (e.mgr = mgr.empno)
+order by  d.deptno , e.empno ;    -- d.deptno  , e.ename   /    d.deptno , e.empno
+
+--
+select    d.DEPTNO , d.DNAME  , e.EMPNO , e.ENAME, e.MGR  , e.SAL ,e.DEPTNO, 
+          s.LOSAL , s.HISAL ,s.GRADE ,
+          mgr.empno `MGR_EMPNO` , mgr.ename `MGR_ENAME` 
+from     DEPT d   left join   emp e       on (e.deptno = d.deptno)  
+                  left  join  salgrade s  on (e.sal  between  s.losal  and  s.hisal)
+                  left  join  emp mgr     on (e.mgr = mgr.empno)
+order by  d.deptno , e.empno ; 
+
+--  using
+select    d.DEPTNO , d.DNAME  , e.EMPNO , e.ENAME, e.MGR  , e.SAL ,e.DEPTNO, 
+          s.LOSAL , s.HISAL ,s.GRADE ,
+          mgr.empno `MGR_EMPNO` , mgr.ename `MGR_ENAME` 
+from     DEPT d   left join   emp e       using(deptno)  
+                  left  join  salgrade s  on (e.sal  between  s.losal  and  s.hisal)
+                  left  join  emp mgr     on (e.mgr = mgr.empno)
+order by  d.deptno , e.empno ; 
+
+--  natural join
+select    d.DEPTNO , DNAME  , e.EMPNO , e.ENAME, e.MGR  , e.SAL , 
+          s.LOSAL , s.HISAL ,s.GRADE ,
+          mgr.empno `MGR_EMPNO` , mgr.ename `MGR_ENAME` 
+from     DEPT d   natural join   emp e       
+                  left  join  salgrade s  on (e.sal  between  s.losal  and  s.hisal)
+                  left  join  emp mgr     on (e.mgr = mgr.empno)
+order by   deptno ,  e.empno ; 
+
+
 -- +--------+------------+-------+--------+------+------+--------+-------+-------+-------+-----------+-----------+
 -- | DEPTNO | DNAME      | EMPNO | ENAME  | MGR  | SAL  | DEPTNO | LOSAL | HISAL | GRADE | MGR_EMPNO | MGR_ENAME |
 -- +--------+------------+-------+--------+------+------+--------+-------+-------+-------+-----------+-----------+
@@ -850,29 +1002,6 @@ order by deptno,ename asc;
 -- |     40 | OPERATIONS |  NULL | NULL   | NULL | NULL |   NULL |  NULL |  NULL |  NULL |      NULL | NULL      |
 -- +--------+------------+-------+--------+------+------+--------+-------+-------+-------+-----------+-----------+
 -- 15 rows in set (0.00 sec)
-select * from salagrade;
 
-select d.DEPTNO, d.DNAME , e.EMPNO , e.ENAME , e.MGR , e.SAL , e.DEPTNO , s.LOSAL 
-	 , s.HISAL , s.GRADE , a.EMPNO `MGR_EMPNO` , a.ENAME `MGR_ENAME`
-from emp e left join emp a       on  e.mgr=a.empno
-		   right join dept d     on e.deptno=d.deptno 
-		   left join salagrade s on e.sal between s.losal and s.hisal
-order by d.deptno, e.ename asc;
-
-select d.DEPTNO, d.DNAME , e.EMPNO , e.ENAME , e.MGR , e.SAL , e.DEPTNO , s.LOSAL 
-	 , s.HISAL , s.GRADE , a.EMPNO `MGR_EMPNO` , a.ENAME `MGR_ENAME`
-from dept d left join  emp e     using(deptno)
-		    left join  emp  a     on  e.mgr=a.empno
-		    left join salagrade s on e.sal between s.losal and s.hisal
-order by d.deptno, e.ename asc;
-
-select    d.DEPTNO , d.DNAME  , e.EMPNO , e.ENAME, e.MGR  , e.SAL ,e.DEPTNO, 
-          s.LOSAL , s.HISAL ,s.GRADE ,
-          mgr.empno `MGR_EMPNO` , mgr.ename `MGR_ENAME` 
-from     DEPT d   natural join   emp e    
-                  left  join  salagrade s  on e.sal  between  s.losal  and  s.hisal
-                  left  join  emp mgr     on (e.mgr = mgr.empno)
-order by  d.deptno , e.empno ; 
 -- mysql>
 
--- ---------------------------------------------------------------------

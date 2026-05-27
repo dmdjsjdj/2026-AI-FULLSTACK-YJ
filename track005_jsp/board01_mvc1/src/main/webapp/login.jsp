@@ -8,7 +8,7 @@
    <div class="container card my-5">
       <h3 class="card-header">로그인</h3>
       <%
-      String nickname = (String)session.getAttribute("nickname");
+       nickname = (String)session.getAttribute("nickname");
 		
       if(nickname != null){
           out.println("<script> alert('로그인중인 사용자입니다'); location.href='list.jsp'; </script>");

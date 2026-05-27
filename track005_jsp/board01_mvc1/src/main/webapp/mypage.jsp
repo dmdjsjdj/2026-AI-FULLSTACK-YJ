@@ -12,7 +12,7 @@
             <caption> 내 정보 </caption>
             <tbody>
             <%
-		        String nickname = (String)session.getAttribute("nickname");
+		         nickname = (String)session.getAttribute("nickname");
             
 		
 		        if(nickname == null){
