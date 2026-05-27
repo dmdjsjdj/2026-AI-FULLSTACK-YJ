@@ -7,10 +7,6 @@
     <!-- content -->
    <div class="container my-5">
       <h3>마이페이지</h3>
-       <tr>
-       <th></th>
-       <td></td>
-       </tr>
        <table 
             class="table table-striped table-bordered table-hover " id="usertable" >
             <caption> 내 정보 </caption>

@@ -37,11 +37,12 @@
 		    	  Class.forName("com.mysql.cj.jdbc.Driver");
 		    	  PreparedStatement pstmt =null;	ResultSet rset = null; Connection conn = null;
 		    	  conn = DriverManager.getConnection( "jdbc:mysql://localhost:3306/mbasic", "root", "1234");
-		    	  pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1) cnt FROM mvcboard1 b where bname=? ORDER BY bno DESC" 
+		    	  pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1 where bname=?) cnt FROM mvcboard1 b where b.bname=? ORDER BY bno DESC" 
 		    			  , ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		    	  
-		    	  pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1) `cnt` FROM mvcboard1 b where bname=? ORDER BY bno DESC");
+		    	  /* pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1) `cnt` FROM mvcboard1 b where bname=? ORDER BY bno DESC"); */
 			      pstmt.setString(1, nickname);
+			      pstmt.setString(2, nickname);
 				  //select- executeQuery/ insert, update, delete- executeUpdate
 				  rset = pstmt.executeQuery(); //표
 	    		  
@@ -68,6 +69,7 @@
             </tbody>
         </table>
         <div class="text-end">
+        	<a href="javascript:history.go(-1)" title="뒤로가기" class="btn btn-info "> ← </a>
             <a href="write.jsp" title="글쓰기 폼" class="btn btn-primary ">글쓰기</a>
         </div>
     </section>
@@ -79,7 +81,6 @@
         tr.style.display = tr.innerText.toLowerCase().includes(keyword) ? "" : "none";
       });
     }
-    window.onload = loadXml;
     </script>
 	<!--  jasp014_footer.jsp -->
     <!--  jasp014_footer.jsp -->

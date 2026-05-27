@@ -7,9 +7,9 @@
     <div class="container my-5">
         <h3 >글 등록 </h3>
         <%
-        String email = (String)session.getAttribute("email");
+        String nickname = (String)session.getAttribute("nickname");
 
-        if(email == null){
+        if(nickname == null){
             response.sendRedirect("login.jsp");
             out.println("로그인이 필요합니다.");
         }
@@ -31,9 +31,9 @@
 	        String url = "jdbc:mysql://localhost:3306/mbasic";
 	        conn = DriverManager.getConnection(url, "root", "1234"); // 본인 비밀번호 입력
 	
-	        String sql = "select * from users where email = ?"; 
+	        String sql = "select * from users where nickname = ?"; 
 	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, email);
+	        pstmt.setString(1, nickname);
 	        rs = pstmt.executeQuery(); //표
 	
 	        if (rs.next()) { //줄
