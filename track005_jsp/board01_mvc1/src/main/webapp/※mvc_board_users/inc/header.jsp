@@ -1,8 +1,3 @@
-<%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
 <!DOCTYPE html>
@@ -33,29 +28,26 @@
                 </button>
                 <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav ms-auto">
-                <!-- 애플리케이션 루트기준 -->
-                <c:if test="${empty sessionScope.email}">
-		                <li class='nav-item'>
-		                	<a class='nav-link' href='${pageContext.request.contextPath}/LoginAction'>Login</a>
-		                </li>
-		                <li class='nav-item'>
-		                	<a class='nav-link' href='${pageContext.request.contextPath}/JoinAction'>Join</a>
-		                </li>
-	                </c:if>
-	                
-	                <c:if test="${not empty sessionScope.email}">
-		                <li class="nav-item">
-	                    	<a class="nav-link" href="${pageContext.request.contextPath}/MyAction">${sessionScope.email}</a>
-	                    </li>
-	                  <c:if test="${sessionScope.email=='admin@gmail.com'}">
-						<li class="nav-item">
-	                    	<a class="nav-link" href="${pageContext.request.contextPath}/Users">users</a>
-	                    </li>
-	                  </c:if>
-	                    <li class="nav-item">
-	                    	<a class="nav-link" href="${pageContext.request.contextPath}/Logout">Logout</a>
-	                    </li>
-	                </c:if>
+                <%
+                String nickname = (String)session.getAttribute("nickname");
+        		
+                if(nickname == null){
+                	out.println(	
+                    "<li class='nav-item'>"+
+                    "<a class='nav-link' href='login.jsp'>login</a>"+
+                    "</li>"+
+                    "<li class='nav-item'>"+
+                    "<a class='nav-link' href='join.jsp'>join</a>"+
+                    "</li>");
+                }
+                
+                if(nickname != null){
+                	out.println(	
+                    "<li class='nav-item'>"+
+                    "<a class='nav-link' href='mypage.jsp'>mypage</a>"+
+                    "</li>");
+                }
+                  %>
                 </ul> 
                 </div>
             </div>

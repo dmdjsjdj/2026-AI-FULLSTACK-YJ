@@ -1,3 +1,4 @@
+<%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
@@ -17,13 +18,33 @@
        <table 
             class="table table-striped table-bordered table-hover " id="usertable" >
             <caption> 내 정보 </caption>
-            <tbody>
-            <tr scope="row"><th>닉네임</th><td> ${nickname}</td></tr>
-		  	<tr scope="row"><th>이메일</th><td> ${email}</td></tr>
-			<tr scope="row"><th>휴대폰</th><td> ${mobile} </td></tr>
-			<tr scope="row"><th>가입일</th><td> ${udate} </td></tr>
-			<tr scope="row"><th>가입IP</th><td> ${bip}  </td></tr> 
-            </tbody>
+            <thead>
+            <tr>
+                <th scope="col">NO</th>
+                <th scope="col">NAME</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">DATE</th>
+                <th scope="col">MOBILE</th>
+                <th scope="col">IP</th>
+            </tr>
+            </thead>
+            
+           <tbody>
+           
+           <c:if test="${not empty userList}">
+                <c:forEach var="user" items="${userList}" varStatus="status">
+                <tr>
+	           		<td scope="col"> ${status.count} </td>
+	           		<td scope="col"> ${user.nickname} </td>
+	           		<td scope="col"> ${user.email} </td>
+	           		<td scope="col"> ${user.udate} </td>
+	           		<td scope="col"> ${user.mobile} </td>
+	           		<td scope="col"> ${user.bip} </td>
+	           	</tr>
+           		</c:forEach>
+           	</c:if>
+          
+           </tbody>
         </table>
         <div class="text-end">
         	<a href="Logout" title="로그아웃" class="btn btn-danger ">로그아웃</a>

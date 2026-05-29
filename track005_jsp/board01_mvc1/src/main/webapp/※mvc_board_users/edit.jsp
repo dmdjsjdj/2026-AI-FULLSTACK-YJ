@@ -7,9 +7,9 @@
     <div class="container my-5">
         <h3 >글 수정 </h3>
         <%
-        email = (String)session.getAttribute("email");
+	         nickname = (String)session.getAttribute("nickname");
 			
-	        if(email == null){
+	        if(nickname == null){
 	            out.println("<script> alert('로그인이 필요합니다'); location.href='login.jsp'; </script>");
 	        }
 		    String bno = request.getParameter("bno"); 

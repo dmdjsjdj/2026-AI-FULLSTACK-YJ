@@ -27,9 +27,9 @@
             <tbody>
             <%
             
-            email = (String)session.getAttribute("email");
+	            nickname = (String)session.getAttribute("nickname");
 	            
-		        if(email == null){
+		        if(nickname == null){
 		            out.println("<script> alert('로그인이 필요합니다'); location.href='login.jsp'; </script>");
 		        }
             
@@ -37,12 +37,12 @@
 		    	  Class.forName("com.mysql.cj.jdbc.Driver");
 		    	  PreparedStatement pstmt =null;	ResultSet rset = null; Connection conn = null;
 		    	  conn = DriverManager.getConnection( "jdbc:mysql://localhost:3306/mbasic", "root", "1234");
-		    	  pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1 where email=?) cnt FROM mvcboard1 b where b.email=? ORDER BY bno DESC" 
+		    	  pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1 where bname=?) cnt FROM mvcboard1 b where b.bname=? ORDER BY bno DESC" 
 		    			  , ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		    	  
 		    	  /* pstmt = conn.prepareStatement("SELECT b.*, (SELECT COUNT(*) FROM mvcboard1) `cnt` FROM mvcboard1 b where bname=? ORDER BY bno DESC"); */
-			      pstmt.setString(1, email);
-			      pstmt.setString(2, email);
+			      pstmt.setString(1, nickname);
+			      pstmt.setString(2, nickname);
 				  //select- executeQuery/ insert, update, delete- executeUpdate
 				  rset = pstmt.executeQuery(); //표
 	    		  
@@ -56,7 +56,7 @@
 						out.println("<tr><td>" 
 				  					+ (cnt--) + "</td><td>" 
 				  					+ "<a href='detail.jsp?bno=" + rset.getInt("bno") + "' style='text-decoration:none; color:inherit;'>" + rset.getString("btitle") + "</a></td><td>" 
-									+ rset.getString("bname")  + "</td><td>" 
+									+ nickname  + "</td><td>" 
 									+ rset.getString("bdate")  + "</td><td>" 
 									+ rset.getInt("bhit")      + "</td></tr>"   ); 
 					}

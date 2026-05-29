@@ -58,6 +58,6 @@ update mvcboard1 set btitle=?, bcontent=? where bno=? and bpass=?;
 -- -------
 delete from mvcboard1 where bno=? and bpass=?;
 
-
+SELECT *, count(*) cnt FROM users where email='aaa@gmail.com';
 
 

@@ -7,9 +7,9 @@
     <div class="container my-5">
         <h3 >글 등록 </h3>
         <%
-        email = (String)session.getAttribute("email");
+         nickname = (String)session.getAttribute("nickname");
 
-        if(email == null){
+        if(nickname == null){
             response.sendRedirect("login.jsp");
             out.println("로그인이 필요합니다.");
         }
@@ -33,7 +33,7 @@
 	
 	        String sql = "select * from users where nickname = ?"; 
 	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, email);
+	        pstmt.setString(1, nickname);
 	        rs = pstmt.executeQuery(); //표
 	
 	        if (rs.next()) { //줄

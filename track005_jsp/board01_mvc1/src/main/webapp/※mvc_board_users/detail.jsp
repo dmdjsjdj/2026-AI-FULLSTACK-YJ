@@ -72,24 +72,7 @@
 	         </div>
 	         <div  class="my-3  text-end"> 
 	         <%
-	         	email = (String)session.getAttribute("email");
-	            String nickname = "";
-        		try{
-      	    	  Class.forName("com.mysql.cj.jdbc.Driver");
-      	    	PreparedStatement pstmt1 =null;	ResultSet rset = null; Connection conn1 = null;
-      	    	  conn1 = DriverManager.getConnection( "jdbc:mysql://localhost:3306/mbasic", "root", "1234");
-      	    	  
-      			  pstmt1 = conn1.prepareStatement("SELECT * FROM users where email=?");
-      			  pstmt1.setString(1, email);
-      		      //select- executeQuery/ insert, update, delete- executeUpdate
-      			  rset = pstmt1.executeQuery(); //표
-      			  
-      			  nickname = rset.getString("nickname");
-      			  
-	      			if(rset != null) rset.close();
-			        if(pstmt1 != null) pstmt1.close();
-			        if(conn1 != null) conn1.close();
-        		 } catch(Exception e) {  e.printStackTrace(); }
+	         nickname = (String)session.getAttribute("nickname");
                 if(nickname.equals(bname)){
 	            out.println("<a href='edit.jsp?bno=" + bno + "'  class='btn btn-outline-success'  title='글수정'>수정</a>"+
 	            "<a href='delete.jsp?bno=" + bno + "' class='btn btn-outline-primary'  title='글삭제'>삭제</a>");

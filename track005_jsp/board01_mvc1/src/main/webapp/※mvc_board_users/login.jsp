@@ -7,22 +7,14 @@
     <!-- content -->
    <div class="container card my-5">
       <h3 class="card-header">로그인</h3>
-      <!-- 
-      > 로그인폼    -  Get
-		> 로그인처리 - Post
-		1) 처리서블릿   : LoginAction
-		2) 데이터 노출  : x
-		3) 보관데이터   : bpass , email  
-		4) 처리경로     : 처리후 마이페이지로   (MyAction - Get)
-       -->
       <%
-      String email = (String)session.getAttribute("email");
+       nickname = (String)session.getAttribute("nickname");
 		
-      if(email != null){
+      if(nickname != null){
           out.println("<script> alert('로그인중인 사용자입니다'); location.href='list.jsp'; </script>");
       }
       %>
-       <form  action ="LoginAction"  method="post"   onsubmit="return loginuser()">
+       <form  action ="login_action.jsp"  method="post"   onsubmit="return loginuser()">
 	         <div  class="my-3">
 	            <label for="email"  class="form-label">이메일</label>
 	            <input type="email"   class="form-control"    id="email2"  name="email"  />
@@ -32,7 +24,7 @@
 	            <input type="password"   class="form-control"    id="bpass2"  name="bpass"  />
 	         </div>
 	         <div  class="my-3  text-end"> 
-	            <button type="reset"   class="btn btn-outline-primary"  title="로그인 취소">취소</button>
+	            <button type="reset"   class="btn btn-outline-primary"  title="가입취소">취소</button>
 	            <button type="submit"  class="btn btn-primary"  title="로그인">로그인</button>
 	         </div>
 	      </form> 
