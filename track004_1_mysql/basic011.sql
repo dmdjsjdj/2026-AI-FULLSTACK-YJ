@@ -522,7 +522,6 @@ select*from emp where sal =any(select max(sal) from emp group by deptno);
 
 
 
-
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- -- 연습문제-10
@@ -629,5 +628,7 @@ select * from emp where sal > any(select min(sal) from emp where deptno=30 group
 -- |  7876 | ADAMS  | CLERK     | 7788 | 1987-05-23 | 1100 | NULL |     20 |
 -- +-------+--------+-----------+------+------------+------+------+--------+
 -- 12 rows in set (0.00 sec)
+
+
 
 

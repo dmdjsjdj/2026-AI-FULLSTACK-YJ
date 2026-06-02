@@ -247,3 +247,113 @@ public void test1() {
 }
 
 
+---------------------
+#3.  Bean
+---------------------
+
+1.  xml   vs  Annotation
+>> xml : 운영
+>> Annotation : 개발
+XML - [운영] , 모든 Bean을 명시적으로 xml에 등록
+    - 여러개발자가 같은 설정파일을 공유해서 개발하면 
+      수정시 충돌이 일어날 경우가 많음.
+
+2.@Component
+- @Component 일반적인 컴포넌트  <bean> 스프링이 관리하는 객체
+- @Component 구체화된 형식
+   @Controller  웹요청받아서 응답
+   @Service     서비스 레이어, 비즈니스 로직
+   @Repository  데이터베이스
+
+3. Bean 의존관계주입
+   1. @Autowired - 정밀한 의존관계 
+      - 프로퍼티, setter, 생성자,, 적용
+   2. @Qualifier - 동일한타입의 bean 구분
+   3. @Value  단순값
+   4. @Resource - 자원연결(  .properties)   
+
+4. component-scan
+<context:component-scan  base-package="경로설정"/>
+
+---------------------
+#4.   DB  + Mybatis
+---------------------
+1. DataSource
++ SimpleDrdiverDataSource   - 가장단순한버젼
+
+2. mybatis
+- sql을 별도로 파일분리해서 관리
+- orm (object relational mapping) 프레임워크
+
+3. 설정내용
+root-context.xml   환경정보설정
+db.propertis       db정보설정
+SqlSessionFacotryBean  : SqlSession 생성 및 관리
+SqlSession           :  sql 실행 , 트랜잭션
+mapper.xml
+
+
+>1. 테이블 만들기
+mysql> desc userinfo_e;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| no    | int          | NO   | PRI | NULL    | auto_increment |
+| email | varchar(100) | NO   |     | NULL    |                |
+| age   | int          | YES  |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec) 
+
+>2. crud - insert, select, update, delete
+insert                  : insert into userinfo_e (email, age) values (?, ?)
+select (전체)            : select * from userinfo_e
+select (해당번호의 읽기)   : select * from userinfo_e where no=?
+update (해당번호 수정)    :  update userinfo_e set email=?, age=? where no=?
+delete (해당번호 삭제)    :  delete from userinfo_e where no=?
+
+----------------------------------------------------
+
+
+> 실습
+1. project 만들기
+    1. dynamic web project - ex02
+    2. configure  - [Convert to Maven Project]
+    3. spring      - add Spring project Nature
+    4. java se-11 / project facts, build path
+    5. build path - add Libraries - JUnit 4
+    
+2. pom.xml 에  jar 파일 다운로드 받기
+3. root-context 에   내용설정
+   1) DataSource
+   2) Mybatis
+   3) Mapper
+4. 각종 설정파일들설정
+    com.the703.dao   - @Mapper 
+    com.the703.dto    
+    config       
+      ㄴ db.properties
+      ㄴ mybatis-config.xml
+      ㄴ test-mapper.xml
+      ㄴ board-mapper.xml
+5. 테스트파일설정
+  
+6. test-mapper.xml
+select now()   
+    
+7. mvcboard
+mysql> desc mvcboard2;
++----------+---------------+------+-----+-------------------+-------------------+
+| Field    | Type          | Null | Key | Default           | Extra             |
++----------+---------------+------+-----+-------------------+-------------------+
+| bno      | int           | NO   | PRI | NULL              | auto_increment    |
+| bname    | varchar(20)   | NO   |     | NULL              |                   |
+| bpass    | varchar(50)   | NO   |     | NULL              |                   |
+| btitle   | varchar(1000) | NO   |     | NULL              |                   |
+| bcontent | text          | NO   |     | NULL              |                   |
+| bdate    | timestamp     | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| bhit     | int           | NO   |     | 0                 |                   |
+| bip      | varchar(50)   | NO   |     | NULL              |                   |
++----------+---------------+------+-----+-------------------+-------------------+
+8 rows in set (0.00 sec)
+
+mysql>      
