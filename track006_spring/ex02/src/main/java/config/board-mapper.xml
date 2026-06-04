@@ -2,32 +2,25 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.the703.dao.UserInfoMapper">
-  <insert id="insert"  parameterType="com.the703.dto.UserInfoDto" >
-  	insert     into   mvcboard2  (name , age)  values (#{name} , #{age}) 
+<mapper namespace="com.the703.dao.BoardMapper">
+  <insert id="insert"  parameterType="BoardDto" >
+  	INSERT INTO mvcboard2 (bname, bpass, btitle, bcontent, bip) 
+  	VALUES (#{bname}, #{bpass}, #{btitle}, #{bcontent}, #{bip});
   </insert>
-  
-  <update id="update"  parameterType="UserInfoDto">
-  	update    mvcboard2   set  name=#{name} , age=#{age}  where  no=#{no}
+
+  <update id="update"  parameterType="BoardDto">
+  	update  mvcboard2  set  btitle=#{btitle}  , bcontent=#{bcontent}  where bno= #{bno}
   </update>
   
   <delete id="delete"  parameterType="int" >
-  	delete    from   mvcboard2     where  bno=#{bno}
+  	delete  from mvcboard2  where bno= #{bno}
   </delete>
   
-  <select  resultType="UserInfoDto" id="selectAll" > <!-- parameterType 없어서 생략 -->
-  	select  * from    mvcboard2
+  <select  resultType="BoardDto" id="selectAll" > <!-- parameterType 없어서 생략 -->
+  	select * from mvcboard2 order by bno desc
   </select>
   
-  <select resultType="UserInfoDto" id="select" parameterType="int">
-  	select  * from    mvcboard2  where bno = #{bno}
+  <select resultType="BoardDto" id="select" parameterType="int">
+  	select * from mvcboard2 where bno=#{bno}
   </select>
 </mapper>
-
-<!-- 
-insert                : insert     into   userinfo_e  (email , age)  values (? , ?) 
-select (전체)          : select  * from    userinfo_e
-select (해당번호의 읽기)  : select  * from    userinfo_e  where no = ? 
-update (해당번호 수정)   : update    userinfo_e   set  email=? , age=?  where  no=?
-delete (해당번호 삭제)   : delete    from   userinfo_e     where  no=?
- -->

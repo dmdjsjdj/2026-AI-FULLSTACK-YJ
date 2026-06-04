@@ -26,7 +26,7 @@ public class ModelTest001 {
 	
 	@Autowired UserInfoMapper  userinfo;
 	
-	@Test
+	@Ignore //@Test
 	public void test5() { 
 		//5. 삭제
 		int dto3 = 5;
@@ -53,6 +53,6 @@ public class ModelTest001 {
 	@Ignore   //@Test
 	public void test3() { System.out.println(sqlSession); }
 	
-	@Ignore   //@Test
+	@Test
 	public void test4() { System.out.println(test.now()); }
 }

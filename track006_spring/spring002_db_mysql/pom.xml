@@ -93,10 +93,33 @@
        <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
        <version>1.16</version>
    </dependency>
+   
+   <!-- 선택사항이라 있을수도 없을수도 있음 -->
+	   <dependency>
+	     <groupId>org.apache.logging.log4j</groupId>
+	     <artifactId>log4j-core</artifactId>
+	     <version>2.17.2</version>
+	   </dependency>
+	   <dependency>
+	     <groupId>org.apache.logging.log4j</groupId>
+	     <artifactId>log4j-api</artifactId>
+	     <version>2.17.2</version>
+	   </dependency> 
+	   <dependency>
+	     <groupId>org.apache.logging.log4j</groupId>
+	     <artifactId>log4j-slf4j-impl</artifactId>
+	     <version>2.17.2</version>
+	   </dependency> 
       
   </dependencies>
   
   <build>
+  	<resources>
+  		<resource>
+  			<directory>src/main/resources</directory>
+  		</resource>
+  	</resources>
+  
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
