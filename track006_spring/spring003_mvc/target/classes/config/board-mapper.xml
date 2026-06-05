@@ -9,11 +9,15 @@
   </insert>
 
   <update id="update"  parameterType="BoardDto">
-  	update  mvcboard2  set  btitle=#{btitle}  , bcontent=#{bcontent}  where bno= #{bno}
+  	update  mvcboard2  set  btitle=#{btitle}  , bcontent=#{bcontent}  where bno= #{bno} and bpass=#{bpass}
   </update>
   
-  <delete id="delete"  parameterType="int" >
-  	delete  from mvcboard2  where bno= #{bno}
+  <update id="updateHit" parameterType="int">
+    update mvcboard2 set bhit = bhit + 1 where bno = #{bno}
+  </update>
+  
+  <delete id="delete"  parameterType="BoardDto" >
+  	delete  from mvcboard2  where bno= #{bno} and bpass=#{bpass}
   </delete>
   
   <select  resultType="BoardDto" id="selectAll" > <!-- parameterType 없어서 생략 -->

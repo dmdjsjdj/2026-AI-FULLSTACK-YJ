@@ -10,7 +10,8 @@ public interface BoardMapper {
     public List<BoardDto> selectAll();
     public BoardDto select(int bno);
     public int update(BoardDto dto);
-    public int delete(int bno);
+    public int delete(BoardDto  bno);
+    public int updateHit(int bno);
 	
 }
 
