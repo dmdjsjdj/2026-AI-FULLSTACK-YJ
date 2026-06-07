@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CSS 정리</title>
+
+  <link rel="stylesheet" href="../css_use/std_css.css">
+</head>
+
+<body>
+
+  <header class="main-header">
+
+    <h1>🎨 CSS 정리</h1>
+
+    <p>CSS 핵심 문법 요약</p>
+
+  </header>
+
+  <div class="top-home">
+
+    <a href="../frontend/frontend_main.html" class="home-btn">
+      ← 목록으로 가기
+    </a>
+
+  </div>
+
+  <div class="container">
+    <div class="study-list">
+
+      <div class="study-item">
+
+        <h2>📑 목차</h2>
+
+        <ol class="toc-list">
+          <li><a href="#css-basic">CSS 기본 문법</a></li>
+          <li><a href="#css-apply">CSS 적용 방법</a></li>
+          <li><a href="#selector">선택자(Selector)</a></li>
+          <li><a href="#box-model">Box Model</a></li>
+          <li><a href="#display">Display</a></li>
+          <li><a href="#position">Position</a></li>
+          <li><a href="#flexbox">Flexbox</a></li>
+          <li><a href="#animation">Animation</a></li>
+          <li><a href="#bootstrap">Bootstrap</a></li>
+        </ol>
+
+      </div>
+
+      <div class="study-item" id="css-basic">
+
+        <h2>1. CSS 기본 문법</h2>
+
+        <p>
+          CSS(Cascading Style Sheets)는 웹 페이지의 디자인과 레이아웃을 담당한다.
+        </p>
+
+        <pre>
+h1{
+  color:blue;
+}
+        </pre>
+
+        <table>
+          <tr>
+            <th>구성</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>Selector</td>
+            <td>선택자</td>
+          </tr>
+
+          <tr>
+            <td>Property</td>
+            <td>속성</td>
+          </tr>
+
+          <tr>
+            <td>Value</td>
+            <td>값</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="css-apply">
+
+        <h2>2. CSS 적용 방법</h2>
+
+        <pre>
+&lt;link rel="stylesheet" href="style.css"&gt;
+        </pre>
+
+        <pre>
+&lt;style&gt;
+h1{
+  color:red;
+}
+&lt;/style&gt;
+        </pre>
+
+        <pre>
+&lt;h1 style="color:red"&gt;
+        </pre>
+
+        <table>
+          <tr>
+            <th>방법</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>Inline</td>
+            <td>태그 내부 적용</td>
+          </tr>
+
+          <tr>
+            <td>Internal</td>
+            <td>style 태그 사용</td>
+          </tr>
+
+          <tr>
+            <td>External</td>
+            <td>외부 css 파일 사용</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="selector">
+
+        <h2>3. 선택자(Selector)</h2>
+
+        <pre>
+p{
+  color:red;
+}
+
+.box{
+  color:blue;
+}
+
+#title{
+  color:green;
+}
+        </pre>
+
+        <table>
+          <tr>
+            <th>선택자</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>태그 선택자</td>
+            <td>p</td>
+          </tr>
+
+          <tr>
+            <td>클래스 선택자</td>
+            <td>.box</td>
+          </tr>
+
+          <tr>
+            <td>아이디 선택자</td>
+            <td>#title</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="box-model">
+
+        <h2>4. Box Model</h2>
+
+        <pre>
+.box{
+  margin:20px;
+  border:1px solid black;
+  padding:10px;
+}
+        </pre>
+
+        <table>
+          <tr>
+            <th>속성</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>margin</td>
+            <td>바깥 여백</td>
+          </tr>
+
+          <tr>
+            <td>border</td>
+            <td>테두리</td>
+          </tr>
+
+          <tr>
+            <td>padding</td>
+            <td>안쪽 여백</td>
+          </tr>
+
+          <tr>
+            <td>content</td>
+            <td>실제 내용 영역</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="display">
+
+        <h2>5. Display</h2>
+
+        <pre>
+display:block;
+display:inline;
+display:inline-block;
+display:none;
+        </pre>
+
+        <table>
+          <tr>
+            <th>값</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>block</td>
+            <td>한 줄 전체 차지</td>
+          </tr>
+
+          <tr>
+            <td>inline</td>
+            <td>내용만큼 차지</td>
+          </tr>
+
+          <tr>
+            <td>inline-block</td>
+            <td>크기 지정 가능</td>
+          </tr>
+
+          <tr>
+            <td>none</td>
+            <td>요소 숨김</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="position">
+
+        <h2>6. Position</h2>
+
+        <pre>
+position:static;
+position:relative;
+position:absolute;
+position:fixed;
+        </pre>
+
+        <table>
+          <tr>
+            <th>값</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>static</td>
+            <td>기본 위치</td>
+          </tr>
+
+          <tr>
+            <td>relative</td>
+            <td>현재 위치 기준</td>
+          </tr>
+
+          <tr>
+            <td>absolute</td>
+            <td>부모 요소 기준</td>
+          </tr>
+
+          <tr>
+            <td>fixed</td>
+            <td>화면에 고정</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="flexbox">
+
+        <h2>7. Flexbox</h2>
+
+        <pre>
+.container{
+  display:flex;
+}
+        </pre>
+
+        <pre>
+justify-content:center;
+align-items:center;
+        </pre>
+
+        <table>
+          <tr>
+            <th>속성</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>display:flex</td>
+            <td>Flex 활성화</td>
+          </tr>
+
+          <tr>
+            <td>justify-content</td>
+            <td>가로 정렬</td>
+          </tr>
+
+          <tr>
+            <td>align-items</td>
+            <td>세로 정렬</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="animation">
+
+        <h2>8. Animation</h2>
+
+        <pre>
+@keyframes move{
+
+  from{
+    left:0;
+  }
+
+  to{
+    left:200px;
+  }
+
+}
+        </pre>
+
+        <pre>
+animation:move 2s infinite;
+        </pre>
+
+        <p>
+          Animation은 요소에 움직임이나 효과를 적용할 때 사용한다.
+        </p>
+
+      </div>
+
+      <div class="study-item" id="bootstrap">
+
+        <h2>9. Bootstrap</h2>
+
+        <pre>
+&lt;link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+rel="stylesheet"&gt;
+        </pre>
+
+        <pre>
+&lt;button class="btn btn-primary"&gt;
+버튼
+&lt;/button&gt;
+        </pre>
+
+        <table>
+          <tr>
+            <th>클래스</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>container</td>
+            <td>레이아웃 컨테이너</td>
+          </tr>
+
+          <tr>
+            <td>row</td>
+            <td>행</td>
+          </tr>
+
+          <tr>
+            <td>col</td>
+            <td>열</td>
+          </tr>
+
+          <tr>
+            <td>btn</td>
+            <td>버튼</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item">
+
+        <h2>💡 핵심 요약</h2>
+
+        <ul>
+          <li>CSS는 웹 페이지의 디자인을 담당한다.</li>
+          <li>선택자를 사용하여 원하는 요소를 선택한다.</li>
+          <li>Box Model은 margin, border, padding, content로 구성된다.</li>
+          <li>Display는 요소의 배치 방식을 결정한다.</li>
+          <li>Position은 요소의 위치를 지정한다.</li>
+          <li>Flexbox는 레이아웃 정렬에 사용된다.</li>
+          <li>Animation은 움직임을 표현한다.</li>
+          <li>Bootstrap은 UI 프레임워크이다.</li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+
+  <a href="#" class="top-btn">
+    ↑ TOP
+  </a>
+
+  <footer>
+
+    <p>© Bootcamp Study Archive</p>
+
+  </footer>
+
+</body>
+</html>

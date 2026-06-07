@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>비동기 통신 정리</title>
+
+  <link rel="stylesheet" href="../css_use/std_css.css">
+</head>
+
+<body>
+
+  <header class="main-header">
+
+    <h1>🔄 비동기 통신 정리</h1>
+
+    <p>AJAX · JSON · Fetch API</p>
+
+  </header>
+
+  <div class="top-home">
+
+    <a href="../frontend/frontend_main.html" class="home-btn">
+      ← 목록으로 가기
+    </a>
+
+  </div>
+
+  <div class="container">
+    <div class="study-list">
+
+      <div class="study-item">
+
+        <h2>📑 목차</h2>
+
+        <ol class="toc-list">
+          <li><a href="#async">비동기 통신</a></li>
+          <li><a href="#ajax">AJAX</a></li>
+          <li><a href="#xhr">XMLHttpRequest</a></li>
+          <li><a href="#json">JSON</a></li>
+          <li><a href="#fetch">Fetch API</a></li>
+          <li><a href="#promise">Promise</a></li>
+          <li><a href="#async-await">Async / Await</a></li>
+        </ol>
+
+      </div>
+
+      <div class="study-item" id="async">
+
+        <h2>1. 비동기 통신</h2>
+
+        <p>
+          비동기 통신은 페이지를 새로고침하지 않고 서버와 데이터를 주고받는 방식이다.
+        </p>
+
+        <table>
+          <tr>
+            <th>방식</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>동기(Synchronous)</td>
+            <td>작업이 끝날 때까지 대기</td>
+          </tr>
+
+          <tr>
+            <td>비동기(Asynchronous)</td>
+            <td>다음 작업을 먼저 수행 가능</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <div class="study-item" id="ajax">
+
+        <h2>2. AJAX</h2>
+
+        <p>
+          AJAX(Asynchronous JavaScript And XML)는 JavaScript를 이용하여
+          서버와 비동기적으로 데이터를 주고받는 기술이다.
+        </p>
+
+        <ul>
+          <li>페이지 새로고침 없음</li>
+          <li>빠른 사용자 경험 제공</li>
+          <li>실시간 데이터 처리 가능</li>
+        </ul>
+
+      </div>
+
+      <div class="study-item" id="xhr">
+
+        <h2>3. XMLHttpRequest</h2>
+
+        <pre>
+const xhr = new XMLHttpRequest();
+
+xhr.open("GET", "/data");
+
+xhr.send();
+
+xhr.onload = function(){
+
+  console.log(xhr.responseText);
+
+};
+        </pre>
+
+        <p>
+          XMLHttpRequest는 AJAX 통신을 위한 전통적인 객체이다.
+        </p>
+
+      </div>
+
+      <div class="study-item" id="json">
+
+        <h2>4. JSON</h2>
+
+        <p>
+          JSON(JavaScript Object Notation)은 서버와 데이터를 주고받기 위한
+          대표적인 데이터 형식이다.
+        </p>
+
+        <pre>
+{
+  "name":"Yejin",
+  "age":24
+}
+        </pre>
+
+        <table>
+          <tr>
+            <th>메서드</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>JSON.parse()</td>
+            <td>문자열 → 객체</td>
+          </tr>
+
+          <tr>
+            <td>JSON.stringify()</td>
+            <td>객체 → 문자열</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <div class="study-item" id="fetch">
+
+        <h2>5. Fetch API</h2>
+
+        <p>
+          Fetch API는 XMLHttpRequest보다 간단하게 서버 통신을 수행할 수 있는 최신 방식이다.
+        </p>
+
+        <pre>
+fetch("/data")
+
+.then(response => response.json())
+
+.then(data => {
+
+  console.log(data);
+
+});
+        </pre>
+
+      </div>
+
+      <div class="study-item" id="promise">
+
+        <h2>6. Promise</h2>
+
+        <p>
+          Promise는 비동기 작업의 성공 또는 실패 결과를 처리하기 위한 객체이다.
+        </p>
+
+        <pre>
+const promise = new Promise(
+  (resolve,reject)=>{
+
+    resolve("성공");
+
+  }
+);
+
+promise.then(result=>{
+
+  console.log(result);
+
+});
+        </pre>
+
+        <table>
+          <tr>
+            <th>메서드</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>then()</td>
+            <td>성공 처리</td>
+          </tr>
+
+          <tr>
+            <td>catch()</td>
+            <td>실패 처리</td>
+          </tr>
+
+          <tr>
+            <td>finally()</td>
+            <td>마무리 작업</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <div class="study-item" id="async-await">
+
+        <h2>7. Async / Await</h2>
+
+        <p>
+          Promise를 더욱 직관적으로 사용할 수 있도록 만든 문법이다.
+        </p>
+
+        <pre>
+async function getData(){
+
+  const response =
+  await fetch("/data");
+
+  const data =
+  await response.json();
+
+  console.log(data);
+
+}
+        </pre>
+
+        <table>
+          <tr>
+            <th>키워드</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>async</td>
+            <td>비동기 함수 선언</td>
+          </tr>
+
+          <tr>
+            <td>await</td>
+            <td>작업 완료까지 대기</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <div class="study-item">
+
+        <h2>💡 핵심 요약</h2>
+
+        <ul>
+          <li>비동기 통신은 페이지 새로고침 없이 서버와 데이터를 주고받는다.</li>
+          <li>AJAX는 비동기 통신 기술이다.</li>
+          <li>XMLHttpRequest는 전통적인 AJAX 통신 방식이다.</li>
+          <li>JSON은 서버와 데이터를 주고받는 대표적인 데이터 형식이다.</li>
+          <li>Fetch API는 최신 비동기 통신 방식이다.</li>
+          <li>Promise는 비동기 작업 결과를 처리한다.</li>
+          <li>Async / Await는 Promise를 더 쉽게 사용하기 위한 문법이다.</li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+
+  <a href="#" class="top-btn">
+    ↑ TOP
+  </a>
+
+  <footer>
+
+    <p>© Bootcamp Study Archive</p>
+
+  </footer>
+
+</body>
+</html>

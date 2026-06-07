@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HTML 정리</title>
+
+  <link rel="stylesheet" href="../css_use/std_css.css">
+</head>
+
+<body>
+
+  <header class="main-header">
+
+    <h1>📂 HTML 정리</h1>
+
+    <p>HTML 핵심 문법 요약</p>
+
+  </header>
+
+  <div class="top-home">
+
+    <a href="../frontend/frontend_main.html" class="home-btn">
+      ← 목록으로 가기
+    </a>
+
+  </div>
+
+  <div class="container">
+    <div class="study-list">
+
+      <div class="study-item">
+
+        <h2>📑 목차</h2>
+
+        <ol class="toc-list">
+          <li><a href="#html-structure">HTML 기본 구조</a></li>
+          <li><a href="#text-tag">텍스트 태그</a></li>
+          <li><a href="#comment-tag">HTML 주석</a></li>
+          <li><a href="#link-tag">링크 태그</a></li>
+          <li><a href="#image-tag">이미지 태그</a></li>
+          <li><a href="#list-tag">목록 태그</a></li>
+          <li><a href="#table-tag">테이블 태그</a></li>
+          <li><a href="#form-tag">Form 태그</a></li>
+          <li><a href="#media-tag">멀티미디어 태그</a></li>
+          <li><a href="#div-span">div / span</a></li>
+          <li><a href="#semantic-tag">시맨틱 태그</a></li>
+        </ol>
+
+      </div>
+
+      <div class="study-item" id="html-structure">
+
+        <h2>1. HTML 기본 구조</h2>
+
+        <p>
+          HTML(HyperText Markup Language)은 웹 페이지의 구조를 만드는 마크업 언어이다.
+        </p>
+
+        <pre>
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;title&gt;문서 제목&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+
+        &lt;/body&gt;
+        &lt;/html&gt;
+        </pre>
+
+        <table>
+          <tr>
+            <th>태그</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>html</td>
+            <td>문서 전체 영역</td>
+          </tr>
+
+          <tr>
+            <td>head</td>
+            <td>설정 정보</td>
+          </tr>
+
+          <tr>
+            <td>body</td>
+            <td>화면에 표시되는 내용</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="text-tag">
+
+        <h2>2. 텍스트 태그</h2>
+
+        <table>
+          <tr>
+            <th>태그</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>h1 ~ h6</td>
+            <td>제목 태그</td>
+          </tr>
+
+          <tr>
+            <td>p</td>
+            <td>문단 태그</td>
+          </tr>
+
+          <tr>
+            <td>br</td>
+            <td>줄바꿈</td>
+          </tr>
+
+          <tr>
+            <td>hr</td>
+            <td>구분선</td>
+          </tr>
+
+          <tr>
+            <td>strong</td>
+            <td>강조</td>
+          </tr>
+        </table>
+
+        <pre>
+        &lt;h1&gt;제목&lt;/h1&gt;
+        &lt;p&gt;문단입니다.&lt;/p&gt;
+        &lt;br&gt;
+        &lt;hr&gt;
+        &lt;strong&gt;강조&lt;/strong&gt;
+        </pre>
+
+      </div>
+
+      <div class="study-item" id="comment-tag">
+        <h2>3. HTML 주석</h2>
+
+        <p>
+          주석(Comment)은 코드에 설명을 작성할 때 사용하며 브라우저에는 표시되지 않는다.
+        </p>
+
+        <pre>
+          &lt;!-- 주석입니다 --&gt;
+        </pre>
+
+      </div>
+
+      <div class="study-item" id="link-tag">
+
+        <h2>4. 링크 태그</h2>
+
+        <pre>
+        &lt;a href="https://google.com"&gt;
+        구글 이동
+        &lt;/a&gt;
+        </pre>
+
+        <ul>
+          <li>href : 이동할 주소</li>
+          <li>target="_blank" : 새 창 열기</li>
+        </ul>
+
+      </div>
+
+      <div class="study-item" id="image-tag">
+
+        <h2>5. 이미지 태그</h2>
+
+        <pre>
+        &lt;img src="cat.jpg" alt="고양이"&gt;
+        </pre>
+
+        <table>
+          <tr>
+            <th>속성</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>src</td>
+            <td>이미지 경로</td>
+          </tr>
+
+          <tr>
+            <td>alt</td>
+            <td>대체 텍스트</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="list-tag">
+
+        <h2>6. 목록 태그</h2>
+
+        <h3>순서 없는 목록</h3>
+
+        <pre>
+        &lt;ul&gt;
+          &lt;li&gt;사과&lt;/li&gt;
+          &lt;li&gt;바나나&lt;/li&gt;
+        &lt;/ul&gt;
+        </pre>
+
+        <h3>순서 있는 목록</h3>
+
+        <pre>
+        &lt;ol&gt;
+          &lt;li&gt;1단계&lt;/li&gt;
+          &lt;li&gt;2단계&lt;/li&gt;
+        &lt;/ol&gt;
+        </pre>
+
+      </div>
+
+      <div class="study-item" id="table-tag">
+
+        <h2>7. 테이블 태그</h2>
+
+        <pre>
+        &lt;table border="1"&gt;
+
+          &lt;tr&gt;
+            &lt;th&gt;이름&lt;/th&gt;
+            &lt;th&gt;나이&lt;/th&gt;
+          &lt;/tr&gt;
+
+          &lt;tr&gt;
+            &lt;td&gt;홍길동&lt;/td&gt;
+            &lt;td&gt;20&lt;/td&gt;
+          &lt;/tr&gt;
+
+        &lt;/table&gt;
+        </pre>
+
+        <table>
+          <tr>
+            <th>태그</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>table</td>
+            <td>테이블 생성</td>
+          </tr>
+
+          <tr>
+            <td>tr</td>
+            <td>행(Row)</td>
+          </tr>
+
+          <tr>
+            <td>th</td>
+            <td>제목 셀</td>
+          </tr>
+
+          <tr>
+            <td>td</td>
+            <td>데이터 셀</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="form-tag">
+
+        <h2>8. Form 태그</h2>
+
+        <pre>
+          &lt;form action="/login"&gt;
+
+            &lt;input type="text"&gt;
+
+            &lt;input type="password"&gt;
+
+            &lt;input type="radio"&gt;
+
+            &lt;input type="checkbox"&gt;
+
+            &lt;input type="submit" value="전송"&gt;
+
+          &lt;/form&gt;
+        </pre>
+
+        <table>
+
+          <tr>
+            <th>type</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>text</td>
+            <td>일반 입력</td>
+          </tr>
+
+          <tr>
+            <td>password</td>
+            <td>비밀번호 입력</td>
+          </tr>
+
+          <tr>
+            <td>radio</td>
+            <td>단일 선택</td>
+          </tr>
+
+          <tr>
+            <td>checkbox</td>
+            <td>다중 선택</td>
+          </tr>
+
+          <tr>
+            <td>submit</td>
+            <td>폼 전송</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <div class="study-item" id="media-tag">
+        <h2>9. 멀티미디어 태그</h2>
+
+        <pre>
+          &lt;audio controls&gt;
+          &lt;/audio&gt;
+
+          &lt;video controls&gt;
+          &lt;/video&gt;
+        </pre>
+
+        <table>
+          <tr>
+            <th>태그</th>
+            <th>설명</th>
+          </tr>
+          <tr>
+            <td>audio</td>
+            <td>오디오 재생</td>
+          </tr>
+          <tr>
+            <td>video</td>
+            <td>동영상 재생</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="study-item" id="div-span">
+        <h2>10. div / span</h2>
+
+        <pre>
+          &lt;div&gt;블록 요소&lt;/div&gt;
+          &lt;span&gt;인라인 요소&lt;/span&gt;
+        </pre>
+
+        <table>
+          <tr>
+            <th>태그</th>
+            <th>설명</th>
+          </tr>
+          <tr>
+            <td>div</td>
+            <td>블록 요소</td>
+          </tr>
+          <tr>
+            <td>span</td>
+            <td>인라인 요소</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="study-item" id="semantic-tag">
+
+        <h2>11. 시맨틱 태그</h2>
+
+        <pre>
+        &lt;header&gt;&lt;/header&gt;
+        &lt;nav&gt;&lt;/nav&gt;
+        &lt;main&gt;&lt;/main&gt;
+        &lt;section&gt;&lt;/section&gt;
+        &lt;article&gt;&lt;/article&gt;
+        &lt;footer&gt;&lt;/footer&gt;
+        </pre>
+
+        <p>
+          HTML5에서 의미를 가진 태그를 사용하여 문서 구조를 명확하게 표현한다.
+        </p>
+
+        <ul>
+          <li>가독성 향상</li>
+          <li>SEO 최적화</li>
+          <li>유지보수 편리</li>
+        </ul>
+
+      </div>
+
+      <div class="study-item">
+
+        <h2>💡 핵심 요약</h2>
+
+        <ul>
+          <li>HTML은 웹 페이지의 구조를 만든다.</li>
+          <li>head는 설정 정보, body는 화면 내용을 담당한다.</li>
+          <li>a 태그는 링크, img 태그는 이미지를 표시한다.</li>
+          <li>ul, ol은 목록을 표현한다.</li>
+          <li>table은 표, form은 사용자 입력을 처리한다.</li>
+          <li>시맨틱 태그는 문서 구조를 의미 있게 표현한다.</li>
+        </ul>
+
+      </div>
+
+  </div>
+</div>
+
+  <a href="#" class="top-btn">
+    ↑ TOP
+  </a>
+
+  <footer>
+
+    <p>© Bootcamp Study Archive</p>
+
+  </footer>
+
+</body>
+</html>

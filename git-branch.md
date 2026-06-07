@@ -28,5 +28,3 @@ git commit -m "작업 내용 설명"
 git push origin feature-브랜치이름
 
 
-
-🛠️ 팀장과 팀원 작업 흐름

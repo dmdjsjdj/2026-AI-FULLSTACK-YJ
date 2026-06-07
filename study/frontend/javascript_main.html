@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>JavaScript 정리</title>
+
+  <link rel="stylesheet" href="../css_use/std_css.css">
+</head>
+
+<body>
+
+  <header class="main-header">
+
+    <h1>🟨 JavaScript 정리</h1>
+
+    <p>JavaScript 핵심 문법 요약</p>
+
+  </header>
+
+  <div class="top-home">
+
+    <a href="../frontend/frontend_main.html" class="home-btn">
+      ← 목록으로 가기
+    </a>
+
+  </div>
+
+  <div class="container">
+    <div class="study-list">
+
+      <div class="study-item">
+
+        <h2>📑 목차</h2>
+
+        <ol class="toc-list">
+          <li><a href="#js-basic">JavaScript 기본 문법</a></li>
+          <li><a href="#variable">변수와 자료형</a></li>
+          <li><a href="#operator">연산자</a></li>
+          <li><a href="#condition">조건문</a></li>
+          <li><a href="#loop">반복문</a></li>
+          <li><a href="#function">함수(Function)</a></li>
+          <li><a href="#event">이벤트(Event)</a></li>
+          <li><a href="#dom">DOM 선택자</a></li>
+          <li><a href="#array">배열(Array)</a></li>
+          <li><a href="#object">객체(Object)</a></li>
+          <li><a href="#fetch">Fetch API</a></li>
+          <li><a href="#ajax">AJAX</a></li>
+          <li><a href="#json">JSON</a></li>
+        </ol>
+
+      </div>
+
+      <div class="study-item" id="js-basic">
+
+        <h2>1. JavaScript 기본 문법</h2>
+
+        <pre>
+&lt;script&gt;
+
+console.log("Hello JavaScript");
+
+&lt;/script&gt;
+        </pre>
+
+        <p>
+          JavaScript는 웹 페이지의 동작을 담당하는 프로그래밍 언어이다.
+        </p>
+
+      </div>
+
+      <div class="study-item" id="variable">
+
+        <h2>2. 변수와 자료형</h2>
+
+        <pre>
+let name = "Yejin";
+
+const age = 24;
+        </pre>
+
+        <table>
+          <tr>
+            <th>키워드</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>let</td>
+            <td>변수 선언</td>
+          </tr>
+
+          <tr>
+            <td>const</td>
+            <td>상수 선언</td>
+          </tr>
+
+          <tr>
+            <td>var</td>
+            <td>예전 방식</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="operator">
+
+        <h2>3. 연산자</h2>
+
+        <pre>
+let a = 10;
+let b = 20;
+
+console.log(a + b);
+        </pre>
+
+        <table>
+          <tr>
+            <th>연산자</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>+</td>
+            <td>더하기</td>
+          </tr>
+
+          <tr>
+            <td>-</td>
+            <td>빼기</td>
+          </tr>
+
+          <tr>
+            <td>*</td>
+            <td>곱하기</td>
+          </tr>
+
+          <tr>
+            <td>/</td>
+            <td>나누기</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="condition">
+
+        <h2>4. 조건문</h2>
+
+        <pre>
+if(age >= 20){
+  console.log("성인");
+}
+else{
+  console.log("미성년자");
+}
+        </pre>
+
+      </div>
+
+      <div class="study-item" id="loop">
+
+        <h2>5. 반복문</h2>
+
+        <pre>
+for(let i=1; i&lt;=5; i++){
+
+  console.log(i);
+
+}
+        </pre>
+
+        <table>
+          <tr>
+            <th>반복문</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>for</td>
+            <td>횟수 반복</td>
+          </tr>
+
+          <tr>
+            <td>while</td>
+            <td>조건 반복</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="function">
+
+        <h2>6. 함수(Function)</h2>
+
+        <pre>
+function hello(){
+
+  console.log("안녕하세요");
+
+}
+
+hello();
+        </pre>
+
+      </div>
+
+      <div class="study-item" id="event">
+
+        <h2>7. 이벤트(Event)</h2>
+
+        <pre>
+button.addEventListener(
+  "click",
+  function(){
+
+    alert("클릭!");
+
+  }
+);
+        </pre>
+
+        <p>
+          사용자의 행동(클릭, 입력 등)에 반응한다.
+        </p>
+
+      </div>
+
+      <div class="study-item" id="dom">
+
+        <h2>8. DOM 선택자</h2>
+
+        <pre>
+document.getElementById("title");
+
+document.querySelector(".box");
+        </pre>
+
+        <table>
+          <tr>
+            <th>메서드</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>getElementById()</td>
+            <td>id 선택</td>
+          </tr>
+
+          <tr>
+            <td>querySelector()</td>
+            <td>첫 번째 요소 선택</td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="study-item" id="array">
+
+        <h2>9. 배열(Array)</h2>
+
+        <pre>
+let fruits = [
+  "사과",
+  "바나나",
+  "포도"
+];
+        </pre>
+
+      </div>
+
+      <div class="study-item" id="object">
+
+        <h2>10. 객체(Object)</h2>
+
+        <pre>
+let user = {
+
+  name:"Yejin",
+
+  age:24
+
+};
+        </pre>
+
+      </div>
+
+      <div class="study-item" id="fetch">
+
+        <h2>11. Fetch API</h2>
+
+        <pre>
+fetch("/data")
+
+.then(res => res.json())
+
+.then(data => {
+
+  console.log(data);
+
+});
+        </pre>
+
+        <p>
+          서버와 비동기 통신을 수행한다.
+        </p>
+
+      </div>
+
+      <div class="study-item" id="ajax">
+
+        <h2>12. AJAX</h2>
+
+        <pre>
+const xhr =
+new XMLHttpRequest();
+
+xhr.open(
+  "GET",
+  "/data"
+);
+
+xhr.send();
+        </pre>
+
+        <p>
+          페이지 새로고침 없이 데이터를 주고받는다.
+        </p>
+
+      </div>
+
+      <div class="study-item" id="json">
+
+        <h2>13. JSON</h2>
+
+        <pre>
+{
+  "name":"Yejin",
+  "age":24
+}
+        </pre>
+
+        <p>
+          서버와 데이터를 주고받을 때 사용하는 형식이다.
+        </p>
+
+      </div>
+
+      <div class="study-item">
+
+        <h2>💡 핵심 요약</h2>
+
+        <ul>
+          <li>JavaScript는 웹 페이지의 동작을 담당한다.</li>
+          <li>let, const를 사용하여 변수를 선언한다.</li>
+          <li>조건문과 반복문으로 흐름을 제어한다.</li>
+          <li>함수는 코드를 재사용하기 위해 사용한다.</li>
+          <li>이벤트는 사용자 행동에 반응한다.</li>
+          <li>DOM 선택자를 이용해 HTML 요소를 제어한다.</li>
+          <li>배열과 객체로 데이터를 관리한다.</li>
+          <li>Fetch와 AJAX는 서버 통신에 사용된다.</li>
+          <li>JSON은 데이터 교환 형식이다.</li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+
+  <a href="#" class="top-btn">
+    ↑ TOP
+  </a>
+
+  <footer>
+
+    <p>© Bootcamp Study Archive</p>
+
+  </footer>
+
+</body>
+</html>

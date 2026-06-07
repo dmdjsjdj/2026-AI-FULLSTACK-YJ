@@ -24,9 +24,7 @@ body{
   );
 
   color:#334155;
-
   line-height:1.6;
-
   min-height:100vh;
 }
 
@@ -105,7 +103,8 @@ body{
 
   border:1px solid rgba(255,255,255,0.5);
 
-  box-shadow:0 8px 20px rgba(80,130,200,0.10);
+  box-shadow:
+  0 8px 20px rgba(80,130,200,0.10);
 
   text-decoration:none;
 
@@ -120,149 +119,141 @@ body{
   transform:translateX(6px);
 }
 
-/* .descs .row-item{
-  color:#64748b;
-
-  font-weight:500;
-} */
-
 /* =========================
-   GRID
+   과목 목차 페이지
 ========================= */
 
-.grid{
-  display:grid;
-
-  grid-template-columns:
-  repeat(auto-fit,minmax(260px,1fr));
-
-  gap:28px;
+.study-list{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
 }
 
-/* =========================
-   CARD
-========================= */
-
-.card{
+.study-item{
   background:
   linear-gradient(
     135deg,
-    rgba(255,255,255,0.55),
+    rgba(255,255,255,0.6),
     rgba(220,240,255,0.85)
   );
 
-  backdrop-filter:blur(12px);
-
-  border-radius:28px;
-
-  padding:32px;
-
-  border:
-  1px solid rgba(255,255,255,0.5);
-
-  box-shadow:
-  0 10px 30px rgba(80,130,200,0.12);
-
-  transition:0.35s;
+  padding:24px 28px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.5);
+  box-shadow:  0 8px 20px rgba(80,130,200,0.08);
+  scroll-margin-top:30px;
 }
 
-.card:hover{
-  transform:translateY(-10px);
-
-  box-shadow:
-  0 18px 40px rgba(80,130,200,0.18);
-}
-
-.card h2{
-  margin-bottom:20px;
+a.study-item{
+  text-decoration:none;
 
   color:#2563eb;
 
-  font-size:28px;
+  font-size:20px;
 
-  font-weight:700;
-}
+  font-weight:600;
 
-/* 카드 링크 */
-.card-link{
-  text-decoration:none;
-
-  color:inherit;
+  transition:0.25s;
 
   display:block;
 }
 
-/* 카드 높이 */
-.card{
-  min-height:260px;
+a.study-item:hover{
+  transform:translateX(8px);
+
+  background:
+  linear-gradient(
+    135deg,
+    #dbeeff,
+    #c6e3ff
+  );
 }
 
 /* =========================
-   LIST
+   공부 노트 내용
 ========================= */
 
-.card ul{
+.study-item h2{
+  color:#1e40af;
+  margin-bottom:15px;
+}
+
+.study-item h3{
+  color:#2563eb;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.study-item p{
+  margin-bottom:12px;
+}
+
+.study-item ul,
+.study-item ol{
+  margin-left:25px;
+  margin-top:10px;
+}
+
+.study-item li{
+  margin-bottom:8px;
+}
+
+/* =========================
+   목차
+========================= */
+
+.toc-list{
   list-style:none;
+  margin-top:15px;
 }
 
-.card li{
-  margin-bottom:14px;
+.toc-list li{
+  margin-bottom:10px;
 }
 
-/* =========================
-   LINK
-========================= */
+.toc-list a{
+  display:block;
 
-.card a{
   text-decoration:none;
 
-  color:#475569;
-
-  font-size:17px;
-
-  transition:0.25s;
-
-  display:inline-block;
-}
-
-.card a:hover{
   color:#2563eb;
 
-  transform:translateX(6px);
+  font-weight:600;
+
+  padding:12px 16px;
+
+  border-radius:12px;
+
+  background:rgba(255,255,255,0.45);
+
+  border:1px solid rgba(255,255,255,0.4);
+
+  box-shadow:
+  0 4px 12px rgba(80,130,200,0.08);
+
+  transition:0.25s;
 }
 
+.toc-list a:hover{
+  transform:translateX(8px);
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(219,238,255,0.8),
+    rgba(198,227,255,0.9)
+  );
+}
+.toc-list a,
+.toc-list a:visited,
+.toc-list a:hover,
+.toc-list a:active{
+  text-decoration:none !important;
+  color:inherit;
+}
 /* =========================
-   NOTE PAGE
+   CODE
 ========================= */
-
-.note-layout{
-  display:grid;
-
-  grid-template-columns:
-  260px 1fr;
-
-  gap:30px;
-}
-
-/* 사이드 */
-
-.sidebar{
-  position:sticky;
-
-  top:30px;
-
-  height:fit-content;
-}
-
-/* 본문 */
-
-.content{
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-}
-
-/* 코드 */
 
 pre{
   background:#eff6ff;
@@ -278,7 +269,9 @@ pre{
   border:1px solid #bfdbfe;
 }
 
-/* 테이블 */
+/* =========================
+   TABLE
+========================= */
 
 table{
   width:100%;
@@ -304,90 +297,8 @@ table th{
 }
 
 /* =========================
-   FOOTER
+   HOME BUTTON
 ========================= */
-
-footer{
-  text-align:center;
-
-  padding:45px;
-
-  color:#5f7d96;
-
-  font-size:14px;
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:900px){
-
-  .note-layout{
-    grid-template-columns:1fr;
-  }
-
-  .sidebar{
-    position:relative;
-    top:0;
-  }
-}
-
-@media(max-width:768px){
-
-  .main-header h1{
-    font-size:32px;
-  }
-
-  .card{
-    padding:26px;
-  }
-}
-
-/* 과목 목차 페이지 */
-
-.study-list{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-
-.study-item{
-  text-decoration:none;
-
-  background:rgba(255,255,255,0.6);
-
-  padding:22px 26px;
-
-  border-radius:20px;
-
-  color:#2563eb;
-
-  font-size:20px;
-
-  font-weight:600;
-
-  transition:0.25s;
-
-  border:1px solid rgba(255,255,255,0.5);
-
-  box-shadow:
-  0 8px 20px rgba(80,130,200,0.08);
-}
-
-.study-item:hover{
-  transform:translateX(8px);
-
-  background:
-  linear-gradient(
-    135deg,
-    #dbeeff,
-    #c6e3ff
-  );
-}
-
-/* 상단 홈 버튼 */
 
 .top-home{
   width:90%;
@@ -431,4 +342,86 @@ footer{
     #7db7ff,
     #abd5ff
   );
+}
+
+/* =========================
+   TOP BUTTON
+========================= */
+
+.top-btn{
+  position:fixed;
+
+  right:30px;
+  bottom:30px;
+
+  width:55px;
+  height:55px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  text-decoration:none;
+
+  border-radius:50%;
+
+  background:
+  linear-gradient(
+    135deg,
+    #93c5fd,
+    #bfdbfe
+  );
+
+  color:#1e3a8a;
+
+  font-weight:700;
+
+  box-shadow:
+  0 8px 20px rgba(59,130,246,0.18);
+
+  transition:0.25s;
+
+  z-index:999;
+}
+
+.top-btn:hover{
+  transform:
+    translateY(-4px)
+    scale(1.05);
+
+  background:
+  linear-gradient(
+    135deg,
+    #7db7ff,
+    #abd5ff
+  );
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+
+  padding:45px;
+
+  color:#5f7d96;
+
+  font-size:14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+  .main-header h1{
+    font-size:32px;
+  }
+
+  .layout{
+    flex-direction:column;
+  }
 }
