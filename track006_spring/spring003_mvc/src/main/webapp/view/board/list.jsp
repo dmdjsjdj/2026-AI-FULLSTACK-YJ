@@ -34,7 +34,7 @@ window.addEventListener("load", function(){
 				<tr>   <!-- 전체갯수        상태갯수 -->
 					<td>${list.size() - status.index}</td>
 					<td><a href="${pageContext.request.contextPath}/board/detail.do?bno=${dto.bno}"
-						   style="text-decoration:none;"> ${dto.btitle} </a></td>
+						   style="text-decoration:none;">${dto.btitle} </a></td>
 					<td>${dto.bname}</td>
 					<td>${dto.bdate}</td>
 					<td>${dto.bhit}</td>

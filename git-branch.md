@@ -16,7 +16,7 @@ cd 2026-ai_branch
 git checkout -b feature-브랜치이름
 ```
 git branch                   -- 브랜치 확인
-git checkout -b feature-sjy
+git checkout -b feature-syj
 git branch      브랜치이름     -- 브랜치 변경
 ```
 

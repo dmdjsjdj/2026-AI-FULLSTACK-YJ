@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HTML 정리</title>
+
+  <link rel="stylesheet" href="../css_use/std_css.css">
+</head>
+
+<body>
+
+  <header class="main-header">
+
+    <h1>📂 HTML 정리</h1>
+
+    <p>HTML 핵심 문법 요약</p>
+
+  </header>
+
+  <div class="top-home">
+
+    <a href="../index.html" class="home-btn">
+      ← 목록으로 가기
+    </a>
+
+  </div>
+
+  <div class="container">
+    <div class="study-list">
+        <div class="study-item">
+
+            <h2>📑 목차</h2>
+
+            <ol class="toc-list">
+                <li><a href="#java-intro">Java 소개</a></li>
+                <li><a href="#variable">변수와 자료형</a></li>
+                <li><a href="#operator">연산자</a></li>
+                <li><a href="#condition">조건문</a></li>
+                <li><a href="#loop">반복문</a></li>
+                <li><a href="#array">배열</a></li>
+                <li><a href="#method">메서드</a></li>
+                <li><a href="#class-object">클래스와 객체</a></li>
+                <li><a href="#constructor">생성자</a></li>
+                <li><a href="#static">static</a></li>
+                <li><a href="#inheritance">상속</a></li>
+                <li><a href="#polymorphism">다형성</a></li>
+                <li><a href="#abstract">추상 클래스</a></li>
+                <li><a href="#interface">인터페이스</a></li>
+                <li><a href="#exception">예외 처리</a></li>
+                <li><a href="#collection">컬렉션 프레임워크</a></li>
+                <li><a href="#generic">Generic</a></li>
+                <li><a href="#io">파일 입출력</a></li>
+                <li><a href="#summary">핵심 요약</a></li>
+            </ol>
+
+        </div>
+
+        <div class="study-item" id="java-intro">
+
+            <h2>1. Java 소개</h2>
+
+            <p>
+                Java는 객체지향 프로그래밍(Object-Oriented Programming) 언어이다.
+                운영체제에 상관없이 JVM(Java Virtual Machine) 위에서 실행되므로
+                플랫폼 독립성을 가진다.
+            </p>
+
+            <pre>
+            public class Main {
+
+            public static void main(String[] args) {
+
+                System.out.println("Hello Java");
+
+            }
+
+            }
+            </pre>
+
+            <table>
+                <tr>
+                <th>구성 요소</th>
+                <th>설명</th>
+                </tr>
+
+                <tr>
+                <td>JDK</td>
+                <td>개발 도구</td>
+                </tr>
+
+                <tr>
+                <td>JRE</td>
+                <td>실행 환경</td>
+                </tr>
+
+                <tr>
+                <td>JVM</td>
+                <td>Java 프로그램 실행</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="study-item" id="variable">
+
+            <h2>2. 변수와 자료형</h2>
+
+            <p>
+                변수는 데이터를 저장하기 위한 메모리 공간이다.
+                자료형(Data Type)은 저장할 데이터의 종류를 의미한다.
+            </p>
+
+            <pre>
+            int age = 20;
+            double score = 95.5;
+            char grade = 'A';
+            String name = "Yejin";
+            </pre>
+
+            <table>
+                <tr>
+                <th>자료형</th>
+                <th>설명</th>
+                </tr>
+
+                <tr>
+                <td>int</td>
+                <td>정수</td>
+                </tr>
+
+                <tr>
+                <td>double</td>
+                <td>실수</td>
+                </tr>
+
+                <tr>
+                <td>char</td>
+                <td>문자</td>
+                </tr>
+
+                <tr>
+                <td>String</td>
+                <td>문자열</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="study-item" id="operator">
+
+            <h2>3. 연산자</h2>
+
+            <p>
+                연산자는 데이터를 계산하거나 비교하기 위해 사용한다.
+            </p>
+
+            <table>
+
+                <tr>
+                <th>종류</th>
+                <th>예시</th>
+                </tr>
+
+                <tr>
+                <td>산술 연산자</td>
+                <td>+, -, *, /, %</td>
+                </tr>
+
+                <tr>
+                <td>비교 연산자</td>
+                <td>==, !=, &gt;, &lt;</td>
+                </tr>
+
+                <tr>
+                <td>논리 연산자</td>
+                <td>&amp;&amp;, ||, !</td>
+                </tr>
+
+            </table>
+
+            <pre>
+            int a = 10;
+            int b = 3;
+
+            System.out.println(a + b);
+            System.out.println(a % b);
+            </pre>
+
+        </div>
+
+        <div class="study-item" id="condition">
+
+            <h2>4. 조건문</h2>
+
+            <p>
+                조건에 따라 실행 흐름을 분기한다.
+            </p>
+
+            <pre>
+            int score = 80;
+
+            if(score >= 60){
+
+            System.out.println("합격");
+
+            }else{
+
+            System.out.println("불합격");
+
+            }
+            </pre>
+
+            <ul>
+                <li>if : 조건이 참일 때 실행</li>
+                <li>else : 조건이 거짓일 때 실행</li>
+                <li>switch : 여러 조건 분기</li>
+            </ul>
+
+        </div>
+
+        <div class="study-item" id="loop">
+
+            <h2>5. 반복문</h2>
+
+            <p>
+                동일한 코드를 여러 번 실행할 때 사용한다.
+            </p>
+
+            <pre>
+            for(int i = 1; i <= 5; i++){
+
+            System.out.println(i);
+
+            }
+            </pre>
+
+            <table>
+
+                <tr>
+                <th>반복문</th>
+                <th>설명</th>
+                </tr>
+
+                <tr>
+                <td>for</td>
+                <td>횟수 반복</td>
+                </tr>
+
+                <tr>
+                <td>while</td>
+                <td>조건 반복</td>
+                </tr>
+
+                <tr>
+                <td>do-while</td>
+                <td>최소 1회 실행</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="study-item" id="array">
+
+            <h2>6. 배열</h2>
+
+            <p>
+                같은 자료형의 데이터를 여러 개 저장하는 구조이다.
+            </p>
+
+            <pre>
+            int[] numbers = {10,20,30};
+
+            System.out.println(numbers[0]);
+            </pre>
+
+            <ul>
+                <li>인덱스는 0부터 시작</li>
+                <li>배열 크기는 생성 후 변경 불가</li>
+            </ul>
+
+        </div>
+
+        <div class="study-item" id="method">
+
+            <h2>7. 메서드</h2>
+
+            <p>
+                특정 기능을 하나로 묶어 재사용할 수 있게 만든 코드 블록이다.
+            </p>
+
+            <pre>
+            public static int add(int a, int b){
+
+            return a + b;
+
+            }
+            </pre>
+
+            <table>
+
+                <tr>
+                <th>구성 요소</th>
+                <th>설명</th>
+                </tr>
+
+                <tr>
+                <td>반환형</td>
+                <td>return 값의 자료형</td>
+                </tr>
+
+                <tr>
+                <td>메서드명</td>
+                <td>기능 이름</td>
+                </tr>
+
+                <tr>
+                <td>매개변수</td>
+                <td>전달받는 값</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="study-item" id="class-object">
+
+            <h2>8. 클래스와 객체</h2>
+
+            <p>
+                객체지향 프로그래밍에서 클래스(Class)는 객체를 만들기 위한 설계도이고,
+                객체(Object)는 클래스로부터 생성된 실제 인스턴스이다.
+            </p>
+
+            <pre>
+            class Student {
+
+            String name;
+            int age;
+
+            }
+
+            Student s1 = new Student();
+            </pre>
+
+            <table>
+
+                <tr>
+                <th>용어</th>
+                <th>설명</th>
+                </tr>
+
+                <tr>
+                <td>클래스</td>
+                <td>객체를 생성하기 위한 설계도</td>
+                </tr>
+
+                <tr>
+                <td>객체</td>
+                <td>클래스로 생성된 실체</td>
+                </tr>
+
+                <tr>
+                <td>인스턴스</td>
+                <td>메모리에 생성된 객체</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="study-item" id="constructor">
+
+            <h2>9. 생성자</h2>
+
+            <p>
+                생성자는 객체가 생성될 때 자동으로 호출되는 특별한 메서드이다.
+            </p>
+
+            <pre>
+            class Student {
+
+            Student() {
+
+                System.out.println("객체 생성");
+
+            }
+
+            }
+            </pre>
+
+            <ul>
+                <li>클래스 이름과 동일</li>
+                <li>반환형 없음</li>
+                <li>객체 생성 시 자동 호출</li>
+            </ul>
+
+        </div>
+
+        <div class="study-item" id="static">
+
+            <h2>10. static</h2>
+
+            <p>
+                static 멤버는 객체 생성 없이 클래스 이름으로 접근할 수 있다.
+            </p>
+
+            <pre>
+            class Test {
+
+            static int count = 0;
+
+            }
+
+            System.out.println(Test.count);
+            </pre>
+
+            <table>
+
+                <tr>
+                <th>구분</th>
+                <th>특징</th>
+                </tr>
+
+                <tr>
+                <td>instance</td>
+                <td>객체 생성 후 사용</td>
+                </tr>
+
+                <tr>
+                <td>static</td>
+                <td>객체 생성 없이 사용</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="study-item" id="inheritance">
+
+            <h2>11. 상속</h2>
+
+            <p>
+                상속(Inheritance)은 기존 클래스의 기능을 물려받아 새로운 클래스를 만드는 것이다.
+            </p>
+
+            <pre>
+            class Animal {
+
+            void move() {
+
+                System.out.println("이동");
+
+            }
+
+            }
+
+            class Dog extends Animal {
+
+            }
+            </pre>
+
+            <ul>
+                <li>코드 재사용 가능</li>
+                <li>유지보수 용이</li>
+                <li>extends 키워드 사용</li>
+            </ul>
+
+        </div>
+
+        <div class="study-item" id="polymorphism">
+
+            <h2>12. 다형성</h2>
+
+            <p>
+                하나의 부모 타입으로 여러 자식 객체를 다룰 수 있는 특징이다.
+            </p>
+
+            <pre>
+            Animal animal = new Dog();
+            </pre>
+
+            <table>
+
+                <tr>
+                <th>종류</th>
+                <th>설명</th>
+                </tr>
+
+                <tr>
+                <td>업캐스팅</td>
+                <td>부모 타입으로 참조</td>
+                </tr>
+
+                <tr>
+                <td>다운캐스팅</td>
+                <td>자식 타입으로 변환</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="study-item" id="abstract">
+
+            <h2>13. 추상 클래스</h2>
+
+            <p>
+                객체를 생성할 수 없는 클래스이며 공통 기능을 정의하기 위해 사용한다.
+            </p>
+
+            <pre>
+            abstract class Animal {
+
+            abstract void sound();
+
+            }
+            </pre>
+
+            <ul>
+                <li>abstract 키워드 사용</li>
+                <li>객체 생성 불가</li>
+                <li>상속 후 구현 필요</li>
+            </ul>
+
+        </div>
+
+        <div class="study-item" id="interface">
+
+            <h2>14. 인터페이스</h2>
+
+            <p>
+                클래스가 반드시 구현해야 하는 기능의 규칙을 정의한다.
+            </p>
+
+            <pre>
+            interface Animal {
+
+            void sound();
+
+            }
+
+            class Dog implements Animal {
+
+            public void sound() {
+
+                System.out.println("멍멍");
+
+            }
+
+            }
+            </pre>
+
+            <table>
+
+                <tr>
+                <th>추상 클래스</th>
+                <th>인터페이스</th>
+                </tr>
+
+                <tr>
+                <td>단일 상속</td>
+                <td>다중 구현 가능</td>
+                </tr>
+
+                <tr>
+                <td>일반 메서드 포함 가능</td>
+                <td>규칙 정의 중심</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="study-item" id="exception">
+
+            <h2>15. 예외 처리</h2>
+
+            <p>
+                예외(Exception)는 프로그램 실행 중 발생하는 오류 상황이다.
+                예외 처리를 통해 프로그램이 비정상 종료되는 것을 방지할 수 있다.
+            </p>
+
+            <pre>
+            try{
+
+            int result = 10 / 0;
+
+            }catch(Exception e){
+
+            System.out.println("오류 발생");
+
+            }
+            </pre>
+
+            <table>
+
+                <tr>
+                <th>키워드</th>
+                <th>설명</th>
+                </tr>
+
+                <tr>
+                <td>try</td>
+                <td>예외 발생 가능 코드</td>
+                </tr>
+
+                <tr>
+                <td>catch</td>
+                <td>예외 처리</td>
+                </tr>
+
+                <tr>
+                <td>finally</td>
+                <td>항상 실행</td>
+                </tr>
+
+                <tr>
+                <td>throw</td>
+                <td>예외 발생</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="study-item" id="collection">
+
+            <h2>16. 컬렉션 프레임워크</h2>
+
+            <p>
+                배열보다 유연하게 데이터를 저장하기 위한 자료구조 모음이다.
+            </p>
+
+            <pre>
+            ArrayList<String> list = new ArrayList<>();
+
+            list.add("Java");
+            list.add("Spring");
+            </pre>
+
+            <table>
+
+                <tr>
+                <th>컬렉션</th>
+                <th>특징</th>
+                </tr>
+
+                <tr>
+                <td>ArrayList</td>
+                <td>순서 O, 중복 O</td>
+                </tr>
+
+                <tr>
+                <td>LinkedList</td>
+                <td>삽입/삭제 유리</td>
+                </tr>
+
+                <tr>
+                <td>HashSet</td>
+                <td>중복 X</td>
+                </tr>
+
+                <tr>
+                <td>HashMap</td>
+                <td>Key-Value 저장</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="study-item" id="generic">
+
+            <h2>17. Generic</h2>
+
+            <p>
+                Generic은 클래스나 메서드에서 사용할 자료형을 일반화하는 기능이다.
+            </p>
+
+            <pre>
+            ArrayList<String> names =
+            new ArrayList<String>();
+            </pre>
+
+            <ul>
+
+                <li>컴파일 시 타입 검사 가능</li>
+
+                <li>형변환 감소</li>
+
+                <li>코드 재사용 증가</li>
+
+            </ul>
+
+        </div>
+
+        <div class="study-item" id="io">
+
+            <h2>18. 파일 입출력 (IO)</h2>
+
+            <p>
+                Java는 파일을 읽고 쓰기 위한 다양한 입출력 클래스를 제공한다.
+            </p>
+
+            <pre>
+            FileWriter fw =
+            new FileWriter("test.txt");
+
+            fw.write("Hello Java");
+
+            fw.close();
+            </pre>
+
+            <table>
+
+                <tr>
+                <th>클래스</th>
+                <th>설명</th>
+                </tr>
+
+                <tr>
+                <td>File</td>
+                <td>파일 정보 관리</td>
+                </tr>
+
+                <tr>
+                <td>FileReader</td>
+                <td>파일 읽기</td>
+                </tr>
+
+                <tr>
+                <td>FileWriter</td>
+                <td>파일 쓰기</td>
+                </tr>
+
+                <tr>
+                <td>BufferedReader</td>
+                <td>버퍼 기반 읽기</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="study-item" id="summary">
+
+            <h2>💡 핵심 요약</h2>
+
+            <ul>
+
+                <li>Java는 객체지향 프로그래밍 언어이다.</li>
+
+                <li>변수와 자료형을 통해 데이터를 저장한다.</li>
+
+                <li>조건문과 반복문으로 프로그램 흐름을 제어한다.</li>
+
+                <li>배열과 컬렉션을 통해 데이터를 관리한다.</li>
+
+                <li>클래스와 객체는 객체지향의 핵심이다.</li>
+
+                <li>상속, 다형성, 추상화로 코드 재사용성을 높인다.</li>
+
+                <li>예외 처리를 통해 프로그램 안정성을 높인다.</li>
+
+                <li>컬렉션과 Generic을 통해 효율적인 자료 관리를 수행한다.</li>
+
+                <li>IO를 이용해 파일을 읽고 저장할 수 있다.</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+  </div>
+
+  <a href="#" class="top-btn">
+    ↑ TOP
+  </a>
+
+  <footer>
+
+    <p>© Bootcamp Study Archive</p>
+
+  </footer>
+</body>
+</html>

@@ -37,16 +37,20 @@
         <ol class="toc-list">
           <li><a href="#js-basic">JavaScript 기본 문법</a></li>
           <li><a href="#variable">변수와 자료형</a></li>
+          <li><a href="#output">출력문</a></li>
           <li><a href="#operator">연산자</a></li>
+          <li><a href="#comparison">비교 연산자</a></li>
           <li><a href="#condition">조건문</a></li>
           <li><a href="#loop">반복문</a></li>
           <li><a href="#function">함수(Function)</a></li>
           <li><a href="#event">이벤트(Event)</a></li>
           <li><a href="#dom">DOM 선택자</a></li>
+          <li><a href="#dom-control">DOM 조작</a></li>
           <li><a href="#array">배열(Array)</a></li>
           <li><a href="#object">객체(Object)</a></li>
           <li><a href="#fetch">Fetch API</a></li>
           <li><a href="#ajax">AJAX</a></li>
+          <li><a href="#form-event">폼 이벤트</a></li>
           <li><a href="#json">JSON</a></li>
         </ol>
 
@@ -104,9 +108,45 @@ const age = 24;
 
       </div>
 
+      <div class="study-item" id="output">
+
+        <h2>3. 출력문</h2>
+
+        <pre>
+        console.log("콘솔 출력");
+
+        alert("알림창");
+
+        document.write("화면 출력");
+        </pre>
+
+        <table>
+          <tr>
+            <th>메서드</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>console.log()</td>
+            <td>콘솔 출력</td>
+          </tr>
+
+          <tr>
+            <td>alert()</td>
+            <td>알림창 출력</td>
+          </tr>
+
+          <tr>
+            <td>document.write()</td>
+            <td>화면 출력</td>
+          </tr>
+        </table>
+
+      </div>
+
       <div class="study-item" id="operator">
 
-        <h2>3. 연산자</h2>
+        <h2>4. 연산자</h2>
 
         <pre>
 let a = 10;
@@ -144,9 +184,45 @@ console.log(a + b);
 
       </div>
 
+      <div class="study-item" id="comparison">
+
+        <h2>5. 비교 연산자</h2>
+
+        <pre>
+        10 == "10"   // true
+
+        10 === "10"  // false
+
+        10 != 5      // true
+        </pre>
+
+        <table>
+          <tr>
+            <th>연산자</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>==</td>
+            <td>값 비교</td>
+          </tr>
+
+          <tr>
+            <td>===</td>
+            <td>값 + 자료형 비교</td>
+          </tr>
+
+          <tr>
+            <td>!=</td>
+            <td>같지 않음</td>
+          </tr>
+        </table>
+
+      </div>
+
       <div class="study-item" id="condition">
 
-        <h2>4. 조건문</h2>
+        <h2>6. 조건문</h2>
 
         <pre>
 if(age >= 20){
@@ -192,7 +268,7 @@ for(let i=1; i&lt;=5; i++){
 
       <div class="study-item" id="function">
 
-        <h2>6. 함수(Function)</h2>
+        <h2>7. 함수(Function)</h2>
 
         <pre>
 function hello(){
@@ -208,7 +284,7 @@ hello();
 
       <div class="study-item" id="event">
 
-        <h2>7. 이벤트(Event)</h2>
+        <h2>8. 이벤트(Event)</h2>
 
         <pre>
 button.addEventListener(
@@ -229,7 +305,7 @@ button.addEventListener(
 
       <div class="study-item" id="dom">
 
-        <h2>8. DOM 선택자</h2>
+        <h2>9. DOM 선택자</h2>
 
         <pre>
 document.getElementById("title");
@@ -256,9 +332,44 @@ document.querySelector(".box");
 
       </div>
 
+      <div class="study-item" id="dom-control">
+
+        <h2>11. DOM 조작</h2>
+
+        <pre>
+        const title =
+        document.getElementById("title");
+
+        title.innerHTML = "변경 완료";
+        </pre>
+
+        <table>
+          <tr>
+            <th>속성</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>innerHTML</td>
+            <td>HTML 내용 변경</td>
+          </tr>
+
+          <tr>
+            <td>innerText</td>
+            <td>텍스트 변경</td>
+          </tr>
+
+          <tr>
+            <td>style</td>
+            <td>CSS 변경</td>
+          </tr>
+        </table>
+
+      </div>
+
       <div class="study-item" id="array">
 
-        <h2>9. 배열(Array)</h2>
+        <h2>12. 배열(Array)</h2>
 
         <pre>
 let fruits = [
@@ -272,7 +383,7 @@ let fruits = [
 
       <div class="study-item" id="object">
 
-        <h2>10. 객체(Object)</h2>
+        <h2>13. 객체(Object)</h2>
 
         <pre>
 let user = {
@@ -288,7 +399,7 @@ let user = {
 
       <div class="study-item" id="fetch">
 
-        <h2>11. Fetch API</h2>
+        <h2>14. Fetch API</h2>
 
         <pre>
 fetch("/data")
@@ -310,7 +421,7 @@ fetch("/data")
 
       <div class="study-item" id="ajax">
 
-        <h2>12. AJAX</h2>
+        <h2>15. AJAX</h2>
 
         <pre>
 const xhr =
@@ -330,9 +441,30 @@ xhr.send();
 
       </div>
 
+      <div class="study-item" id="form-event">
+
+        <h2>16. 폼 이벤트</h2>
+
+        <pre>
+        form.addEventListener(
+          "submit",
+          function(event){
+
+            event.preventDefault();
+
+          }
+        );
+        </pre>
+
+        <p>
+          폼 전송 시 입력값 검증에 사용한다.
+        </p>
+
+      </div>
+
       <div class="study-item" id="json">
 
-        <h2>13. JSON</h2>
+        <h2>17. JSON</h2>
 
         <pre>
 {
@@ -352,15 +484,18 @@ xhr.send();
         <h2>💡 핵심 요약</h2>
 
         <ul>
-          <li>JavaScript는 웹 페이지의 동작을 담당한다.</li>
-          <li>let, const를 사용하여 변수를 선언한다.</li>
-          <li>조건문과 반복문으로 흐름을 제어한다.</li>
-          <li>함수는 코드를 재사용하기 위해 사용한다.</li>
-          <li>이벤트는 사용자 행동에 반응한다.</li>
-          <li>DOM 선택자를 이용해 HTML 요소를 제어한다.</li>
-          <li>배열과 객체로 데이터를 관리한다.</li>
-          <li>Fetch와 AJAX는 서버 통신에 사용된다.</li>
-          <li>JSON은 데이터 교환 형식이다.</li>
+          <li>JavaScript는 웹 페이지의 동작과 기능을 담당한다.</li>
+          <li>변수는 let, const를 사용하여 선언한다.</li>
+          <li>자료형에는 Number, String, Boolean, Array, Object 등이 있다.</li>
+          <li>조건문(if, switch)과 반복문(for, while)으로 프로그램 흐름을 제어한다.</li>
+          <li>함수(Function)는 코드를 재사용하기 위해 사용한다.</li>
+          <li>이벤트(Event)는 클릭, 입력 등 사용자 행동에 반응한다.</li>
+          <li>DOM(Document Object Model)을 이용해 HTML 요소를 선택하고 수정할 수 있다.</li>
+          <li>배열(Array)과 객체(Object)를 사용하여 데이터를 관리한다.</li>
+          <li>ES6 문법(화살표 함수, 템플릿 리터럴, 구조 분해 할당)을 지원한다.</li>
+          <li>Fetch API와 AJAX를 이용해 서버와 비동기 통신을 수행한다.</li>
+          <li>Promise와 async/await를 사용하여 비동기 코드를 효율적으로 작성한다.</li>
+          <li>JSON(JavaScript Object Notation)은 서버와 데이터를 주고받는 대표적인 형식이다.</li>
         </ul>
 
       </div>

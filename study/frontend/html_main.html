@@ -46,6 +46,11 @@
           <li><a href="#media-tag">멀티미디어 태그</a></li>
           <li><a href="#div-span">div / span</a></li>
           <li><a href="#semantic-tag">시맨틱 태그</a></li>
+          <li><a href="#global-attr">전역 속성</a></li>
+          <li><a href="#entity-tag">HTML 엔티티</a></li>
+          <li><a href="#iframe-tag">iframe 태그</a></li>
+          <li><a href="#meta-tag">meta 태그</a></li>
+          <li><a href="#html5-input">HTML5 입력 타입</a></li>
         </ol>
 
       </div>
@@ -402,17 +407,212 @@
 
       </div>
 
+      <div class="study-item" id="global-attr">
+
+        <h2>12. 전역 속성 (Global Attribute)</h2>
+
+        <p>
+          대부분의 HTML 태그에서 공통적으로 사용할 수 있는 속성이다.
+        </p>
+
+        <pre>
+        &lt;div id="box1" class="container"&gt;
+          내용
+        &lt;/div&gt;
+        </pre>
+
+        <table>
+          <tr>
+            <th>속성</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>id</td>
+            <td>고유 식별자</td>
+          </tr>
+
+          <tr>
+            <td>class</td>
+            <td>그룹 지정</td>
+          </tr>
+
+          <tr>
+            <td>style</td>
+            <td>인라인 스타일</td>
+          </tr>
+
+          <tr>
+            <td>title</td>
+            <td>툴팁 표시</td>
+          </tr>
+
+          <tr>
+            <td>hidden</td>
+            <td>요소 숨김</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <div class="study-item" id="entity-tag">
+
+        <h2>13. HTML 엔티티</h2>
+
+        <p>
+          HTML에서 특수문자를 표현하기 위해 사용하는 문자 코드이다.
+        </p>
+
+        <table>
+
+          <tr>
+            <th>엔티티</th>
+            <th>결과</th>
+          </tr>
+
+          <tr>
+            <td>&amp;lt;</td>
+            <td>&lt;</td>
+          </tr>
+
+          <tr>
+            <td>&amp;gt;</td>
+            <td>&gt;</td>
+          </tr>
+
+          <tr>
+            <td>&amp;amp;</td>
+            <td>&amp;</td>
+          </tr>
+
+          <tr>
+            <td>&amp;nbsp;</td>
+            <td>공백</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <div class="study-item" id="iframe-tag">
+
+        <h2>14. iframe 태그</h2>
+
+        <p>
+          다른 웹 페이지를 현재 페이지 안에 삽입할 수 있다.
+        </p>
+
+        <pre>
+        &lt;iframe
+          src="https://www.youtube.com"
+          width="500"
+          height="300"&gt;
+        &lt;/iframe&gt;
+        </pre>
+
+      </div>
+
+      <div class="study-item" id="meta-tag">
+
+        <h2>15. meta 태그</h2>
+
+        <p>
+          웹 페이지의 설정 정보를 정의한다.
+        </p>
+
+        <pre>
+        &lt;meta charset="UTF-8"&gt;
+
+        &lt;meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+        </pre>
+
+        <table>
+
+          <tr>
+            <th>속성</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>charset</td>
+            <td>문자 인코딩 설정</td>
+          </tr>
+
+          <tr>
+            <td>viewport</td>
+            <td>반응형 웹 설정</td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <div class="study-item" id="html5-input">
+
+        <h2>16. HTML5 입력 타입</h2>
+
+        <p>
+          HTML5에서는 다양한 입력 타입을 제공한다.
+        </p>
+
+        <pre>
+        &lt;input type="email"&gt;
+
+        &lt;input type="number"&gt;
+
+        &lt;input type="date"&gt;
+
+        &lt;input type="file"&gt;
+        </pre>
+
+        <table>
+
+          <tr>
+            <th>type</th>
+            <th>설명</th>
+          </tr>
+
+          <tr>
+            <td>email</td>
+            <td>이메일 입력</td>
+          </tr>
+
+          <tr>
+            <td>number</td>
+            <td>숫자 입력</td>
+          </tr>
+
+          <tr>
+            <td>date</td>
+            <td>날짜 선택</td>
+          </tr>
+
+          <tr>
+            <td>file</td>
+            <td>파일 업로드</td>
+          </tr>
+
+        </table>
+
+      </div>
+
       <div class="study-item">
 
         <h2>💡 핵심 요약</h2>
 
         <ul>
-          <li>HTML은 웹 페이지의 구조를 만든다.</li>
+          <li>HTML은 웹 페이지의 구조를 만드는 마크업 언어이다.</li>
           <li>head는 설정 정보, body는 화면 내용을 담당한다.</li>
-          <li>a 태그는 링크, img 태그는 이미지를 표시한다.</li>
-          <li>ul, ol은 목록을 표현한다.</li>
-          <li>table은 표, form은 사용자 입력을 처리한다.</li>
+          <li>텍스트, 링크, 이미지, 목록 태그를 사용해 콘텐츠를 구성한다.</li>
+          <li>table은 표를 만들고 form은 사용자 입력을 처리한다.</li>
+          <li>div는 블록 요소, span은 인라인 요소이다.</li>
           <li>시맨틱 태그는 문서 구조를 의미 있게 표현한다.</li>
+          <li>id와 class는 CSS와 JavaScript에서 자주 사용된다.</li>
+          <li>meta 태그는 문서 환경을 설정한다.</li>
+          <li>HTML5는 다양한 입력 타입과 멀티미디어 기능을 제공한다.</li>
         </ul>
 
       </div>
