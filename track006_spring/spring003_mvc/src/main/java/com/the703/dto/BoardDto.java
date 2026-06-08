@@ -13,6 +13,7 @@ public class BoardDto {
 	private String bdate;
 	private String bhit;
 	private String bip;
+	private String bfile;
 }
 
 /*
@@ -28,6 +29,7 @@ mysql> desc mvcboard2;
 | bdate    | timestamp    | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
 | bhit     | int          | NO   |     | 0                 |                   |
 | bip      | varchar(50)  | NO   |     | NULL              |                   |
+| bfile    | varchar(500) | YES  |     | NULL              |                   |
 +----------+--------------+------+-----+-------------------+-------------------+
 8 rows in set (0.00 sec)
 */
