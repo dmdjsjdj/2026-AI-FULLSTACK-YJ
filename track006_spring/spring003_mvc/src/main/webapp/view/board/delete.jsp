@@ -3,13 +3,6 @@
 <%@include file="../inc/header.jsp"  %>
 <!-- 	header		 -->
 <!-- 	header		 -->
-<script>
-let result = "${result}";
-
-if(result == "삭제 실패"){
-    alert(result);
-}
-</script>
 
    <div class="container  my-5">
       <h3 >글 삭제</h3>

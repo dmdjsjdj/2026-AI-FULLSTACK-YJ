@@ -9,7 +9,7 @@ window.addEventListener("load", function(){
 	let result = '${result}';   // el
 	console.log(result);
 	
-	if( result == "글쓰기 실패" ){ alert(result);  history.go(-1); } // 알림창, 뒤로가기
+	if( result == "글쓰기 실패"  || result == "삭제 실패" ){ alert(result);  history.go(-1); } // 알림창, 뒤로가기
 	if(result.length != 0){ alert(result); }  
 });
 </script>
@@ -30,9 +30,9 @@ window.addEventListener("load", function(){
                 </tr>
             </thead>
             <tbody>
-				<c:forEach var="dto" items="${list}" varStatus="status">
+            	<c:forEach var="dto" items="${list}" varStatus="status">
 				<tr>   <!-- 전체갯수        상태갯수 -->
-					<td>${list.size() - status.index}</td>
+					<td>${paging.listtotal - paging.pstartno - status.index}</td>
 					<td><a href="${pageContext.request.contextPath}/board/detail.do?bno=${dto.bno}"
 						   style="text-decoration:none;"> ${dto.btitle} </a></td>
 					<td>${dto.bname}</td>
@@ -41,6 +41,36 @@ window.addEventListener("load", function(){
 				</tr>
 				</c:forEach>
             </tbody>
+            <tfoot><tr><td colspan="5">
+            	<ul class="pagination  justify-content-center"> 
+            	<!-- 이전 -->
+            	<c:if test="${paging.start > 1}">
+			        <li class="page-item">
+			            <a class="page-link"
+			               href="?pstartno=${paging.start-1}">
+			               이전
+			            </a>
+			        </li>
+			    </c:if>
+    
+            	<!-- 1,2,3,4,5,,,,10 -->
+            	<c:forEach var="i" begin="${paging.start}" end="${paging.end}">
+			        <li class="page-item <c:if test="${i==paging.current}">  active </c:if> ">
+			        	<a href="?pstartno=${i}" class="page-link">${i}</a>
+			        </li>
+			    </c:forEach>
+			    
+            	<!-- 다음 -->
+            	<c:if test="${paging.end < paging.pagetotal}">
+			        <li class="page-item">
+			            <a class="page-link"
+			               href="?pstartno=${paging.end+1}">
+			               다음
+			            </a>
+			        </li>
+			    </c:if>
+            	</ul></td></tr>
+            </tfoot>
         </table>
 
         <div  class="text-end">
