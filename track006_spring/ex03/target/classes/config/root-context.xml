@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+      http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+      http://www.springframework.org/schema/mvc
+      https://www.springframework.org/schema/mvc/spring-mvc.xsd" >
+   
+   <!-- 3. Mapper  :  MapperScannerConfigurer  -->
+   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+   		<property name="basePackage" value="com.the703.dao"/>
+   		<property name="annotationClass" value="com.the703.dao.Mapper"/>
+   </bean>
+   
+   <!-- 2. mybatis :  SqlSessionFactoryBean / SqlSession  -->
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+   		 <property name="dataSource" 	  ref="dataSource"/>
+   		 <property name="configLocation"  value="classpath:config/mybatis-config.xml"/>
+   		 <property name="mapperLocations"  >
+   		 		<list>
+   		 			<value>classpath:config/test-mapper.xml</value>
+   		 			<value>classpath:config/board-mapper.xml</value>
+   		 			<value>classpath:config/user-mapper.xml</value>
+   		 		</list>
+   		 </property>
+   </bean>
+   <bean id="sqlSession"  class="org.mybatis.spring.SqlSessionTemplate">
+   		<constructor-arg ref="sqlSessionFactory" />
+   </bean>
+   
+   <!-- 1. DataSource  :  SimpleDriverDataSource  
+   			Driver driver, String url, String username, String password 
+   <context:property-placeholder location="classpath:config/db.properties" />			
+   <bean id="dataSource" 
+   		 class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+   		 <property name="driverClass" value="${db.driverClass}"/>
+   		 <property name="url" 		  value="${db.url}"/>
+   		 <property name="username"    value="${db.username}"/>
+   		 <property name="password"    value="${db.password}"/>
+   </bean> -->
+   <context:component-scan base-package="com.the703"/>
+   <context:property-placeholder location="classpath:config/db.properties" />	
+   <bean id="dataSource" 
+   		 class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="${db.driverClass}" />
+		<property name="url"           value="${db.url}" />
+        <property name="username"        value="${db.username}" />
+        <property name="password"        value="${db.password}" />
+   </bean>
+   
+   <!-- View Resolver :  I -->
+   <bean id="viewResolver"  
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix"   value="/view/"/>
+      <property name="suffix"   value=".jsp"/>
+   </bean> 
+   
+   <bean  id="multipartResolver"  
+         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <property name="maxUploadSize"   value="10485760"></property> <!-- 1kb=2^10  => 1mb=2^10*2^10=> 10MB -->
+      <property name="defaultEncoding" value="UTF-8"></property>
+   </bean>   
+<!--    <mvc:resources  mapping="/resources/upload/" location="/resources/upload/**" ></mvc:resources>  -->
+   
+<!--    <mvc:resources      mapping="/upload/**"  location="file:///C:/file/"></mvc:resources>  -->
+</beans>
+<!-- 
+mybatis-config.xml
+db.properties
+ -->
