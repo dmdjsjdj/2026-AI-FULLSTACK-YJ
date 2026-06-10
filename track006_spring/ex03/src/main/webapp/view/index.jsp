@@ -14,6 +14,7 @@
 </head>
 <body>
 	<div class="container my-3 bg-info text-white p-3 rounded text-center">
+		<h1>Security</h1>
 		<a href="${pageContext.request.contextPath}/security/all"
 			class="btn btn-warning">ALL    - 모든사람들 접근가능</a>
    		<a href="${pageContext.request.contextPath}/security/member"

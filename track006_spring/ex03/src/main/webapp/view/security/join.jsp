@@ -10,7 +10,8 @@
 	3) 보관데이터   : nickname , bpass , email , mobile
 	4) 처리경로     : 처리후 로그인 폼으로 (LoginAction - Get)   
    --> 
-  <form action="" method="post" onsubmit="return checkForm()">
+  <form action="${pageContext.request.contextPath}/security/join" method="post" onsubmit="return checkForm()">
+  <input  type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
     <div class="my-3">
       <label for="nickname" class="form-label">닉네임</label>
       <input type="text" class="form-control" id="nickname" name="nickname" />
@@ -23,9 +24,44 @@
       <label for="email" class="form-label">이메일</label>
       <input type="email" class="form-control" id="email" name="email" />
     </div>
-    <div class="my-3">
+    <div class="my-3 alert alert-warning target">
+    	이메일 입력은 필수입니다.
+    </div>
+   	<script>
+   		window.addEventListener("load", function() {
+			let email = document.getElementById("email");
+			let target = document.querySelector(".target");
+			
+			email.addEventListener("keyup", function(e) {  //console.log(e.target.value);
+				let value = e.target.value.trim(); // 공백빼기
+				if(value != ""){  // 빈칸이 아니면 서버에 요청
+					fetch("${pageContext.request.contextPath}/doubleEmail?email=" + encodeURIComponent(value))
+					.then( response=> response.json()) // json으로 응답
+					.then( data=>{ 
+						if(data.exists){
+							target.textContent="이미 사용중인 이메일입니다.";
+							target.className  ="my-3 alert alert-danger target"
+						}else{
+							target.textContent="사용가능한 이메일입니다.";
+							target.className  ="my-3 alert alert-warning target"
+						}
+					}).catch(err =>{ 
+						target.textContent="서버오류입니다.";
+						target.className  ="my-3 alert alert-info target"
+					});
+				} 
+				else{ // 빈칸이면
+					target.textContent="이메일 입력은 필수입니다.";
+					target.className  ="my-3 alert alert-warning target"
+				} // 빈칸이면 메세지 유지
+			});
+			
+		});
+   	</script>
+    
+    <div class="my-3">    
       <label for="mobile" class="form-label">휴대폰</label>
-      <input type="text" class="form-control" id="mobile" name="mobile" />
+      <input type="tel" class="form-control" id="mobile" name="mobile" />
     </div>
     <div class="text-end">
       <button type="reset" class="btn btn-outline-primary">취소</button>
@@ -60,7 +96,8 @@ function checkForm(){
 1) 처리서블릿   : JoinAction
 2) 데이터 노출  : x
 3) 보관데이터   : nickname , bpass , email , mobile
-4) 처리경로     : 처리후 로그인 폼으로 (LoginAction - Get)
+4) 처리경로     : 처리후 로그인 폼으로 (LoginAction - Get
+)
 
 
 2. Login

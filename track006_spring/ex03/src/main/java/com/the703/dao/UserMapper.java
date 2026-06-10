@@ -14,6 +14,7 @@ public interface UserMapper {
 	/* security */
     public int insertAuth(AuthDto dto);
     public AuthListDto readAuth(AuthDto dto);
+    public UserDto findByEmailUserInfo(String email);
 }
 /*
 #2)  2) Dao - UserMapper   user-mapper.xml
