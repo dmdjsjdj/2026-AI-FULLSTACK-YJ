@@ -22,3 +22,6 @@ Thumbs.db
 /.metadata/
 
 target/
+
+# SQL Developer 프로그램 폴더 제외
+track004_2_oracle/sqldeveloper/
