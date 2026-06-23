@@ -211,5 +211,6 @@ foreign key(ino) references t3(no)   on delete cascade  on update cascade
 
     delete from t3 where no=20; 
 
+
     select * from t3;
     select * from t4;
