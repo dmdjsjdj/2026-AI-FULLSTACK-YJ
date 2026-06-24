@@ -71,6 +71,24 @@
 			<version>3.0.5</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 		 -->
+		<!-- 		 -->
+		<dependency>
+		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+		    <version>1.16</version>
+		</dependency>	
+		<!-- 		 -->
+		<!-- 		 -->
+		<!-- https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect -->
+		<!-- 추가 -->
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
