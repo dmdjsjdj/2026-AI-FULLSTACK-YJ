@@ -15,7 +15,12 @@ public class UtilPaging {
    private  int  start;       	//#7) 시작번호
    private  int  end;        	//#8) 끝번호
     
+   public UtilPaging(int listtotal, int pageNo) {
+       this(listtotal, pageNo, 10, 10);
+   }
+   
     public UtilPaging(int listtotal, int pageNo , int onepagelist , int  bottomlist) { 
+    	
       this.listtotal   = (listtotal<=0)? 1: listtotal;
       this.onepagelist = onepagelist;   
       this.pagetotal   = (int) Math.ceil(this.listtotal/ (double)onepagelist);  // 193/10	19페이지 + 3글 = 20개

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{fragments/layout}">
+<!--    #1. layout 렌더링    -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content"> <!-- 필수 -->
+	    <div class="alert alert-success alert-dismissible fade show" role="alert">
+	    	<span th:text="${success}"></span>
+	    	<button type="button" class="btn-close" data-dismiss="alert"  aria-label="Close"></button>
+	    </div>
+	
+	   <div class="card  my-5 p-4">
+	      <h3 class="card-header"> MBTI QUEST BOARD</h3> 	    
+	      
+	      <table class="table table-striped table-bordered table-hover">
+	      	<caption>mbti </caption>
+	      	<thead>
+	      		<tr>
+	      			<th scope="col">NO</th>
+	      			<th scope="col">TITLE</th>
+	      			<th scope="col">NAME</th>
+	      			<th scope="col">DATE</th>
+	      			<th scope="col">HIT</th>
+	      		</tr>	
+	      	</thead>
+	      	<tbody> 
+		  		<tr th:each="dto, i : ${list}">
+		  			<td th:text="${paging.listtotal - ((paging.current-1)* paging.onepagelist) - i.index}"></td>
+		  			<td>  <!-- http://localhost:8080/board/detail?id=43 -->
+		  				<a th:href="@{/board/detail(id=${dto.id})}" th:text="${dto.btitle}"></a>
+		  			</td>
+		  			<td th:text="${dto.appUserId}"></td>
+		  			<td th:text="${dto.createAt}"></td>
+		  			<td th:text="${dto.bhit}"></td>
+		  		</tr>
+	      	</tbody>
+	      </table> 
+	      
+	      <!-- <div th:text="${paging}"></div> -->
+	      <div class="d-flex justify-content-center my-4" th:if="${paging != null}">
+			    <ul class="pagination">
+			        
+			        <!-- [이전] 버튼: 시작 번호(start)가 1보다 클 때만 활성화 -->
+			        <li class="page-item" th:classappend="${paging.start <= 1} ? 'disabled'">
+			            <a class="page-link" th:href="@{/board/list(pageNo=${paging.start - 1})}">이전</a>
+			        </li>
+			
+			        <!-- 페이지 번호 루프: start 번호부터 end 번호까지 출력 -->
+			        <li class="page-item" 
+			            th:each="num : ${#numbers.sequence(paging.start, paging.end)}" 
+			            th:classappend="${paging.current == num
+			            
+			            } ? 'active'">
+			            <a class="page-link" th:href="@{/board/list(pageNo=${num})}" th:text="${num}">1</a>
+			        </li>
+			
+			        <!-- [다음] 버튼: 끝 번호(end)가 전체 페이지수(pagetotal)보다 작을 때만 활성화 -->
+			        <li class="page-item" th:classappend="${paging.end >= paging.pagetotal} ? 'disabled'">
+			            <a class="page-link" th:href="@{/board/list(pageNo=${paging.end + 1})}">다음</a>
+			        </li>
+			        
+			    </ul>
+			</div>
+	      
+			<p class="text-end">
+				<a th:href="@{/board/write}" class="btn btn-primary">글쓰기</a>
+			</p>	 
+			<p class="text-end alert alert-primary">로그인을 하면 글쓰기가능합니다.</p>	
+	   </div>
+   
+	</div>
+</body>
+</html>
+
+
+<!-- 
+INSERT INTO sboard2 (ID, APP_USER_ID, BTITLE, BCONTENT, BPASS, BIP, CREATED_AT) 
+SELECT (SELECT NVL(MAX(ID), 0) FROM sboard2) + ROWNUM, APP_USER_ID, BTITLE, BCONTENT, BPASS, BIP, SYSDATE FROM sboard2;
+
+commit;
+ -->

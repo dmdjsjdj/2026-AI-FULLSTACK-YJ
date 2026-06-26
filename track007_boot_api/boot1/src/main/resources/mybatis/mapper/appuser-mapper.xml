@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.the703.dao.AppUserDao">
+	<insert id="insertAppUser" 								parameterType="AppUserDto">
+		INSERT INTO appuser 
+		 ( APP_USER_ID, EMAIL, PASSWORD, MBTI_TYPE_ID, CREATED_AT, UFILE, MOBILE, NICKNAME, PROVIDER, PROVIDER_ID )
+		VALUES   
+		 ( #{appUserId},  #{email},  #{password}, #{mbtiTypeId},  #{createAt},  
+		   #{ufile},  #{mobile},  #{nickname},  #{provider},  #{providerId})
+	</insert>
+	
+	<select id="readAuthByEmail" resultType="AppUserAuthDto" parameterType="AppUserDto">
+		SELECT u.email, u.password, a.auth
+		FROM appuser u 
+		LEFT JOIN authorities a ON u.app_user_id = a.app_user_id
+		WHERE u.email = #{email}
+	</select>
+	
+	<select id="findByEmail" 	 resultType="AppUserDto" 				  parameterType="AppUserDto">
+		select * from appuser where email=#{email}
+	</select>
+	
+	<select id="iddoubleByEmail" resultType="int" 				  parameterType="AppUserDto">
+		select count(*) from appuser where email=#{email}
+	</select>
+	
+	<update id="updateAppUser" 								  parameterType="AppUserDto">
+		update appuser
+		set  password=#{password}, mbti_type_id=#{mbtiTypeId}, ufile=#{ufile}, nickname=#{nickname},
+			 mobile=#{mobile}, provider=#{provider}, provider_id=#{providerId}
+		where app_user_id=1
+	</update>
+	
+	<delete id="deleteAppUser" 								   parameterType="AppUserDto">
+		delete from appuser where app_user_id=1
+	</delete>
+	
+	<insert id="insertAuth" 								   parameterType="AppUserDto">
+		insert into authorities (AUTH_ID,EMAIL,AUTH) values (authorities_seq.nextval,#{email},#{auth})
+	</insert>
+	
+	<delete id="deleteAuth" 								   parameterType="AppUserDto">
+		delete from authorities where email= #{email}
+	</delete>
+</mapper>
