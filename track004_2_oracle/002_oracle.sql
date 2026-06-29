@@ -77,7 +77,7 @@ where ID= 1;
 -- 해당번호 삭제
  delete from sboard2 where ID=1;
 
-
+ delete from sboard2 where ID=1;
 
 INSERT INTO sboard2 (ID, APP_USER_ID, BTITLE, BCONTENT, BPASS, BIP, CREATED_AT) 
 SELECT (SELECT NVL(MAX(ID), 0) FROM sboard2) + ROWNUM, APP_USER_ID, BTITLE, BCONTENT, BPASS, BIP, SYSDATE FROM sboard2;

@@ -10,7 +10,7 @@ public class AppUserDto {
 	private Integer mbtiTypeId;
 	private String createAt;
 	private String ufile;
-	private String moblie;
+	private String mobile;
 	private String nickname;
 	private String provider;
 	private String providerId;
