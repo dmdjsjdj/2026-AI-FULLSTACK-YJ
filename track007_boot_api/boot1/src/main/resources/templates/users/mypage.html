@@ -22,7 +22,10 @@
 					<tbody>
 						<tr>
 							<td  rowspan="4"  class="text-center fw-bold fs-3 table-primary"   style="width: 25%;">
-								<img  	th:if="${dto.ufile != null}"
+								<img th:if="${dto.ufile != null and #strings.startsWith(dto.ufile,'http')}"
+								     th:src="${dto.ufile}"    class="w-100"/>
+								     
+								<img  	th:if="${dto.ufile != null and !#strings.startsWith(dto.ufile,'http')}"
 										th:src="@{|/upload/${dto.ufile}|}" alt="" class="w-100"/>
 										
 								<img  	th:unless="${dto.ufile != null}"
@@ -31,6 +34,7 @@
 						</tr>
 						<tr>
 							<th>닉네임</th>
+							
 							<td th:text="${dto.nickname}"></td>
 						</tr>
 						<tr>

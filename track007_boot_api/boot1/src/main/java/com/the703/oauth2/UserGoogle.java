@@ -17,7 +17,7 @@ public class UserGoogle implements UserInfoOAuth2 {
 
 	@Override
 	public String getEmail() {
-		Object email =  attributes.get("emails");
+		Object email =  attributes.get("email");
 		return email != null? email.toString(): null;
 	}  
 	
@@ -30,7 +30,7 @@ public class UserGoogle implements UserInfoOAuth2 {
 	@Override
 	public String getImage() {
 		Object picture =  attributes.get("picture");
-		return picture != null? picture.toString(): null;
+		return picture != null? picture.toString(): "the703_1.png";
 	}
 
 }

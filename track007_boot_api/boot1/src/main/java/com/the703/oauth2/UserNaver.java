@@ -30,7 +30,7 @@ public class UserNaver implements UserInfoOAuth2{
 
 	@Override public String getNickname() {
 		Map<String, Object> response = getResponse();
-		return response != null ? String.valueOf(response.get("name")) : null;
+		return response != null ? String.valueOf(response.get("nickname")) : null;
 	}
 
 	@Override public String getImage() {
