@@ -27,4 +27,4 @@ target/
 track004_2_oracle/sqldeveloper/
 
 track007_boot_api/boot1/src/main/resources/application-oauth.properties
-track008_1_nodeReact/back/nodemodules
+track008_1_nodeReact/back/node_modules
