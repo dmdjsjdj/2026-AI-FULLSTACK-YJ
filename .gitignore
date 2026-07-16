@@ -24,7 +24,14 @@ Thumbs.db
 target/
 
 # SQL Developer 프로그램 폴더 제외
-track004_2_oracle/sqldeveloper/
+sqldeveloper/
 
-track007_boot_api/boot1/src/main/resources/application-oauth.properties
-track008_1_nodeReact/back/node_modules
+application-oauth.properties
+
+node_modules/
+.env
+.env.*
+dist/
+build/
+coverage/
+.next
