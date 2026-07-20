@@ -78,7 +78,7 @@ const reducer = ( state=initialState, action )=>{ // 현재상태, 요청액션
         case LOAD_USERS_FAILURE:
         case UPDATE_NICKNAME_FAILURE:
         case DELETE_USER_FAILURE:
-            return { ...state, isLoading: false, error:action.error?.message || action.error }
+            return { ...state, isLoading: false, error:action.error?.message || action.error };
 
         // 기본값 -> 상태변경없음
         default: 
