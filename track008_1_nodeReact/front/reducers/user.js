@@ -29,6 +29,14 @@ export const UPDATE_NICKNAME_FAILURE = 'UPDATE_NICKNAME_FAILURE'; // 닉네임 �
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST'; // 사용자 삭제
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS'; // 사용자 성공
 export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE'; // 사용자 실패
+// 이메일 중복 체크
+export const CHECK_EMAIL_REQUEST = "CHECK_EMAIL_REQUEST";
+export const CHECK_EMAIL_SUCCESS = "CHECK_EMAIL_SUCCESS";
+export const CHECK_EMAIL_FAILURE = "CHECK_EMAIL_FAILURE";
+// 닉네임 중복 체크
+export const CHECK_NICKNAME_REQUEST = "CHECK_NICKNAME_REQUEST";
+export const CHECK_NICKNAME_SUCCESS = "CHECK_NICKNAME_SUCCESS";
+export const CHECK_NICKNAME_FAILURE = "CHECK_NICKNAME_FAILURE";
 
 //2. 초기상태
 export const initialState={
@@ -37,6 +45,12 @@ export const initialState={
     isLoading: false,  // api 요청 중 여부
     error: null,       // 에러메시지
     signUpDone: false, // 회원가입 완료여부
+
+    emailChecked: false,
+    nicknameChecked: false,
+
+    emailMessage: "",
+    nicknameMessage: "",
 };
 
 //3. reducer 함수
@@ -49,6 +63,8 @@ const reducer = ( state=initialState, action )=>{ // 현재상태, 요청액션
         case LOAD_USERS_REQUEST:
         case UPDATE_NICKNAME_REQUEST:
         case DELETE_USER_REQUEST:
+        case CHECK_EMAIL_REQUEST:
+        case CHECK_NICKNAME_REQUEST:
             return { ...state, isLoading: true, error: null }
 
         // 성공 액션 -> 상태 업데이트
@@ -64,12 +80,33 @@ const reducer = ( state=initialState, action )=>{ // 현재상태, 요청액션
             return { ...state, isLoading: false, 
                       me: state.me  &&  state.me.id === action.data.id
                       ? { ...state.me, nickname:action.data.nickname } 
-                      : state.me };
+                      : state.me,
+                      
+                      users: state.users.map((u) =>
+                            u.id === action.data.id
+                                ? { ...u, nickname: action.data.nickname }
+                                : u
+                       ),
+                    };
         case DELETE_USER_SUCCESS:
             return { ...state, isLoading: false, 
                       me: state.me?.id === action.data.id? null : state.me,
                       users: state.users.filter( (u) => u.id !== action.data.id )
                     };
+        case CHECK_EMAIL_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                emailChecked: action.data.available,
+                emailMessage: action.data.message,
+            };
+        case CHECK_NICKNAME_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                nicknameChecked: action.data.available,
+                nicknameMessage: action.data.message,
+            };
 
         // 실패 액션 -> 에러메시지 저장
         case LOG_IN_FAILURE:
@@ -78,6 +115,8 @@ const reducer = ( state=initialState, action )=>{ // 현재상태, 요청액션
         case LOAD_USERS_FAILURE:
         case UPDATE_NICKNAME_FAILURE:
         case DELETE_USER_FAILURE:
+        case CHECK_EMAIL_FAILURE:
+        case CHECK_NICKNAME_FAILURE:
             return { ...state, isLoading: false, error:action.error?.message || action.error };
 
         // 기본값 -> 상태변경없음

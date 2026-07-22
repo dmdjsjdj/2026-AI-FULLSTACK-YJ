@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState   , useEffect   } from "react";
 import { useRouter } from "next/router";
-import { SIGN_UP_REQUEST } from "../reducers/user";
+import { SIGN_UP_REQUEST, CHECK_EMAIL_REQUEST, CHECK_NICKNAME_REQUEST, } from "../reducers/user";
 
 
 // useSelector - 전역상태
@@ -15,7 +15,9 @@ export default function JoinPage(){
     //1. 코드
     const dispatch = useDispatch();
     const router   = useRouter();
-    const {me, isLoading, error, signUpDone} = useSelector( (state)=> state.user);
+    const {me, isLoading, error, signUpDone, 
+           emailChecked, nicknameChecked, emailMessage, nicknameMessage,} 
+           = useSelector( (state)=> state.user);
     //      변수,   변수셋팅함수
     const [email, setEmail]  = useState('');  // let email=''
     const [password, setPassword]  = useState('');
@@ -30,6 +32,20 @@ export default function JoinPage(){
 
         //2. Store: 액션알림 useDispatch
         dispatch({ type: SIGN_UP_REQUEST, data:{email, password, nickname}});
+    };
+
+    const onCheckEmail = () => {
+        dispatch({
+            type: CHECK_EMAIL_REQUEST,
+            data: { email },
+        });
+    };
+
+    const onCheckNickname = () => {
+        dispatch({
+            type: CHECK_NICKNAME_REQUEST,
+            data: { nickname },
+        });
     };
     //5. 상태변화감지
     useEffect(()=>{
@@ -54,11 +70,29 @@ export default function JoinPage(){
             <form className="w-50 mx-auto" onSubmit={onSubmit}>
             {/* 이메일 입력 */}
             <div className="mb-3">
-                <input type="email" className="form-control" 
-                       placeholder="이메일입력" title="이메일입력"
-                       value={email}
-                       onChange={(e)=>{setEmail(e.target.value);}}/>
+                <div className="input-group">
+                    <input
+                        type="email"
+                        className="form-control"
+                        placeholder="이메일 입력"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={onCheckEmail}
+                    >
+                        중복확인
+                    </button>
+                </div>
             </div>
+            {emailMessage   && (
+                <div className={
+                    emailChecked? "text-success mt-1" : "text-danger mt-1"}>
+                    {emailMessage}
+                </div>
+            )}
             {/* 비밀번호 입력 */}
             <div className="mb-3">
                 <input type="password" className="form-control" 
@@ -68,14 +102,33 @@ export default function JoinPage(){
             </div>
             {/* 닉네임 입력 */}
             <div className="mb-3">
-                <input type="text" className="form-control" 
-                       placeholder="닉네임입력" title="닉네임입력"
-                       value={nickname}
-                       onChange={(e)=>{setNickname(e.target.value);}}/>
+                <div className="input-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="닉네임 입력"
+                        value={nickname}
+                        onChange={(e) => setNickname(e.target.value)}
+                    />
+                    <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={onCheckNickname}
+                    >
+                        중복확인
+                    </button>
+                </div>
             </div>
+            {nicknameMessage   && (
+                <div className={
+                    nicknameChecked? "text-success mt-1" : "text-danger mt-1"}>
+                    {nicknameMessage}
+                </div>
+            )}
             {/* 버튼 입력 */}
             <div className="mb-3">
-                <button type="submit" className="btn btn-primary w-100" disabled={isLoading}>회원가입</button>
+                <button type="submit" className="btn btn-primary w-100" 
+                        disabled={isLoading || !emailChecked || !nicknameChecked}>회원가입</button>
             </div>
             </form>
 

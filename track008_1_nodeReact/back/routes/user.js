@@ -85,6 +85,62 @@ router.post('/login', (req, res, next)=>{
     })(req, res, next);
 });
 
+// GET /user/check-email
+router.get('/check-email', async (req, res) => {
+    try {
+        const { email } = req.query;
+
+        const user = await findUserByEmail(email);
+
+        if (user) {
+            return res.json({
+                available: false,
+                message: '이미 사용 중인 이메일입니다.'
+            });
+        }
+
+        res.json({
+            available: true,
+            message: '사용 가능한 이메일입니다.'
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: '이메일 중복 확인 실패'
+        });
+    }
+});
+
+// GET /user/check-nickname
+router.get('/check-nickname', async (req, res) => {
+    try {
+        const { nickname } = req.query;
+        console.log("닉네임:", nickname);
+
+        const user = await findUserByNickname(nickname);
+        console.log("조회결과:", user);
+
+        if (user) {
+            return res.json({
+                available: false,
+                message: '이미 사용 중인 닉네임입니다.'
+            });
+        }
+
+        res.json({
+            available: true,
+            message: '사용 가능한 닉네임입니다.'
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: '닉네임 중복 확인 실패'
+        });
+    }
+});
+
 router.get('/:id', async(req,res)=>{
 
     try{

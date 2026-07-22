@@ -15,6 +15,8 @@ import reducer, {
     LOAD_USERS_REQUEST, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE,
     UPDATE_NICKNAME_REQUEST, UPDATE_NICKNAME_SUCCESS, UPDATE_NICKNAME_FAILURE,
     DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAILURE,
+    CHECK_EMAIL_REQUEST, CHECK_EMAIL_SUCCESS, CHECK_EMAIL_FAILURE,
+    CHECK_NICKNAME_REQUEST, CHECK_NICKNAME_SUCCESS, CHECK_NICKNAME_FAILURE,
 } from '../reducers/user'; // 액션타입 불러오기
 
 const client = axios.create({
@@ -197,6 +199,57 @@ function* watchDeleteUser(){
 // 4. put  - redux 액션을 dispatch
 // 5. takeLatest - 특정액션을 감지하고 가장 마지막 액션만 처리
 
+// ------------------ 이메일 중복확인 ---------------------    watchCheckEmail
+// GET /user/check-email?email=test@test.com
+export function checkEmailApi(email) {
+    return client.get(`/user/check-email?email=${email}`);
+}
+
+export function* checkEmail(action) {
+    try {
+        const result = yield call(checkEmailApi, action.data.email);
+
+        yield put({
+            type: CHECK_EMAIL_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        yield put({
+            type: CHECK_EMAIL_FAILURE,
+            error: err.response?.data || err.message,
+        });
+    }
+}
+
+function* watchCheckEmail() {
+    yield takeLatest(CHECK_EMAIL_REQUEST, checkEmail);
+}
+
+// ------------------ 닉네임 중복확인 ---------------------    watchCheckNickname
+// GET /user/check-nickname
+export function checkNicknameApi(nickname) {
+    return client.get(`/user/check-nickname?nickname=${nickname}`);
+}
+
+export function* checkNickname(action) {
+    try {
+        const result = yield call(checkNicknameApi, action.data.nickname);
+
+        yield put({
+            type: CHECK_NICKNAME_SUCCESS,
+            data: result.data,
+        });
+    } catch (err) {
+        yield put({
+            type: CHECK_NICKNAME_FAILURE,
+            error: err.response?.data || err.message,
+        });
+    }
+}
+
+function* watchCheckNickname() {
+    yield takeLatest(CHECK_NICKNAME_REQUEST, checkNickname);
+}
 
 
 export default function* userSaga(){
@@ -207,5 +260,7 @@ export default function* userSaga(){
         fork(watchLoadUsers),
         fork(watchUpdateNickname),
         fork(watchDeleteUser),
+        fork(watchCheckEmail),
+        fork(watchCheckNickname),
     ]);
 }

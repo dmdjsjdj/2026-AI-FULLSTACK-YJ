@@ -8,7 +8,7 @@ export default function LoginPage(){
     //1. 코드
     const dispatch = useDispatch();
     const router   = useRouter();
-    const {me, isLoading, error, signUpDone} = useSelector( (state)=> state.user);
+    const {me, isLoading, error} = useSelector( (state)=> state.user);
     //      변수,   변수셋팅함수
     const [email, setEmail]  = useState('');  // let email=''
     const [password, setPassword]  = useState('');
@@ -22,15 +22,6 @@ export default function LoginPage(){
         //2. Store: 액션알림 useDispatch
         dispatch({ type: LOG_IN_REQUEST, data:{email, password}});
     };
-    //5. 상태변화감지
-    useEffect(()=>{
-        if(signUpDone){  //  경로변경
-            router.push({
-                pathname:'/users',
-                query: {loginSuccess : 'true' }  // 회원가입 성공여부 주소표시창줄
-            })
-        }
-    }, [signUpDone, router]);
 
     // 로그인시,,,, me 값이 있다면
     useEffect(()=>{
@@ -41,7 +32,7 @@ export default function LoginPage(){
     return (
         <div className="container my-4">
             <h3 className="mb-3">로그인</h3>
-            <form className="w-50 mx-auto">
+            <form className="w-50 mx-auto" onSubmit={onSubmit}>
             {/* 이메일 입력 */}
             <div className="mb-3">
                 <input type="email" className="form-control" 
@@ -58,7 +49,7 @@ export default function LoginPage(){
             </div>
             {/* 버튼 입력 */}
             <div className="mb-3">
-                <button type="submit" className="btn btn-primary w-100">회원가입</button>
+                <button type="submit" className="btn btn-primary w-100">로그인</button>
             </div>
             </form>
         </div>
