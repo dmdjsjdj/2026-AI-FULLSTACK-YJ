@@ -18,7 +18,7 @@ import reducer, {
 } from '../reducers/user'; // 액션타입 불러오기
 
 const client = axios.create({
-    baseURL : 'http://localhost3065', // API 서버 주소
+    baseURL : 'http://localhost:3065', // API 서버 주소
     withCredentials : true,  // 쿠키/세션 인증포함
 });
 // ------------------ 로그아웃 -----------------------     watchLogout
@@ -157,7 +157,7 @@ export function* updateNickname(action){
     }
 }
 function* watchUpdateNickname(){
-    yield takeLatest( UPDATE_NICKNAME_REQUEST, login );
+    yield takeLatest( UPDATE_NICKNAME_REQUEST, updateNickname );
     // UPDATE_NICKNAME_REQUEST 액션발생 -> 여러번 요청시 가장 마지막 요청처리 1개
     // return { ...state, isLoading: true, error: null }
 }
@@ -187,7 +187,7 @@ export function* deleteUser(action){
     }
 }
 function* watchDeleteUser(){
-    yield takeLatest( DELETE_USER_REQUEST, deleteUsers );
+    yield takeLatest( DELETE_USER_REQUEST, deleteUser );
     // DELETE_USER_REQUEST 액션발생 -> 여러번 요청시 가장 마지막 요청처리 1개
     // return { ...state, isLoading: true, error: null }
 }
