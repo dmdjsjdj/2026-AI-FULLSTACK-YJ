@@ -85,6 +85,116 @@ router.post('/login', (req, res, next)=>{
     })(req, res, next);
 });
 
+// get : /user/check-email   이메일 중복확인
+/**
+ * @swagger
+ * /user/check-email:
+ *   get:
+ *     summary: 이메일 중복 확인
+ *     description: 입력한 이메일이 이미 존재하는지 확인합니다.
+ *     parameters:
+ *       - in: query
+ *         name: email
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: 확인 성공 (중복 여부는 응답 본문 참고)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 available:
+ *                   type: boolean
+ *                   description: 사용 가능 여부
+ *                 message:
+ *                   type: string
+ *                   description: 결과 메시지
+ *       500:
+ *         description: 이메일 중복 확인 실패
+ */
+router.get('/check-email', async (req, res) => {
+    try {
+        const { email } = req.query;
+
+        const user = await findUserByEmail(email);
+
+        if (user) {
+            return res.json({
+                available: false,
+                message: '이미 사용 중인 이메일입니다.'
+            });
+        }
+
+        res.json({
+            available: true,
+            message: '사용 가능한 이메일입니다.'
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: '이메일 중복 확인 실패'
+        });
+    }
+});
+
+// get : /user/check-nickname   닉네임 중복확인
+/**
+ * @swagger
+ * /user/check-nickname:
+ *   get:
+ *     summary: 닉네임 중복확인
+ *     description: 입력한 닉네임이 이미 존재하는지 확인합니다.
+ *     parameters:
+ *       - in: query
+ *         name: nickname
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: 확인 성공 (중복 여부는 응답 본문 참고)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 available:
+ *                   type: boolean
+ *                   description: 사용 가능 여부
+ *                 message:
+ *                   type: string
+ *                   description: 결과 메시지
+ *       500:
+ *         description: 닉네임 중복 확인 실패
+ */
+router.get('/check-nickname', async (req, res) => {
+    try {
+        const { nickname } = req.query;
+
+        const user = await findUserByNickname(nickname);
+
+        if (user) {
+            return res.json({
+                available: false,
+                message: '이미 사용 중인 닉네임입니다.'
+            });
+        }
+
+        res.json({
+            available: true,
+            message: '사용 가능한 닉네임입니다.'
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: '닉네임 중복 확인 실패'
+        });
+    }
+});
+
 router.get('/:id', async(req,res)=>{
 
     try{
