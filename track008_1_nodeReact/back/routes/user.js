@@ -85,7 +85,35 @@ router.post('/login', (req, res, next)=>{
     })(req, res, next);
 });
 
-// GET /user/check-email
+// get : /user/check-email   이메일 중복확인
+/**
+ * @swagger
+ * /user/check-email:
+ *   get:
+ *     summary: 이메일 중복 확인
+ *     description: 입력한 이메일이 이미 존재하는지 확인합니다.
+ *     parameters:
+ *       - in: query
+ *         name: email
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: 확인 성공 (중복 여부는 응답 본문 참고)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 available:
+ *                   type: boolean
+ *                   description: 사용 가능 여부
+ *                 message:
+ *                   type: string
+ *                   description: 결과 메시지
+ *       500:
+ *         description: 이메일 중복 확인 실패
+ */
 router.get('/check-email', async (req, res) => {
     try {
         const { email } = req.query;
@@ -112,14 +140,40 @@ router.get('/check-email', async (req, res) => {
     }
 });
 
-// GET /user/check-nickname
+// get : /user/check-nickname   닉네임 중복확인
+/**
+ * @swagger
+ * /user/check-nickname:
+ *   get:
+ *     summary: 닉네임 중복확인
+ *     description: 입력한 닉네임이 이미 존재하는지 확인합니다.
+ *     parameters:
+ *       - in: query
+ *         name: nickname
+ *         required: true
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: 확인 성공 (중복 여부는 응답 본문 참고)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 available:
+ *                   type: boolean
+ *                   description: 사용 가능 여부
+ *                 message:
+ *                   type: string
+ *                   description: 결과 메시지
+ *       500:
+ *         description: 닉네임 중복 확인 실패
+ */
 router.get('/check-nickname', async (req, res) => {
     try {
         const { nickname } = req.query;
-        console.log("닉네임:", nickname);
 
         const user = await findUserByNickname(nickname);
-        console.log("조회결과:", user);
 
         if (user) {
             return res.json({

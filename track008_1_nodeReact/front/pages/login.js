@@ -22,11 +22,10 @@ export default function LoginPage(){
         //2. Store: 액션알림 useDispatch
         dispatch({ type: LOG_IN_REQUEST, data:{email, password}});
     };
-
     // 로그인시,,,, me 값이 있다면
     useEffect(()=>{
         if(me) router.push('/users');
-    }, [me, router]);
+    }, [me]);
 
     //2. 뷰 - 렌더링  {}  ()
     return (
