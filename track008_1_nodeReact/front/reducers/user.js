@@ -29,11 +29,11 @@ export const UPDATE_NICKNAME_FAILURE = 'UPDATE_NICKNAME_FAILURE'; // 닉네임 �
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST'; // 사용자 삭제
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS'; // 사용자 성공
 export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE'; // 사용자 실패
-
+// 이메일 중복 체크
 export const CHECK_EMAIL_REQUEST = "CHECK_EMAIL_REQUEST";
 export const CHECK_EMAIL_SUCCESS = "CHECK_EMAIL_SUCCESS";
 export const CHECK_EMAIL_FAILURE = "CHECK_EMAIL_FAILURE";
-
+// 닉네임 중복 체크
 export const CHECK_NICKNAME_REQUEST = "CHECK_NICKNAME_REQUEST";
 export const CHECK_NICKNAME_SUCCESS = "CHECK_NICKNAME_SUCCESS";
 export const CHECK_NICKNAME_FAILURE = "CHECK_NICKNAME_FAILURE";
@@ -87,20 +87,35 @@ const reducer = ( state=initialState, action )=>{ // 현재상태, 요청액션
             return { ...state, isLoading: false, users: action.data };
         case UPDATE_NICKNAME_SUCCESS:
             return { ...state, isLoading: false, 
-                      me: state.me && state.me.id === action.data.id
-                        ? { ...state.me, nickname: action.data.nickname }
-                        : state.me,
-
+                      me: state.me  &&  state.me.id === action.data.id
+                      ? { ...state.me, nickname:action.data.nickname } 
+                      : state.me,
+                      
                       users: state.users.map((u) =>
-                        u.id === action.data.id
-                            ? { ...u, nickname: action.data.nickname }
-                            : u
-                    ), };
+                            u.id === action.data.id
+                                ? { ...u, nickname: action.data.nickname }
+                                : u
+                       ),
+                    };
         case DELETE_USER_SUCCESS:
             return { ...state, isLoading: false, 
                       me: state.me?.id === action.data.id? null : state.me,
                       users: state.users.filter( (u) => u.id !== action.data.id )
                     };
+        case CHECK_EMAIL_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                emailChecked: action.data.available,
+                emailMessage: action.data.message,
+            };
+        case CHECK_NICKNAME_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                nicknameChecked: action.data.available,
+                nicknameMessage: action.data.message,
+            };
 
         case CHECK_EMAIL_SUCCESS:
             return {

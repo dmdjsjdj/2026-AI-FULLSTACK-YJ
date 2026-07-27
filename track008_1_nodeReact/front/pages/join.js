@@ -34,7 +34,6 @@ export default function JoinPage(){
         //2. Store: 액션알림 useDispatch
         dispatch({ type: SIGN_UP_REQUEST, data:{email, password, nickname}});
     };
-
     const onCheckEmail = (e) => {
         if(!email.trim()){  alert('이메일을 입력해주세요'); return; }
         dispatch({

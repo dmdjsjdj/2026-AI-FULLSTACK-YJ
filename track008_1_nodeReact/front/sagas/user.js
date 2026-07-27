@@ -200,7 +200,7 @@ function* watchDeleteUser(){
 // 5. takeLatest - 특정액션을 감지하고 가장 마지막 액션만 처리
 
 // ------------------ 이메일 중복확인 ---------------------    watchCheckEmail
-// GET /user/check-email
+// GET /user/check-email?email=test@test.com
 export function checkEmailApi(email) {
     return client.get(`/user/check-email?email=${email}`);
 }
@@ -242,7 +242,6 @@ export function* checkNickname(action) {
             type: CHECK_NICKNAME_SUCCESS,
             data: result.data,
         });
-
     } catch (err) {
         yield put({
             type: CHECK_NICKNAME_FAILURE,
@@ -254,8 +253,6 @@ export function* checkNickname(action) {
 function* watchCheckNickname() {
     yield takeLatest(CHECK_NICKNAME_REQUEST, checkNickname);
 }
-
-
 
 export default function* userSaga(){
     yield all([
