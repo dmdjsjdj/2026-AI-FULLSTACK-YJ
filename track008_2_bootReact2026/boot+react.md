@@ -32,13 +32,13 @@
 
 
 ##### [실습]  1. 스프링부트 프로젝트 
-- [ ] 1. 개발개요안내
-- [ ] 2. java.sun.com - JAVA 17 다운로드 - 설치
-- [ ] 3. SPRING BOOT   - https://spring.io/ - 다운로드 - 설치
+- [x] 1. 개발개요안내
+- [x] 2. java.sun.com - JAVA 17 다운로드 - 설치
+- [x] 3. SPRING BOOT   - https://spring.io/ - 다운로드 - 설치
   > 이전버젼
   https://github.com/spring-projects/spring-tools/wiki/Previous-Versions
-- [ ] 4. SPRING BOOT 프로젝트 만들기
-- [ ] 5. lombok
+- [x] 4. SPRING BOOT 프로젝트 만들기
+- [x] 5. lombok
 
 ##### [실습]  2. docker 설치
 1. docker 설치
@@ -57,7 +57,7 @@ docker ps
 ```
 java -jar lombok-1.18.32.jar
 ```
-- [ ] 2. redis 설치 
+- [x] 2. redis 설치 
 ```
 docker pull  redis
 docker run   -d  --name  my-redis  -p 6379:6379   redis
@@ -105,3 +105,34 @@ docker  exec  -it  my-redis  redis-cli
 docker  exec  -it  my-redis  redis-cli  FLUSHALL
 keys *
 get  저장이름
+
+
+##### [실습]  3. oracle 유저세팅
+
+```sql
+-- cmd
+-- sqlplus
+-- conn system/1234
+
+-- 유저만들기 ( 오라클 12 이상에서 기존방식으로 사용자 생성 허용 )
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+create user boot  identified by react;
+
+-- 권한부여
+grant  connect , resource  to boot;
+
+ALTER USER boot DEFAULT TABLESPACE users QUOTA UNLIMITED ON users;    -- 물리적공간이용
+grant  create table to boot;
+
+```
+
+
+##### [실습]  4.  Boot + React ver1
+
+1. boead
+- [ ] 1. project
+- [ ] 2. 부품객체 () : gradle
+  ※ https://mvnrepository.com/
+- [ ] 3. application.yml
+
+1. 회원가입
