@@ -127,12 +127,122 @@ grant  create table to boot;
 ```
 
 
-##### [실습]  4.  Boot + React ver1
+##### [실습]  4.  Boot + React - ver1 ( 기본 게시판 + 회원가입 )
 
 1. boead
-- [ ] 1. project
-- [ ] 2. 부품객체 () : gradle
+- [x] 1. project
+- [x] 2. 부품객체 () : gradle
   ※ https://mvnrepository.com/
-- [ ] 3. application.yml
+- [x] 3. application.yml  ( 들여쓰기 주의 )
+```
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/XE    # jdbc url
+    username: boot                              # 사용자 계정
+    password: react                             # 비밀번호
+    driver-class-name: oracle.jdbc.OracleDriver # oracle, mysql, ,,,
+
+  jpa:
+    hibernate:
+      ddl-auto: update      # 엔티티 변경사항 db테이블 자동으로 변경사항 반영
+                            # update:수정반영, 기존데이터 유지 / create-drop:생성후 삭제, 매번 초기화
+                            # 배포할때는 none (기본)
+    properties:
+      hibernate:
+        format_sql: true    # 콘솔 및 로그에 출력되는 sql 들여쓰기 속성
+        show_sql: true      # sql 쿼리 문장을 그대로 로그 출력
+
+  servlet:
+    multipart:
+      enabled: true           # 파일업로드처리 기능 활성화
+      max-file-size: 10MB     # 업로드하는 최대허용용량
+      max-request-size: 20MB  # 한번에 전송되는 총용량
+
+  data:
+    redis:
+      host: localhost       # redis 연결주소
+      port: 6379            # 서버포트
+      timeout: 2000         # 서버와 연결 대기시간
+
+  config:
+    import: 
+      - optional:application-oauth.yml    # api 설정관련
+      - optional:file:.env[.properties]   # .env 파일 실제 보관키
+
+
+mybatis:
+  config-location: classpath:mybatis-config.xml   # 전역설정파일
+  mapper-locations: classpath:mapper/**/*.xml     # 매퍼 경로패턴
+  type-aliases-package: com.thejoa703.domain      # 도메인설정
+
+jwt:
+  issuer: thejoa703          # jwt 토큰 발행한 주체자
+  secret: ${JWT_SECRET}      # 사용한 비밀키 - 외부환경변수에서 불러와서 설정
+  access-token-exp-seconds: 900        # 유효시간
+  refresh-token-exp-seconds: 1209600   
+  header: Authorization      # 토큰전달시 http요청헤더 이름 지정
+  prefix: Bearer             # 토큰앞에 붙는 이름 (접두사)
+
+file:
+  upload-dir: uploads        # 업로드된 파일설정경로
+
+#server:
+#  port: 8484
+```
+
+  ※ (oracle db:table) → dto → mapper → service → controller → view
+- [ ] 4. entity ( 테이블을 객체로 처리 )
+  back1
+    ㄴ src/main/java
+      ㄴcom.thejoa703.entity
+         - AppUser
+         - Post
+
+  A. JPA
+    - ORM(Object-Relational Mapping)
+    부품객체(자바클래스)와 RDB(관계형데이터베이스)의 불일치 해결하려고
+    SQL중심이 아니라 객체 중심으로 데이터를 다룰 수 있게 해주는 기술
+
+    - 1. @Entity DB의 테이블과 맵핑
+    - 테이블컨럼변경시 SQL을 일일이 수정할 필요없이 엔티티클래스만 수정
+    - 데이터베이스 방언(Dialect) 지원 - oracle, mysql 특정데이터에 종속
+
+    - 2. JpaRepository - db에 접속해서 crud 작업을 처리하는 인터페이스
+    - 3. 외래키 설정
+      한사람이 여러글을 쓸 수 있다
+      ```
+      > AppUser
+      @OneToMany
+
+      > Post
+      @ManyToOne
+      ```
+
+
+
+
+- [x] 5. Repository
+  back1
+    ㄴ src/main/java
+      ㄴcom.thejoa703.repository
+         - AppUserRepository
+         - PostRepository
+  https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+
+- [ ] 6. Dto 
+  back1
+    ㄴ src/main/java
+      ㄴcom.thejoa703.dto
+         - UserDto
+         - PostDto
+
+
+- [ ] 7. Service
+- [ ] 8. Controller
+- [ ] 9. View
+
+
+
+
 
 1. 회원가입
