@@ -302,7 +302,7 @@ file:
 front/
 ├── .next/                  # Next.js 빌드 결과물 (자동 생성, 배포 시 사용)
 ├── components/         # 재사용 가능한 UI 컴포넌트 폴더
-│   └── Layout.js         # 페이지 공통 레이아웃 컴포넌트
+│   └── AppLayout.js         # 페이지 공통 레이아웃 컴포넌트
 ├── node_modules/       # 설치된 npm 패키지들
 ├── pages/                  # Next.js 라우팅 기반 페이지 폴더
 │   ├── posts/             
@@ -313,18 +313,18 @@ front/
 │   └── index.js            # 메인 페이지
 ├── reducers/               # Redux 리듀서 폴더
 │   ├── __tests__/       
-│   │  ├── postr.test.js        # 게시판 테스트 코드 
-│   │  └── user.test.js        # 리듀서 테스트 코드
+│   │   ├── post.test.js        # 게시판 테스트 코드 
+│   │   └── user.test.js        # 리듀서 테스트 코드
 │   ├── index.js            # 루트 리듀서 (combineReducers)
 │   ├── authReducer.js             # 사용자 관련 리듀서
 │   └── postReducer.js             # 게시판 관련 리듀서 
 ├── sagas/                  # Redux-Saga 폴더
 │   ├── __tests__/       
-│      ├── postr.test.js        # 게시판 사가 테스트 코드
-│      └── user.test.js        #  유저   사가  테스트 코드
+│   │   ├── post.test.js     # 게시판 사가 테스트 코드
+│   │   └── user.test.js      #  유저   사가  테스트 코드
 │   ├── index.js            # 루트 사가
-│   ├── user.js             # 사용자 관련 사가
-│   └── post.js             # 게시판 관련 사가 
+│   ├── authSaga.js             # 사용자 관련 사가
+│   └── postSaga.js             # 게시판 관련 사가 
 ├── store/                  # Redux 스토어 설정 폴더
 │   ├── configureStore.js   # Redux 스토어 설정
 │   └── configureStore.test.js # 스토어 테스트 코드
