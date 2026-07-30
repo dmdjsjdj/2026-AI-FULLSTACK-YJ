@@ -1,29 +1,46 @@
 // sagas/authSaga.js
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import {all, call, put, takeLatest} from 'redux-saga/effects';
 import axios from 'axios';
 import {
     signupRequest, signupSuccess, signupFailure,
-    fetchUserRequest, fetchUserSuccess, fetchUserFailure, resetUserState,
-} from '../reducers/authReducer';
+    fetchUserRequest, fetchUserSuccess, fetchUserFailure,
+    resetUserState,
+}from '../reducers/authReducer';
+
 const USER_API_BASE = 'http://localhost:8080/api/users'
 
-// --- 회원가입  POST /api/users ---
-export const signupApi = (userData)=> axios.post(USER_API_BASE, userData);
-//2. signup(action) - action.payload 사용자가 입력한 값 (회원정보)
-export function* signup(action){
-    try{
-        const result = yield call(signupApi, action.payload); //3. 
-        yield put(signupSuccess(result.data)); // 처리결과 put
-    }catch(err){
+// === 회원 가입 POST /api/users ===
+export const signupApi = (userData) => axios.post(USER_API_BASE, userData);
+export function* signup(action) {
+    try {
+        const result = yield call(signupApi, action.payload);
+        yield put(signupSuccess(result.data));
+
+    } catch(err){
         yield put(signupFailure(err.response?.data?.message || err.message));
     }
 }
-//1. takeLatest(signupRequest.type, signup) : takeLatest - 요청이 여러번, 가장 마지막 발생 요청 처리
-function* watchSignup() { yield takeLatest(signupRequest.type, signup); }
+function* watchSignup() {yield takeLatest(signupRequest.type, signup)}
 
-// --- 단건조회   GET  /api/users/1 ---
-export const fetchUserApi = (userId)=> axios.get(`${USER_API_BASE}/${userId}`);
+// === 단건 조회 GET /api/users/{id} ===
+export const fetchUserApi = (id) => axios.get(`${USER_API_BASE}/${id}`);
+//2) 
+export function* fetchUser(action) {
+    try {
+        // action = {type:user/fetchUserRequest , payload: 1}
+        const result = yield call(fetchUserApi, action.payload);
+        yield put(fetchUserSuccess(result.data));
 
-export default function * authSaga(){
-    yield all();
+    } catch(err){
+        yield put(fetchUserFailure(err.response?.data?.message || err.message));
+    }
+}
+//1) 여러번 요청와도 1번만
+function* watchFetchUser() {yield takeLatest(fetchUserRequest.type, fetchUser)}
+
+export default function *authSaga() {
+    yield all([
+        call(watchSignup),
+        call(watchFetchUser),
+    ]);
 }

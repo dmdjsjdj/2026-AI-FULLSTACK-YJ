@@ -7,3 +7,9 @@
       - day028 : https://hi-sally03915.tistory.com/1980
 
 
+■ 10주
+> 1. 포폴완성     ~9월초
+  - boot + security + jwt + redis + / jpa + oracle  -> (9월초)
+> 2. 이력서 + 회사지원 (~10월)
+  - python + django
+  - flutter
