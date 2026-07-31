@@ -13,14 +13,19 @@ const {useBreakpoint} = Grid;
 
 //2. 부품
 // Header / Drawer
-function AppLayout(){
+function AppLayout({children, initialUser}){  //★ 대체부품, 초기값
+
+    const [ drawerOpen, setDrawer ] = useState(false);
+
     const menuItems = [
         { key: "new",     label: <Link href="/posts/new">✏️ NEW POST</Link> },
         { key: "profile", label: <Link href="/mypage">👤 MYPAGE </Link> },
         { key: "home",    label: <Link href="/signup">🏠 JOIN</Link> },
     ];
-
-    ///////////////////////////////
+    ///////////////////#1) Row (줄) - Col (칸)  / Col
+    ///////////////////#2) 반응형속성 (xs, sm, md, lg) - 24칸
+    // display:"flex"  자식요소 배치 알아서
+    // justify= "space-between"  양쪽에 콘텐츠 배치
     return (<Layout>
     {/* Header */}
     <Header style={{display:"flex"}}>
@@ -32,16 +37,37 @@ function AppLayout(){
                     </a>
                 </Link>
             </Col>
-            <Col flex="auto">
+            {/* xs, sm (모바일): 0 숨김처리, md (테블릿): 16 24칸중에 16, lg(pc): 18 */}
+            <Col flex="auto" xs={0} sm={0} md={16} lg={18}>
                 <Menu
                 theme="dark"
                 mode="horizontal"
                 items={menuItems}
                 />
             </Col>
+            {/* button 종류 : primary, default(하얀색), text(없음), link(a태그형식) */}
+            <Col flex="none" xs={2} md={0}>
+                <Button 
+                    type="text" 
+                    icon={ <MenuOutlined style={{color:"white", fontSize:20}} />}
+                    onClick={()=>setDrawer(true)}>
+                    Open
+                </Button>
+            </Col>
         </Row>
     </Header>
-    <Content>123123123123</Content>
+    <Drawer
+        title="Basic Drawer"
+        placement="right"
+        onClose={()=> setDrawer(false)}
+        open={drawerOpen}
+    >
+        <Menu
+            mode="vertical"
+            items={menuItems}
+        />
+    </Drawer>
+    <Content  style={{padding: "40px"}}> {children} </Content>
     </Layout>);
 }
 //3. export
