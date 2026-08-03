@@ -56,7 +56,7 @@ export function* updatePost(action){
 }
 
 // watchDeletePost          -   DELETE   /api/posts/{id}      게시글 삭제
-export const deletePostAPI = (id)=> axios.delete(`${POST_API_BASE}/${id}`);
+export const deletePostAPI = ( id ) => axios.delete(`${POST_API_BASE}/${id}`);
 export function* deletePost(action){
     // action = {type:   , payload:{}}
     try {

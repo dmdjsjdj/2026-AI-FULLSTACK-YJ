@@ -93,7 +93,7 @@ const postReducer= createSlice({
         deletePostSuccess: (state,action)=>{
             state.loading = false;
             state.posts = state.posts.filter(post =>
-                post.id !== action.payload.id
+                post.id !== action.payload
             )
             state.currentPost = null; 
             state.success = true;

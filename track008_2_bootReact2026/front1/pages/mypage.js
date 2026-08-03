@@ -14,7 +14,7 @@ export default function MyPage(){
         return (
             <div style={{maxWidth: 600, margin: "40px auto"}}>
                 <p>로그인된 사용자가 없습니다.</p>
-                <Button type="primary" onClick={()=> Router.push("/signup")}>
+                <Button type="primary" onClick={()=> router.push("/signup")}>
                     회원가입 하러가기
                 </Button>
             </div>
