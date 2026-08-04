@@ -14,9 +14,12 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="COMMENTS")
+@Getter @Setter
 public class Comment {
 	
 	@Id // 기본키 primary 키 붙히기
