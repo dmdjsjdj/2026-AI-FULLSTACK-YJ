@@ -439,3 +439,37 @@ deleted            like
 
 1) 리트윗
 2) 팔로우
+
+
+
+
+
+
+■ 과정명   : [취업기업확대]AI활용 풀스택(프론트엔드,백엔드)부트캠프(자바,파이썬,플러터)
+■ 훈련과목 : (비NCS)프로젝트(완성된 웹서비스 플랫폼 프로젝트 리뉴얼)
+> boot + security + jwt + redis / jpa( mybatis ) +oracle / react + next     → aws
+
+
+[4]  DTO / SERVICE
+- table     →   mapper      (dto)   →  service    →   controller
+- @Entity   →   repository  (dto)   →  service    →   controller
+
+ㅁ멤버관리
+회원가입
+
+로그인
+
+마이페이지 (닉네임 변경, 프로필이미지변경, 회원탈퇴) * 팔로워 / 팔로잉
+
+1) UserDto : UserRequestDto / UserResponse
+UserRequestDto < email, password, nickname, image />
+UserRequestDto < email, 권한     , nickname, image />
+
+LoginRequest <email, password>
+
+ㅁ게시글관리
+게시글 작성
+
+게시글 목록(전체/좋아요/내글+리트윗)
+*1. 각 세부내용 수정/삭제
+*2. 좋아요/리트윗/댓글
