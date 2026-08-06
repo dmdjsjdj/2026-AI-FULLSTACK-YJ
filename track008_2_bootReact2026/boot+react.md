@@ -473,3 +473,24 @@ LoginRequest <email, password>
 게시글 목록(전체/좋아요/내글+리트윗)
 *1. 각 세부내용 수정/삭제
 *2. 좋아요/리트윗/댓글
+
+[5]  RestController
+
+> Ver2  . frontend
+
+1. 프로그램 만들기
+```
+mkdir front2
+cd front2
+npm init
+```
+
+2. 프로그램 설치
+```
+npm install
+```
+
+3. 개발
+1) reducer
+2) saga
+3) page

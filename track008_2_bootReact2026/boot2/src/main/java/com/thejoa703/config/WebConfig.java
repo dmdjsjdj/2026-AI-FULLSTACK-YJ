@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
     // 이미지 리소스 정적 매핑
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/upload/**")
+        registry.addResourceHandler("/uploads/**")
                 .addResourceLocations("file:" + uploadDir + "/");
     }
 
