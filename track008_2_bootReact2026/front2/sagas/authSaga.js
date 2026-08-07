@@ -74,6 +74,9 @@ export const updateNicknameApi=({ userId, nickname })=>
 export function* updateNickname(action) {
   try {
     const result = yield call(updateNicknameApi, action.payload); 
+
+    console.log(result.data);
+
     yield put(updateNicknameSuccess(result.data));
   } catch (err) {
     yield put(updateNicknameFailure(err.response?.data?.error || err.message));
@@ -84,13 +87,16 @@ export function* updateNickname(action) {
 export function updateProfileImageApi({ userId, file }) {
   const formData = new FormData();
   formData.append("ufile", file);  
-  return api.post(`${USER_API_BASE}/${userId}/profile-image`, formData, {
+  return axios.patch(`${USER_API_BASE}/${userId}/profile-image`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 }
 export function* updateProfileImage(action) {
   try {
     const result = yield call(updateProfileImageApi, action.payload); 
+    
+    console.log(result.data);
+
     yield put(updateProfileImageSuccess(result.data));
   } catch (err) {
     yield put(updateProfileImageFailure(err.response?.data?.error || err.message));

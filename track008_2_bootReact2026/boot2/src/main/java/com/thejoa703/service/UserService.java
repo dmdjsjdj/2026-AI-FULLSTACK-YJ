@@ -80,6 +80,7 @@ public class UserService {
 	}
 
 	// Update : 닉네임 변경
+	@Transactional
 	public UserResponseDto updateNickname(Long userId, String newNickname) {
 		// 닉네임 중복검사
 		if (appUserRepository.existsByNickname(newNickname)) {
@@ -87,19 +88,38 @@ public class UserService {
 		}
 		// 사용자조회 후
 		AppUser user = appUserRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("사용자 없음"));
+		
+		System.out.println("before = " + user.getNickname());
+		
 		user.setNickname(newNickname); // ##2. 닉네임셋팅
-		return UserResponseDto.fromEntity(appUserRepository.save(user));
+		AppUser saved = appUserRepository.save(user);
+
+	    System.out.println("after = " + saved.getNickname());
+
+	    return UserResponseDto.fromEntity(saved);
 	}
 
 	// Update : 프로필 이미지변경
+	@Transactional
 	public UserResponseDto updateProfileImage(Long userId, MultipartFile profileImage) {
 		// 사용자 조회
 		AppUser user = appUserRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("사용자 없음"));
+		
+		System.out.println("===== BEFORE =====");
+	    System.out.println(user.getNickname());
+	    System.out.println(user.getUfile());
+		
 		// 새이미지 업로드 또는 기본 이미지 설정
 		user.setUfile(profileImage != null && !profileImage.isEmpty() // 이미지가 빈게 아니라면
 				? fileStorageService.upload(profileImage) // 업로드
 				: "uploads/thejoa703.png"); // 기본값
-		return UserResponseDto.fromEntity(appUserRepository.save(user)); // 저장 후 dto반환
+		AppUser saved = appUserRepository.save(user);
+		
+		System.out.println("===== AFTER =====");
+	    System.out.println(saved.getNickname());
+	    System.out.println(saved.getUfile());
+	    
+		return UserResponseDto.fromEntity(saved); // 저장 후 dto반환
 	}
 
 	// 회원탈퇴

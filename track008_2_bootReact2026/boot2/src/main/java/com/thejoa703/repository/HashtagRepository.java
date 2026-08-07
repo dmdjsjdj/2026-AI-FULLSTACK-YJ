@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.thejoa703.entity.Hashtag;
 
 @Repository
-public interface HashTagRepository extends JpaRepository<Hashtag, Long> {
+public interface HashtagRepository extends JpaRepository<Hashtag, Long> {
 	@Query("SELECT h FROM Hashtag h JOIN FETCH h.posts WHERE h.name= :name")
 	Optional<Hashtag> findByNameWithPosts(@Param("name") String name);
 	/*

@@ -1,70 +1,106 @@
-// pages/posts/new.js
 // 1. import
-import { Card, Form, Input, Button, message } from "antd";   
-import { useSelector, useDispatch } from "react-redux";   // 전역정보, 이벤트발생
-import { useRouter } from "next/router";        // 화면이동
-import { createPostRequest } from "../../reducers/postReducer"; // 액션
+import React, { useState, useEffect, useRef } from "react";      // 5. 변수, 4. 이벤트알림
+import { useSelector, useDispatch } from "react-redux"; // 1. 전역정보, 2. 이벤트발생
+import { useRouter } from "next/router";                // 3. 화면이동
+import { createPostRequest, resetPostState, resetUserState } from "../../reducers/postReducer"; // 액션
+import { Card, Form, Input, Button, message, Upload, Select } from 'antd';
+import { UploadOutlined } from "@ant-design/icons";
+
 
 // 2. export + 부품
-function NewPostPage(){
-    //1. 유저정보가져오기 (useSelector: 전역정보) Q2. 
+export default function NewPostPage() {
+    //     글정보(state.post),  → reducer/index.js
+    // 1. 유저정보(state.user) 가져오기 ( useSelector: 전역정보 )   Q2.
     const router = useRouter();
     const dispatch = useDispatch();
-    const {loading, error} = useSelector((state)=> state.post); // 글정보
-    // 유저정보 user
-    const {user} = useSelector((state)=> state.auth);
+    const { loading, error, success } = useSelector( (state)=> state.post );    // 글정보
+    const { user } = useSelector( (state)=> state.auth );                       // 유저정보
 
+    const [fileList, setFileList] = useState([]);
 
-    //2. 게시글 작성(dispatch(createPostRequest(dto)) : 이벤트발생알림)  Q3
-    const onFinish = (values) => {
+    const firstRender = useRef(true);
+
+    // 2. 게시글작성 ( dispatch(createPostRequest(dto)): 이벤트발생알림 )   Q3. 글쓰고나면 / 
+    // { userId, dto(content, 해시태그), files }
+    const onFinish = (values)=> {
         const dto = {
-            content: values.content ,
-            userId: 84
+            content: values.content,
+            hashtags: values.hashtags? values.hashtags.join(",") : "",
         };
-        dispatch(createPostRequest(dto));
-        message.success("게시글 작성요청완료");
-        router.push("/");
+        const files = fileList.map( (f)=> f.originFileObj );
+
+        dispatch(createPostRequest({ userId: user.id, dto, files }));
     };
-    // 글쓰고나면
-    // useEffect(() => {
-    //     if (success) {
-    //         message.success("게시글 등록이 성공적으로 완료되었습니다.");
-    //         router.push(`/mypage`); // 절대 경로로 마이페이지 이동
-    //         dispatch(resetUserState()); // 다음 글 작성을 위해 성공 상태 초기화
-    //     }
-    // }, [success, router, dispatch]);
+    
+    // useSelect(전역) / useDispatch(알림) / useState(변수) / useEffect(이벤트변화감지)
+    useEffect( ()=> {
+        console.log("🔥 useEffect 실행됨");
+        console.log("success 값:", success);
+        console.log("현재 경로:", router.pathname);
+        console.log("첫 렌더링 여부:", firstRender.current);
 
-    if(!user){
-        return (
-            <div style={{maxWidth: 600, margin: "40px auto"}}>
-                <p>로그인된 사용자가 없습니다.</p>
-                <Button type="primary" onClick={()=> router.push("/signup")}>
-                    회원가입 하러가기
-                </Button>
-            </div>
-        );
-    }
+        // 처음 /posts/new 들어왔을 때 남아있는 success=true 무시
+        if (firstRender.current) {
+            firstRender.current = false;
+            dispatch(resetPostState());     // 초기화
+            console.log("👉 첫 진입 success 무시하고 초기화 완료");
+            return;
+        }
 
-    //////////////////////// Q1. View
+        if(success) {
+            message.success("게시글이 성공적으로 작성되었습니다.")
+            setFileList([]);            // FileList 빈 파일 set
+            dispatch(resetPostState()); // 글 다썼어요 - 초기화
+            router.push("/")            // 해당 글로 넘어가기
+        }
+        return ()=> {   // 글 작성 실패 시
+            if(success) {
+                dispatch(resetPostState()); // 글 못썼어도 초기화
+            }
+        }
+    }, [success, router, dispatch]);
+
+    //////////////////////////////////////  Q1. view
     return (
-        <Card title="게시글 작성" style={{maxWidth: 600, margin: "0 auto"}}>
-            <Form onFinish={onFinish}>
-                    {/* 내용입력 */}
-                    <Form.Item
-                        label="내용"
-                        name="content"
-                        hasFeedback
-                        rules={[{ required: true, message: '내용을 입력하세요.' }]}
+        <Card title="게시글 작성" style={{maxWidth:600, margin:"0 auto"}}>
+            <Form layout="vertical" onFinish={onFinish}>
+                {/* 게시글 내용 작성 */}
+                <Form.Item
+                    label="내용"
+                    name="content"
+                    hasFeedback
+                    rules={[ {required:true, message:'내용을 입력하세요.'} ]}
+                >
+                    <Input.TextArea rows={4} placeholder="게시글 내용을 입력하세요."/>
+                </Form.Item>
+
+                {/* 해시태그 입력 */}
+                <Form.Item label="해시태그" name="hashtags">
+                    <Select mode="tags" style={{width:"100%"}} placeholder="해시태그 입력 후 Enter" />
+                </Form.Item>
+                
+                {/* 이미지 업로드 */}
+                <Form.Item label="이미지업로드">
+                    <Upload
+                        multiple
+                        beforeUpload={()=> false}
+                        fileList={fileList}
+                        onChange={({fileList})=> setFileList(fileList)} // Upload 객체 넘김 => {fileList}
                     >
-                        <Input.TextArea rows={4} placeholder="게시글 내용을 입력하세요." />
-                    </Form.Item>
-                    <Button  type="primary" htmlType="submit" >
-                        게시글 작성
-                    </Button>
+                        <Button
+                            type="primary"
+                            htmlType="button"
+                            icon = {<UploadOutlined />}
+                        >
+                            이미지 선택
+                        </Button>
+                    </Upload>
+                </Form.Item>
+
+                <Button type="primary" htmlType="submit" loading={loading} >게시글 작성</Button>
+                { error && <p style={{color:"red"}}>{error}</p>}
             </Form>
+
         </Card>
     );
 }
-
-// 3. export
-export default NewPostPage;

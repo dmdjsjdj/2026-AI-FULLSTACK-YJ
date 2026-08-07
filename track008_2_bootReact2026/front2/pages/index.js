@@ -1,65 +1,113 @@
 // pages/index.js
-import React, {useEffect, useState} from "react";
+
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deletePostRequest, fetchPostsRequest, updatePostRequest } from "../reducers/postReducer";
-import { Spin } from "antd";
+import { useRouter } from "next/router";
+import { fetchPostsRequest, updatePostRequest, deletePostRequest } from "../reducers/postReducer";
+import { Spin } from 'antd';
 import PostList from "../components/PostList";
 import EditPostModal from "../components/EditPostModal";
-import { Content } from "antd/lib/layout/layout";
 
-
-export default function Home(){
+export default function Home() {
     const dispatch = useDispatch();
-    //1. 유저정보가져오기 - state.auth
-    //2. 게시글정보가져오기 - state.post
-    const { posts,loading, error } = useSelector((state)=> state.post)
+    // 1. 유저 정보 가져오기 - state.auth
+    const { user } = useSelector((state)=> state.auth);     // ###
+    // 2. 게시글 정보 가져오기 - state.post
+    const { posts, loading, error } = useSelector((state)=> state.post);
+    
+    // useState 는 []
+    // 수정모달: isEditModalVisible, setIsEditModalVisible
+    const [ isEditModalVisible, setIsEditModalVisible ] = useState(false);
+    const [ uploadFiles, setUploadFiles ] = useState([]);   // ###
+    // 수정할글: editPost, setEditPost
+    const [ editPost, setEditPost ] = useState(null);
+    // 수정기능: handleEditSubmit
+    const handleEdit = (post)=> {
+        setEditPost(post);
+        setIsEditModalVisible(true);
 
-    //수정모달: isEditModalVisible, setIsEditModalVisible
-    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-    //수정할글: editPost,  setEditPost
-    const [editPost,  setEditPost] = useState(false);
+        // 기존 이미지 표시용
+        const oldImages = post.imageUrls?.map((url,index)=>({
+            uid:`old-${index}`,
+            name:url.split("/").pop(),
+            status:"done",
+            url:`http://localhost:8080/${url}`,
+            old:true
+        })) || [];
 
-    //수정기능: handleEditSubmit
-    const handleEdit = (post)=>{
-        setEditPost(post); //수정글셋팅
-        setIsEditModalVisible(true); // 수정화면 보이게
-    }
+        setUploadFiles(oldImages);
+    };
 
-    const handleEditSubmit=(values)=>{
+    // ##2. saga 넘기는 데이터 확인 (userId, postId, dto, files)
+    const handleEditSubmit = (values) => {
+
+        console.log("🔥 수정 submit editPost =", editPost);
+        console.log("🔥 수정 values =", values);
+
+        if(!editPost){
+            console.log("❌ 수정할 게시글 없음");
+            return;
+        }
+
+        const currentPostId = editPost.id;
+
+        const files = uploadFiles
+            .filter(file => file.originFileObj)
+            .map(file => file.originFileObj);
+
+
         dispatch(
-            updatePostRequest({ postId: editPost.id, dto:{ content: values.content }})
+            updatePostRequest({
+                userId: user.id,
+                postId: currentPostId,
+                dto:{
+                    content: values.content,
+                    hashtags: Array.isArray(values.hashtags)
+                        ? values.hashtags.join(",")
+                        : ""
+                },
+                files
+            })
         );
+
+
         setIsEditModalVisible(false);
         setEditPost(null);
+        setUploadFiles([]);
+    };
+
+    // 삭제기능: handleDelete
+    const handleDelete = (postId)=> {
+        dispatch ( deletePostRequest(postId) );   // 해당글번호   
     };
     
-    // 페이지 처음뜰때 게시글 조회액션
-    useEffect(() => {
+
+
+    // 페이지가 처음뜰 때 게시글 조회 액션 - dispatch
+    useEffect( ()=> {
         dispatch(fetchPostsRequest());
     }, [dispatch]);
 
-    // 삭제기능
-    const handleDelete = (postId)=>{
-        dispatch(deletePostRequest(postId));
-    }
-    
-    ////////////////
+    ///////////////////////////////////
     return (
         <>
-            <PostList 
-                posts={posts}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
+            <PostList
+                posts = {posts}
+                handleEdit = {handleEdit}
+                handleDelete = {handleDelete}
+                
             />
+            {/* ### 3. Edit 수정파라미터 추가 */}
             <EditPostModal 
                 visible={isEditModalVisible}
                 onCancel={()=> setIsEditModalVisible(false)}
                 editPost={editPost}
                 onSubmit={handleEditSubmit}
-                
+                uploadFiles={uploadFiles}
+                setUploadFiles={setUploadFiles}
             />
         </>
     );
 }
-// {/* 수정부품 */}
+
 // npm run dev

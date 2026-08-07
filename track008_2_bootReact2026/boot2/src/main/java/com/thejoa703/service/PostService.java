@@ -1,14 +1,24 @@
 package com.thejoa703.service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.thejoa703.dto.PostDto.PostRequestDto;
+import com.thejoa703.dto.PostDto.PostResponseDto;
 import com.thejoa703.entity.AppUser;
+import com.thejoa703.entity.Hashtag;
+import com.thejoa703.entity.Image;
 import com.thejoa703.entity.Post;
 import com.thejoa703.repository.AppUserRepository;
+import com.thejoa703.repository.HashtagRepository;
 import com.thejoa703.repository.PostRepository;
+import com.thejoa703.util.FileStorageService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +28,8 @@ import lombok.RequiredArgsConstructor;
 public class PostService {
 	private final PostRepository postRepository;
 	private final AppUserRepository appUserRepository;
+	private final HashtagRepository      hashtagRepository;   // 해시태그
+	private final FileStorageService   fileStorageService;   // 이미지 업로드처리
 	
 	//1. 전체게시글조회
 	public List<Post> getAllPosts(){
@@ -40,30 +52,94 @@ public class PostService {
 		return postRepository.findPostsWithPaging(start, end);
 	}
 	
-	//4. 게시글생성 (save)
-	@Transactional
-	public Post createPost(Long userId, String content) {
-		AppUser user = appUserRepository.findById(userId)
-				.orElseThrow(()-> new IllegalArgumentException("존재하지 않는 사용자입니다. ID: " + userId));
-		
-		Post post = new Post();
-		post.setContent(content);
-		post.setUser(user);
-		
-		return postRepository.save(post);
-	}
+	// 4. 게시글생성 (save + 해시태그 + 이미지업로드)
+	   @Transactional   // appUserRepository, postRepository 2개. 하나라도 틀리면 rollback
+	   public PostResponseDto createPost(Long userId, PostRequestDto dto, List<MultipartFile> files) {
+	      AppUser user = appUserRepository.findById(userId)
+	            .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 사용자! ID: " + userId));
+	      
+	      Post post = new Post();
+	      post.setUser(user);
+	      post.setContent( dto.getContent() );
+	      
+	      // 이미지업로드
+	      if(files != null && !files.isEmpty()) {
+	         files.forEach( file-> {
+	            String url = fileStorageService.upload(file);
+	            Image image = new Image();
+	            image.setSrc(url);
+	            image.setPost(post);
+	            
+	            post.getImages().add(image);
+	         });
+	      }
+	      
+	      // 해시태그 (1. 겹치면 안됨   2. #해시  #first)
+	      if(dto.getHashtags() != null && !dto.getHashtags().isEmpty()) {
+	    	  Set<String> distinctTags = Arrays.stream(dto.getHashtags().split(","))
+	    			  .map(String::trim)
+	    			  .filter(s -> !s.isEmpty())
+	    			  .collect(Collectors.toSet());
+	    	  
+	    	  distinctTags.forEach(tagStr -> {
+	    		  String normalized = tagStr.startsWith("#") ? tagStr.substring(1) : tagStr;
+	    		  Hashtag tag = hashtagRepository.findByName(normalized) // 기존등록태그인지확인
+	    				  .orElseGet(() -> { // 존재x면
+	    					  Hashtag newtag = new Hashtag(); // 새로운 태그만들고
+	    					  newtag.setName(normalized); // 이름셋팅
+	    					  return hashtagRepository.save(newtag);
+	    				  });
+	    		  post.getHashtags().add(tag);
+	    	  });
+	      }
+	      
+	      return PostResponseDto.from(postRepository.save(post));
+	   }
 	
 	//5. 게시글수정 (save 안쓰고 update 쿼리 반영)
 	@Transactional
-	public Post updatePost(Long postId, String content) {
+	public PostResponseDto updatePost(Long userId, Long postId, PostRequestDto dto, List<MultipartFile> files) {
 		Post post = postRepository.findById(postId)
 				.orElseThrow(()-> new IllegalArgumentException("존재하지 않는 게시글입니다. ID: " + postId));
 		
-		if(post.isDeleted()) {
-			throw new IllegalArgumentException("삭제된 게시글은 수정할 수 없습니다.");
+		if(!post.getUser().getId().equals(userId)) {
+			throw new IllegalArgumentException("본인 글만 수정할 수 있습니다.");
 		}
-		post.setContent(content); // 저장메서드를 따로 호출하지 않아도 update 쿼리 반영
-		return post; // 더티체킹( Dirty Checking )으로 자동으로 update
+		post.setContent(dto.getContent()); // 저장메서드를 따로 호출하지 않아도 update 쿼리 반영
+
+
+		// 이미지업로드
+	      if(files != null && !files.isEmpty()) {
+	         files.forEach( file-> {
+	            String url = fileStorageService.upload(file);
+	            Image image = new Image();
+	            image.setSrc(url);
+	            image.setPost(post);
+	            
+	            post.getImages().add(image);
+	         });
+	      }
+	      
+	      // 해시태그 (1. 겹치면 안됨   2. #해시  #first)
+	      if(dto.getHashtags() != null && !dto.getHashtags().isEmpty()) {
+	    	  Set<String> distinctTags = Arrays.stream(dto.getHashtags().split(","))
+	    			  .map(String::trim)
+	    			  .filter(s -> !s.isEmpty())
+	    			  .collect(Collectors.toSet());
+	    	  
+	    	  distinctTags.forEach(tagStr -> {
+	    		  String normalized = tagStr.startsWith("#") ? tagStr.substring(1) : tagStr;
+	    		  Hashtag tag = hashtagRepository.findByName(normalized) // 기존등록태그인지확인
+	    				  .orElseGet(() -> { // 존재x면
+	    					  Hashtag newtag = new Hashtag(); // 새로운 태그만들고
+	    					  newtag.setName(normalized); // 이름셋팅
+	    					  return hashtagRepository.save(newtag);
+	    				  });
+	    		  post.getHashtags().add(tag);
+	    	  });
+	      }
+	      
+	      return PostResponseDto.from(postRepository.save(post));
 	}
 	
 	//6. 게시글삭제 

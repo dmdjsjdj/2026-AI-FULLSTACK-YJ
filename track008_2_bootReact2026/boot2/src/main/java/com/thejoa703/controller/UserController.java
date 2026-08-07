@@ -114,7 +114,7 @@ public class UserController {
    
    // Update: 프로필이미지변경
    @Operation(summary = "프로필 이미지 업로드/교체", description="특정 사용자의 프로필이미지를 변경합니다.")
-   @PostMapping(value = "/{userId}/profile-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+   @PatchMapping(value = "/{userId}/profile-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
    public ResponseEntity<UserResponseDto> updateProfileImage(
            @PathVariable("userId") Long userId,
            @RequestParam("ufile") MultipartFile ufile

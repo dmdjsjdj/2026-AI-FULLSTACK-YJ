@@ -24,7 +24,7 @@ import com.thejoa703.mapper.DeptUserMapper;
 import com.thejoa703.repository.AppUserRepository;
 import com.thejoa703.repository.CommentRepository;
 import com.thejoa703.repository.DeptUserRepository;
-import com.thejoa703.repository.HashTagRepository;
+import com.thejoa703.repository.HashtagRepository;
 import com.thejoa703.repository.ImageRepository;
 import com.thejoa703.repository.PostLikeRepository;
 import com.thejoa703.repository.PostRepository;
@@ -35,7 +35,7 @@ class Boot2ApplicationTests_1_Entity {
 	@Autowired private AppUserRepository appUserRepository;
 	@Autowired private PostRepository	 postRepository;
 	@Autowired private ImageRepository	 imageRepository;
-	@Autowired private HashTagRepository hashTagRepository;
+	@Autowired private HashtagRepository hashTagRepository;
 	@Autowired private CommentRepository commentRepositoty;
 	@Autowired private PostLikeRepository postLikeRepository;
 
