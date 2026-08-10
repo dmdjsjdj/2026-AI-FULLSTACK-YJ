@@ -27,6 +27,7 @@ target/
 sqldeveloper/
 
 application-oauth.properties
+application-oauth.yml
 
 node_modules/
 .env

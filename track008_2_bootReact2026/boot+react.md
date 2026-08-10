@@ -494,3 +494,133 @@ npm install
 1) reducer
 2) saga
 3) page
+
+
+
+4. 보안 + 시큐리티
+1) 설정파일 : build.gradle 시큐리티 / .env 
+   각종 설정파일 : webConfig
+2) security : jwt + Redis
+   com.thejoa.security
+     ㄴ JwtAuthenticationFilter
+     ㄴ JwtProperties
+     ㄴ JwtProvider
+     ㄴ TokenStore
+
+STEP1)
+```
+[사용자]
+   ├─▶ 로컬 회원가입/로그인
+   │       - 이메일/비밀번호 → DB 저장
+   │       - 로그인 성공 시 JWT 발급
+   │
+   └─▶ 소셜 로그인(OAuth2)
+           - 구글/카카오/네이버 인증
+           - OAuth2SuccessHandler 실행
+             • 사용자 정보 추출
+             • DB 저장/조회
+             • Access Token 발급 (출입증)
+             • Refresh Token 발급 (장기체류증) → Redis 저장 + 쿠키
+```
+
+STEP2)
+```
+[프론트엔드]
+   └─▶ Access Token localStorage 저장
+        API 호출 시 Authorization 헤더에 Bearer 붙임
+```
+
+STEP3)
+```
+[Spring Boot 서버]
+   ├─▶ JwtAuthenticationFilter
+   │       - 토큰 검증 (출입증 검사)
+   │       - SecurityContext에 사용자 정보 저장
+   │
+   └─▶ Controller/Service
+           - userId 기반 DB 조회
+           - 응답 반환 (사원증 스캔)
+```
+
+■ 핵심정리
+1. JWT VS 세션
+- 세션 : 서버 메모리에 사용자 상태를 저장 -> 서버확장시 부담
+        (서버에서 출입명단 직접 들고있기)
+- JWT (Jeson Web Token) : 토큰자체에 인증정보 포함 ->
+        (사용자가 직접 출입증 들고다니기)
+
+2. Access Token  vs  Refresh Token
+-  Access Token  : 짧은 기간 유효 -> api 호출시 사용
+-  Refresh Token : 긴 기간 유효 -> redis 냉장고에 보관 안전보관
+
+3. Redis 사용
+- 토큰 냉장고 -> 장기체류증 안전하게 보관, 필요시 꺼내씀
+- Refresh Token 중앙에서 관리
+- TTL 로 자동만료처리
+- 로그아웃시 즉시 삭제
+
+4. 구조확인
+1) security + jwt + redis
+  - JwtProperties  : 토큰
+    * secret, issuer, expSeconds 기본속성
+  - JwtProvider    : 토큰 발급 / 검증
+    Access Token  (출입증)
+    Refresh Token (장기)
+  - TokenStore     : 토큰 저장소
+    Redis 저장소, Refresh
+  - JwtAuthenticationFilter  : 보안 게이트
+
+2) oauth2.0
+  - OAuth2  : 입국 심사대
+  - UserInfoOAuth2 / UserInfoNaver , UserInfoKakao , UserInfoGoogle
+  - CustomOAuth2User
+  - OAuth2SuccessHandler
+
+3) 설정파일
+  - SecurityConfig
+  - WebConfig
+  - RedisConfig
+  - SwaggerConfig
+
+1. Header → 토큰의 머릿말 ( 이 토큰은 HS256 알고리즘으로 서명했어!  정보 )
+```json
+   { "alg": "HS256", "typ": "JWT" }
+```
+2. Payload(Claims)   →  토큰의 몸통 ( 누가, 어떤권한, 언제까지  사용자의 신분증정보)
+```json
+   {
+     "iss": "thejoa703",   // 발급자
+     "sub": "12345",       // 사용자 ID
+     "role": "USER",       // 권한
+     "email": "user@test.com",
+     "exp": 1737000000     // 만료 시간
+   }
+```
+3. Signature     →  토큰의 도장 ( 서버만 아는 비밀키로 찍은 도장 → 위변조 방지)
+```json
+   HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret)
+```
+4. 보안 + 시큐리티
+1) 설정파일 : build.gradle 시큐리티 / .env 
+   각종 설정파일 : webConfig
+
+2) security : jwt + Redis
+   com.thejoa.security
+     ㄴ JwtAuthenticationFilter (4)  출입증검사
+     ㄴ JwtProperties (1)  Jwt 토큰
+     ㄴ JwtProvider   (2)  발급
+     ㄴ TokenStore    (3)  redis 보관 / RedisConfig / SecurityConfig : 소설처리 (구글/ 카카오/네이버 인증)
+
+3) oauth2
+com. thejoa703.oauth2
+L  UserInfoOAuth2  (1) 소셜 공통속성 추출
+ㄴ UserInfoGoogle / UserInfoKakao / UserInfoNaver  (2) 2
+ㄴ CustomoAuth2User (3) Security : local + Oauth2: 소셜 - 유저정보 
+ㄴ OAuth2SuccessHandler (4) 로그인시 - redis / jwt 설정
+
+1) oauth2 : 소셜처리
+  com.thejoa703.oauth2
+
+1) service
+2) controller
+3) react

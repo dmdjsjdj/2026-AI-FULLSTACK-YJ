@@ -89,6 +89,8 @@ export function* updatePost(action){
         console.log("🔥 수정 응답 =", result.data);
 
         yield put( updatePostSuccess(result.data) );
+
+        yield put(fetchPostsRequest());
     }catch(err){
         console.log("🔥 수정 실패 =", err);
         console.log("🔥 수정 실패 response =", err.response?.data);
