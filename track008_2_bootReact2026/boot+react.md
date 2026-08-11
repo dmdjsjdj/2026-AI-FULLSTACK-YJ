@@ -624,3 +624,29 @@ L  UserInfoOAuth2  (1) 소셜 공통속성 추출
 1) service
 2) controller
 3) react
+
+
+
+
+1. boot
+1) docker -> redis
+2) boot 구동
+
+2. react
+1) 폴더만들기
+2) 프로젝트 설치
+3) reducer -> saga -> page
+4) jwt 사용
+ㄴ api/axios.js
+
+3. social 개발자사이트 - 키찾기
+> kakao 개발자, naver 개발자, google 개발자
+> boot의 .env 파일 바꾸기
+
+```
+mkdir front3  -- 폴더만들기
+cd front3  -- 폴더이동
+
+front 프로젝트 .next / node_module 빼고 콘텐츠 넣기
+npm install
+```

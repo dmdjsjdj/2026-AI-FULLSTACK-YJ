@@ -306,4 +306,4 @@ public class UserController {
 //- GET			전체 사용자 수
 //- PUT			닉네임변경
 //- PUT			프로필이미지변경
-//- DELETE		회원탈퇴s
+//- DELETE		회원탈퇴
