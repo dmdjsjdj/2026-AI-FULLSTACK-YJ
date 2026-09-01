@@ -65,6 +65,15 @@ export default function MyPage(){
 
     const [fileList, setFileList] = useState([]);
 
+    // useEffect(() => {
+    //     const token = localStorage.getItem("accessToken");
+    //     // 리덕스에도 유저가 없고, 로컬 스토리지에도 토큰이 없다면 비로그인 유저이므로 리다이렉트
+    //     if (!user && !token) {
+    //         message.error("로그인이 필요한 페이지입니다.");
+    //         router.push("/login");
+    //     }
+    // }, [user, router]);
+
     if(!user){
         return (
             <div style={{maxWidth: 600, margin: "40px auto"}}>

@@ -138,17 +138,30 @@ public class UserController {
 //		return ResponseEntity.ok( user );
 //	}
 	
-	// 로그아웃
+ // 로그아웃
     @Operation(summary = "로그아웃")
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(
-          @CookieValue(name = "refreshToken", required = false) String refreshToken,
-                                       HttpServletResponse response) {
-        var claims = jwtProvider.parse(refreshToken).getBody();
-        String userId = claims.getSubject();
+            @CookieValue(name = "refreshToken", required = false) String refreshToken,
+            HttpServletResponse response) {
 
-        tokenStore.deleteRefreshToken(userId);	// redis 제거
- 
+        // refreshToken이 없으면 그냥 로그아웃 완료 처리
+        if (refreshToken != null && !refreshToken.isBlank()) {
+
+            try {
+                var claims = jwtProvider.parse(refreshToken).getBody();
+                String userId = claims.getSubject();
+
+                // Redis에서 refreshToken 삭제
+                tokenStore.deleteRefreshToken(userId);
+
+            } catch (Exception e) {
+                // 이미 만료/잘못된 토큰이어도 로그아웃은 진행
+                System.out.println("로그아웃 토큰 검증 실패: " + e.getMessage());
+            }
+        }
+
+        // 쿠키 삭제
         ResponseCookie deleteCookie = ResponseCookie.from("refreshToken", "")
                 .httpOnly(true)
                 .secure(true)
@@ -156,6 +169,7 @@ public class UserController {
                 .path("/")
                 .maxAge(0)
                 .build();
+
         response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString());
 
         return ResponseEntity.noContent().build();
@@ -184,12 +198,12 @@ public class UserController {
                 UserResponseDto user = userService.getUser(Long.valueOf(userId));	// 사용자 조회
                 return ResponseEntity.ok(user);	// 사용자 반환
             }  
-            if (refreshToken != null) {	// 장기 사용자인지 확인
-                var claims = jwtProvider.parse(refreshToken).getBody();
-                String userId = claims.getSubject();	// 사용자 id 추출
-                UserResponseDto user = userService.getUser(Long.valueOf(userId));	// 사용자 조회
-                return ResponseEntity.ok(user);	// 사용자 반환
-            }
+//            if (refreshToken != null) {	// 장기 사용자인지 확인
+//                var claims = jwtProvider.parse(refreshToken).getBody();
+//                String userId = claims.getSubject();	// 사용자 id 추출
+//                UserResponseDto user = userService.getUser(Long.valueOf(userId));	// 사용자 조회
+//                return ResponseEntity.ok(user);	// 사용자 반환
+//            }
             return ResponseEntity.status(401).build();	// 인증실패 401
         } catch (Exception e) {
             return ResponseEntity.status(401).build();	// 예외 발생 시 인증실패

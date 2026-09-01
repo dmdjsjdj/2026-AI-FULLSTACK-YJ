@@ -10,7 +10,7 @@ import  {  fetchPostsRequest , fetchPostsSuccess, fetchPostsFailure ,   //  전�
             resetPostState // 초기화
 } from '../reducers/postReducer';
 
-const POST_API_BASE = '/api/posts';
+const POST_API_BASE = '/auth';
 // watchFetchPosts          -   GET      /api/posts      전체 게시글 조회
 export const fetchPostsAPI = ()=> api.get(POST_API_BASE);
 export function* fetchPosts(action){
