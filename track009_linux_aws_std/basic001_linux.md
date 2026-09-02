@@ -355,5 +355,14 @@ chmod -x  hello.sh  # 권한 빼기
 ./hello.sh
 ```
 
+Q1. 현재시간출력 쉘스크립트 작성  > date_log.sh
+#!/bin/bash
+date
+date > log.txt
+echo  "log.txt 파일에 시각이 저장되었습니다."
+
+Q2. 권한확인 실행권한주기
+Q3. 실행 및 확인
+
 ## Part002. Aws
 

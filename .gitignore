@@ -36,3 +36,12 @@ dist/
 build/
 coverage/
 .next
+
+
+# AWS credentials
+*.pem
+*accessKeys.csv
+.env
+.env.*
+
+*.csv
