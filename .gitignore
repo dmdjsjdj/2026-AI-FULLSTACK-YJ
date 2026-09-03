@@ -47,3 +47,4 @@ coverage/
 .env.*
 
 *.csv
+/track009_linux_aws_std/basic002_aws.md
