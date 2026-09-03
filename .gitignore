@@ -22,6 +22,8 @@ Thumbs.db
 /.metadata/
 
 target/
+**/target/
+*.class
 
 # SQL Developer 프로그램 폴더 제외
 sqldeveloper/
