@@ -12,7 +12,7 @@
 <br/> 
 
 ## 📌 Contact & Links 
-<img src="me.png" alt="프로필" width="90" />
+<img width="120" alt="Image" src="https://github.com/user-attachments/assets/fabfda09-517b-4c1d-9a1a-b8826c560e88" />
 
 | | |
 |-|-|
