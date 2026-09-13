@@ -689,11 +689,6 @@
     transition: 0.3s;
 }
 
-.trouble-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(80,130,200,0.13);
-}
-
 .trouble-item:last-child {
     margin-bottom: 0;
 }
