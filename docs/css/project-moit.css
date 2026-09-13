@@ -69,47 +69,32 @@
 
 .project-detail-hero p {
     max-width: 760px;
-
     color: var(--text-light);
-
     line-height: 1.8;
-
     font-size: 1.05rem;
 }
 
 .project-label {
     display: inline-block;
-
     margin-bottom: 15px;
-
     color: var(--accent-blue);
-
     font-weight: 700;
-
     letter-spacing: 3px;
 }
 
 .detail-stack {
     display: flex;
-
     gap: 8px;
-
     flex-wrap: wrap;
-
     margin-top: 25px;
 }
 
 .detail-stack span {
     padding: 7px 14px;
-
     border-radius: 999px;
-
     background: rgba(255,255,255,0.85);
-
     color: var(--deep-blue);
-
     font-size: 0.82rem;
-
     font-weight: 500;
 }
 
@@ -132,17 +117,22 @@
 
 .detail-heading {
     margin-bottom: 45px;
-
     text-align: center;
+}
+
+.detail-heading h2 {
+    margin-bottom: 20px;
+
+    color: var(--deep-blue);
+
+    font-size: 2.5rem;
+    font-weight: 700;
 }
 
 .detail-heading p {
     max-width: 700px;
-
     margin: 0 auto;
-
     color: var(--text-light);
-
     line-height: 1.8;
 }
 
