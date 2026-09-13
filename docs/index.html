@@ -1,329 +1,545 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>손예진 | Full-Stack Developer</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 기존 CSS -->
     <link rel="stylesheet" href="./css/my.css">
 </head>
 
 <body>
-
-<!-- ================= HEADER ================= -->
-<header class="header">
-    <nav class="navbar navbar-expand-lg">
+    <!-- =========================
+         Navigation
+    ========================== -->
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-
-            <a class="navbar-brand fw-bold" href="./index.html">
+            <a class="navbar-brand" href="#home">
                 FULLSTACK YJ
             </a>
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-
+            
+            <div
+                class="collapse navbar-collapse justify-content-end"
+                id="navbarNav">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="#about">
+                            About
+                        </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#skills">Skills</a>
+                        <a class="nav-link" href="#skills">
+                            Skills
+                        </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projects</a>
+                        <a class="nav-link" href="#projects">
+                            Projects
+                        </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="#contact">
+                            Contact
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-</header>
 
-<!-- ================= HERO ================= -->
-<section class="hero">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
+    <!-- =========================
+         Hero
+    ========================== -->
+    <section
+        id="home"
+        class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="hero-small-title">
+                        FULL-STACK DEVELOPER
+                    </div>
 
-                <p class="hero-subtitle">
-                    FULL-STACK DEVELOPER
-                </p>
+                    <h1 class="hero-title">
+                        기능을 넘어,<br>
+                        <span>서비스의 흐름</span>을 이해하는 개발자
+                    </h1>
 
-                <h1>
-                    기능을 넘어,<br>
-                    <span>서비스의 흐름</span>을 이해하는 개발자
-                </h1>
-
-                <p class="hero-description">
-                    Java · Spring Boot · JPA · React를 기반으로
-                    프론트엔드부터 백엔드, 데이터 흐름까지 이해하며
-                    하나의 기능이 실제 서비스에서 어떻게 동작하는지 고민합니다.
-                </p>
-
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        프로젝트 보기
-                    </a>
-
-                    <a href="https://github.com/dmdjsjdj/2026-AI-FULLSTACK-YJ"
-                       target="_blank"
-                       class="btn btn-outline-dark">
-                        GitHub
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-5 text-center">
-                <div class="profile-card">
-                    <img src="./img/one.png"
-                         alt="프로필 이미지"
-                         class="profile-image">
-
-                    <h3>손예진</h3>
-
-                    <p>
-                        Java · Spring Boot · React
+                    <p class="hero-subtitle">
+                        Java · Spring Boot · JPA · React
                     </p>
+
+                    <p class="hero-description">
+                        프론트엔드부터 백엔드, 데이터 흐름까지 이해하며
+                        하나의 기능이 실제 서비스에서 어떻게 동작하는지 고민합니다.
+                        단순히 기능을 구현하는 것보다 서비스의 흐름과
+                        유지보수성을 고려한 개발을 지향합니다.
+                    </p>
+
+                    <div class="hero-btn-group">
+                        <a
+                            href="#projects"
+                            class="btn-primary-custom">
+                            프로젝트 보기
+                        </a>
+
+                        <a
+                            href="https://github.com/dmdjsjdj"
+                            target="_blank"
+                            class="btn-outline-custom">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 text-center mt-5 mt-lg-0">
+                    <img
+                        src="https://github.com/user-attachments/assets/fabfda09-517b-4c1d-9a1a-b8826c560e88"
+                        alt="손예진 프로필"
+                        class="profile-img">
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ================= ABOUT ================= -->
-<section id="about" class="section">
-    <div class="container">
-        <div class="section-title">
-            <p>ABOUT ME</p>
-            <h2>서비스의 흐름을 생각합니다.</h2>
-        </div>
+    <!-- =========================
+         About
+    ========================== -->
+    <section
+        id="about"
+        class="about-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">
+                    About Me
+                </h2>
 
-        <div class="about-grid">
-            <div class="about-box">
-                <div class="about-number">01</div>
-
-                <h3>서비스 흐름 이해</h3>
-
-                <p>
-                    단순히 기능을 구현하는 것보다
-                    사용자의 요청이 프론트엔드에서 백엔드와 DB를 거쳐
-                    다시 화면에 전달되는 전체 흐름을 이해하려고 합니다.
+                <p class="section-subtitle">
+                    기능을 구현하는 것에서 끝나지 않고,
+                    전체 흐름을 이해하며 개발합니다.
                 </p>
             </div>
 
-            <div class="about-box">
-                <div class="about-number">02</div>
+            <div class="row g-4">
+                <!-- 01 -->
+                <div class="col-md-4">
+                    <div class="about-card h-100">
+                        <div class="about-icon">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
 
-                <h3>문제의 원인부터 해결</h3>
+                        <h4>
+                            서비스 흐름 이해
+                        </h4>
 
-                <p>
-                    오류가 발생했을 때 결과만 수정하기보다
-                    데이터 흐름과 상태 변화를 단계별로 확인하여
-                    원인을 찾고 해결하는 방식을 중요하게 생각합니다.
+                        <p>
+                            화면 하나의 기능만 보는 것이 아니라
+                            React → API → Spring Boot → DB까지
+                            데이터가 이동하는 전체 흐름을 이해하고
+                            기능을 설계합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 02 -->
+                <div class="col-md-4">
+                    <div class="about-card h-100">
+                        <div class="about-icon">
+                            <i class="bi bi-bug"></i>
+                        </div>
+
+                        <h4>
+                            문제 원인부터 해결
+                        </h4>
+
+                        <p>
+                            오류가 발생했을 때 단순히 결과만 수정하기보다
+                            데이터 흐름과 상태 변화를 단계별로 확인하며
+                            문제의 원인을 찾아 해결하려고 합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 03 -->
+                <div class="col-md-4">
+                    <div class="about-card h-100">
+                        <div class="about-icon">
+                            <i class="bi bi-arrow-repeat"></i>
+                        </div>
+
+                        <h4>
+                            지속적인 개선
+                        </h4>
+
+                        <p>
+                            프로젝트를 한 번 완성하는 것보다
+                            실제 사용 흐름에서 발생할 수 있는 문제를 찾고
+                            구조와 기능을 계속 개선하는 개발을 중요하게 생각합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         Skills
+    ========================== -->
+    <section
+        id="skills"
+        class="skills-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">
+                    Skills
+                </h2>
+
+                <p class="section-subtitle">
+                    프로젝트에서 직접 사용하며 경험한 기술입니다.
                 </p>
             </div>
 
-            <div class="about-box">
-                <div class="about-number">03</div>
+            <div class="row g-4">
+                <!-- Backend -->
+                <div class="col-lg-4">
+                    <div class="skill-card h-100">
+                        <div class="skill-icon">
+                            <i class="bi bi-server"></i>
+                        </div>
 
-                <h3>지속적인 개선</h3>
+                        <h4 class="mb-4">
+                            Backend
+                        </h4>
 
-                <p>
-                    한 번 동작하는 기능에 그치지 않고
-                    유지보수성과 확장성을 고려하여
-                    구조와 로직을 계속 개선합니다.
+                        <div class="portfolio-badges justify-content-center">
+                            <span class="badge-custom">
+                                Java
+                            </span>
+
+                            <span class="badge-custom">
+                                Spring Boot
+                            </span>
+
+                            <span class="badge-custom">
+                                Spring Security
+                            </span>
+
+                            <span class="badge-custom">
+                                JPA
+                            </span>
+
+                            <span class="badge-custom">
+                                JWT
+                            </span>
+
+                            <span class="badge-custom">
+                                Redis
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend -->
+                <div class="col-lg-4">
+                    <div class="skill-card h-100">
+                        <div class="skill-icon">
+                            <i class="bi bi-window-stack"></i>
+                        </div>
+
+                        <h4 class="mb-4">
+                            Frontend
+                        </h4>
+
+                        <div class="portfolio-badges justify-content-center">
+                            <span class="badge-custom">
+                                React
+                            </span>
+
+                            <span class="badge-custom">
+                                JavaScript
+                            </span>
+
+                            <span class="badge-custom">
+                                Redux-Saga
+                            </span>
+
+                            <span class="badge-custom">
+                                Axios
+                            </span>
+
+                            <span class="badge-custom">
+                                Ant Design
+                            </span>
+
+                            <span class="badge-custom">
+                                Chart.js
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DB / Tools -->
+                <div class="col-lg-4">
+                    <div class="skill-card h-100">
+                        <div class="skill-icon">
+                            <i class="bi bi-database"></i>
+                        </div>
+
+                        <h4 class="mb-4">
+                            DB & Tools
+                        </h4>
+
+                        <div class="portfolio-badges justify-content-center">
+                            <span class="badge-custom">
+                                Oracle
+                            </span>
+
+                            <span class="badge-custom">
+                                MySQL
+                            </span>
+
+                            <span class="badge-custom">
+                                Git
+                            </span>
+
+                            <span class="badge-custom">
+                                GitHub
+                            </span>
+
+                            <span class="badge-custom">
+                                STS4
+                            </span>
+
+                            <span class="badge-custom">
+                                VS Code
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         Projects
+    ========================== -->
+    <section
+        id="projects"
+        class="portfolio-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">
+                    Projects
+                </h2>
+
+                <p class="section-subtitle">
+                    하나의 프로젝트를 단계적으로 개선하며
+                    서비스 구조와 문제 해결 경험을 쌓았습니다.
                 </p>
             </div>
-        </div>
-    </div>
-</section>
 
-<!-- ================= EDUCATION ================= -->
-<section class="section section-light">
-    <div class="container">
-        <div class="section-title">
-            <p>EDUCATION</p>
-            <h2>개발 학습</h2>
-        </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card portfolio-card">
+                        <div
+                            class="portfolio-img portfolio-img-3
+                            d-flex align-items-center
+                            justify-content-center">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
 
-        <div class="education-card">
-            <div>
-                <span class="education-date">
-                    2026.03 ~ 2026.10
-                </span>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="mb-0">
+                                    MOIT
+                                </h3>
 
-                <h3>
-                    AI활용 풀스택 개발 부트캠프
-                </h3>
+                                <span class="badge-custom">
+                                    Team Project
+                                </span>
+                            </div>
 
-                <p>
-                    Java · Spring Boot · Oracle · JPA · React · JavaScript
-                    기반의 풀스택 개발 학습
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+                            <p class="portfolio-desc">
+                                대학생 및 일반 사용자를 위한
+                                목적형 모임 플랫폼입니다.
 
-<!-- ================= SKILLS ================= -->
-<section id="skills" class="section">
-    <div class="container">
-        <div class="section-title">
-            <p>TECH STACK</p>
-            <h2>사용 기술</h2>
-        </div>
+                                1차 기본 모임 서비스에서 시작하여
+                                2차 React 기반 API 구조로 전환하고,
+                                3차에는 광고·결제·통계·자동화 기능까지
+                                확장했습니다.
+                            </p>
 
-        <div class="skill-grid">
-            <div class="skill-box">
-                <h3>Backend</h3>
+                            <div class="portfolio-badges mb-4">
+                                <span class="badge-custom">
+                                    Spring Boot
+                                </span>
 
-                <div class="skill-tags">
-                    <span>Java</span>
-                    <span>Spring Boot</span>
-                    <span>Spring Security</span>
-                    <span>JPA</span>
-                    <span>JWT</span>
-                    <span>Redis</span>
-                </div>
-            </div>
+                                <span class="badge-custom">
+                                    JPA
+                                </span>
 
-            <div class="skill-box">
-                <h3>Frontend</h3>
+                                <span class="badge-custom">
+                                    React
+                                </span>
 
-                <div class="skill-tags">
-                    <span>React</span>
-                    <span>JavaScript</span>
-                    <span>Redux-Saga</span>
-                    <span>Axios</span>
-                    <span>Ant Design</span>
-                    <span>Chart.js</span>
-                </div>
-            </div>
+                                <span class="badge-custom">
+                                    JWT
+                                </span>
 
-            <div class="skill-box">
-                <h3>Database & Tools</h3>
+                                <span class="badge-custom">
+                                    Redis
+                                </span>
 
-                <div class="skill-tags">
-                    <span>Oracle</span>
-                    <span>MySQL</span>
-                    <span>Git</span>
-                    <span>GitHub</span>
-                    <span>STS4</span>
-                    <span>VS Code</span>
+                                <span class="badge-custom">
+                                    Oracle
+                                </span>
+                            </div>
+
+                            <a
+                                href="./project-moit.html"
+                                class="btn-primary-custom d-inline-block">
+                                프로젝트 상세 보기
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ================= PROJECT ================= -->
-<section id="projects" class="section section-light">
-    <div class="container">
-        <div class="section-title">
-            <p>PROJECT</p>
-            <h2>프로젝트</h2>
-        </div>
+    <!-- =========================
+         Contact
+    ========================== -->
+    <section
+        id="contact"
+        class="contact-section">
+        <div class="container">
+            <div class="contact-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <h2 class="contact-title">
+                            Contact
+                        </h2>
 
-        <div class="project-card">
-            <div class="project-image">
-                <img src="./img/cat2.png"
-                     alt="MOIT 프로젝트">
-            </div>
+                        <p class="text-muted mb-4">
+                            새로운 서비스를 만들고,
+                            문제를 해결하며 성장하는 개발자가 되겠습니다.
+                        </p>
 
-            <div class="project-content">
-                <span class="project-label">
-                    TEAM PROJECT · 1차 → 2차 → 3차
-                </span>
+                        <div class="contact-item">
+                            <div class="social-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            
+                            <div>
+                                <small>
+                                    Email
+                                </small>
 
-                <h3>
-                    MOIT
-                </h3>
+                                <p>
+                                    jenia03s@gmail.com
+                                </p>
+                            </div>
+                        </div>
 
-                <h4>
-                    관심사를 함께하는 모임 플랫폼
-                </h4>
+                        <div class="contact-item">
+                            <div class="social-icon">
+                                <i class="bi bi-github"></i>
+                            </div>
+                            
+                            <div>
+                                <small>
+                                    GitHub
+                                </small>
 
-                <p>
-                    대학생 및 일반 사용자가 관심사를 기반으로
-                    모임을 생성하고 참여할 수 있는 서비스입니다.
-                </p>
+                                <p>
+                                    <a
+                                        href="https://github.com/dmdjsjdj"
+                                        target="_blank"
+                                        class="text-decoration-none">
+                                        github.com/dmdjsjdj
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="project-stack">
-                    <span>Spring Boot</span>
-                    <span>JPA</span>
-                    <span>React</span>
-                    <span>JWT</span>
-                    <span>Redis</span>
-                    <span>Oracle</span>
+                    <div class="col-lg-5 text-center mt-4 mt-lg-0">
+                        <a
+                            href="https://github.com/dmdjsjdj"
+                            target="_blank"
+                            class="btn-primary-custom d-inline-block">
+
+                            GitHub 바로가기
+                        </a>
+                    </div>
                 </div>
-
-                <div class="project-highlight">
-                    <strong>3차 주요 개선</strong>
-
-                    <ul>
-                        <li>광고 등록 → 승인 → 결제 → 노출 구조 구현</li>
-                        <li>광고 노출·클릭 및 CTR 통계 제공</li>
-                        <li>Scheduler 기반 상태·통계·알림 자동화</li>
-                        <li>LLM API를 활용한 광고 성과 요약</li>
-                    </ul>
-                </div>
-
-                <a href="./project-moit.html"
-                   class="project-button">
-                    프로젝트 상세보기 →
-                </a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ================= CONTACT ================= -->
-<section id="contact" class="section contact-section">
-    <div class="container text-center">
-        <div class="section-title">
-            <p>CONTACT</p>
-            <h2>함께 성장할 개발자를 찾고 있습니다.</h2>
+    <!-- =========================
+         Top Button
+    ========================== -->
+    <a
+        href="#home"
+        class="top_btn position-fixed bottom-0 end-0 m-4
+        text-white rounded-circle
+        d-flex align-items-center justify-content-center"
+        style="width:48px;height:48px;text-decoration:none;">
+
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- =========================
+         Footer
+    ========================== -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-1">
+                손예진 | Full-Stack Developer
+            </p>
+
+            <small>
+                © 2026 YJ. All rights reserved.
+            </small>
         </div>
+    </footer>
 
-        <p class="contact-description">
-            새로운 기술을 배우고 실제 서비스에 적용하는 과정을 좋아합니다.
-        </p>
-
-        <div class="contact-links">
-            <a href="mailto:jenia03s@gmail.com">
-                jenia03s@gmail.com
-            </a>
-
-            <a href="https://github.com/dmdjsjdj/2026-AI-FULLSTACK-YJ"
-               target="_blank">
-                GitHub
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-    <p>
-        © 2026 Son Yejin. All rights reserved.
-    </p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
 </body>
 </html>
