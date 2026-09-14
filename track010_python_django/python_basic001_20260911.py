@@ -357,7 +357,6 @@ log_df = pd.DataFrame(log_data)
 # --- [작성 공간] ---
 success_df = log_df[log_df['status_code'] == 200]
 
-# TODO: log_df에 'response_time_sec' 컬럼을 생성하는 코드를 작성하세요.
 log_df['response_time_sec'] = log_df['response_time_ms'] / 1000
 
 server_summary = log_df.groupby('server')['response_time_ms'].mean().reset_index()
