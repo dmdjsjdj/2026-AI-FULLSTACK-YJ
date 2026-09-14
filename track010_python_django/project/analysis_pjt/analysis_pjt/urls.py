@@ -13,10 +13,18 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+""" 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path , include
+from django.views.generic import RedirectView
 
-urlpatterns = [
+urlpatterns=[
+    #  Admin 관리자 라우팅
     path('admin/', admin.site.urls),
+
+    #  /dashboard/ 주소로로 들어오는 애들 
+    path('dashboard/' , include('analytics.urls')),
+
+    # http://127.0.0.1:8000 접속시, /dashboard/ 로 자동이동
+    path('', RedirectView.as_view(url='/dashboard/', permanent=False)),
 ]
