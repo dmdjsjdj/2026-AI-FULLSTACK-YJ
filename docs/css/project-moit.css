@@ -74,6 +74,12 @@
     font-size: 1.05rem;
 }
 
+.project-detail-hero .container > .btn {
+    display: block !important;
+    width: fit-content;
+    margin-top: 30px;
+}
+
 .project-label {
     display: inline-block;
     margin-bottom: 15px;
