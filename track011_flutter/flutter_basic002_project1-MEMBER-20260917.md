@@ -3,7 +3,6 @@
 ---
 
 ## 🛠️ Step 0. 개발 환경 설정 및 터미널 구동
-
 ### 1. Windows 개발자 모드 활성화 (최초 1회)
 
 * `Win + R` 입력 후 `ms-settings:developers` 실행 ➔ **개발자 모드 켬**
@@ -11,14 +10,14 @@
 ### 2. 프로젝트 생성 및 1차 구동 테스트
 
 ```bash
-# 1. 프로젝트 생성
+# 1. 프로젝트 생성 
 flutter create mobile2
 
-# 2. 프로젝트 디렉토리 이동
-cd mobile2
- 
-# 3. 프로젝트 기본 실행 (Windows 타겟 선택)
-flutter run 
+# 2. 프로젝트 디렉토리 이동 
+cd  mobile2
+
+# 3. 프로젝트 기본 실행 (Windows 타겟 선택) 
+flutter run
 1
 
 ```
@@ -46,10 +45,10 @@ flutter run -d windows
 
 ```bash
 # Riverpod, Dio, Secure Storage, Image Picker 설치
-# 1) redux처럼 전역상태관리 라이브러리
-# 2) dio : Axios처럼 비동기 http 통신 라이브러리 (Intercepter 기능제공)
+# 1) flutter_riverpod : redux 처럼 전역상태관리 라이브러리 
+# 2) dio  :  Axios처럼  비동기 http 통신 라이브러리 ( Intercepter 기능제공  ) 
 # 3) flutter_secure_storage : 브라우저의 localStorage/Cookies대신 모바일 암호화영역 jwt 저장
-# 4) image_picker : <input type="file"> 같은 갤러리/카메라 접근 패키지
+# 4) image_picker : <input type="file">  같은 갤러리/카메라 접근패키지
 
 flutter pub add flutter_riverpod
 flutter pub add dio
@@ -70,10 +69,10 @@ flutter pub get
 ```bash
 # ✏️ 연습문제 & 개념 점검 [Step 0]
 # Q1. Windows 환경에서 C++ 네이티브 창으로 디버그 앱을 구동할 때 사용하는 flutter run 옵션은 무엇인가요?
-# 답: flutter run -d ( Windows )
+# 답: flutter run -d (  windows   )
 
 # Q2. Axios처럼 HTTP Interceptor 기능을 지원하는 Flutter 비동기 통신 라이브러리는 무엇인가요?
-# 답: (  dio  )
+# 답: (   dio    )
 
 ```
 
@@ -106,7 +105,7 @@ mobile2/
             │   └── board_provider.dart #  게시글 CRUD & FormData 멀티파트 상태관리
             └── presentation/
                 ├── post_list_page.dart #  게시글 목록 화면 (카드 형태 UI)
-                ├── post_write_page.dart #  이미지 다중 선택(image_picker) & 글 작성
+                ├── post_write_page.dart#  이미지 다중 선택(image_picker) & 글 작성
                 ├── post_detail_page.dart #  게시글 상세 보기 (작성자 검증)
                 └── post_update_page.dart #  게시글 및 이미지 수정 화면
 ```
@@ -115,7 +114,7 @@ mobile2/
 #### 1. `lib/main.dart`
 
 ```dart
-// ProviderScope 최상위 앱(App) 전역상태 공유가능
+// ProviderScope 최상위 앱(App)  전역상태 공유가능
 
 // flutter 기본 ui 컴포넌트 라이브러리 임포트
 import 'package:flutter/material.dart';
@@ -124,13 +123,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // 메인앱설정
 import 'app.dart';
 
+// 앱실행 진입점
 void main() {
   // Flutter 엔진과 플랫폼 바인딩 초기화
   WidgetsFlutterBinding.ensureInitialized();
-  
   // ProviderScope: Riverpod 전역 상태를 앱 전체에 주입 (Redux의 <Provider> 역할)
   runApp(const ProviderScope(child: App()));
 }
+
 ```
 
 > **🧪 중간 테스트:**
@@ -150,19 +150,20 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     // MaterialApp: 앱 전체 테마와 라우팅 테이블을 관리하는 루트 위젯
     return MaterialApp(
-      title: '나의 소셜 앱',
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      title: 'TheJoa703',  // 앱의 대표타이틀
+      debugShowCheckedModeBanner: false,  // 우측상단 debug 띠제거
+      initialRoute: '/',  // 앱구동시 최초로 보여줄 메인 라우트 지정
       routes: {
         // 루트 경로 매핑 (Scaffold: 기본 레이아웃 뼈대 제공 위젯)
         '/': (context) => Scaffold(
-              appBar: AppBar(title: const Text('1단계: 라우팅 테스트')),
-              body: const Center(child: Text('앱이 정상적으로 실행되었습니다! 🎉')),
+              appBar: AppBar(title: const Text('1단계: 라우팅 테스트')),  // 헤더 상단바
+              body: const Center(child: Text('앱이 정상적으로 실행되었습니다! 🎉')), // 화면 본문중앙
             ),
       },
     );
   }
 }
+
 ```
 
 > **🧪 중간 테스트:**
@@ -173,10 +174,10 @@ class App extends StatelessWidget {
 ```dart
 // ✏️ 연습문제 & 개념 점검 [Step 1]
 // Q1. Riverpod 전역 상태를 앱 레이어 전체에 바인딩하기 위해 최상위 앱을 감싸주는 위젯은 무엇인가요?
-// 답: ( ProviderScope )
+// 답: (   ProviderScope   )
 
 // Q2. Flutter에서 상단 헤더바, 본문, 하단 탭 등의 기본 뼈대를 제공해 주는 Layout 구조 위젯은 무엇인가요?
-// 답: ( Scaffold )
+// 답: (  Scaffold    )
 
 ```
 
@@ -185,24 +186,26 @@ class App extends StatelessWidget {
 ## 🌐 Step 2. Core & Shared (임시 레이아웃 검증)
 
 #### 1. `lib/core/network/api_client.dart`
-
 ```dart
-// web 플랫폼 판단용
+// spring boot 에서(8080) 와 통신할 서버 base_url
+
+//web 플랫폼 판단용 
 import 'package:flutter/foundation.dart';
-// os 플랫폼(android, ios, windows 등 ) 감지 라이브러리
+//os 플랫폼(Android, iOS , Windows 등 ) 감지 라이브러리 
 import 'dart:io' show Platform;
 
 class ApiClient {
   static String getBaseUrl() {
+    //1. 웹브라우저 실행시
     if (kIsWeb) return 'http://localhost:8080';
     try {
-      // Android 에뮬레이터에서 PC 서버(localhost) 접속 우회 전용 IP ### 
+      // 2. Android 에뮬레이터에서 PC 서버(localhost) 접속 우회 전용 IP  ###
       if (Platform.isAndroid) return 'http://10.0.2.2:8080';
     } catch (_) {}
+    //3. window 데스크톱 네이티브 앱 실행시
     return 'http://localhost:8080';
   }
 }
-
 ```
 
 > **🧪 중간 테스트:**
@@ -211,28 +214,28 @@ class ApiClient {
 > 
 
 #### 2. `lib/shared/components/app_layout.dart` (임시 레이아웃 ver-1)
-
 ```dart
-// React에서 레이아웃 : <Layout>{children}</Layout>
-// ConsumerWidget 상속받으면 React에서 useSelector 처럼 전역인증
+//  React에서 레이아웃 : <Layout>{children}</Layout>
+//  ConsumerWidget 상속받으면  React에서 useSelector 처럼 전역인증
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Riverpod 상태를 반응형으로 관찰하기 위해 StatelessWidget 대신 상속받는 클래스
 class AppLayout extends ConsumerWidget {
-  final Widget child;
+  final Widget child;  // React의 Children
   const AppLayout({super.key, required this.child});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 임시테스트용 - 로그인 여부 테스트
+    // 임시테스트용 - 로그인 여부테스트
     final bool isLogined = DateTime.now().year < 2000;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('나의 소셜 앱'),
         actions: [
+          //  ... 전개연산자   React     { isLogined ? <A/> : <B/>  }
           if (isLogined) ...[
             const Center(
               child: Padding(
@@ -265,6 +268,7 @@ class AppLayout extends ConsumerWidget {
 
 ```dart
 import 'package:flutter/material.dart';
+// 공통 상단바 레이아웃 (AppLayout)
 import 'shared/components/app_layout.dart';
 
 class App extends StatelessWidget {
@@ -273,12 +277,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'APPLE 소셜 앱',
+      title: '나의 소셜 앱',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        useMaterial3: true,
+        useMaterial3: true,  // 구글 최신 Meterial Design 3 테마적용
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.blue, // 파란색 테마헤더
+          backgroundColor: Colors.blue,  // 파란색 테마헤더
           foregroundColor: Colors.white, // 글자 하얀색
         ),
       ),
@@ -287,7 +291,7 @@ class App extends StatelessWidget {
         '/': (context) => const AppLayout(
               child: Center(
                 child: Text(
-                  'BLUE상단바 🎉',
+                  'Hello BLUE상단바 🎉',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -307,10 +311,10 @@ class App extends StatelessWidget {
 ```dart
 // ✏️ 연습문제 & 개념 점검 [Step 2]
 // Q1. Android 에뮬레이터에서 PC에 작동 중인 로컬 백엔드 서버(localhost:8080)로 통신할 때 사용하는 전용 IP는 무엇인가요?
-// 답: http://(10.0.2.2):8080
+// 답: http://( 10.0.2.2 ):8080
 
 // Q2. React의 useSelector처럼 Riverpod에서 전역 상태를 관찰(구독)할 수 있도록 StatelessWidget 대신 상속받는 위젯 클래스는 무엇인가요?
-// 답: ( ConsumerWidget )
+// 답: (   ConsumerWidget   )
 
 ```
 
@@ -319,21 +323,20 @@ class App extends StatelessWidget {
 ## 🔐 Step 3. Features: Auth (인증 기능 완성)
 
 #### 1. `lib/features/auth/data/auth_provider.dart`
-
 ```dart
-// React [Redux + Saga + api/axios.js(jwt 토큰처리)]
-// AuthState  - Redux
-
+//  React [Redux + Saga + api/axios.js(jwt 토큰처리)]
+//  AuthState   - Redux
+//  _dio.interceptors :  api 요청마다 `Bearer ${token}` 을 헤더주입 , 401 에러토큰
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';  // 리덕스
-import 'package:dio/dio.dart';  // axios 역할의 비동기 역할
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:dio/dio.dart';  // axios  역할의 비동기 http 통신
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';  // jwt 저장라이브러리
 import '../../../core/network/api_client.dart';
 
 class AuthState {
-  final Map<String, dynamic>? user; // 서버에서 받은 유저정보 dto객체
-  final String? accessToken; // jwt access Token
-  final bool loading; // 로딩중?
+  final Map<String, dynamic>? user; // 서버엥서 받은 유저정보 dto객체
+  final String? accessToken;  // jwt access Token
+  final bool loading;  // 로딩중?
   final String? error; // 에러
 
   const AuthState({
@@ -348,22 +351,23 @@ class AuthState {
 class AuthNotifier extends Notifier<AuthState> {
   @override
   AuthState build() {
-    _initDio();
-    return const AuthState();
+    _initDio();  // Provider 생성시 인터셉터 설정 초기화
+    return const AuthState();  // 초기화 상태 반환
   }
 
-  late final Dio _dio;
+  late final Dio _dio;  // late (나중에-사용하기 직전에 초기화)  , final 변경 x
   // OS 암호화 저장소 객체 생성 (localStorage 대신 모바일 보안 영역 사용)
-  final _storage = const FlutterSecureStorage();
+  final _storage = const FlutterSecureStorage();   
 
   void _initDio() {
     _dio = Dio(BaseOptions(
-      baseUrl: ApiClient.getBaseUrl(),
+      baseUrl: ApiClient.getBaseUrl(),  // 부품객체 : ApiClient  http://localhost:8080
       headers: {'Content-Type': 'application/json'},
     ));
 
     // [핵심] Dio Interceptor 설정 (Axios interceptor와 100% 동일)
-    _dio.interceptor.add(InterceptorsWrapper(
+    _dio.interceptors.add(InterceptorsWrapper(
+      // 매 api 요청마다  SecureStorage에서 토큰 읽어와서 Authorization 헤서 주입
       onRequest: (options, handler) async {
         final token = await _storage.read(key: 'accessToken');
         if (token != null) {
@@ -372,6 +376,7 @@ class AuthNotifier extends Notifier<AuthState> {
         }
         return handler.next(options);
       },
+      // 에러응답  - 401(토큰만료) → 재발급시도
       onError: (DioException e, handler) async {
         // [핵심] HTTP 401 Unauthorized 감지 시 토큰 재발급 후 원래 요청 재시도
         if (e.response?.statusCode == 401) {
@@ -380,7 +385,7 @@ class AuthNotifier extends Notifier<AuthState> {
             final token = await _storage.read(key: 'accessToken');
             e.requestOptions.headers['Authorization'] = 'Bearer $token';
             // 기존 실패했던 API 요청 재전송
-            final clonedRequest = await _dio.fetch(e.requestOptions);
+            final clonedRequest = await _dio.fetch(e.requestOptions); // 원래요청 재전송
             return handler.resolve(clonedRequest);
           }
         }
@@ -388,10 +393,10 @@ class AuthNotifier extends Notifier<AuthState> {
       },
     ));
   }
-
+  // jwt 토큰 재발급 비동기 로직
   Future<bool> _refreshAccessToken() async {
     try {
-      final response = await _dio.post('/auth/refresh');
+      final response = await _dio.post('/auth/refresh');  // boot 요청경로
       final newAccessToken = response.data['accessToken'];
       if (newAccessToken != null) {
         await _storage.write(key: 'accessToken', value: newAccessToken);
@@ -404,12 +409,13 @@ class AuthNotifier extends Notifier<AuthState> {
         return true;
       }
     } catch (_) {
-      await logout();
+      await logout();  // refresh 실패시 강제로그아웃
     }
     return false;
   }
-
+  // 로그인
   Future<bool> login(Map<String, dynamic> credentials) async {
+    // 로딩상태시작
     state = AuthState(
       user: state.user,
       accessToken: state.accessToken,
@@ -450,15 +456,16 @@ class AuthNotifier extends Notifier<AuthState> {
       return false;
     }
   }
-
+  // 로그아웃 액션
   Future<void> logout() async {
     try {
-      await _dio.post('/auth/logout');
+      await _dio.post('/auth/logout'); 
     } catch (_) {}
-    await _storage.delete(key: 'accessToken');
-    state = const AuthState();
+    await _storage.delete(key: 'accessToken');  // 저장된 토큰삭제
+    state = const AuthState();  // 상태초기화
   }
 
+  // 회원가입
   Future<bool> signup(Map<String, dynamic> data) async {
     state = AuthState(
       user: state.user,
@@ -498,7 +505,7 @@ class AuthNotifier extends Notifier<AuthState> {
       return false;
     }
   }
-
+  // 이메일 중복체크 api  ( GET   /auth/check-email )
   Future<bool> checkEmailDuplicate(String email) async {
     try {
       final response = await _dio.get('/auth/check-email', queryParameters: {'email': email});
@@ -507,17 +514,16 @@ class AuthNotifier extends Notifier<AuthState> {
       return false;
     }
   }
-
+  // 닉네임 중복체크 api  ( GET   /auth/check-nickname )
   Future<bool> checkNicknameDuplicate(String nickname) async {
     try {
       final response = await _dio.get('/auth/check-nickname', queryParameters: {'nickname': nickname});
-      return response.data;
+      return response.data;  // true:이미존재, false: 사용가능
     } catch (e) {
       return false;
     }
   }
 }
-
 // [핵심] Riverpod NotifierProvider 등록
 final authProvider = NotifierProvider<AuthNotifier, AuthState>(() {
   return AuthNotifier();
@@ -530,6 +536,8 @@ final authProvider = NotifierProvider<AuthNotifier, AuthState>(() {
 > 
 > 
 
+
+
 #### 2. `lib/features/auth/presentation/login_page.dart`
 
 ```dart
@@ -538,7 +546,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/auth_provider.dart';
 
 // React의 useState + useSelector 기능을 모두 사용하기 위해 상속받는 클래스
-class LoginPage extends ConsumerState {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
@@ -547,6 +555,7 @@ class LoginPage extends ConsumerState {
 
 class _LoginPageState extends ConsumerState<LoginPage> {
   // [핵심] Flutter의 폼 입력 제어 컨트롤러 (React의 useState/useRef 역할)
+  // _변수  : 해당변수를 클래스 내부에서만 접근
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -563,23 +572,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
+    //  Toast  / Alert  대신 사용하는 Flutter 표준스낵바
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('이메일과 비밀번호를 입력해주세요.')),
       );
       return;
     }
-
-     // 서버 연동
     // [핵심] Notifier의 메서드를 호출(dispatch)하기 위해 ref.read().notifier 사용  ##
     final success = await ref.read(authProvider.notifier).login({'email': email, 'password': password});
     
     if (success && mounted) {
       // [핵심] 히스토리 스택을 모두 삭제하고 이동 (React Router의 router.replace('/') 효과)
-      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false );
     }
   }
-
+  ////////////////////////////////////////////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     // [핵심] 전역 AuthState 변화를 구독하여 UI 자동 재빌드 (Redux의 useSelector 역할)
@@ -596,12 +604,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             const SizedBox(height: 12),
             TextField(controller: _passwordController, obscureText: true, decoration: const InputDecoration(labelText: '비밀번호')),
             const SizedBox(height: 24),
+            // 에러 발생시 조건부 렌더링
             if (authState.error != null)
               Text(authState.error!, style: const TextStyle(color: Colors.red)),
             const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
+                // 로딩 중일때 버튼 비활성화 여부 
                 onPressed: authState.loading ? null : _handleLogin,
                 child: authState.loading ? const CircularProgressIndicator(color: Colors.white) : const Text('로그인'),
               ),
@@ -679,7 +689,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
     final exists = await ref.read(authProvider.notifier).checkEmailDuplicate(email);
     if (exists) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('이미 사용 중인 이메일입니다.')));
-      // [정답 1] Flutter의 local state 변경 및 UI 트리 재렌더링 트리거 함수
+      // [핵심] Flutter의 local state 변경 및 UI 트리 재렌더링 트리거 함수
       setState(() => _isEmailChecked = false);
     } else {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('사용 가능한 이메일입니다.')));
@@ -725,23 +735,14 @@ class _SignupPageState extends ConsumerState<SignupPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('회원가입 완료! 로그인해주세요.')),
       );
-      // [정답 2] 현재 페이지를 스택에서 제거하고 이전 페이지로 복귀
+      // [핵심] 현재 페이지를 스택에서 제거하고 이전 페이지로 복귀 (React Router의 router.back())
       Navigator.pop(context); 
     }
   }
-
+  //////////////////////////////////////////////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
-
-    // [선택적 개선] 회원가입 실패 에러를 스낵바로 일관되게 보여주는 listen 패턴
-    ref.listen<AuthState>(authProvider, (previous, next) {
-      if (next.error != null && next.error != previous?.error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(next.error!), backgroundColor: Colors.red),
-        );
-      }
-    });
 
     return Scaffold(
       appBar: AppBar(title: const Text('회원가입')),
@@ -751,12 +752,11 @@ class _SignupPageState extends ConsumerState<SignupPage> {
           children: [
             Row(
               children: [
-                // [정답 3] Flex Layout 내에서 입력창이 남은 공간을 차지하도록 확장해 주는 위젯
+                // [핵심] Flex Layout 내에서 입력창이 남은 공간을 차지하도록 확장해 주는 위젯
                 Expanded(
                   child: TextField(
                     controller: _emailController, 
                     decoration: const InputDecoration(labelText: '이메일'),
-                    keyboardType: TextInputType.emailAddress,
                     onChanged: (_) => setState(() => _isEmailChecked = false),
                   ),
                 ),
@@ -765,11 +765,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
               ],
             ),
             const SizedBox(height: 12),
-            TextField(
-              controller: _passwordController, 
-              obscureText: true, 
-              decoration: const InputDecoration(labelText: '비밀번호'),
-            ),
+            TextField(controller: _passwordController, obscureText: true, decoration: const InputDecoration(labelText: '비밀번호')),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -784,17 +780,16 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 ElevatedButton(onPressed: _checkNickname, child: const Text('중복확인')),
               ],
             ),
+            const SizedBox(height: 16),
+            if (authState.error != null)
+              Text(authState.error!, style: const TextStyle(color: Colors.red)),
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: authState.loading ? null : _handleSignup,
                 child: authState.loading 
-                    ? const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
-                      ) 
+                    ? const CircularProgressIndicator(color: Colors.white) 
                     : const Text('가입하기'),
               ),
             ),
@@ -838,8 +833,8 @@ class UsersPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // [핵심] 읽어온 유저 데이터 가져오기
-    final user = ref._______(authProvider).user;
+    // [핵심] 읽어온 유저 데이터 가져오기  ##
+    final user = ref.watch(authProvider).user;
 
     return AppLayout(
       child: Scaffold(
@@ -850,6 +845,7 @@ class UsersPage extends ConsumerWidget {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    // 카드형태의 표
                     Card(
                       elevation: 2,
                       shape: RoundedRectangleBorder(
@@ -858,7 +854,7 @@ class UsersPage extends ConsumerWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         // HTML의 <table> 태그 역할을 해주는 Flutter 내장 표 위젯
-                        child: _______(
+                        child: DataTable(
                           columnSpacing: 24.0,
                           columns: const [
                             DataColumn(
@@ -905,9 +901,9 @@ class UsersPage extends ConsumerWidget {
                 ),
         ),
         
-        // 화면 우측 하단 둥근 플로팅 글쓰기 버튼 (FAB)
+        // 로그인 된 상태, 화면 우측 하단 둥근 플로팅 글쓰기 버튼 (FAB)
         floatingActionButton: user != null
-            ? _______.extended(
+            ? FloatingActionButton.extended(
                 onPressed: () {
                   Navigator.pushNamed(context, '/post-write');
                 },
@@ -952,18 +948,18 @@ class AppLayout extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.watch(authProvider);
+    final authState = ref.watch(authProvider); // 전역 인증상태 관찰
     final bool isLogined = authState.accessToken != null && authState.user != null;
     final userNickname = authState.user?['nickname'] ?? '유저';
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('나의 소셜 앱'),
-        actions: [
+        title: const Text('마이페이지'),
+        actions: [   // {isLogined? <A/> : <B/>}
           if (isLogined) ...[
             Center(
               // [핵심] 일반 Text/Container 영역을 클릭 및 물결 터치(Ripple) 반응형으로 만들어 주는 위젯
-              child: _______(
+              child: InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, '/users');
                 },
@@ -984,7 +980,7 @@ class AppLayout extends ConsumerWidget {
             TextButton(
               onPressed: () {
                 // [핵심] 읽기 전용으로 Notifier의 메서드 실행
-                ref.read(authProvider._______).logout();
+                ref.read(authProvider.notifier).logout();
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('로그아웃 되었습니다.')),
                 );
@@ -1054,9 +1050,9 @@ class App extends StatelessWidget {
 ```dart
 // ✏️ 연습문제 & 개념 점검 [Step 3]
 // Q1. JWT 토큰을 브라우저 LocalStorage보다 안전하게 스마트폰 OS 암호화 영역에 저장해 주는 패키지 클래스는 무엇인가요?
-// 답: (                     )
+// 답: (  FlutterSecureStorage  )
 
 // Q2. 로그인 후 router.replace('/') 처럼 뒤로 가기 스택을 지우고 메인 경로로 이동해 주는 Navigator 메서드는 무엇인가요?
-// 답: Navigator.(                     )
+// 답: Navigator.(   pushNamedAndRemoveUntil )
 
 ```

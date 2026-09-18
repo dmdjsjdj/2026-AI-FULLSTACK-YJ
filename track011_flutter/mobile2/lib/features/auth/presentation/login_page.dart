@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/auth_provider.dart';
 
-// [수정] React의 컴포넌트 역할을 하는 ConsumerStatefulWidget 상속
+// React의 useState + useSelector 기능을 모두 사용하기 위해 상속받는 클래스
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
@@ -11,55 +11,44 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  // Flutter의 폼 입력 제어 컨트롤러 (React의 useState/useRef 역할)
+  // [핵심] Flutter의 폼 입력 제어 컨트롤러 (React의 useState/useRef 역할)
+  // _변수  : 해당변수를 클래스 내부에서만 접근
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    // 메모리 누수 방지를 위한 컨트롤러 객체 해제
+    // [핵심] 메모리 누수 방지를 위한 컨트롤러 객체 해제
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
-  void _handleLogin() {
+  void _handleLogin() async {
+    // TextEditingController에서 텍스트 값 추출
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
+    //  Toast  / Alert  대신 사용하는 Flutter 표준스낵바
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('이메일과 비밀번호를 입력해주세요.')),
       );
       return;
     }
-
-    // Notifier의 메서드를 호출(dispatch)하기 위해 ref.read().notifier 사용
-    ref.read(authProvider.notifier).login({
-      'email': email,
-      'password': password,
-    });
+    // [핵심] Notifier의 메서드를 호출(dispatch)하기 위해 ref.read().notifier 사용  ##
+    final success = await ref.read(authProvider.notifier).login({'email': email, 'password': password});
+    
+    if (success && mounted) {
+      // [핵심] 히스토리 스택을 모두 삭제하고 이동 (React Router의 router.replace('/') 효과)
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false );
+    }
   }
-
+  ////////////////////////////////////////////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     // [핵심] 전역 AuthState 변화를 구독하여 UI 자동 재빌드 (Redux의 useSelector 역할)
     final authState = ref.watch(authProvider);
-
-    // [핵심] 상태 변화에 따른 부수 효과(에러 스낵바 등)를 선언적으로 처리하는 listen 기능
-    ref.listen<AuthState>(authProvider, (previous, next) {
-      // 에러가 새로 발생했을 때만 스낵바 표시
-      if (next.error != null && next.error != previous?.error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(next.error!), backgroundColor: Colors.red),
-        );
-      }
-      
-      // 로그인이 성공하여 토큰과 유저 정보가 채워졌다면 메인 화면으로 이동
-      if (next.user != null && next.accessToken != null && mounted) {
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-      }
-    });
 
     return Scaffold(
       appBar: AppBar(title: const Text('로그인')),
@@ -68,30 +57,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _emailController, 
-              decoration: const InputDecoration(labelText: '이메일'),
-              keyboardType: TextInputType.emailAddress, // 키보드 타입 최적화
-            ),
+            TextField(controller: _emailController, decoration: const InputDecoration(labelText: '이메일')),
             const SizedBox(height: 12),
-            TextField(
-              controller: _passwordController, 
-              obscureText: true, 
-              decoration: const InputDecoration(labelText: '비밀번호'),
-            ),
+            TextField(controller: _passwordController, obscureText: true, decoration: const InputDecoration(labelText: '비밀번호')),
             const SizedBox(height: 24),
+            // 에러 발생시 조건부 렌더링
+            if (authState.error != null)
+              Text(authState.error!, style: const TextStyle(color: Colors.red)),
+            const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                // 로딩 중에는 버튼을 비활성화(null) 처리
+                // 로딩 중일때 버튼 비활성화 여부 
                 onPressed: authState.loading ? null : _handleLogin,
-                child: authState.loading 
-                    ? const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
-                      ) 
-                    : const Text('로그인'),
+                child: authState.loading ? const CircularProgressIndicator(color: Colors.white) : const Text('로그인'),
               ),
             ),
             const SizedBox(height: 12),

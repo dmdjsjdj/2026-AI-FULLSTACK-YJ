@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/auth_provider.dart';
@@ -35,7 +36,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
     final exists = await ref.read(authProvider.notifier).checkEmailDuplicate(email);
     if (exists) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('이미 사용 중인 이메일입니다.')));
-      // [정답 1] Flutter의 local state 변경 및 UI 트리 재렌더링 트리거 함수
+      // [핵심] Flutter의 local state 변경 및 UI 트리 재렌더링 트리거 함수
       setState(() => _isEmailChecked = false);
     } else {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('사용 가능한 이메일입니다.')));
@@ -81,23 +82,14 @@ class _SignupPageState extends ConsumerState<SignupPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('회원가입 완료! 로그인해주세요.')),
       );
-      // [정답 2] 현재 페이지를 스택에서 제거하고 이전 페이지로 복귀
+      // [핵심] 현재 페이지를 스택에서 제거하고 이전 페이지로 복귀 (React Router의 router.back())
       Navigator.pop(context); 
     }
   }
-
+  //////////////////////////////////////////////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
-
-    // [선택적 개선] 회원가입 실패 에러를 스낵바로 일관되게 보여주는 listen 패턴
-    ref.listen<AuthState>(authProvider, (previous, next) {
-      if (next.error != null && next.error != previous?.error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(next.error!), backgroundColor: Colors.red),
-        );
-      }
-    });
 
     return Scaffold(
       appBar: AppBar(title: const Text('회원가입')),
@@ -107,12 +99,11 @@ class _SignupPageState extends ConsumerState<SignupPage> {
           children: [
             Row(
               children: [
-                // [정답 3] Flex Layout 내에서 입력창이 남은 공간을 차지하도록 확장해 주는 위젯
+                // [핵심] Flex Layout 내에서 입력창이 남은 공간을 차지하도록 확장해 주는 위젯
                 Expanded(
                   child: TextField(
                     controller: _emailController, 
                     decoration: const InputDecoration(labelText: '이메일'),
-                    keyboardType: TextInputType.emailAddress,
                     onChanged: (_) => setState(() => _isEmailChecked = false),
                   ),
                 ),
@@ -121,11 +112,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
               ],
             ),
             const SizedBox(height: 12),
-            TextField(
-              controller: _passwordController, 
-              obscureText: true, 
-              decoration: const InputDecoration(labelText: '비밀번호'),
-            ),
+            TextField(controller: _passwordController, obscureText: true, decoration: const InputDecoration(labelText: '비밀번호')),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -140,17 +127,16 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 ElevatedButton(onPressed: _checkNickname, child: const Text('중복확인')),
               ],
             ),
+            const SizedBox(height: 16),
+            if (authState.error != null)
+              Text(authState.error!, style: const TextStyle(color: Colors.red)),
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: authState.loading ? null : _handleSignup,
                 child: authState.loading 
-                    ? const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
-                      ) 
+                    ? const CircularProgressIndicator(color: Colors.white) 
                     : const Text('가입하기'),
               ),
             ),
